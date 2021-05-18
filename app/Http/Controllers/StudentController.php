@@ -16,6 +16,7 @@ session_start();
 
 class StudentController extends Controller
 {
+
 	public function AuthLogin(){
 		$student_id=Session::get('student_id');
 		if($student_id){
@@ -42,7 +43,7 @@ class StudentController extends Controller
 			return view('student.account.register');
 		}
 	}
-
+	
 	public function login(Request $request){
 		$data = $request->validate([
 			'student_email'=>'required|email',

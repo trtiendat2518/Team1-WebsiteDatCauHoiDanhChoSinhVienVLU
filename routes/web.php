@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 //STUDENT HOME
-
+Route::get('/', 'HomeController@index');
 //STUDENT ACCOUNT
 Route::get('/login', 'StudentController@index_login');
 Route::get('/register', 'StudentController@index_register');
