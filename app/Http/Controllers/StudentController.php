@@ -16,7 +16,6 @@ session_start();
 
 class StudentController extends Controller
 {
-
 	public function AuthLogin(){
 		$student_id=Session::get('student_id');
 		if($student_id){
@@ -157,6 +156,7 @@ class StudentController extends Controller
 			return view('student.account.forgetpass');
 		}	
 	}
+
 	public function confirm_mail(Request $request){
 		$data = $request->all();
 		$student_email = $data['student_email'];
