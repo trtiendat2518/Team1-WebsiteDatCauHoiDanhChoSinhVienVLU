@@ -43,7 +43,16 @@ class StudentController extends Controller
 		}
 	}
 
-		public function login(Request $request){
+	public function logout(){
+		$this->AuthLogin();
+		Session::put('student_id', null);
+		Session::put('student_name', null);
+		Session::put('student_email', null);
+		Session::put('student_password', null);     
+		return Redirect::to('/');
+	}
+
+	public function login(Request $request){
 		$data = $request->validate([
 			'student_email'=>'required|email',
 			'student_password'=>'required|min:6|max:32',
