@@ -16,6 +16,7 @@ session_start();
 
 class StudentController extends Controller
 {
+<<<<<<< HEAD
 	public function AuthLogin(){
 		$student_id=Session::get('student_id');
 		if($student_id){
@@ -143,5 +144,17 @@ class StudentController extends Controller
 			Session::put('message', '<div class="alert alert-danger">Vui lòng nhập Mail Văn Lang!</div>');
 			return Redirect::to('/register');
 		}
+=======
+	public function index_forgetpass(){
+		return view('student.account.forgetpass');
+	}
+
+	public function index_newpass(){
+		if(Session::get('token_pass')){
+			return view('student.account.newpass');
+		}else{
+			return view('student.account.forgetpass');
+		}	
+>>>>>>> trantiendat
 	}
 }
