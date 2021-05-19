@@ -34,4 +34,11 @@ class PostController extends Controller
 			return Redirect::to('/');
 		}
     }
+
+    public function post_delete($post_id)
+	{
+		Post::find($post_id)->delete();
+		Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
+		return Redirect::to('/');
+	}
 }

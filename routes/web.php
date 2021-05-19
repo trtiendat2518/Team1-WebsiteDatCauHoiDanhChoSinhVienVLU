@@ -18,6 +18,7 @@ Route::post('/tao-mat-khau-moi', 'StudentController@newpassword');
 
 //STUDENT POST
 Route::post('/dang-cau-hoi', 'PostController@post_new');
+Route::get('/xoa-cau-hoi/{post_id}', 'PostController@post_delete');
 
 //STUDENT MAIL
 Route::get('/xac-nhan-tai-khoan-email', 'MailController@verifymail');

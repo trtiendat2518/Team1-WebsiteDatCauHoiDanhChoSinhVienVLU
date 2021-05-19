@@ -284,14 +284,20 @@
 											{{-- <span><img src="images/clock.png" alt="">3 min ago</span> --}}
 										</div>
 									</div>
+									@php
+										if(Session::get('student_name')==$post_info->post_student){
+									@endphp
 									<div class="ed-opts">
 										<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
 										<ul class="ed-options">
 											<li><a href="#" title="">Chỉnh sửa</a></li>
-											<li><a href="#" title="">Xóa</a></li>
+											<li><a href="{{URL::to('/xoa-cau-hoi/'.$post_info->post_id)}}" class="active styling-edit" ui-toggle-class="" onclick="return confirm('Bạn có chắc chắn muốn xóa {{$post_info->post_title}} không?')" title="">Xóa</a></li>
 											<li><a href="#" title="">Ẩn</a></li>
 										</ul>
 									</div>
+									@php
+										}
+									@endphp
 								</div>
 								<div class="job_descp">
 									<br>
