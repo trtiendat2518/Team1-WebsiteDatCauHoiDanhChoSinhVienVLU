@@ -48,12 +48,14 @@
 						<h3>Loại câu hỏi</h3>
 						<i class="la la-ellipsis-v"></i>
 					</div>
-					<div class="suggestions-list">
+					<div class="suggestions-list">						
+						@foreach ($category_post as $key => $val)
 						<div class="suggestion-usd">
 							<div class="sgt-text">
-								<a href="" title="">Câu hỏi HOT<i class="la la-chevron-right"></i></a>
+								<a href="{{url('/cau-hoi-theo-loai/'.$val->category_id)}}" title=""><i class="la la-chevron-right" style="color: black;">{{$val->category_name}}</i></a>
 							</div>
 						</div>
+						@endforeach					
 						<div class="view-more">
 							<a href="#" title="">View More</a>
 						</div>
@@ -80,9 +82,6 @@
 		<div class="col-lg-6 col-md-8 no-pd">
 			<div class="main-ws-sec">
 				<div class="post-topbar">
-					<div class="user-picy">
-						<img src="images/resources/user-pic.png" alt="">
-					</div>
 					<div class="form-group">
 						<center>
 							<input type="submit" style="background: #e44d3a; color: white;" class="btn btn-default post_project" id="btnpost" name="btnpost" value="Đăng câu hỏi">
@@ -274,123 +273,50 @@
 								<a href="#" title="" tabindex="-1">View Profile</a>
 							</div></div></div><span class="slick-nexti slick-arrow" style="display: inline;"></span></div>
 						</div>
+						@foreach ($post as $key => $post_info)
 						<div class="post-bar">
-							<div class="post_topbar">
-								<div class="usy-dt">
-									<img src="images/resources/us-pic.png" alt="">
-									<div class="usy-name">
-										<h3>John Doe</h3>
-										<span><img src="images/clock.png" alt="">3 min ago</span>
-									</div>
-								</div>
-								<div class="ed-opts">
-									<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-									<ul class="ed-options">
-										<li><a href="#" title="">Edit Post</a></li>
-										<li><a href="#" title="">Unsaved</a></li>
-										<li><a href="#" title="">Unbid</a></li>
-										<li><a href="#" title="">Close</a></li>
-										<li><a href="#" title="">Hide</a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="epi-sec">
-								<ul class="descp">
-									<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
-									<li><img src="images/icon9.png" alt=""><span>India</span></li>
-								</ul>
-								<ul class="bk-links">
-									<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-									<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-									<li><a href="#" title="" class="bid_now">Bid Now</a></li>
-								</ul>
-							</div>
-							<div class="job_descp">
-								<h3>Senior Wordpress Developer</h3>
-								<ul class="job-dt">
-									<li><a href="#" title="">Full Time</a></li>
-									<li><span>$30 / hr</span></li>
-								</ul>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... <a href="#" title="">view more</a></p>
-								<ul class="skill-tags">
-									<li><a href="#" title="">HTML</a></li>
-									<li><a href="#" title="">PHP</a></li>
-									<li><a href="#" title="">CSS</a></li>
-									<li><a href="#" title="">Javascript</a></li>
-									<li><a href="#" title="">Wordpress</a></li>
-								</ul>
-							</div>
-							<div class="job-status-bar">
-								<ul class="like-com">
-									<li>
-										<a href="#"><i class="fas fa-heart"></i> Like</a>
-										<img src="images/liked-img.png" alt="">
-										<span>25</span>
-									</li>
-									<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment 15</a></li>
-								</ul>
-								<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-							</div>
-						</div>
-						<div class="posty">
 							<div class="post-bar no-margin">
 								<div class="post_topbar">
 									<div class="usy-dt">
 										<img src="images/resources/us-pc2.png" alt="">
 										<div class="usy-name">
-											<h3>John Doe</h3>
-											<span><img src="images/clock.png" alt="">3 min ago</span>
+											<h3><b style="color: red;">Sinh viên:</b> {{$post_info->post_student}}</h3>
+											{{-- <span><img src="images/clock.png" alt="">3 min ago</span> --}}
 										</div>
 									</div>
 									<div class="ed-opts">
 										<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
 										<ul class="ed-options">
-											<li><a href="#" title="">Edit Post</a></li>
-											<li><a href="#" title="">Unsaved</a></li>
-											<li><a href="#" title="">Unbid</a></li>
-											<li><a href="#" title="">Close</a></li>
-											<li><a href="#" title="">Hide</a></li>
+											<li><a href="#" title="">Chỉnh sửa</a></li>
+											<li><a href="#" title="">Xóa</a></li>
+											<li><a href="#" title="">Ẩn</a></li>
 										</ul>
 									</div>
 								</div>
-								<div class="epi-sec">
-									<ul class="descp">
-										<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
-										<li><img src="images/icon9.png" alt=""><span>India</span></li>
-									</ul>
-									<ul class="bk-links">
-										<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-										<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-									</ul>
-								</div>
 								<div class="job_descp">
-									<h3>Senior Wordpress Developer</h3>
-									<ul class="job-dt">
-										<li><a href="#" title="">Full Time</a></li>
-										<li><span>$30 / hr</span></li>
-									</ul>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... <a href="#" title="">view more</a></p>
+									<br>
+									<h3>{{$post_info->post_title}}</h3>
+									{{-- <ul class="job-dt">
+										<li><a href="#" title="">Câu hỏi</a></li>
+									</ul> --}}
+									<p>{{$post_info->post_content}}{{-- <a href="#" title=""> view more</a> --}}</p>
 									<ul class="skill-tags">
-										<li><a href="#" title="">HTML</a></li>
-										<li><a href="#" title="">PHP</a></li>
-										<li><a href="#" title="">CSS</a></li>
-										<li><a href="#" title="">Javascript</a></li>
-										<li><a href="#" title="">Wordpress</a></li>
+										<li><a href="{{url('/cau-hoi-theo-loai/'.$post_info->category_id)}}" title="">{{$post_info->category_name}}</a></li>
 									</ul>
 								</div>
 								<div class="job-status-bar">
 									<ul class="like-com">
 										<li>
-											<a href="#"><i class="fas fa-heart"></i> Like</a>
-											<img src="images/liked-img.png" alt="">
-											<span>25</span>
+											<a href="#"><i class="fa fa-heart"></i> 25</a>
 										</li>
-										<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment 15</a></li>
+										<li>
+											<a href="#"><i class="fa fa-comment"></i> 50</a>
+										</li>
 									</ul>
-									<a href="#"><i class="fas fa-eye"></i>Views 50</a>
+									<a href="#"><i class="fa fa-eye"></i> 50</a>
 								</div>
 							</div>
-							<div class="comment-section">
+							{{-- <div class="comment-section">
 								<a href="#" class="plus-ic">
 									<i class="la la-plus"></i>
 								</a>
@@ -450,15 +376,10 @@
 										</form>
 									</div>
 								</div>
-							</div>
+							</div> --}}
 						</div>
-						<div class="process-comm">
-							<div class="spinner">
-								<div class="bounce1"></div>
-								<div class="bounce2"></div>
-								<div class="bounce3"></div>
-							</div>
-						</div>
+						<br>
+						@endforeach
 					</div>
 				</div>
 			</div>
@@ -567,65 +488,6 @@
 								<div class="hr-rate">
 									<span>$25/hr</span>
 								</div>
-							</div>
-						</div>
-					</div>
-					<div class="widget suggestions full-width">
-						<div class="sd-title">
-							<h3>Most Viewed People</h3>
-							<i class="la la-ellipsis-v"></i>
-						</div>
-						<div class="suggestions-list">
-							<div class="suggestion-usd">
-								<img src="images/resources/s1.png" alt="">
-								<div class="sgt-text">
-									<h4>Jessica William</h4>
-									<span>Graphic Designer</span>
-								</div>
-								<span><i class="la la-plus"></i></span>
-							</div>
-							<div class="suggestion-usd">
-								<img src="images/resources/s2.png" alt="">
-								<div class="sgt-text">
-									<h4>John Doe</h4>
-									<span>PHP Developer</span>
-								</div>
-								<span><i class="la la-plus"></i></span>
-							</div>
-							<div class="suggestion-usd">
-								<img src="images/resources/s3.png" alt="">
-								<div class="sgt-text">
-									<h4>Poonam</h4>
-									<span>Wordpress Developer</span>
-								</div>
-								<span><i class="la la-plus"></i></span>
-							</div>
-							<div class="suggestion-usd">
-								<img src="images/resources/s4.png" alt="">
-								<div class="sgt-text">
-									<h4>Bill Gates</h4>
-									<span>C &amp; C++ Developer</span>
-								</div>
-								<span><i class="la la-plus"></i></span>
-							</div>
-							<div class="suggestion-usd">
-								<img src="images/resources/s5.png" alt="">
-								<div class="sgt-text">
-									<h4>Jessica William</h4>
-									<span>Graphic Designer</span>
-								</div>
-								<span><i class="la la-plus"></i></span>
-							</div>
-							<div class="suggestion-usd">
-								<img src="images/resources/s6.png" alt="">
-								<div class="sgt-text">
-									<h4>John Doe</h4>
-									<span>PHP Developer</span>
-								</div>
-								<span><i class="la la-plus"></i></span>
-							</div>
-							<div class="view-more">
-								<a href="#" title="">View More</a>
 							</div>
 						</div>
 					</div>

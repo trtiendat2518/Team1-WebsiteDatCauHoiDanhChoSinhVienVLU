@@ -145,29 +145,29 @@
 				<div class="post-project">
 					<h3>Câu hỏi của bạn</h3>
 					<div class="post-project-fields">
-						<form>
+						<form action="{{url('/dang-cau-hoi')}}" method="post">
+							@csrf
 							<div class="row">
 								<div class="col-lg-12">
-									<input type="text" name="title" placeholder="Tiêu đề">
+									<input type="text" name="post_title" placeholder="Tiêu đề">
 								</div>
 								<div class="col-lg-12">
 									<div class="inp-field">
-										<select>
+										<select name="category_post">
 											<option>Loại câu hỏi</option>
-											<option>Category 1</option>
-											<option>Category 2</option>
-											<option>Category 3</option>
+											@foreach ($category_post as $key => $cate)
+												<option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
+											@endforeach
 										</select>
 									</div>
 								</div>
 								<div class="col-lg-12">
-									<textarea style="height: 100%; resize: none;" id="ckeditor1" name="description" placeholder="Nội dung câu hỏi" rows="10"></textarea>
+									<textarea name="post_content" style="height: 100%; resize: none;" id="ckeditor1" name="description" placeholder="Nội dung câu hỏi" rows="10"></textarea>
 								</div>
 								<div class="col-lg-12">
 									<center>
 										<ul>
-											<li><button class="active" type="submit" value="post">Đăng</button></li>
-											<li><a href="#" title="">Cancel</a></li>
+											<li><button class="active" type="submit">Đăng</button></li>
 										</ul>
 									</center>
 								</div>

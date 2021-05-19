@@ -16,6 +16,12 @@ Route::get('/newpass', 'StudentController@index_newpass');
 Route::post('/xac-nhan-mail', 'StudentController@confirm_mail');
 Route::post('/tao-mat-khau-moi', 'StudentController@newpassword');
 
+//STUDENT POST
+Route::post('/dang-cau-hoi', 'PostController@post_new');
+
 //STUDENT MAIL
 Route::get('/xac-nhan-tai-khoan-email', 'MailController@verifymail');
 Route::get('/xac-nhan-mail-mat-khau-moi', 'MailController@verifychangepassword');
+
+
+
