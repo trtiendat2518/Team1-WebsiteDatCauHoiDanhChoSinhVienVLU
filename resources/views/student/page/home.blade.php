@@ -302,9 +302,6 @@
 								<div class="job_descp">
 									<br>
 									<h3>{{$post_info->post_title}}</h3>
-									{{-- <ul class="job-dt">
-										<li><a href="#" title="">Câu hỏi</a></li>
-									</ul> --}}
 									<p>{{$post_info->post_content}}{{-- <a href="#" title=""> view more</a> --}}</p>
 									<ul class="skill-tags">
 										<li><a href="{{url('/cau-hoi-theo-loai/'.$post_info->category_id)}}" title="">{{$post_info->category_name}}</a></li>
