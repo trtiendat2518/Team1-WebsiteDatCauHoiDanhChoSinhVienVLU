@@ -77,7 +77,7 @@
 														</label>
 														<small>Ghi nhớ</small>
 													</div>
-													<a href="{{url('/forgetpass')}}" title="">Quên mật khẩu?</a>
+													<a href="{{asset('/forgetpass')}}" title="">Quên mật khẩu?</a>
 												</div>
 											</div>
 											<div class="col-lg-12 no-pdd" style="margin-top: 20px;">

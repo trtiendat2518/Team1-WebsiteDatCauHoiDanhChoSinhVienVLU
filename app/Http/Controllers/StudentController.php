@@ -16,7 +16,6 @@ session_start();
 
 class StudentController extends Controller
 {
-
 	public function AuthLogin(){
 		$student_id=Session::get('student_id');
 		if($student_id){
@@ -43,16 +42,19 @@ class StudentController extends Controller
 			return view('student.account.register');
 		}
 	}
-	
-	public function logout(){
-		$this->AuthLogin();
-		Session::put('student_id', null);
-		Session::put('student_name', null);
-		Session::put('student_email', null);
-		Session::put('student_password', null);     
-		return Redirect::to('/');
+
+	public function index_forgetpass(){
+		return view('student.account.forgetpass');
 	}
 
+	public function index_newpass(){
+		if(Session::get('token_pass')){
+			return view('student.account.newpass');
+		}else{
+			return view('student.account.forgetpass');
+		}	
+	}
+	
 	public function login(Request $request){
 		$data = $request->validate([
 			'student_email'=>'required|email',
@@ -155,18 +157,15 @@ class StudentController extends Controller
 		}
 	}
 
-	public function index_forgetpass(){
-		return view('student.account.forgetpass');
+	public function logout(){
+		$this->AuthLogin();
+		Session::put('student_id', null);
+		Session::put('student_name', null);
+		Session::put('student_email', null);
+		Session::put('student_password', null);     
+		return Redirect::to('/');
 	}
-
-	public function index_newpass(){
-		if(Session::get('token_pass')){
-			return view('student.account.newpass');
-		}else{
-			return view('student.account.forgetpass');
-		}	
-	}
-
+	
 	public function confirm_mail(Request $request){
 		$data = $request->all();
 		$student_email = $data['student_email'];
@@ -215,5 +214,9 @@ class StudentController extends Controller
 			Session::put('message','<div class="alert alert-success">Đổi mật khẩu thành công! Mời bạn đăng nhập.</div>');
 			return Redirect::to('login');
 		}
+	}
+
+	public function profile(){
+		return view('student.page.profile.profilemine');
 	}
 }

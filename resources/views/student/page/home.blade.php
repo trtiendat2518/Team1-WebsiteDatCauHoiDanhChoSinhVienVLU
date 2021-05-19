@@ -384,7 +384,6 @@
 								</div>
 							</div> --}}
 						</div>
-						<br>
 						@endforeach
 						<footer class="panel-footer" style="background: #fff0;">
 							<div class="row">
@@ -510,5 +509,6 @@
 			</div>
 		</div>
 	</div>
+
 </div>
 @endsection
