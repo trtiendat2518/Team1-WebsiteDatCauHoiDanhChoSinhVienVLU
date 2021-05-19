@@ -167,7 +167,17 @@
 								<div class="col-lg-12">
 									<center>
 										<ul>
+											@php
+												if(Session::get('student_id')){
+											@endphp
 											<li><button class="active" type="submit">Đăng</button></li>
+											@php
+												}else{
+											@endphp
+											<li><a type="button" style="background: #e44d3a;" href="{{url('/login')}}" title="">Đăng</a></li>
+											@php
+												}
+											@endphp
 										</ul>
 									</center>
 								</div>
