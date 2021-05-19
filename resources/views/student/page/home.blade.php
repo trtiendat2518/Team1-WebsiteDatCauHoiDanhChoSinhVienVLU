@@ -380,6 +380,15 @@
 						</div>
 						<br>
 						@endforeach
+						<footer class="panel-footer" style="background: #fff0;">
+							<div class="row">
+								<div class="col-sm-7 text-right text-center-xs">                
+									<ul class="pagination m-t-none m-b-none" style="background: #fff0;">
+										<span>{!! $post->render("pagination::bootstrap-4") !!}</span>
+									</ul>
+								</div>
+							</div>
+						</footer>
 					</div>
 				</div>
 			</div>

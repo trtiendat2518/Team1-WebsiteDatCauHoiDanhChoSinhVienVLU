@@ -5250,7 +5250,7 @@ a:hover {
 .pagination {
 	float: left;
 	width: 100%;
-	background-color: #fff;
+	background-color: #fff0;
 	padding: 13px 25px;
 }
 .full-pagi {
@@ -5271,6 +5271,7 @@ a:hover {
 .pagination li .page-link.active {
 	background-color: #e44d3a;
 	color: #fff;
+	height: 100%
 	border-color: transparent;
 }
 .pvr {
