@@ -16,6 +16,17 @@ $(window).on("load", function() {
         return false;
     });
 
+    $(".post_project2").on("click", function(){
+        $(".post-popup2.pst-pj2").addClass("active");
+        $(".wrapper").addClass("overlay");
+        return false;
+    });
+    $(".post-project2 > a").on("click", function(){
+        $(".post-popup2.pst-pj2").removeClass("active");
+        $(".wrapper").removeClass("overlay");
+        return false;
+    });
+
     //  ============= POST JOB POPUP FUNCTION =========
 
     $(".post-jb").on("click", function(){
