@@ -133,7 +133,270 @@
 							<a href="#"><i class="fa fa-eye"></i> 50</a>
 						</div>
 					</div>
-					
+					<div class="top-profiles">
+						<div class="pf-hd">
+							<h3>Top Profiles</h3>
+							<i class="la la-ellipsis-v"></i>
+						</div>
+						<div class="profiles-slider slick-initialized slick-slider">
+							<span class="slick-previous slick-arrow" style="display: inline;"></span>
+							<div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 6084px; transform: translate3d(-2340px, 0px, 0px);"><div class="user-profy slick-slide slick-cloned" style="width: 460px;" tabindex="-1" data-slick-index="-1" aria-hidden="true">
+								<img src="images/resources/user3.png" alt="">
+								<h3>John Doe</h3>
+								<span>Graphic Designer</span>
+								<ul>
+									<li><a href="#" title="" class="followw" tabindex="-1">Follow</a></li>
+									<li><a href="#" title="" class="envlp" tabindex="-1"><img src="images/envelop.png" alt=""></a></li>
+									<li><a href="#" title="" class="hire" tabindex="-1">hire</a></li>
+								</ul>
+								<a href="#" title="" tabindex="-1">View Profile</a>
+							</div>
+							<div class="user-profy slick-slide" style="width: 460px;" tabindex="-1" data-slick-index="0" aria-hidden="true">
+								<img src="images/resources/user1.png" alt="">
+								<h3>John Doe</h3>
+								<span>Graphic Designer</span>
+								<ul>
+									<li><a href="#" title="" class="followw" tabindex="-1">Follow</a></li>
+									<li><a href="#" title="" class="envlp" tabindex="-1"><img src="images/envelop.png" alt=""></a></li>
+									<li><a href="#" title="" class="hire" tabindex="-1">hire</a></li>
+								</ul>
+								<a href="#" title="" tabindex="-1">View Profile</a>
+							</div><div class="user-profy slick-slide" style="width: 460px;" tabindex="-1" data-slick-index="1" aria-hidden="true">
+								<img src="images/resources/user2.png" alt="">
+								<h3>John Doe</h3>
+								<span>Graphic Designer</span>
+								<ul>
+									<li><a href="#" title="" class="followw" tabindex="-1">Follow</a></li>
+									<li><a href="#" title="" class="envlp" tabindex="-1"><img src="images/envelop.png" alt=""></a></li>
+									<li><a href="#" title="" class="hire" tabindex="-1">hire</a></li>
+								</ul>
+								<a href="#" title="" tabindex="-1">View Profile</a>
+							</div><div class="user-profy slick-slide" style="width: 460px;" tabindex="-1" data-slick-index="2" aria-hidden="true">
+								<img src="images/resources/user3.png" alt="">
+								<h3>John Doe</h3>
+								<span>Graphic Designer</span>
+								<ul>
+									<li><a href="#" title="" class="followw" tabindex="-1">Follow</a></li>
+									<li><a href="#" title="" class="envlp" tabindex="-1"><img src="images/envelop.png" alt=""></a></li>
+									<li><a href="#" title="" class="hire" tabindex="-1">hire</a></li>
+								</ul>
+								<a href="#" title="" tabindex="-1">View Profile</a>
+							</div><div class="user-profy slick-slide" style="width: 460px;" tabindex="-1" data-slick-index="3" aria-hidden="true">
+								<img src="images/resources/user1.png" alt="">
+								<h3>John Doe</h3>
+								<span>Graphic Designer</span>
+								<ul>
+									<li><a href="#" title="" class="followw" tabindex="-1">Follow</a></li>
+									<li><a href="#" title="" class="envlp" tabindex="-1"><img src="images/envelop.png" alt=""></a></li>
+									<li><a href="#" title="" class="hire" tabindex="-1">hire</a></li>
+								</ul>
+								<a href="#" title="" tabindex="-1">View Profile</a>
+							</div><div class="user-profy slick-slide slick-current slick-active" style="width: 460px;" tabindex="0" data-slick-index="4" aria-hidden="false">
+								<img src="images/resources/user2.png" alt="">
+								<h3>John Doe</h3>
+								<span>Graphic Designer</span>
+								<ul>
+									<li><a href="#" title="" class="followw" tabindex="0">Follow</a></li>
+									<li><a href="#" title="" class="envlp" tabindex="0"><img src="images/envelop.png" alt=""></a></li>
+									<li><a href="#" title="" class="hire" tabindex="0">hire</a></li>
+								</ul>
+								<a href="#" title="" tabindex="0">View Profile</a>
+							</div><div class="user-profy slick-slide" style="width: 460px;" tabindex="-1" data-slick-index="5" aria-hidden="true">
+								<img src="images/resources/user3.png" alt="">
+								<h3>John Doe</h3>
+								<span>Graphic Designer</span>
+								<ul>
+									<li><a href="#" title="" class="followw" tabindex="-1">Follow</a></li>
+									<li><a href="#" title="" class="envlp" tabindex="-1"><img src="images/envelop.png" alt=""></a></li>
+									<li><a href="#" title="" class="hire" tabindex="-1">hire</a></li>
+								</ul>
+								<a href="#" title="" tabindex="-1">View Profile</a>
+							</div><div class="user-profy slick-slide slick-cloned" style="width: 460px;" tabindex="-1" data-slick-index="6" aria-hidden="true">
+								<img src="images/resources/user1.png" alt="">
+								<h3>John Doe</h3>
+								<span>Graphic Designer</span>
+								<ul>
+									<li><a href="#" title="" class="followw" tabindex="-1">Follow</a></li>
+									<li><a href="#" title="" class="envlp" tabindex="-1"><img src="images/envelop.png" alt=""></a></li>
+									<li><a href="#" title="" class="hire" tabindex="-1">hire</a></li>
+								</ul>
+								<a href="#" title="" tabindex="-1">View Profile</a>
+							</div><div class="user-profy slick-slide slick-cloned" style="width: 460px;" tabindex="-1" data-slick-index="7" aria-hidden="true">
+								<img src="images/resources/user2.png" alt="">
+								<h3>John Doe</h3>
+								<span>Graphic Designer</span>
+								<ul>
+									<li><a href="#" title="" class="followw" tabindex="-1">Follow</a></li>
+									<li><a href="#" title="" class="envlp" tabindex="-1"><img src="images/envelop.png" alt=""></a></li>
+									<li><a href="#" title="" class="hire" tabindex="-1">hire</a></li>
+								</ul>
+								<a href="#" title="" tabindex="-1">View Profile</a>
+							</div><div class="user-profy slick-slide slick-cloned" style="width: 460px;" tabindex="-1" data-slick-index="8" aria-hidden="true">
+								<img src="images/resources/user3.png" alt="">
+								<h3>John Doe</h3>
+								<span>Graphic Designer</span>
+								<ul>
+									<li><a href="#" title="" class="followw" tabindex="-1">Follow</a></li>
+									<li><a href="#" title="" class="envlp" tabindex="-1"><img src="images/envelop.png" alt=""></a></li>
+									<li><a href="#" title="" class="hire" tabindex="-1">hire</a></li>
+								</ul>
+								<a href="#" title="" tabindex="-1">View Profile</a>
+							</div><div class="user-profy slick-slide slick-cloned" style="width: 460px;" tabindex="-1" data-slick-index="9" aria-hidden="true">
+								<img src="images/resources/user1.png" alt="">
+								<h3>John Doe</h3>
+								<span>Graphic Designer</span>
+								<ul>
+									<li><a href="#" title="" class="followw" tabindex="-1">Follow</a></li>
+									<li><a href="#" title="" class="envlp" tabindex="-1"><img src="images/envelop.png" alt=""></a></li>
+									<li><a href="#" title="" class="hire" tabindex="-1">hire</a></li>
+								</ul>
+								<a href="#" title="" tabindex="-1">View Profile</a>
+							</div><div class="user-profy slick-slide slick-cloned" style="width: 460px;" tabindex="-1" data-slick-index="10" aria-hidden="true">
+								<img src="images/resources/user2.png" alt="">
+								<h3>John Doe</h3>
+								<span>Graphic Designer</span>
+								<ul>
+									<li><a href="#" title="" class="followw" tabindex="-1">Follow</a></li>
+									<li><a href="#" title="" class="envlp" tabindex="-1"><img src="images/envelop.png" alt=""></a></li>
+									<li><a href="#" title="" class="hire" tabindex="-1">hire</a></li>
+								</ul>
+								<a href="#" title="" tabindex="-1">View Profile</a>
+							</div><div class="user-profy slick-slide slick-cloned" style="width: 460px;" tabindex="-1" data-slick-index="11" aria-hidden="true">
+								<img src="images/resources/user3.png" alt="">
+								<h3>John Doe</h3>
+								<span>Graphic Designer</span>
+								<ul>
+									<li><a href="#" title="" class="followw" tabindex="-1">Follow</a></li>
+									<li><a href="#" title="" class="envlp" tabindex="-1"><img src="images/envelop.png" alt=""></a></li>
+									<li><a href="#" title="" class="hire" tabindex="-1">hire</a></li>
+								</ul>
+								<a href="#" title="" tabindex="-1">View Profile</a>
+							</div></div></div><span class="slick-nexti slick-arrow" style="display: inline;"></span></div>
+						</div>
+						@foreach ($post as $key => $post_info)
+						<div class="post-bar">
+							<div class="post-bar no-margin">
+								<div class="post_topbar">
+									<div class="usy-dt">
+										<img src="images/resources/us-pc2.png" alt="">
+										<div class="usy-name">
+											<h3><b style="color: red;">Sinh viên:</b> {{$post_info->post_student_name}}</h3>
+											{{-- <span><img src="images/clock.png" alt="">3 min ago</span> --}}
+										</div>
+									</div>
+									@php
+										if(Session::get('student_email')==$post_info->post_student_email){
+									@endphp
+									<div class="ed-opts">
+										<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+										<ul class="ed-options">
+											<li class="fa fa-pencil"><a type="submit" id="btnpost2" name="btnpost2" class="post_project2" style="color: #666666;"> Chỉnh sửa</a></li>
+
+											<li class="fa fa-trash"><a href="{{URL::to('/xoa-cau-hoi/'.$post_info->post_id)}}" class="active styling-edit" ui-toggle-class="" onclick="return confirm('Bạn có chắc chắn muốn xóa {{$post_info->post_title}} không?')" title="" style="color: #666666;"> Xóa câu hỏi</a></li>
+
+											<li class="fa fa-eye-slash"><a href="#" title="" style="color: #666666;"> Ẩn câu hỏi</a></li>
+										</ul>
+									</div>
+									@php
+										}
+									@endphp
+								</div>
+								<div class="job_descp">
+									<br>
+									<h3>{{$post_info->post_title}}</h3>
+									{{-- <ul class="job-dt">
+										<li><a href="#" title="">Câu hỏi</a></li>
+									</ul> --}}
+									<p>{{$post_info->post_content}}{{-- <a href="#" title=""> view more</a> --}}</p>
+									<ul class="skill-tags">
+										<li><a href="{{url('/cau-hoi-theo-loai/'.$post_info->category_id)}}" title="">{{$post_info->category_name}}</a></li>
+									</ul>
+								</div>
+								<div class="job-status-bar">
+									<ul class="like-com">
+										<li>
+											<a href="#"><i class="fa fa-heart"></i> 25</a>
+										</li>
+										<li>
+											<a href="#"><i class="fa fa-comment"></i> 50</a>
+										</li>
+									</ul>
+									<a href="#"><i class="fa fa-eye"></i> 50</a>
+								</div>
+							</div>
+							{{-- <div class="comment-section">
+								<a href="#" class="plus-ic">
+									<i class="la la-plus"></i>
+								</a>
+								<div class="comment-sec">
+									<ul>
+										<li>
+											<div class="comment-list">
+												<div class="bg-img">
+													<img src="images/resources/bg-img1.png" alt="">
+												</div>
+												<div class="comment">
+													<h3>John Doe</h3>
+													<span><img src="images/clock.png" alt=""> 3 min ago</span>
+													<p>Lorem ipsum dolor sit amet, </p>
+													<a href="#" title="" class="active"><i class="fa fa-reply-all"></i>Reply</a>
+												</div>
+											</div>
+											<ul>
+												<li>
+													<div class="comment-list">
+														<div class="bg-img">
+															<img src="images/resources/bg-img2.png" alt="">
+														</div>
+														<div class="comment">
+															<h3>John Doe</h3>
+															<span><img src="images/clock.png" alt=""> 3 min ago</span>
+															<p>Hi John </p>
+															<a href="#" title=""><i class="fa fa-reply-all"></i>Reply</a>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<div class="comment-list">
+												<div class="bg-img">
+													<img src="images/resources/bg-img3.png" alt="">
+												</div>
+												<div class="comment">
+													<h3>John Doe</h3>
+													<span><img src="images/clock.png" alt=""> 3 min ago</span>
+													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at.</p>
+													<a href="#" title=""><i class="fa fa-reply-all"></i>Reply</a>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+								<div class="post-comment">
+									<div class="cm_img">
+										<img src="images/resources/bg-img4.png" alt="">
+									</div>
+									<div class="comment_box">
+										<form>
+											<input type="text" placeholder="Post a comment">
+											<button type="submit">Send</button>
+										</form>
+									</div>
+								</div>
+							</div> --}}
+						</div>
+						@endforeach
+						<footer class="panel-footer" style="background: #fff0;">
+							<div class="row">
+								<div class="col-sm-7 text-right text-center-xs">                
+									<ul class="pagination m-t-none m-b-none" style="background: #fff0;">
+										<span>{!! $post->render("pagination::bootstrap-4") !!}</span>
+									</ul>
+								</div>
+							</div>
+						</footer>
+					</div>
 				</div>
 			</div>
 			<div class="col-lg-3 pd-right-none no-pd">
