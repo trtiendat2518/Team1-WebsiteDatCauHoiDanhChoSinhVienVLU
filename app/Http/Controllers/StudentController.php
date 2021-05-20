@@ -88,6 +88,7 @@ class StudentController extends Controller
 				if($login_count){
 					Session::put('student_name', $login->student_name);
 					Session::put('student_id', $login->student_id);
+					Session::put('student_email', $login->student_email);
 					return Redirect::to('/');
 				}
 			}

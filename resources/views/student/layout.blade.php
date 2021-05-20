@@ -143,7 +143,7 @@
 			</main>
 			<div class="post-popup pst-pj">
 				<div class="post-project">
-					<h3>Câu hỏi của bạn</h3>
+					<h3>Đăng câu hỏi</h3>
 					<div class="post-project-fields">
 						<form action="{{url('/dang-cau-hoi')}}" method="post">
 							@csrf
@@ -156,7 +156,7 @@
 										<select name="category_post">
 											<option>Loại câu hỏi</option>
 											@foreach ($category_post as $key => $cate)
-												<option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
+											<option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
 											@endforeach
 										</select>
 									</div>
@@ -168,15 +168,15 @@
 									<center>
 										<ul>
 											@php
-												if(Session::get('student_id')){
-											@endphp
-											<li><button class="active" type="submit">Đăng</button></li>
-											@php
-												}else{
-											@endphp
-											<li><a type="button" style="background: #e44d3a;" href="{{url('/login')}}" title="">Đăng</a></li>
-											@php
-												}
+											if(Session::get('student_id')){
+												@endphp
+												<li><button class="active" type="submit">Đăng</button></li>
+												@php
+											}else{
+												@endphp
+												<li><a type="button" style="background: #e44d3a;" href="{{url('/login')}}" title="">Đăng</a></li>
+												@php
+											}
 											@endphp
 										</ul>
 									</center>
@@ -187,6 +187,56 @@
 					<a href="#" title=""><i class="la la-times-circle-o"></i></a>
 				</div>
 			</div>
+			{{-- Edit Question --}}
+			@foreach ($post as $key => $post_val)
+			<div class="post-popup2 pst-pj2">
+				<div class="post-project2">
+					<h3>Câu hỏi của bạn</h3>
+					<div class="post-project2-fields">
+						<form action="{{url('/chinh-sua-cau-hoi/'.$post_val->post_id)}}')}}" method="post">
+							@csrf
+							<div class="row">
+								<div class="col-lg-12">
+									<input type="text" name="post_title" value="{{$post_val->post_title}}">
+								</div>
+								<div class="col-lg-12">
+									<div class="inp-field">
+										<select name="category_post">
+											<option value="{{$post_val->category_id}}">Loại câu hỏi của bạn: {{$cate->category_name}}</option>
+											<option>------------------------------------------</option>
+											@foreach ($category_post as $key => $cate)
+												<option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<textarea name="post_content" style="height: 100%; resize: none;" id="ckeditor1" name="description" rows="10">{{$post_val->post_content}}</textarea>
+								</div>
+								<div class="col-lg-12">
+									<center>
+										<ul>
+											@php
+											if(Session::get('student_id')){
+												@endphp
+												<li><button class="active" type="submit">Cập nhật</button></li>
+												@php
+											}else{
+												@endphp
+												<li><a type="button" style="background: #e44d3a;" href="{{url('/login')}}" title="">Cập nhật</a></li>
+												@php
+											}
+											@endphp
+										</ul>
+									</center>
+								</div>
+							</div>
+						</form>
+					</div>
+					<a href="#" title=""><i class="la la-times-circle-o"></i></a>
+				</div>
+			</div>
+			@endforeach
 		</div>
 		<script type="text/javascript" src="{{asset('public/student/js/jquery.min.js')}}"></script>
 		<script type="text/javascript" src="{{asset('public/student/js/popper.js')}}"></script>

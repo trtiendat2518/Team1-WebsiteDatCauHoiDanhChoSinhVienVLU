@@ -280,19 +280,21 @@
 									<div class="usy-dt">
 										<img src="images/resources/us-pc2.png" alt="">
 										<div class="usy-name">
-											<h3><b style="color: red;">Sinh viên:</b> {{$post_info->post_student}}</h3>
+											<h3><b style="color: red;">Sinh viên:</b> {{$post_info->post_student_name}}</h3>
 											{{-- <span><img src="images/clock.png" alt="">3 min ago</span> --}}
 										</div>
 									</div>
 									@php
-										if(Session::get('student_name')==$post_info->post_student){
+										if(Session::get('student_email')==$post_info->post_student_email){
 									@endphp
 									<div class="ed-opts">
 										<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
 										<ul class="ed-options">
-											<li><a href="#" title="">Chỉnh sửa</a></li>
-											<li><a href="{{URL::to('/xoa-cau-hoi/'.$post_info->post_id)}}" class="active styling-edit" ui-toggle-class="" onclick="return confirm('Bạn có chắc chắn muốn xóa {{$post_info->post_title}} không?')" title="">Xóa</a></li>
-											<li><a href="#" title="">Ẩn</a></li>
+											<li class="fa fa-pencil"><a type="submit" id="btnpost2" name="btnpost2" class="post_project2" style="color: #666666;"> Chỉnh sửa</a></li>
+
+											<li class="fa fa-trash"><a href="{{URL::to('/xoa-cau-hoi/'.$post_info->post_id)}}" class="active styling-edit" ui-toggle-class="" onclick="return confirm('Bạn có chắc chắn muốn xóa {{$post_info->post_title}} không?')" title="" style="color: #666666;"> Xóa câu hỏi</a></li>
+
+											<li class="fa fa-eye-slash"><a href="#" title="" style="color: #666666;"> Ẩn câu hỏi</a></li>
 										</ul>
 									</div>
 									@php

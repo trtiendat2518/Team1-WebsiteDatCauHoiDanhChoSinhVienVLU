@@ -15,12 +15,12 @@ session_start();
 
 class PostController extends Controller
 {
-    public function post_new(Request $request)
-    {
+    public function post_new(Request $request){
     	$data = $request->all();
     	$post = new Post();
 
-    	$post->post_student = Session::get('student_name');
+    	$post->post_student_name = Session::get('student_name');
+    	$post->post_student_email = Session::get('student_email');
     	$post->post_title = $data['post_title'];
 		$post->category_id = $data['category_post'];
 		$post->post_content = $data['post_content'];
@@ -35,10 +35,27 @@ class PostController extends Controller
 		}
     }
 
-    public function post_delete($post_id)
-	{
+    public function post_delete($post_id){
 		Post::find($post_id)->delete();
 		Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
 		return Redirect::to('/');
+	}
+
+	public function post_update(Request $request, $post_id){
+		$data = $request->all();
+		$post = Post::find($post_id);
+
+    	$post->post_title = $data['post_title'];
+		$post->category_id = $data['category_post'];
+		$post->post_content = $data['post_content'];
+
+		$result = $post->save();
+		if($result){
+			Session::put('message','<div class="alert alert-success">Cập nhật thành công!</div>');
+			return Redirect::to('/');
+		}else{
+			Session::put('message','<div class="alert alert-danger">Không thể cập nhật!</div>');
+			return Redirect::to('/');
+		} 
 	}
 }
