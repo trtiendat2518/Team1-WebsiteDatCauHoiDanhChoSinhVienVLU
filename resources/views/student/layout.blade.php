@@ -11,7 +11,13 @@
 	<link rel="stylesheet" href="{{asset('public/student/css/vendor/simplebar.css')}}">
 	<!-- tiny-slider styles -->
 	<link rel="stylesheet" href="{{asset('public/student/css/vendor/tiny-slider.css')}}">
-	<!-- favicon -->
+
+	<link rel="stylesheet" href="{{asset('public/student/css/sweetalert.css')}}">
+
+	<link rel="stylesheet" href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')}}">
+
+	<link rel="stylesheet" href="{{asset('public/student/css/raw/styles.css')}}">
+	
 	<link rel="icon" href="{{asset('public/student/img/vlu.ico')}}">
 	<title>Trang chủ</title>
 </head>
@@ -3081,5 +3087,35 @@
 <script src="{{asset('public/student/js/utils/svg-loader.js')}}"></script>
 
 <script src="{{asset('public/student/js/global/global.maps.js')}}"></script>
+
+<script src="{{asset('public/student/js/sweetalert.min.js')}}"></script>
+
+<script src="{{asset('public/student/js/jquery.min.js')}}"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.postQ').click(function(){
+			var post_title = $('.title').val();
+			var category_id = $('.category').val();
+			var post_content = $('.content').val();
+			var _token = $('input[name="_token"]').val();
+			if(post_title=='' || category_id=='' || post_content==''){
+				swal("Vui lòng không để trống!", "", "warning");
+			}else{
+				$.ajax({
+					url:'{{ url('/dang-cau-hoi') }}',
+					method: 'POST',
+					data: {post_title:post_title, category_id:category_id, post_content:post_content, _token:_token},
+					success:function(data){
+						swal("Đăng thành công!", "", "success");
+					}
+				});
+				window.setTimeout(function(){
+					location.reload();
+				},3000);
+			}
+		});
+	});
+</script>
 </body>
 </html>

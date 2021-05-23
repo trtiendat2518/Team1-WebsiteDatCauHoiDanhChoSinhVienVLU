@@ -51,7 +51,7 @@
 				<!-- /FORM BOX DECORATION -->
 
 				<!-- FORM BOX TITLE -->
-				<h2 class="form-box-title">Tạo mới mật khẩu</h2>
+				<h2 style="color: white;" class="form-box-title">Tạo mới mật khẩu</h2>
 				<!-- /FORM BOX TITLE -->
 				<!-- FORM -->
 				<form action="{{url('/tao-mat-khau-moi')}}" method="post" class="form">
