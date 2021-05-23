@@ -11,6 +11,10 @@
 	<link rel="stylesheet" href="{{asset('public/student/css/vendor/simplebar.css')}}">
 	<!-- tiny-slider styles -->
 	<link rel="stylesheet" href="{{asset('public/student/css/vendor/tiny-slider.css')}}">
+	<link rel="stylesheet" href="{{asset('public/student/css/raw/styles.css')}}">
+	<link rel="stylesheet" href="{{asset('public/student/css/font-awesome.min.css')}}">
+	<link rel="stylesheet" href="{{asset('public/student/css/sweetalert.css')}}">
+	<link rel="stylesheet" href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')}}">
 	<!-- favicon -->
 	<link rel="icon" href="{{asset('public/student/img/vlu.ico')}}">
 	<title>Trang chủ</title>
@@ -379,11 +383,11 @@
 			<!-- USER AVATAR -->
 			<a class="user-avatar small no-outline" href="profile-timeline.html">
 				<!-- USER AVATAR CONTENT -->
-				<div class="user-avatar-content">
+				{{-- <div class="user-avatar-content">
 					<!-- HEXAGON -->
-					<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/01.jpg')}}')}}"></div>
+					<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/02.jpg')}}')}}"></div>
 					<!-- /HEXAGON -->
-				</div>
+				</div> --}}
 				<!-- /USER AVATAR CONTENT -->
 
 				<!-- USER AVATAR PROGRESS -->
@@ -3003,50 +3007,6 @@
 	</div>
 	<!-- /POPUP PICTURE IMAGE WRAP -->
 </div>
-
-<div class="popup-box small popup-event-creation">
-	<div class="popup-close-button popup-event-creation-trigger">
-		<svg class="popup-close-button-icon icon-cross">
-			<use xlink:href="#svg-cross"></use>
-		</svg>
-	</div>
-	<center><p class="popup-box-title">Chỉnh sửa câu hỏi</p></center>
-	<form action="" method="post" class="form">
-		<div class="form-row">
-			<div class="form-item">
-				<div class="form-input small">
-					<label for="event-name">Tiêu đề</label>
-					<input type="text" id="event-name" name="event_name">
-				</div>
-			</div>
-		</div>
-		<div class="form-row">
-			<div class="form-item">
-				<div class="form-select">
-					<label for="event-category">Loại câu hỏi</label>
-					<select id="event-category" name="event_category">
-						<option value="0">Big Events</option>
-						<option value="1">Small Events</option>
-					</select>
-					<svg class="form-select-icon icon-small-arrow">
-						<use xlink:href="#svg-small-arrow"></use>
-					</svg>
-				</div>
-			</div>
-		</div>
-		<div class="form-row">
-			<div class="form-item">
-				<div class="form-input small">
-					<label for="event-description">Nội dung</label>
-					<textarea id="event-description" name="event_description"></textarea>
-				</div>
-			</div>
-		</div>
-		<div class="popup-box-actions medium void">
-			<button class="popup-box-action full button secondary">Chỉnh sửa</button>
-		</div>
-	</form>
-</div>
 <!-- app -->
 <script src="{{asset('public/student/js/utils/app.js')}}"></script>
 <!-- page loader -->
@@ -3081,5 +3041,33 @@
 <script src="{{asset('public/student/js/utils/svg-loader.js')}}"></script>
 
 <script src="{{asset('public/student/js/global/global.maps.js')}}"></script>
+<script src="{{asset('public/student/js/sweetalert.min.js')}}"></script>
+<script src="{{asset('public/student/js/jquery.min.js')}}"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.postQ').click(function(){
+			var post_title = $('.title').val();
+			var category_id = $('.category').val();
+			var post_content = $('.content').val();
+			var _token = $('input[name="_token"]').val();
+			if(post_title=='' || category_id=='' || post_content==''){
+				swal("Vui lòng không để trống!", "", "warning");
+			}else{
+				$.ajax({
+					url:'{{ url('/dang-cau-hoi') }}',
+					method: 'POST',
+					data: {post_title:post_title, category_id:category_id, post_content:post_content, _token:_token},
+					success:function(data){
+						swal("Đăng thành công!", "", "success");
+					}
+				});
+				window.setTimeout(function(){
+					location.reload();
+				},3000);
+			}
+		});
+	});
+</script>
 </body>
 </html>

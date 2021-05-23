@@ -51,7 +51,7 @@
 				<!-- /FORM BOX DECORATION -->
 
 				<!-- FORM BOX TITLE -->
-				<h2 class="form-box-title">Xác nhận Mail</h2>
+				<h2 style="color: white;" class="form-box-title">Xác nhận Mail</h2>
 				<!-- /FORM BOX TITLE -->
 				<!-- FORM -->
 				<form action="{{url('/xac-nhan-mail')}}" method="post" class="form">

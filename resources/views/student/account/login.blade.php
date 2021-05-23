@@ -70,7 +70,7 @@
 				<!-- /FORM BOX DECORATION -->
 
 				<!-- FORM BOX TITLE -->
-				<h2 class="form-box-title">Đăng nhập tài khoản</h2>
+				<h2 style="color: white;" class="form-box-title">Đăng nhập tài khoản</h2>
 				<!-- /FORM BOX TITLE -->
 				<!-- FORM -->
 				<form action="{{url('/dang-nhap')}}" method="post" class="form">

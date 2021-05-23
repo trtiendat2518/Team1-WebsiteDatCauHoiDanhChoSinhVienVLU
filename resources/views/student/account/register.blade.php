@@ -61,9 +61,7 @@
 				<!-- FORM BOX DECORATION -->
 				<img class="form-box-decoration" src="{{asset('public/student/img/landing/rocket.png')}}" alt="rocket">
 				<!-- /FORM BOX DECORATION -->
-
-				<!-- FORM BOX TITLE -->
-				<h2 class="form-box-title">Tạo tài khoản!</h2>
+				<h2 style="color: white;" class="form-box-title">Tạo tài khoản!</h2>
 				<!-- /FORM BOX TITLE -->
 				@php
 				$message=Session::get('message');

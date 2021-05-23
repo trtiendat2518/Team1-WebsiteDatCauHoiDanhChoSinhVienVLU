@@ -258,16 +258,16 @@
 					</div>
 				</div>
 				<div class="quick-post-body">
-					<form action="{{url('/dang-cau-hoi')}}" method="post" class="form">
+					<form class="form">
 						@csrf
 						<div class="form-row">
 							<div class="form-item">
 								<div class="form-textarea">
-									<textarea id="quick-post-text" name="post_title" rows="1" placeholder="Tiêu đề" style="height: 50%"></textarea>
+									<textarea id="title" name="title" rows="1" class="title" placeholder="Tiêu đề" style="height: 50%"></textarea>
 									<div class="form-row">
 										<div class="form-item">
 											<div class="form-select">
-												<select style="background-color: #21283b; border-radius: 0px;" id="event-category" name="category_post">
+												<select style="background-color: #21283b; border-radius: 0px;" id="category" class="category" name="category">
 													<option value="0">---Loại câu hỏi---</option>
 													@foreach ($category_post as $key => $cate)
 													<option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
@@ -279,11 +279,11 @@
 											</div>
 										</div>
 									</div>
-									<textarea id="quick-post-text" name="post_content" placeholder="Nội dung"></textarea>
+									<textarea id="content" class="content" name="content" placeholder="Nội dung"></textarea>
 								</div>
 							</div>
 						</div>
-						<button class="button quick-post-footer-actions secondary" type="submit">Đăng</button>
+						<button class="postQ button quick-post-footer-actions secondary" name="postQ" type="button">Đăng</button>
 					</form>
 				</div>
 			</div>
@@ -320,9 +320,7 @@
 								</svg>
 							</div>
 							<div class="simple-dropdown widget-box-post-settings-dropdown">
-								<a href="#" class="simple-dropdown-link popup-event-creation-trigger section-filters-bar-actions">Chỉnh sửa</a>
-								<p></p>
-								<a href="{{url('/xoa-cau-hoi/'.$post_info->post_id)}}" class="simple-dropdown-link" onclick="return confirm('Bạn có chắc chắn muốn xóa {{$post_info->post_title}} không?')">Xóa câu hỏi</a>
+								<a href="javascript:void(0)" type="button" class="postD simple-dropdown-link" id="postD" data-id_post="{{$post_info->post_id}}">Xóa câu hỏi</a>
 							</div>
 						</div>
 					</div>
