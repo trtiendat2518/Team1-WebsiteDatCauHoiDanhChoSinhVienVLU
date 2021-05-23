@@ -3047,12 +3047,34 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.postQ').click(function(){
+			var dm = "dm", 
+				du = "đụ", 
+				cc = "cc",
+				cl = "cl", 
+				cac = "cặc", 
+				lon = "lồn",
+				dit = "địt",
+				dmm = "dmm",
+				cdl = "cdl",
+				clgv = "clgv",
+				clm = "clm",
+				deo = "đéo",
+				dcm = "dcm",
+				vl = "vl",
+				vai = "vãi",
+				di = "đĩ";
 			var post_title = $('.title').val();
 			var category_id = $('.category').val();
 			var post_content = $('.content').val();
 			var _token = $('input[name="_token"]').val();
-			if(post_title=='' || category_id=='' || post_content==''){
+
+			if(post_title=='' || category_id==0 || post_content==''){
 				swal("Vui lòng không để trống!", "", "warning");
+			}else if(post_content.includes(dm)||post_content.includes(du)||post_content.includes(cc)||post_content.includes(cac)||post_content.includes(lon)||post_content.includes(dit)||post_content.includes(dmm)||post_content.includes(cdl)||post_content.includes(clgv)||post_content.includes(clm)||post_content.includes(deo)||post_content.includes(di)||post_content.includes(dcm)||post_content.includes(vai)||post_content.includes(vl)){
+				swal("Nội dung có chứa từ không phù hợp!", "", "error");
+			}else if(post_title.includes(dm)||post_title.includes(du)||post_title.includes(cc)||post_title.includes(cac)||post_title.includes(lon)||post_title.includes(dit)||post_title.includes(dmm)||post_title.includes(cdl)||post_title.includes(clgv)||post_title.includes(clm)||post_title.includes(deo)||post_title.includes(di)
+				||post_title.includes(dcm)||post_title.includes(vai)||post_title.includes(vl)){
+				swal("Nội dung có chứa từ không phù hợp!", "", "error");
 			}else{
 				$.ajax({
 					url:'{{ url('/dang-cau-hoi') }}',
