@@ -263,7 +263,7 @@
 						<div class="form-row">
 							<div class="form-item">
 								<div class="form-textarea">
-									<textarea id="title" name="title" rows="1" class="title" placeholder="Tiêu đề" style="height: 50%"></textarea>
+									<textarea minlength="10" maxlength="70" id="title" name="title" rows="1" class="title" placeholder="Tiêu đề" style="height: 50%"></textarea>
 									<div class="form-row">
 										<div class="form-item">
 											<div class="form-select">
@@ -279,7 +279,7 @@
 											</div>
 										</div>
 									</div>
-									<textarea id="content" class="content" name="content" placeholder="Nội dung"></textarea>
+									<textarea minlength="50" maxlength="500" id="content" class="content" name="content" placeholder="Nội dung tối đa 500 ký tự"></textarea>
 								</div>
 							</div>
 						</div>
