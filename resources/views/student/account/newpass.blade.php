@@ -1,100 +1,129 @@
 <!DOCTYPE html>
-<html><head>
-	<meta charset="UTF-8">
-	<title>Tạo mật khẩu mới</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<link rel="stylesheet" type="text/css" href="{{asset('public/student/css/animate.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('public/student/css/bootstrap.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('public/student/css/line-awesome.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('public/student/css/line-awesome-font-awesome.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('public/student/css/all.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('public/student/css/font-awesome.css')}}"> 
-	<link rel="stylesheet" type="text/css" href="{{asset('public/student/css/slick.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('public/student/css/slick-theme.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('public/student/css/style.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('public/student/css/responsive.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('public/student/css/font.css')}}">
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- bootstrap 4.3.1 -->
+	<link rel="stylesheet" href="{{asset('public/student/css/vendor/bootstrap.min.css')}}">
+	<!-- styles -->
+	<link rel="stylesheet" href="{{asset('public/student/css/styles.min.css')}}">
+	<link rel="stylesheet" href="{{asset('public/student/css/raw/styles.css')}}">
+	<!-- favicon -->
+	<link rel="icon" href="{{asset('public/student/img/vlu.ico')}}">
+</head> 
+
+<title>Mật khẩu mới</title>
 </head>
-<body class="sign-in" oncontextmenu="return false;">
-	<div class="wrapper">
-		<div class="sign-in-page">
-			<div class="signin-popup">
-				<div class="signin-pop">
-					<div class="row">
-						<div class="col-lg-6">
-							<div class="cmp-info">
-								<div class="cm-logo">
-									<img src="{{asset('public/student/images/vlulogo.png')}}" alt="">
-								</div>
-								<img src="{{asset('public/student/images/cm-main-img.png')}}" alt="">
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="login-sec">
-								<div class="sign_in_sec animated fadeIn current" id="tab-1" style="padding-top: 140px;">
-									<h3>Tạo mật khẩu mới</h3>
-									@php
-									$message=Session::get('message');
-									if($message){
-										echo $message;
-										Session::put('message', null);
-									}
-									@endphp
-									<center>
-										<form action="{{url('/tao-mat-khau-moi')}}" method="post">
-											{{csrf_field()}}
-											<div class="row">
-												<div class="col-lg-12 no-pdd">
-													<div class="sn-field">
-														<input type="password" name="student_password" placeholder="Mật khẩu mới">
-														<i class="fa fa-lock"></i>
-													</div>
-												</div>
-												<div class="col-lg-12 no-pdd">
-													<div class="sn-field">
-														<input type="password" name="student_password_confirm" placeholder="Nhập lại mật khẩu mới">
-														<i class="fa fa-lock"></i>
-													</div>
-												</div>
-												<div class="col-lg-12 no-pdd">
-													<center>
-														<button type="submit" value="submit">Xác nhận</button>
-													</center>
-												</div>
-											</div>
-										</form>
-									</center>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+<body>
+
+	<!-- LANDING -->
+	<div class="landing">
+		<!-- LANDING INFO -->
+		<div class="landing-info">
+			<!-- LOGO -->
+			<div class="logo">
+				<!-- ICON LOGO VIKINGER -->
+				<a href="{{url('/')}}" title=""><img src="{{asset('public/student/img/vlu.ico')}}" alt=""></a>
+				<!-- /ICON LOGO VIKINGER -->
 			</div>
-			<div class="footy-sec">
-				<div class="container">
-					<ul>
-						<li><a href="help-center.html" title="">Help Center</a></li>
-						<li><a href="about.html" title="">About</a></li>
-						<li><a href="#" title="">Privacy Policy</a></li>
-						<li><a href="#" title="">Community Guidelines</a></li>
-						<li><a href="#" title="">Cookies Policy</a></li>
-						<li><a href="#" title="">Career</a></li>
-						<li><a href="forum.html" title="">Forum</a></li>
-						<li><a href="#" title="">Language</a></li>
-						<li><a href="#" title="">Copyright Policy</a></li>
-					</ul>
-					<p><img src="{{asset('public/student/images/copy-icon.png')}}" alt="">Copyright 2019</p>
-				</div>
+			<!-- /LOGO -->
+
+			<!-- LANDING INFO PRETITLE -->
+			<h2 class="landing-info-pretitle">Welcome to</h2>
+			<!-- /LANDING INFO PRETITLE -->
+
+			<!-- LANDING INFO TITLE -->
+			<h1 class="landing-info-title">VLU</h1>
+			<!-- /LANDING INFO TITLE -->
+
+			<!-- LANDING INFO TEXT -->
+			<p class="landing-info-text">Website này sẽ cùng bạn giải đáp những thắc mắc khi bạn đang trong gia đình Văn Lang!</p>
+			<!-- /LANDING INFO TEXT -->
+		</div>
+		<!-- /LANDING INFO -->
+
+		<!-- LANDING FORM -->
+		<div class="landing-form">
+			<!-- FORM BOX -->
+			<div class="form-box login-register-form-element" style="margin-top: -250px;">
+				<!-- FORM BOX DECORATION -->
+				<img class="form-box-decoration overflowing" src="{{asset('public/student/img/landing/rocket.png')}}" alt="rocket">
+				<!-- /FORM BOX DECORATION -->
+
+				<!-- FORM BOX TITLE -->
+				<h2 style="color: white;" class="form-box-title">Tạo mới mật khẩu</h2>
+				<!-- /FORM BOX TITLE -->
+				<!-- FORM -->
+				<form action="{{url('/tao-mat-khau-moi')}}" method="post" class="form">
+					<!-- FORM ROW -->
+					{{csrf_field()}}
+					@php
+					$message=Session::get('message');
+					if($message){
+						echo $message;
+						Session::put('message', null);
+					}
+					@endphp
+					<div class="form-row">
+						<!-- FORM ITEM -->
+						<div class="form-item">
+							<!-- FORM INPUT -->
+							<div class="form-input">
+								<label for="register-password">Mật khẩu</label>
+								<input type="password" name="student_password" id="register-password">
+							</div>
+							<!-- /FORM INPUT -->
+						</div>
+						<!-- /FORM ITEM -->
+					</div>
+					<!-- /FORM ROW -->
+
+					<!-- FORM ROW -->
+					<div class="form-row">
+						<!-- FORM ITEM -->
+						<div class="form-item">
+							<!-- FORM INPUT -->
+							<div class="form-input">
+								<label for="register-password-repeat">Nhập lại mật khẩu</label>
+								<input type="password" name="student_password_confirm" id="register-password-repeat">
+							</div>
+							<!-- /FORM INPUT -->
+						</div>
+						<!-- /FORM ITEM -->
+					</div>
+					<div class="form-row">
+						<!-- FORM ITEM -->
+						<div class="form-item">
+							<!-- BUTTON -->
+							<button type="submit" class="button medium secondary">Xác nhận</button>
+							<!-- /BUTTON -->
+						</div>
+						<div class="form-item">
+							<!-- FORM LINK -->
+							<a class="form-link" style="font-size: 16px;" href="{{asset('/login')}}"><center><br>Quay lại đăng nhập</center></a>
+							<!-- /FORM LINK -->
+						</div>
+						<!-- /FORM ITEM -->
+					</div>
+					<!-- /FORM ROW -->
+				</form>
+				<!-- /FORM -->
 			</div>
 		</div>
+		<!-- /LANDING FORM -->
 	</div>
-	<script type="text/javascript" src="{{asset('public/student/js/jquery.min.js')}}"></script>
-	<script type="text/javascript" src="{{asset('public/student/js/popper.js')}}"></script>
-	<script type="text/javascript" src="{{asset('public/student/js/bootstrap.min.js')}}"></script>
-	<script type="text/javascript" src="{{asset('public/student/js/slick.min.js')}}"></script>
-	<script type="text/javascript" src="{{asset('public/student/js/script.js')}}"></script>
-	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	<!-- /LANDING -->
 
-</body></html>
+	<!-- app -->
+	<script src="{{asset('public/student/js/utils/app.js')}}"></script>
+	<!-- XM_Plugins -->
+	<script src="{{asset('public/student/js/vendor/xm_plugins.min.js')}}"></script>
+	<!-- form.utils -->
+	<script src="{{asset('public/student/js/form/form.utils.js')}}"></script>
+	<!-- landing.tabs -->
+	<script src="{{asset('public/student/js/landing/landing.tabs.js')}}"></script>
+	<!-- SVG icons -->
+	<script src="{{asset('public/student/js/utils/svg-loader.js')}}"></script>
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script> 
+</body>
+</html>
