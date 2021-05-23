@@ -43,7 +43,19 @@ class StudentController extends Controller
 		}
 	}
 
-		public function login(Request $request){
+	public function index_forgetpass(){
+		return view('student.account.forgetpass');
+	}
+
+	public function index_newpass(){
+		if(Session::get('token_pass')){
+			return view('student.account.newpass');
+		}else{
+			return view('student.account.forgetpass');
+		}	
+	}
+	
+	public function login(Request $request){
 		$data = $request->validate([
 			'student_email'=>'required|email',
 			'student_password'=>'required|min:6|max:32',
@@ -76,6 +88,7 @@ class StudentController extends Controller
 				if($login_count){
 					Session::put('student_name', $login->student_name);
 					Session::put('student_id', $login->student_id);
+					Session::put('student_email', $login->student_email);
 					return Redirect::to('/');
 				}
 			}
@@ -143,5 +156,68 @@ class StudentController extends Controller
 			Session::put('message', '<div class="alert alert-danger">Vui lòng nhập Mail Văn Lang!</div>');
 			return Redirect::to('/register');
 		}
+	}
+
+	public function logout(){
+		$this->AuthLogin();
+		Session::put('student_id', null);
+		Session::put('student_name', null);
+		Session::put('student_email', null);
+		Session::put('student_password', null);     
+		return Redirect::to('/');
+	}
+	
+	public function confirm_mail(Request $request){
+		$data = $request->all();
+		$student_email = $data['student_email'];
+		$check_exist = Student::where('student_email', $student_email)->first();
+		if(empty($student_email)){
+			Session::put('message','<div class="alert alert-danger">Vui lòng nhập mail!</div>');
+			return Redirect::to('forgetpass');
+		}
+		if($check_exist){
+			$to_name = "BCN Khoa CNTT";
+			$to_email = $check_exist->student_email;
+			$data = array("name"=>"Vui lòng xác nhận tài khoản để tiếp tục!", "body"=>"Nhấn xác nhận để tiếp tục");
+			Mail::send('mail.send_mail_change_pass', $data, function($message) use ($to_name, $to_email){
+				$message->to($to_email)->subject('Quên mật khẩu');
+				$message->from($to_email, $to_name);
+			});
+
+			Session::put('student_email', $student_email);
+			Session::put('message','<div class="alert alert-warning">Xác nhận Mail để tiếp tục đổi mật khẩu mới!</div>');
+			return Redirect::to('forgetpass');
+		}else{
+			Session::put('message','<div class="alert alert-danger">Mail không tồn tại!</div>');
+			return Redirect::to('forgetpass');
+		}
+	}
+
+	public function newpassword(Request $request){
+		$data = $request->all();
+		$student_email = Session::get('student_email');
+		$student_password = $data['student_password'];
+		$student_password_confirm = $request->student_password_confirm;
+
+		if(empty($student_password) || empty($student_password_confirm)){
+			Session::put('message','<div class="alert alert-danger">Vui lòng điền đầy đủ thông tin!</div>');
+			return Redirect::to('newpass');
+		}else if($student_password != $student_password_confirm){
+			Session::put('message','<div class="alert alert-danger">Mật khẩu không khớp với nhau!</div>');
+			return Redirect::to('newpass');
+		}else{
+			$student = Student::where('student_email', $student_email)->first();
+			$student->student_password = md5($student_password);
+			$student->save();
+
+			Session::put('token_pass', null);
+			Session::put('student_email', null);
+			Session::put('message','<div class="alert alert-success">Đổi mật khẩu thành công! Mời bạn đăng nhập.</div>');
+			return Redirect::to('login');
+		}
+	}
+
+	public function profile(){
+		return view('student.page.profile.profilemine');
 	}
 }
