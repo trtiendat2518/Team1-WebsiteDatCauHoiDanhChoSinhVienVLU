@@ -26,4 +26,7 @@ class PostController extends Controller
 		$post->post_content = $data['post_content'];
 		$post->save();
     }
+    public function post_delete(Request $request){
+		Post::find($request->input('id'))->delete();
+	}
 }
