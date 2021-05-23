@@ -27,8 +27,8 @@ Route::get('/trang-ca-nhan', 'StudentController@profile');
 //STUDENT POST
 Route::post('/dang-cau-hoi', 'PostController@post_new');
 Route::get('/xoa-cau-hoi/{post_id}', 'PostController@post_delete');
-
-//--------------------------------------------------------------------------------------------//
+Route::post('/chinh-sua-cau-hoi/{post_id}', 'PostController@post_update');
 
 //ADMIN HOME
 Route::get('/admin-home', 'AdminController@index');
+
