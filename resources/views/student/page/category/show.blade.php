@@ -8,7 +8,9 @@
 		<!-- /SECTION BANNER ICON -->
 
 		<!-- SECTION BANNER TITLE -->
-		<p class="section-banner-title">Trang câu hỏi</p>
+		@foreach ($category_by_name as $key => $name)
+		<p class="section-banner-title">Những câu hỏi về: {{$name->category_name}}</p>
+		@endforeach
 		<!-- /SECTION BANNER TITLE -->
 
 		<!-- SECTION BANNER TEXT -->
@@ -268,9 +270,8 @@
 										<div class="form-item">
 											<div class="form-select">
 												<select style="background-color: #21283b; border-radius: 0px;" id="category" class="category" name="category">
-													<option value="0">---Loại câu hỏi---</option>
-													@foreach ($category_post as $key => $cate)
-													<option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
+													@foreach ($category_by_name as $key => $cate)
+													<option value="{{$cate->category_id}}" selected>{{$cate->category_name}}</option>
 													@endforeach
 												</select>
 												<svg class="form-select-icon icon-small-arrow">
@@ -317,7 +318,7 @@
 				<p class="simple-tab-item">Quan tâm</p>
 				<p class="simple-tab-item">Xem nhiều</p>
 			</div>
-			@foreach ($post as $key => $post_info)
+			@foreach ($category_by_id as $key => $post_info)
 			<div class="widget-box no-padding">
 				@php
 				if(Session::get('student_email')==$post_info->post_student_email){
