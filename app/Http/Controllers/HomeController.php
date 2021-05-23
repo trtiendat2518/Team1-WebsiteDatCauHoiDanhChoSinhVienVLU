@@ -17,20 +17,10 @@ session_start();
 
 class HomeController extends Controller
 {
-    public function AuthLogin(){
-		$student_id=Session::get('student_id');
-		if($student_id){
-			return Redirect::to('/');
-		}else{
-			return Redirect::to('/login')->send();
-		}
-	}
-    
 	public function index(){
-		$this->AuthLogin();
 		$category_post = Category::orderBy('category_id', 'DESC')->get();
 		$post = Post::join('tbl_category','tbl_category.category_id','=','tbl_post.category_id')
-		->orderBy('post_id','DESC')->get();
+		->orderBy('post_id','DESC')->paginate(2);
 		return view('student.page.home')->with(compact('category_post','post'));
 	}
 }
