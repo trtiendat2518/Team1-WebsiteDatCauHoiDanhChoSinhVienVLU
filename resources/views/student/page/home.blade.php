@@ -283,7 +283,17 @@
 								</div>
 							</div>
 						</div>
+						@php
+							if(Session::get('student_id')){
+						@endphp
 						<button class="postQ button quick-post-footer-actions secondary" name="postQ" type="button">Đăng</button>
+						@php
+							}else{
+						@endphp
+						<a href="{{url('/login')}}" style="color: white;" class=" button quick-post-footer-actions secondary btn-block" type="button">Đăng</a>
+						@php
+							}
+						@endphp
 					</form>
 				</div>
 			</div>

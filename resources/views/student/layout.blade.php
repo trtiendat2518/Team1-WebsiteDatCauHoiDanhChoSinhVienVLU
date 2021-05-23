@@ -3051,7 +3051,7 @@
 			var category_id = $('.category').val();
 			var post_content = $('.content').val();
 			var _token = $('input[name="_token"]').val();
-			if(post_title=='' || category_id=='' || post_content==''){
+			if(post_title=='' || category_id==0 || post_content==''){
 				swal("Vui lòng không để trống!", "", "warning");
 			}else{
 				$.ajax({

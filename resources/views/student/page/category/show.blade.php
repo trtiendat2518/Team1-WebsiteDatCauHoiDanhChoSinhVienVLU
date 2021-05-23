@@ -270,9 +270,8 @@
 										<div class="form-item">
 											<div class="form-select">
 												<select style="background-color: #21283b; border-radius: 0px;" id="category" class="category" name="category">
-													<option value="0">---Loại câu hỏi---</option>
-													@foreach ($category_post as $key => $cate)
-													<option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
+													@foreach ($category_by_name as $key => $cate)
+													<option value="{{$cate->category_id}}" selected>{{$cate->category_name}}</option>
 													@endforeach
 												</select>
 												<svg class="form-select-icon icon-small-arrow">
@@ -285,7 +284,17 @@
 								</div>
 							</div>
 						</div>
+						@php
+							if(Session::get('student_id')){
+						@endphp
 						<button class="postQ button quick-post-footer-actions secondary" name="postQ" type="button">Đăng</button>
+						@php
+							}else{
+						@endphp
+						<a href="{{url('/login')}}" style="color: white;" class=" button quick-post-footer-actions secondary btn-block" type="button">Đăng</a>
+						@php
+							}
+						@endphp
 					</form>
 				</div>
 			</div>
