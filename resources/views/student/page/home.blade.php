@@ -557,7 +557,6 @@
 									<svg class="icon-plus-small">
 										<use xlink:href="#svg-plus-small"></use>
 									</svg>
-									<!-- /ICON PLUS SMALL -->
 								</div>
 								<!-- /STATS BOX DIFF ICON -->
 
