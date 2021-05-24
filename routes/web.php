@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 //STUDENT HOME
 Route::get('/', 'HomeController@index');
+Route::post('/tim-kiem','HomeController@search');
 
 //STUDENT ACCOUNT
 Route::get('/login', 'StudentController@index_login');
@@ -28,6 +29,9 @@ Route::get('/trang-ca-nhan', 'StudentController@profile');
 Route::post('/dang-cau-hoi', 'PostController@post_new');
 Route::get('/xoa-cau-hoi', 'PostController@post_delete');
 Route::post('/chinh-sua-cau-hoi/{post_id}', 'PostController@post_update');
+
+//STUDENT CATEGORY POST
+Route::get('/cau-hoi-theo-loai/{category_id}','CategoryController@show_category_post');
 
 //ADMIN HOME
 Route::get('/admin-home', 'AdminController@index');

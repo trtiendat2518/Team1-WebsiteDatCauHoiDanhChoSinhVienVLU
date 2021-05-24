@@ -8,7 +8,7 @@
 		<!-- /SECTION BANNER ICON -->
 
 		<!-- SECTION BANNER TITLE -->
-		<p class="section-banner-title">Trang câu hỏi</p>
+		<p class="section-banner-title">Kết quả tìm kiếm</p>
 		<!-- /SECTION BANNER TITLE -->
 
 		<!-- SECTION BANNER TEXT -->
@@ -279,7 +279,7 @@
 											</div>
 										</div>
 									</div>
-									<textarea minlength="50" maxlength="500" id="content" class="content" name="content" placeholder="Nội dung tối đa 500 ký tự"></textarea>
+									<textarea minlength="50" maxlength="500" id="content" class="content" name="content" placeholder="Nội dung tối đa 500 ký tự..."></textarea>
 								</div>
 							</div>
 						</div>
@@ -290,7 +290,7 @@
 						@php
 							}else{
 						@endphp
-						<a href="{{url('/login')}}" class=" button quick-post-footer-actions secondary btn-block" type="button">Đăng</a>
+						<a href="{{url('/login')}}" class=" button quick-post-footer-actions secondary btn-block">Đăng</a>
 						@php
 							}
 						@endphp
@@ -317,7 +317,7 @@
 				<p class="simple-tab-item">Quan tâm</p>
 				<p class="simple-tab-item">Xem nhiều</p>
 			</div>
-			@foreach ($post as $key => $post_info)
+			@foreach ($search_product as $key => $post_info)
 			<div class="widget-box no-padding">
 				@php
 				if(Session::get('student_email')==$post_info->post_student_email){
@@ -360,7 +360,7 @@
 						</div>
 						<p style="font-size: 20px;" class="widget-box-status-text">{{$post_info->post_title}}</p>
 						<br>
-						<p class="widget-box-status-text">{{$post_info->post_content}}</p>
+						<p class="read-more widget-box-status-text">{{$post_info->post_content}}</p>
 
 						<div class="tag-list">
 							<a class="tag-item secondary" style="font-size: 16px" href="{{url('/cau-hoi-theo-loai/'.$post_info->category_id)}}">{{$post_info->category_name}}</a>
@@ -456,7 +456,7 @@
 					</div>
 					<div class="post-option">
 						<svg class="post-option-icon icon-share">
-							<use xlink:href="#svg-share"></use>
+							<use xlink:href="#svg-quests"></use>
 						</svg>
 						<p class="post-option-text">Câu trả lời của Khoa</p>
 					</div>
