@@ -263,7 +263,7 @@
 						<div class="form-row">
 							<div class="form-item">
 								<div class="form-textarea">
-									<textarea id="title" name="title" rows="1" class="title" placeholder="Tiêu đề" style="height: 50%"></textarea>
+									<textarea minlength="10" maxlength="70" id="title" name="title" rows="1" class="title" placeholder="Tiêu đề" style="height: 50%"></textarea>
 									<div class="form-row">
 										<div class="form-item">
 											<div class="form-select">
@@ -279,7 +279,7 @@
 											</div>
 										</div>
 									</div>
-									<textarea id="content" class="content" name="content" placeholder="Nội dung"></textarea>
+									<textarea minlength="50" maxlength="500" id="content" class="content" name="content" placeholder="Nội dung tối đa 500 ký tự"></textarea>
 								</div>
 							</div>
 						</div>
@@ -290,7 +290,7 @@
 						@php
 							}else{
 						@endphp
-						<a href="{{url('/login')}}" style="color: white;" class=" button quick-post-footer-actions secondary btn-block" type="button">Đăng</a>
+						<a href="{{url('/login')}}" class=" button quick-post-footer-actions secondary btn-block" type="button">Đăng</a>
 						@php
 							}
 						@endphp
@@ -330,6 +330,8 @@
 								</svg>
 							</div>
 							<div class="simple-dropdown widget-box-post-settings-dropdown">
+								{{-- <a href="javascript:void(0)" type="button" class="postE simple-dropdown-link section-filters-bar-actions popup-event-creation-trigger" onclick="getPost({{$post_info->post_id}})" >Chỉnh sửa</a>
+								<p></p> --}}
 								<a href="javascript:void(0)" type="button" class="postD simple-dropdown-link" id="postD" data-id_post="{{$post_info->post_id}}">Xóa câu hỏi</a>
 							</div>
 						</div>
