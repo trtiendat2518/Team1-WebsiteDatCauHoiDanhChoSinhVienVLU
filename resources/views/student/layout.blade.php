@@ -3,6 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- SEO website -->
+	<meta name="description" content="{{$meta_desc}}">
+    <meta name="author" content="SEP-TEAM1-FWB">
+    <link rel="canonical" href="{{$url_canonical}}">
 	<!-- bootstrap 4.3.1 -->
 	<link rel="stylesheet" href="{{asset('public/student/css/vendor/bootstrap.min.css')}}">
 	<!-- styles -->
@@ -17,7 +21,7 @@
 	<link rel="stylesheet" href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')}}">
 	<!-- favicon -->
 	<link rel="icon" href="{{asset('public/student/img/vlu.ico')}}">
-	<title>Trang chủ</title>
+	<title>{{$meta_title}}</title>
 </head>
 <body">
 
