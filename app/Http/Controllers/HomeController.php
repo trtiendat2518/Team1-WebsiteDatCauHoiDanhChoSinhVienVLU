@@ -23,4 +23,12 @@ class HomeController extends Controller
 		->orderBy('post_id','DESC')->paginate(10);
 		return view('student.page.home')->with(compact('category_post','post'));
 	}
+
+	public function search(Request $request)
+	{
+		$category_post = Category::orderBy('category_id', 'DESC')->get();
+		$keywords = $request->keywords_submit;
+		$search_product = Post::join('tbl_category','tbl_category.category_id','=','tbl_post.category_id')->where('post_title','like','%'.$keywords.'%')->get(); 
+		return view('student.page.post.search')->with(compact('category_post','search_product'));
+	}
 }

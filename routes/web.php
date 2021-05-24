@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 //STUDENT HOME
 Route::get('/', 'HomeController@index');
+Route::post('/tim-kiem','HomeController@search');
 
 //STUDENT ACCOUNT
 Route::get('/login', 'StudentController@index_login');
