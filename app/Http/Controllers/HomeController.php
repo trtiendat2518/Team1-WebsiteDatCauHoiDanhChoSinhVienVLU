@@ -32,9 +32,15 @@ class HomeController extends Controller
 
 	public function search(Request $request)
 	{
+		//SEO
+		$meta_desc = "Tìm kiếm câu hỏi";
+        $meta_title = "Tìm kiếm câu hỏi";
+        $url_canonical = $request->url();
+		//---------------
+		
 		$category_post = Category::orderBy('category_id', 'DESC')->get();
 		$keywords = $request->keywords_submit;
 		$search_product = Post::join('tbl_category','tbl_category.category_id','=','tbl_post.category_id')->where('post_title','like','%'.$keywords.'%')->get(); 
-		return view('student.page.post.search')->with(compact('category_post','search_product'));
+		return view('student.page.post.search')->with(compact('meta_desc','meta_title','url_canonical','category_post','search_product'));
 	}
 }
