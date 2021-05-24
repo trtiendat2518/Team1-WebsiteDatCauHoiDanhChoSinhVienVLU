@@ -1511,11 +1511,21 @@
 				<div class="dropdown-navigation-header">
 					<!-- USER STATUS -->
 					<div class="user-status" style="padding: 0px;">
-
+						@php
+							if(Session::get('student_id')){
+						@endphp
 						<!-- USER STATUS TITLE -->
 						<p class="user-status-title"><span class="bold">Xin chào, @php
 						echo Session::get('student_name');
 					@endphp !</span></p>
+					@php
+						}else{
+					@endphp
+					<p class="user-status-title"><span class="bold">Xin chào,
+					Bạn cần đăng nhập để sử dụng các tính năng !</span></p>
+					@php
+						}
+					@endphp
 					<!-- /USER STATUS TITLE -->
 
 					<!-- USER STATUS TEXT -->
@@ -1537,26 +1547,11 @@
 		<!-- /DROPDOWN NAVIGATION LINK -->
 
 		<!-- DROPDOWN NAVIGATION LINK -->
-		<a class="dropdown-navigation-link" href="hub-profile-social.html">Xã hội &amp; Stream</a>
-		<!-- /DROPDOWN NAVIGATION LINK -->
-
-		<!-- DROPDOWN NAVIGATION LINK -->
 		<a class="dropdown-navigation-link" href="hub-profile-notifications.html">Thông báo</a>
-
-		<!-- DROPDOWN NAVIGATION CATEGORY -->
-		<p class="dropdown-navigation-category">Tài khoản</p>
-		<!-- /DROPDOWN NAVIGATION CATEGORY -->
-
-		<!-- DROPDOWN NAVIGATION LINK -->
-		<a class="dropdown-navigation-link" href="hub-account-info.html">Thông tin tài khoản</a>
 		<!-- /DROPDOWN NAVIGATION LINK -->
 
 		<!-- DROPDOWN NAVIGATION LINK -->
 		<a class="dropdown-navigation-link" href="hub-account-password.html">Thay đổi mật khẩu</a>
-		<!-- /DROPDOWN NAVIGATION LINK -->
-
-		<!-- DROPDOWN NAVIGATION LINK -->
-		<a class="dropdown-navigation-link" href="hub-account-settings.html">Cài đặt chung</a>
 
 		<!-- DROPDOWN NAVIGATION BUTTON -->
 		@php

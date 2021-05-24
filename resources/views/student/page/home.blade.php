@@ -290,7 +290,7 @@
 						@php
 							}else{
 						@endphp
-						<a href="{{url('/login')}}" style="color: white;" class=" button quick-post-footer-actions secondary btn-block" type="button">Đăng</a>
+						<a href="{{url('/login')}}" class=" button quick-post-footer-actions secondary btn-block" type="button">Đăng</a>
 						@php
 							}
 						@endphp
