@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Comment;
 use DB;
 use Mail;
 use Session;

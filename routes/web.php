@@ -33,6 +33,10 @@ Route::post('/chinh-sua-cau-hoi/{post_id}', 'PostController@post_update');
 //STUDENT CATEGORY POST
 Route::get('/cau-hoi-theo-loai/{category_id}','CategoryController@show_category_post');
 
+//STUDENT COMMENT
+Route::post('/binh-luan/{post_id}', 'CommentController@comment_post');
+
+//-----------------------------------------------------------------------------------------
 //ADMIN HOME
 Route::get('/admin-home', 'AdminController@index');
 

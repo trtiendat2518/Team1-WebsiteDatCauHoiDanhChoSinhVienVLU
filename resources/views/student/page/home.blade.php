@@ -317,7 +317,7 @@
 				<p class="simple-tab-item">Quan tâm</p>
 				<p class="simple-tab-item">Xem nhiều</p>
 			</div>
-			@foreach ($post as $key => $post_info)
+			@foreach ($post2 as $key => $post_info)
 			<div class="widget-box no-padding">
 				@php
 				if(Session::get('student_email')==$post_info->post_student_email){
@@ -461,6 +461,101 @@
 						<p class="post-option-text">Câu trả lời của Khoa</p>
 					</div>
 				</div>
+				<!-- POST COMMENT LIST -->
+				<div id="commentId"  class="post-comment-list ">
+					<!-- POST COMMENT -->
+					@foreach ($post_info->comments as $key => $cmt)
+						<div class="post-comment">
+						<!-- USER AVATAR -->
+						<a class="user-avatar small no-outline" href="profile-timeline.html">
+							<!-- USER AVATAR CONTENT -->
+							<div class="user-avatar-content">
+								<!-- HEXAGON -->
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/05.jpg')}}"></div>
+								<!-- /HEXAGON -->
+							</div>
+							<!-- /USER AVATAR CONTENT -->
+
+							<!-- USER AVATAR PROGRESS -->
+							<div class="user-avatar-progress">
+								<!-- HEXAGON -->
+								<div class="hexagon-progress-40-44"></div>
+								<!-- /HEXAGON -->
+							</div>
+							<!-- /USER AVATAR PROGRESS -->
+
+							<!-- USER AVATAR PROGRESS BORDER -->
+							<div class="user-avatar-progress-border">
+								<!-- HEXAGON -->
+								<div class="hexagon-border-40-44"></div>
+								<!-- /HEXAGON -->
+							</div>
+							<!-- /USER AVATAR PROGRESS BORDER -->
+						</a>
+						<p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html" style="color: #007bff;">{{$cmt->student->student_name}}</a>
+							<br>{{$cmt->comment_content}}</p>
+					</div>
+					@endforeach
+					<!-- /POST COMMENT -->
+
+					<!-- POST COMMENT HEADING -->
+					<p class="post-comment-heading">Load More Comments <span class="highlighted">9+</span></p>
+					<!-- /POST COMMENT HEADING -->
+
+					<!-- POST COMMENT FORM -->
+					<div class="post-comment-form">
+						<!-- USER AVATAR -->
+						<div class="user-avatar small no-outline">
+							<!-- USER AVATAR CONTENT -->
+							<div class="user-avatar-content">
+								<!-- HEXAGON -->
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/01.jpg')}}"></div>
+								<!-- /HEXAGON -->
+							</div>
+							<!-- /USER AVATAR CONTENT -->
+
+							<!-- USER AVATAR PROGRESS -->
+							<div class="user-avatar-progress">
+								<!-- HEXAGON -->
+								<div class="hexagon-progress-40-44"></div>
+								<!-- /HEXAGON -->
+							</div>
+							<!-- /USER AVATAR PROGRESS -->
+
+							<!-- USER AVATAR PROGRESS BORDER -->
+							<div class="user-avatar-progress-border">
+								<!-- HEXAGON -->
+								<div class="hexagon-border-40-44"></div>
+								<!-- /HEXAGON -->
+							</div>
+							<!-- /USER AVATAR PROGRESS BORDER -->
+						</div>
+						<!-- /USER AVATAR -->
+
+						<!-- FORM -->
+						<form action="{{url('/binh-luan/'.$post_info->post_id)}}" method="post" class="form">
+							@csrf
+							<!-- FORM ROW -->
+							<div class="form-row">
+								<!-- FORM ITEM -->
+								<div class="form-item">
+									<!-- FORM INPUT -->
+									<div class="form-input small" style="margin-bottom: 50px;">
+										<label for="post-reply">Bình luận của bạn</label>
+										<textarea name="comment_content" rows="5" id="post-reply"></textarea>
+										<button style="margin-top: 110px; width: 90px;" type="submit" class="button secondary">Gửi</button>
+									</div>
+									<!-- /FORM INPUT -->
+								</div>
+								<!-- /FORM ITEM -->
+							</div>
+							<!-- /FORM ROW -->
+						</form>
+						<!-- /FORM -->
+					</div>
+					<!-- /POST COMMENT FORM -->
+				</div>
+				<!-- /POST COMMENT LIST -->
 			</div>
 			@endforeach
 			<div class="loader-bars">

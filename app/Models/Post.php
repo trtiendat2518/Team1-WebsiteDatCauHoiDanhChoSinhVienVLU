@@ -13,4 +13,11 @@ class Post extends Model
     ];
     protected $primaryKey = 'post_id';
     protected $table = 'tbl_post';
+
+    public function comments(){
+        return $this->hasMany('App\Models\Comment', 'post_id');
+    }
+    public function student(){
+        return $this->belongsTo('App\Models\Student','post_student_name');
+    }
 }
