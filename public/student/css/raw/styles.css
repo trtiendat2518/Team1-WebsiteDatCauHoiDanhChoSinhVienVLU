@@ -491,7 +491,7 @@ input[type="text"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus {
-  border-color: #7750f8;
+  border-color: #040aae;
 }
 
 input[type="text"],
@@ -925,7 +925,7 @@ textarea::placeholder {
 }
 
 .checkbox-line .checkbox-line-text {
-  color: #4ff461;
+  color: #040aae;
   font-size: 0.875rem;
   font-weight: 500;
 }
@@ -965,13 +965,13 @@ textarea::placeholder {
 
 .checkbox-wrap input[type="checkbox"]:checked + .checkbox-box,
 .checkbox-wrap input[type="radio"]:checked + .checkbox-box {
-  background-color: #40d04f;
-  border-color: #40d04f;
+  background-color: #040aae;
+  border-color: #040aae;
 }
 
 .checkbox-wrap input[type="checkbox"]:checked + .checkbox-box.round,
 .checkbox-wrap input[type="radio"]:checked + .checkbox-box.round {
-  border: 6px solid #40d04f;
+  border: 6px solid #040aae;
   background-color: #1d2333;
 }
 
@@ -1068,37 +1068,37 @@ textarea::placeholder {
 
 .interactive-input.dark input {
   border: none;
-  background-color: #5538b5;
-  color: #fff;
+  background-color: #fff;
+  color: #040aae;
 }
 
 .interactive-input.dark input::-webkit-input-placeholder {
-  color: #8b88ff;
+  color: #004efdad;
   opacity: .6;
 }
 
 .interactive-input.dark input::-moz-placeholder {
-  color: #8b88ff;
+  color: #004efdad;
   opacity: .6;
 }
 
 .interactive-input.dark input:-ms-input-placeholder {
-  color: #8b88ff;
+  color: #004efdad;
   opacity: .6;
 }
 
 .interactive-input.dark input::-ms-input-placeholder {
-  color: #8b88ff;
+  color: #004efdad;
   opacity: .6;
 }
 
 .interactive-input.dark input::placeholder {
-  color: #8b88ff;
+  color: #004efdad;
   opacity: .6;
 }
 
 .interactive-input.dark .interactive-input-icon-wrap .interactive-input-icon {
-  fill: #9b7dff;
+  fill: #004efdad;
 }
 
 .interactive-input.dark .interactive-input-action:hover .interactive-input-action-icon {
@@ -5201,7 +5201,7 @@ figure > img {
 }
 
 .option-item.active {
-  border-bottom: 4px solid #4ff461;
+  border-bottom: 4px solid #004efdad;
 }
 
 .option-item.active .option-item-icon {
@@ -14921,7 +14921,7 @@ figure > img {
       align-items: center;
   width: 100%;
   height: 80px;
-  background-color: #7750f8;
+  background-color: #004efdad;
   position: fixed;
   top: 0;
   left: 0;
@@ -15238,11 +15238,11 @@ figure > img {
 }
 
 .menu-main .menu-main-item:hover > .menu-main-item-link {
-  color: #4ff461;
+  color: #004efdad;
 }
 
 .menu-main .menu-main-item:hover > .menu-main-item-link .icon-dots {
-  fill: #4ff461;
+  fill: #004efdad;
 }
 
 .menu-main .menu-main-item:hover > .menu-main {
@@ -15303,12 +15303,12 @@ figure > img {
 
 .menu .menu-item.active .menu-item-link {
   color: #fff;
-  background-color: #40d04f;
+  background-color: #004efdad;
   box-shadow: 4px 7px 12px 0 rgba(64, 208, 79, 0.2);
 }
 
 .menu .menu-item.active .menu-item-link:hover {
-  background-color: #40d04f;
+  background-color: #004efdad;
   color: #fff;
   padding-left: 62px;
   box-shadow: 4px 7px 12px 0 rgba(64, 208, 79, 0.2);

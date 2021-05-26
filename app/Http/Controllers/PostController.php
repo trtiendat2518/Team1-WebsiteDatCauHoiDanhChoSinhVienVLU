@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\CreatePostFormRequest;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,7 +17,7 @@ session_start();
 class PostController extends Controller
 {
     public function post_new(Request $request){
-    	$data = $request->all();
+		$data = $request->all();
 		$post = new Post();
 		$post->post_student_name = Session::get('student_name');
     	$post->post_student_email = Session::get('student_email');
@@ -25,10 +26,7 @@ class PostController extends Controller
 		$post->post_content = $data['post_content'];
 		$post->save();
     }
-
-    public function post_delete($post_id){
-		Post::find($post_id)->delete();
-		Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
-		return Redirect::to('/');
+    public function post_delete(Request $request){
+		Post::find($request->input('id'))->delete();
 	}
 }

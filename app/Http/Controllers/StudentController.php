@@ -100,12 +100,13 @@ class StudentController extends Controller
 
 	public function register(Request $request){
 		$data = $request->validate([
-			'student_name'=>'required',
+			'student_name'=>'required|alpha|max:100',
 			'student_email'=>'required',
 			'student_password'=>'required|min:6|max:32',
 			'g-recaptcha-response'=>new Captcha(),
 		],[
 			'student_name.required'=>'Tên không được để trống',
+			'student_name.alpha'=>'Tên không được chứa ký tự số',
 			'student_email.required'=>'Mail không được để trống',
 			'student_email.email'=>'Mail nhập sai định dạng',
 			'student_password.required'=>'Mật khẩu không được để trống',
