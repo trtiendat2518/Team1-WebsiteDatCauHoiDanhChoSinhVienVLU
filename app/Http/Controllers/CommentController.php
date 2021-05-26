@@ -26,15 +26,5 @@ class CommentController extends Controller
 		$cmt->student_id = Session::get('student_id');
 		$cmt->comment_content = $data['comment_content'];
 		$cmt->save();
-
-		// $check = Comment::join('tbl_post','tbl_post.post_id','=','tbl_comment.post_id')
-		// ->join('tbl_student','tbl_student.student_id','=','tbl_comment.student_id')
-		// ->where('post_id', $post_id);
-		// $data = array();
-		// $data['post_id'] = $post_id;
-		// $data['student_id'] = Session::get('student_id');
-		// $data['comment_content'] = $request->comment_content;
-		// DB::table('tbl_comment')->insert($data);
-		return Redirect::to('/');
 	}
 }

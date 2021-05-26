@@ -533,7 +533,7 @@
 						<!-- /USER AVATAR -->
 
 						<!-- FORM -->
-						<form action="{{url('/binh-luan/'.$post_info->post_id)}}" method="post" class="form">
+						<form class="form">
 							@csrf
 							<!-- FORM ROW -->
 							<div class="form-row">
@@ -542,8 +542,18 @@
 									<!-- FORM INPUT -->
 									<div class="form-input small" style="margin-bottom: 50px;">
 										<label for="post-reply">Bình luận của bạn</label>
-										<textarea name="comment_content" rows="5" id="post-reply"></textarea>
-										<button style="margin-top: 110px; width: 90px;" type="submit" class="button secondary">Gửi</button>
+										<textarea class="cmtcontent_{{$post_info->post_id}}" name="comment_content" rows="5" id="post-reply"></textarea>
+										@php
+											if(Session::get('student_id')){
+										@endphp
+											<button style="margin-top: 110px; width: 90px;" type="button" data-id_post="{{$post_info->post_id}}" class="postC button secondary">Gửi</button>
+										@php
+											}else{
+										@endphp
+											<a href="{{url('/login')}}" style="margin-left: 360px; width: 90px;" type="button" class="button secondary">Gửi</a>
+										@php
+											}
+										@endphp
 									</div>
 									<!-- /FORM INPUT -->
 								</div>
