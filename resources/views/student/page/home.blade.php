@@ -467,6 +467,20 @@
 					@foreach ($post_info->comments as $key => $cmt)
 						<div class="post-comment">
 						<!-- USER AVATAR -->
+						@if (Session::get('student_id')==$cmt->student->student_id)
+						<div class="widget-box-settings">
+							<div class="post-settings-wrap">
+								<div class="post-settings widget-box-post-settings-dropdown-trigger">
+									<svg class="post-settings-icon icon-more-dots">
+										<use xlink:href="#svg-more-dots"></use>
+									</svg>
+								</div>
+								<div class="simple-dropdown widget-box-post-settings-dropdown">
+									<a href="javascript:void(0)" type="button" class="postCD simple-dropdown-link" id="postCD" data-id_cmt="{{$cmt->comment_id}}">Xóa bình luận</a>
+								</div>
+							</div>
+						</div>
+						@endif
 						<a class="user-avatar small no-outline" href="profile-timeline.html">
 							<!-- USER AVATAR CONTENT -->
 							<div class="user-avatar-content">

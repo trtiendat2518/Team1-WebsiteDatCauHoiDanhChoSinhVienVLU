@@ -2826,7 +2826,7 @@
 						location.reload();
 					},2000);
 				}else{
-					swal("", "", "error");
+					swal("Hủy bỏ xóa", "", "error");
 				}
 				
 			});
@@ -2873,6 +2873,40 @@
 					location.reload();
 				},3000);
 			}
+		});
+
+		$('.postCD').click(function(){
+			var id = $(this).data('id_cmt');
+			swal({
+				title: "Bạn có chắc chắn muốn xóa?",
+				text: "",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonClass:"btn-danger",
+				cancelButtonText: "Không",
+				confirmButtonClass: "btn-success",
+				confirmButtonText: "Chắc chắn!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			},
+			function(isConfirm){
+				if (isConfirm) {
+					$.ajax({
+						url: '{{url('/xoa-binh-luan/')}}',
+						method:'GET',
+						data:{id:id},
+						success:function(response){						
+							swal("Bạn đã xóa thành công!", "", "success");
+						}
+					});
+					window.setTimeout(function(){
+						location.reload();
+					},2000);
+				}else{
+					swal("Hủy bỏ xóa", "", "error");
+				}
+				
+			});
 		});
 	});
 </script>

@@ -19,9 +19,7 @@ class CategoryController extends Controller
     public function show_category_post(Request $request, $category_id)
     {
     	$category_post = Category::orderBy('category_id', 'DESC')->get();
-    	$category_by_id = Post::orderBy('post_id', 'DESC')
-    	->join('tbl_category','tbl_category.category_id','=','tbl_post.category_id')
-    	->where('tbl_post.category_id', $category_id)->get();
+    	$category_by_id = Post::join('tbl_category','tbl_post.category_id','=','tbl_category.category_id')->where('tbl_post.category_id', $category_id)->orderBy('post_id','DESC')->get();
     	$category_by_name = Category::where('tbl_category.category_id', $category_id)->limit(1)->get();
 
     	//SEO

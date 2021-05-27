@@ -27,4 +27,9 @@ class CommentController extends Controller
 		$cmt->comment_content = $data['comment_content'];
 		$cmt->save();
 	}
+
+	public function comment_delete(Request $request)
+	{
+		Comment::find($request->input('id'))->delete();
+	}
 }

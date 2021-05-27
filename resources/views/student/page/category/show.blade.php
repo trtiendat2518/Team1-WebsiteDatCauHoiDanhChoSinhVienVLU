@@ -462,6 +462,127 @@
 						<p class="post-option-text">Câu trả lời của Khoa</p>
 					</div>
 				</div>
+
+				<!-- POST COMMENT LIST -->
+				<div id="commentId"  class="post-comment-list ">
+					<!-- POST COMMENT -->
+					@foreach ($post_info->comments as $key => $cmt)
+					<div class="post-comment">
+						@if (Session::get('student_id')==$cmt->student->student_id)
+						<div class="widget-box-settings">
+							<div class="post-settings-wrap">
+								<div class="post-settings widget-box-post-settings-dropdown-trigger">
+									<svg class="post-settings-icon icon-more-dots">
+										<use xlink:href="#svg-more-dots"></use>
+									</svg>
+								</div>
+								<div class="simple-dropdown widget-box-post-settings-dropdown">
+									<a href="javascript:void(0)" type="button" class="postCD simple-dropdown-link" id="postCD" data-id_cmt="{{$cmt->comment_id}}">Xóa bình luận</a>
+								</div>
+							</div>
+						</div>
+						@endif
+						<!-- USER AVATAR -->
+						<a class="user-avatar small no-outline" href="profile-timeline.html">
+							<!-- USER AVATAR CONTENT -->
+							<div class="user-avatar-content">
+								<!-- HEXAGON -->
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/05.jpg')}}"></div>
+								<!-- /HEXAGON -->
+							</div>
+							<!-- /USER AVATAR CONTENT -->
+
+							<!-- USER AVATAR PROGRESS -->
+							<div class="user-avatar-progress">
+								<!-- HEXAGON -->
+								<div class="hexagon-progress-40-44"></div>
+								<!-- /HEXAGON -->
+							</div>
+							<!-- /USER AVATAR PROGRESS -->
+
+							<!-- USER AVATAR PROGRESS BORDER -->
+							<div class="user-avatar-progress-border">
+								<!-- HEXAGON -->
+								<div class="hexagon-border-40-44"></div>
+								<!-- /HEXAGON -->
+							</div>
+							<!-- /USER AVATAR PROGRESS BORDER -->
+						</a>
+						<p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html" style="color: #007bff;">{{$cmt->student->student_name}}</a>
+							<br>{{$cmt->comment_content}}</p>
+						</div>
+						@endforeach
+						<!-- /POST COMMENT -->
+
+						<!-- POST COMMENT HEADING -->
+						<p class="post-comment-heading">Load More Comments <span class="highlighted">9+</span></p>
+						<!-- /POST COMMENT HEADING -->
+
+						<!-- POST COMMENT FORM -->
+						<div class="post-comment-form">
+							<!-- USER AVATAR -->
+							<div class="user-avatar small no-outline">
+								<!-- USER AVATAR CONTENT -->
+								<div class="user-avatar-content">
+									<!-- HEXAGON -->
+									<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/01.jpg')}}"></div>
+									<!-- /HEXAGON -->
+								</div>
+								<!-- /USER AVATAR CONTENT -->
+
+								<!-- USER AVATAR PROGRESS -->
+								<div class="user-avatar-progress">
+									<!-- HEXAGON -->
+									<div class="hexagon-progress-40-44"></div>
+									<!-- /HEXAGON -->
+								</div>
+								<!-- /USER AVATAR PROGRESS -->
+
+								<!-- USER AVATAR PROGRESS BORDER -->
+								<div class="user-avatar-progress-border">
+									<!-- HEXAGON -->
+									<div class="hexagon-border-40-44"></div>
+									<!-- /HEXAGON -->
+								</div>
+								<!-- /USER AVATAR PROGRESS BORDER -->
+							</div>
+							<!-- /USER AVATAR -->
+
+							<!-- FORM -->
+							<form class="form">
+								@csrf
+								<!-- FORM ROW -->
+								<div class="form-row">
+									<!-- FORM ITEM -->
+									<div class="form-item">
+										<!-- FORM INPUT -->
+										<div class="form-input small" style="margin-bottom: 50px;">
+											<label for="post-reply">Bình luận của bạn</label>
+											<textarea class="cmtcontent_{{$post_info->post_id}}" name="comment_content" rows="5" id="post-reply"></textarea>
+											@php
+											if(Session::get('student_id')){
+												@endphp
+												<button style="margin-top: 110px; width: 90px;" type="button" data-id_post="{{$post_info->post_id}}" class="postC button secondary">Gửi</button>
+												@php
+											}else{
+												@endphp
+												<a href="{{url('/login')}}" style="margin-left: 360px; width: 90px;" type="button" class="button secondary">Gửi</a>
+												@php
+											}
+											@endphp
+										</div>
+										<!-- /FORM INPUT -->
+									</div>
+									<!-- /FORM ITEM -->
+								</div>
+								<!-- /FORM ROW -->
+							</form>
+							<!-- /FORM -->
+						</div>
+						<!-- /POST COMMENT FORM -->
+					</div>
+					<!-- /POST COMMENT LIST -->
+					
 			</div>
 			@endforeach
 			<div class="loader-bars">
