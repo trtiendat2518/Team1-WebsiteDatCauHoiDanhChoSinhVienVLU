@@ -13,4 +13,8 @@ class Student extends Model
     ];
     protected $primaryKey = 'student_id';
     protected $table = 'tbl_student';
+
+    public function comments(){
+        return $this->hasMany('App\Models\Comment', 'student_id');
+    }
 }
