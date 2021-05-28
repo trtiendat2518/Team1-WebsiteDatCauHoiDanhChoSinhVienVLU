@@ -185,31 +185,9 @@
 								<div class="meta-line">
 									<div class="meta-line-list reaction-item-list">
 										<div class="reaction-item">
-											<img class="reaction-image reaction-item-dropdown-trigger" src="{{asset('public/student/img/reaction/dislike.png')}}" alt="reaction-dislike">
-											<div class="simple-dropdown padded reaction-item-dropdown">
-												<p class="simple-dropdown-text"><img class="reaction" src="{{asset('public/student/img/reaction/dislike.png')}}" alt="reaction-dislike"> <span class="bold">Dislike</span></p>
-												<p class="simple-dropdown-text">Matt Parker</p>
-												<p class="simple-dropdown-text">Destroy Dex</p>
-												<p class="simple-dropdown-text">The Green Goo</p>
-											</div>
-										</div>
-										<div class="reaction-item">
-											<img class="reaction-image reaction-item-dropdown-trigger" src="{{asset('public/student/img/reaction/love.png')}}" alt="reaction-love">
-											<div class="simple-dropdown padded reaction-item-dropdown">
-												<p class="simple-dropdown-text"><img class="reaction" src="{{asset('public/student/img/reaction/love.png')}}" alt="reaction-love"> <span class="bold">Love</span></p>
-												<p class="simple-dropdown-text">Sandra Strange</p>
-												<p class="simple-dropdown-text">Jane Rodgers</p>
-											</div>
-										</div>
-										<div class="reaction-item">
 											<img class="reaction-image reaction-item-dropdown-trigger" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
 											<div class="simple-dropdown padded reaction-item-dropdown">
 												<p class="simple-dropdown-text"><img class="reaction" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like"> <span class="bold">Like</span></p>
-												<p class="simple-dropdown-text">Neko Bebop</p>
-												<p class="simple-dropdown-text">Nick Grissom</p>
-												<p class="simple-dropdown-text">Sarah Diamond</p>
-												<p class="simple-dropdown-text">Jett Spiegel</p>
-												<p class="simple-dropdown-text"><span class="bold">and 2 more...</span></p>
 											</div>
 										</div>
 									</div>
@@ -239,30 +217,9 @@
 							<div class="reaction-option text-tooltip-tft" data-title="Like">
 								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
 							</div>
-							<div class="reaction-option text-tooltip-tft" data-title="Love">
-								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/love.png')}}" alt="reaction-love">
-							</div>
-							<div class="reaction-option text-tooltip-tft" data-title="Dislike">
-								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/dislike.png')}}" alt="reaction-dislike">
-							</div>
-							<div class="reaction-option text-tooltip-tft" data-title="Happy">
-								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/happy.png')}}" alt="reaction-happy">
-							</div>
-							<div class="reaction-option text-tooltip-tft" data-title="Funny">
-								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/funny.png')}}" alt="reaction-funny">
-							</div>
-							<div class="reaction-option text-tooltip-tft" data-title="Wow">
-								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/wow.png')}}" alt="reaction-wow">
-							</div>
-							<div class="reaction-option text-tooltip-tft" data-title="Angry">
-								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/angry.png')}}" alt="reaction-angry">
-							</div>
-							<div class="reaction-option text-tooltip-tft" data-title="Sad">
-								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/sad.png')}}" alt="reaction-sad">
-							</div>
 						</div>
 					</div>
-					<div class="post-option">
+					<div class="post-option showCmt" data-toggle="tab" data-id_a="{{$post_info->post_id}}" id="show_{{$post_info->post_id}}">
 						<svg class="post-option-icon icon-comment">
 							<use xlink:href="#svg-comment"></use>
 						</svg>
@@ -276,7 +233,7 @@
 					</div>
 				</div>
 				<!-- POST COMMENT LIST -->
-				<div id="commentId"  class="post-comment-list ">
+				<div id="commentId_{{$post_info->post_id}}" style="display: none;" class="post-comment-list ">
 					<!-- POST COMMENT -->
 					@foreach ($post_info->comments as $key => $cmt)
 						<div class="post-comment">

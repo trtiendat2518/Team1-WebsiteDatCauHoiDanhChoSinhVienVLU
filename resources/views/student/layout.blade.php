@@ -2911,5 +2911,15 @@
 	});
 </script>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.showCmt').click(function(){
+			var id = $(this).data('id_a');
+			// $("#commentId_"+id).css("display", "block");
+			$("#commentId_"+id).toggle();
+		});
+	});
+</script>
+
 </body>
 </html>
