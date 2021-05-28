@@ -219,7 +219,7 @@
 							</div>
 							<div class="content-action">
 								<div class="meta-line">
-									<p class="meta-line-link">15 Lượt bình luận</p>
+									<p class="meta-line-link">{{$post_info->comments()->count()}} Lượt bình luận</p>
 								</div>
 								<div class="meta-line">
 									<p class="meta-line-text">1 Câu trả lời</p>
