@@ -14,7 +14,7 @@ class Post extends Model
     protected $table = 'tbl_post';
 
     public function comments(){
-        return $this->hasMany('App\Models\Comment', 'post_id');
+        return $this->hasMany('App\Models\Comment', 'post_id')->orderBy('comment_id','DESC');
     }
     public function student(){
         return $this->belongsTo('App\Models\Student','post_student_name');
