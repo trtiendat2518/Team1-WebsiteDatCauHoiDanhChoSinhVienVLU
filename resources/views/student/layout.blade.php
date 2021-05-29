@@ -2921,7 +2921,22 @@
 	});
 </script>
 
-
+<script type="text/javascript">
+	$(document).ready(function () {
+		var id = $('.postId').val();
+		$(".lineCmt_"+id).slice(0,3).show();
+		$('.loadM_'+id).click(function (e) {
+			e.preventDefault();
+			$(".lineCmt_"+id+":hidden").slice(0, 3).slideDown();
+			if ($(".lineCmt_"+id+":hidden").length == 0) {
+				$('.loadM_'+id).css('visibility', 'hidden');
+			}
+			$('html,body').animate({
+				scrollTop: $(this).offset().top
+			}, 1000);
+		});
+	});
+</script>
 
 </body>
 </html>
