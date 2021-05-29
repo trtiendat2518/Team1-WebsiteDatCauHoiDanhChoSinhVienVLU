@@ -2826,12 +2826,100 @@
 						location.reload();
 					},2000);
 				}else{
-					swal("", "", "error");
+					swal("Hủy bỏ xóa", "", "error");
 				}
 				
 			});
 		});
 	});
 </script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.postC').click(function(){
+			var id = $(this).data('id_post');
+			var dm = "dm", 
+			du = "đụ", 
+			cc = "cc",
+			cl = "cl", 
+			cac = "cặc", 
+			lon = "lồn",
+			dit = "địt",
+			dmm = "dmm",
+			cdl = "cdl",
+			clgv = "clgv",
+			clm = "clm",
+			deo = "đéo",
+			dcm = "dcm",
+			vl = "vl",
+			vai = "vãi",
+			di = "đĩ";
+			var comment_content = $('.cmtcontent_'+id).val();
+			var _token = $('input[name="_token"]').val();
+			if(comment_content==''){
+				swal("Vui lòng không để trống!", "", "warning");
+			}else if(comment_content.includes(dm)||comment_content.includes(du)||comment_content.includes(cc)||comment_content.includes(cac)||comment_content.includes(lon)||comment_content.includes(dit)||comment_content.includes(dmm)||comment_content.includes(cdl)||comment_content.includes(clgv)||comment_content.includes(clm)||comment_content.includes(deo)||comment_content.includes(di)||comment_content.includes(dcm)||comment_content.includes(vai)||comment_content.includes(vl)){
+				swal("Nội dung có chứa từ không phù hợp!", "", "error");
+			}else{
+				$.ajax({
+					url:'{{ url('/binh-luan/') }}'+'/'+id,
+					method: 'POST',
+					data: {comment_content:comment_content, id:id, _token:_token},
+					success:function(data){
+						swal("", "", "success");
+					}
+				});
+				window.setTimeout(function(){
+					location.reload();
+				},3000);
+			}
+		});
+
+		$('.postCD').click(function(){
+			var id = $(this).data('id_cmt');
+			swal({
+				title: "Bạn có chắc chắn muốn xóa?",
+				text: "",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonClass:"btn-danger",
+				cancelButtonText: "Không",
+				confirmButtonClass: "btn-success",
+				confirmButtonText: "Chắc chắn!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			},
+			function(isConfirm){
+				if (isConfirm) {
+					$.ajax({
+						url: '{{url('/xoa-binh-luan/')}}',
+						method:'GET',
+						data:{id:id},
+						success:function(response){						
+							swal("Bạn đã xóa thành công!", "", "success");
+						}
+					});
+					window.setTimeout(function(){
+						location.reload();
+					},2000);
+				}else{
+					swal("Hủy bỏ xóa", "", "error");
+				}
+				
+			});
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.showCmt').click(function(){
+			var id = $(this).data('id_a');
+			// $("#commentId_"+id).css("display", "block");
+			$("#commentId_"+id).toggle();
+		});
+	});
+</script>
+
 </body>
 </html>

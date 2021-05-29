@@ -24,6 +24,8 @@ class PostController extends Controller
     	$post->post_title = $data['post_title'];
     	$post->category_id = $data['category_id'];
 		$post->post_content = $data['post_content'];
+		date_default_timezone_set('Asia/Ho_Chi_Minh');
+		$post->created_at = now();
 		$post->save();
     }
     public function post_delete(Request $request){

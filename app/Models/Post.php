@@ -7,10 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    public $timestamp = false;
     protected $fillable = [
     	'post_student', 'post_title', 'category_id', 'post_content', 'updated_at', 'created_at'
     ];
     protected $primaryKey = 'post_id';
     protected $table = 'tbl_post';
+
+    public function comments(){
+        return $this->hasMany('App\Models\Comment', 'post_id');
+    }
+    public function student(){
+        return $this->belongsTo('App\Models\Student','post_student_name');
+    }
 }
