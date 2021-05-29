@@ -25,6 +25,8 @@ class CommentController extends Controller
 		$cmt->post_id = $post_id;
 		$cmt->student_id = Session::get('student_id');
 		$cmt->comment_content = $data['comment_content'];
+		date_default_timezone_set('Asia/Ho_Chi_Minh');
+		$cmt->created_at = now();
 		$cmt->save();
 	}
 
