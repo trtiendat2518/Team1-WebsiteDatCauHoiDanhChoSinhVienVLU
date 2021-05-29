@@ -234,123 +234,83 @@
 					</div>
 				</div>
 				<!-- POST COMMENT LIST -->
-				<div id="commentId_{{$post_info->post_id}}" style="display: none;" class="post-comment-list ">
-					<!-- POST COMMENT HEADING -->
-					<p class="post-comment-heading">Xem thêm...</p>
-					<!-- /POST COMMENT HEADING -->
-					<!-- POST COMMENT -->
-					@foreach ($post_info->comments as $key => $cmt)
-					<div class="post-comment">
-						@if (Session::get('student_id')==$cmt->student->student_id)
-						<div class="widget-box-settings">
-							<div class="post-settings-wrap">
-								<div class="post-settings widget-box-post-settings-dropdown-trigger">
-									<svg class="post-settings-icon icon-more-dots">
-										<use xlink:href="#svg-more-dots"></use>
-									</svg>
-								</div>
-								<div class="simple-dropdown widget-box-post-settings-dropdown">
-									<a href="javascript:void(0)" type="button" class="postCD simple-dropdown-link" id="postCD" data-id_cmt="{{$cmt->comment_id}}">Xóa bình luận</a>
-								</div>
-							</div>
-						</div>
-						@endif
-						<!-- USER AVATAR -->
-						<a class="user-avatar small no-outline" href="profile-timeline.html">
-							<!-- USER AVATAR CONTENT -->
-							<div class="user-avatar-content">
-								<!-- HEXAGON -->
-								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/05.jpg')}}"></div>
-								<!-- /HEXAGON -->
-							</div>
-							<!-- /USER AVATAR CONTENT -->
-
-							<!-- USER AVATAR PROGRESS -->
-							<div class="user-avatar-progress">
-								<!-- HEXAGON -->
-								<div class="hexagon-progress-40-44"></div>
-								<!-- /HEXAGON -->
-							</div>
-							<!-- /USER AVATAR PROGRESS -->
-
-							<!-- USER AVATAR PROGRESS BORDER -->
-							<div class="user-avatar-progress-border">
-								<!-- HEXAGON -->
-								<div class="hexagon-border-40-44"></div>
-								<!-- /HEXAGON -->
-							</div>
-							<!-- /USER AVATAR PROGRESS BORDER -->
-						</a>
-						<p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html" style="color: #007bff;">{{$cmt->student->student_name}}</a>
-							<span style="font-size: 10px;">{{ \Carbon\Carbon::parse($cmt->created_at)->diffForHumans() }}</span>
-							<p>{{$cmt->comment_content}}</p>
-						</p>
-					</div>
-					@endforeach
-					<!-- /POST COMMENT -->
-
-					<!-- POST COMMENT FORM -->
+				<div id="commentId_{{$post_info->post_id}}" style="display: none;"  class="post-comment-list ">
 					<div class="post-comment-form">
-						<!-- USER AVATAR -->
 						<div class="user-avatar small no-outline">
-							<!-- USER AVATAR CONTENT -->
 							<div class="user-avatar-content">
-								<!-- HEXAGON -->
 								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/01.jpg')}}"></div>
-								<!-- /HEXAGON -->
 							</div>
-							<!-- /USER AVATAR CONTENT -->
-
-							<!-- USER AVATAR PROGRESS -->
 							<div class="user-avatar-progress">
-								<!-- HEXAGON -->
 								<div class="hexagon-progress-40-44"></div>
-								<!-- /HEXAGON -->
 							</div>
-							<!-- /USER AVATAR PROGRESS -->
-
-							<!-- USER AVATAR PROGRESS BORDER -->
 							<div class="user-avatar-progress-border">
-								<!-- HEXAGON -->
 								<div class="hexagon-border-40-44"></div>
-								<!-- /HEXAGON -->
 							</div>
-							<!-- /USER AVATAR PROGRESS BORDER -->
 						</div>
-						<!-- /USER AVATAR -->
-
-						<!-- FORM -->
 						<form class="form">
 							@csrf
-							<!-- FORM ROW -->
 							<div class="form-row">
-								<!-- FORM ITEM -->
 								<div class="form-item">
-									<!-- FORM INPUT -->
-									<div class="form-input small" style="margin-bottom: 50px;">
+									<div class="form-input small">
 										<label for="post-reply">Bình luận của bạn</label>
-										<textarea class="cmtcontent_{{$post_info->post_id}}" name="comment_content" rows="5" id="post-reply"></textarea>
+										<textarea style="height: 0%; width: 85%;" class="cmtcontent_{{$post_info->post_id}}" name="comment_content" rows="2" id="post-reply"></textarea>
 										@php
 										if(Session::get('student_id')){
 											@endphp
-											<button style="margin-top: 110px; width: 90px;" type="button" data-id_post="{{$post_info->post_id}}" class="postC button secondary">Gửi</button>
+											<button style="margin-top: 40px; line-height: 0px; height: 30px;" type="button" data-id_post="{{$post_info->post_id}}" class="postC button secondary">Gửi</button>
 											@php
 										}else{
 											@endphp
-											<a href="{{url('/login')}}" style="margin-left: 360px; width: 90px;" type="button" class="button secondary">Gửi</a>
+											<a href="{{url('/login')}}"><button style="margin-top: 40px; line-height: 0px; height: 30px;" class="button secondary">Gửi</button></a>
 											@php
 										}
 										@endphp
 									</div>
-									<!-- /FORM INPUT -->
 								</div>
-								<!-- /FORM ITEM -->
 							</div>
-							<!-- /FORM ROW -->
 						</form>
-						<!-- /FORM -->
 					</div>
-					<!-- /POST COMMENT FORM -->
+					<div id="all_cmt">
+						<input type="hidden" name="postId" class="postId" value="{{$post_info->post_id}}">
+						@foreach ($post_info->comments as $key => $cmt)
+						<div style="display: none;" class="post-comment lineCmt_{{$post_info->post_id}}" id="lineCmt_{{$post_info->post_id}}">
+							@if (Session::get('student_id')==$cmt->student->student_id)
+							<div class="widget-box-settings">
+								<div class="post-settings-wrap">
+									<div class="post-settings widget-box-post-settings-dropdown-trigger">
+										<svg class="post-settings-icon icon-more-dots">
+											<use xlink:href="#svg-more-dots"></use>
+										</svg>
+									</div>
+									<div class="simple-dropdown widget-box-post-settings-dropdown">
+										<a href="javascript:void(0)" type="button" class="postCD simple-dropdown-link" id="postCD" data-id_cmt="{{$cmt->comment_id}}">Xóa bình luận</a>
+									</div>
+								</div>
+							</div>
+							@endif
+							<a class="user-avatar small no-outline" href="profile-timeline.html">
+								<div class="user-avatar-content">
+									<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/05.jpg')}}"></div>
+								</div>
+								<div class="user-avatar-progress">
+									<div class="hexagon-progress-40-44"></div>
+								</div>
+								<div class="user-avatar-progress-border">
+									<div class="hexagon-border-40-44"></div>
+								</div>
+							</a>
+							<p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html" style="color: #007bff;">{{$cmt->student->student_name}}</a>
+								<span class="user-status-text small">
+									{{ \Carbon\Carbon::parse($cmt->created_at)->diffForHumans() }} 
+								</span>
+								<p>{{$cmt->comment_content}}</p>
+							</p>
+						</div>
+						@endforeach
+					</div>
+					@if ($post_info->comments()->count() > 3)
+					<p class="post-comment-heading loadM_{{$post_info->post_id}}">Xem thêm...</p>
+					@endif	
 				</div>
 				<!-- /POST COMMENT LIST -->
 			</div>
