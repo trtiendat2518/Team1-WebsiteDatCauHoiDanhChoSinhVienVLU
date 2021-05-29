@@ -99,15 +99,15 @@
 							</div>
 						</div>
 						@php
-							if(Session::get('student_id')){
-						@endphp
-						<button class="postQ button quick-post-footer-actions secondary" name="postQ" type="button">Đăng</button>
-						@php
-							}else{
-						@endphp
-						<a href="{{url('/login')}}" style="color: white;" class=" button quick-post-footer-actions secondary btn-block" type="button">Đăng</a>
-						@php
-							}
+						if(Session::get('student_id')){
+							@endphp
+							<button class="postQ button quick-post-footer-actions secondary" name="postQ" type="button">Đăng</button>
+							@php
+						}else{
+							@endphp
+							<a href="{{url('/login')}}" style="color: white;" class=" button quick-post-footer-actions secondary btn-block" type="button">Đăng</a>
+							@php
+						}
 						@endphp
 					</form>
 				</div>
@@ -171,11 +171,11 @@
 								</div>
 							</a>
 							<p class="user-status-title medium"><a class="bold" href="profile-timeline.html">{{$post_info->post_student_name}}</a></p>
-							<p class="user-status-text small">39 minutes ago</p>
+							<p class="user-status-text small">{{ \Carbon\Carbon::parse($post_info->created_at)->diffForHumans() }}</p>
 						</div>
 						<p style="font-size: 20px;" class="widget-box-status-text">{{$post_info->post_title}}</p>
 						<br>
-						<p class="widget-box-status-text">{{$post_info->post_content}}</p>
+						<p style="white-space: pre-line;" class="widget-box-status-text">{{$post_info->post_content}}</p>
 
 						<div class="tag-list">
 							<a class="tag-item secondary" style="font-size: 16px" href="{{url('/cau-hoi-theo-loai/'.$post_info->category_id)}}">{{$post_info->category_name}}</a>
@@ -235,6 +235,9 @@
 				</div>
 				<!-- POST COMMENT LIST -->
 				<div id="commentId_{{$post_info->post_id}}" style="display: none;" class="post-comment-list ">
+					<!-- POST COMMENT HEADING -->
+					<p class="post-comment-heading">Xem thêm...</p>
+					<!-- /POST COMMENT HEADING -->
 					<!-- POST COMMENT -->
 					@foreach ($post_info->comments as $key => $cmt)
 					<div class="post-comment">
@@ -279,92 +282,95 @@
 							<!-- /USER AVATAR PROGRESS BORDER -->
 						</a>
 						<p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html" style="color: #007bff;">{{$cmt->student->student_name}}</a>
-							<br>{{$cmt->comment_content}}</p>
-						</div>
-						@endforeach
-						<!-- /POST COMMENT -->
-
-						<!-- POST COMMENT HEADING -->
-						<p class="post-comment-heading">Load More Comments <span class="highlighted">9+</span></p>
-						<!-- /POST COMMENT HEADING -->
-
-						<!-- POST COMMENT FORM -->
-						<div class="post-comment-form">
-							<!-- USER AVATAR -->
-							<div class="user-avatar small no-outline">
-								<!-- USER AVATAR CONTENT -->
-								<div class="user-avatar-content">
-									<!-- HEXAGON -->
-									<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/01.jpg')}}"></div>
-									<!-- /HEXAGON -->
-								</div>
-								<!-- /USER AVATAR CONTENT -->
-
-								<!-- USER AVATAR PROGRESS -->
-								<div class="user-avatar-progress">
-									<!-- HEXAGON -->
-									<div class="hexagon-progress-40-44"></div>
-									<!-- /HEXAGON -->
-								</div>
-								<!-- /USER AVATAR PROGRESS -->
-
-								<!-- USER AVATAR PROGRESS BORDER -->
-								<div class="user-avatar-progress-border">
-									<!-- HEXAGON -->
-									<div class="hexagon-border-40-44"></div>
-									<!-- /HEXAGON -->
-								</div>
-								<!-- /USER AVATAR PROGRESS BORDER -->
-							</div>
-							<!-- /USER AVATAR -->
-
-							<!-- FORM -->
-							<form class="form">
-								@csrf
-								<!-- FORM ROW -->
-								<div class="form-row">
-									<!-- FORM ITEM -->
-									<div class="form-item">
-										<!-- FORM INPUT -->
-										<div class="form-input small" style="margin-bottom: 50px;">
-											<label for="post-reply">Bình luận của bạn</label>
-											<textarea class="cmtcontent_{{$post_info->post_id}}" name="comment_content" rows="5" id="post-reply"></textarea>
-											@php
-											if(Session::get('student_id')){
-												@endphp
-												<button style="margin-top: 110px; width: 90px;" type="button" data-id_post="{{$post_info->post_id}}" class="postC button secondary">Gửi</button>
-												@php
-											}else{
-												@endphp
-												<a href="{{url('/login')}}" style="margin-left: 360px; width: 90px;" type="button" class="button secondary">Gửi</a>
-												@php
-											}
-											@endphp
-										</div>
-										<!-- /FORM INPUT -->
-									</div>
-									<!-- /FORM ITEM -->
-								</div>
-								<!-- /FORM ROW -->
-							</form>
-							<!-- /FORM -->
-						</div>
-						<!-- /POST COMMENT FORM -->
+							<span style="font-size: 10px;">{{ \Carbon\Carbon::parse($cmt->created_at)->diffForHumans() }}</span>
+							<p>{{$cmt->comment_content}}</p>
+						</p>
 					</div>
-					<!-- /POST COMMENT LIST -->
+					@endforeach
+					<!-- /POST COMMENT -->
+
+					<!-- POST COMMENT FORM -->
+					<div class="post-comment-form">
+						<!-- USER AVATAR -->
+						<div class="user-avatar small no-outline">
+							<!-- USER AVATAR CONTENT -->
+							<div class="user-avatar-content">
+								<!-- HEXAGON -->
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/01.jpg')}}"></div>
+								<!-- /HEXAGON -->
+							</div>
+							<!-- /USER AVATAR CONTENT -->
+
+							<!-- USER AVATAR PROGRESS -->
+							<div class="user-avatar-progress">
+								<!-- HEXAGON -->
+								<div class="hexagon-progress-40-44"></div>
+								<!-- /HEXAGON -->
+							</div>
+							<!-- /USER AVATAR PROGRESS -->
+
+							<!-- USER AVATAR PROGRESS BORDER -->
+							<div class="user-avatar-progress-border">
+								<!-- HEXAGON -->
+								<div class="hexagon-border-40-44"></div>
+								<!-- /HEXAGON -->
+							</div>
+							<!-- /USER AVATAR PROGRESS BORDER -->
+						</div>
+						<!-- /USER AVATAR -->
+
+						<!-- FORM -->
+						<form class="form">
+							@csrf
+							<!-- FORM ROW -->
+							<div class="form-row">
+								<!-- FORM ITEM -->
+								<div class="form-item">
+									<!-- FORM INPUT -->
+									<div class="form-input small" style="margin-bottom: 50px;">
+										<label for="post-reply">Bình luận của bạn</label>
+										<textarea class="cmtcontent_{{$post_info->post_id}}" name="comment_content" rows="5" id="post-reply"></textarea>
+										@php
+										if(Session::get('student_id')){
+											@endphp
+											<button style="margin-top: 110px; width: 90px;" type="button" data-id_post="{{$post_info->post_id}}" class="postC button secondary">Gửi</button>
+											@php
+										}else{
+											@endphp
+											<a href="{{url('/login')}}" style="margin-left: 360px; width: 90px;" type="button" class="button secondary">Gửi</a>
+											@php
+										}
+										@endphp
+									</div>
+									<!-- /FORM INPUT -->
+								</div>
+								<!-- /FORM ITEM -->
+							</div>
+							<!-- /FORM ROW -->
+						</form>
+						<!-- /FORM -->
+					</div>
+					<!-- /POST COMMENT FORM -->
+				</div>
+				<!-- /POST COMMENT LIST -->
 			</div>
 			@endforeach
-			<div class="loader-bars">
-				<div class="loader-bar"></div>
-				<div class="loader-bar"></div>
-				<div class="loader-bar"></div>
-				<div class="loader-bar"></div>
-				<div class="loader-bar"></div>
-				<div class="loader-bar"></div>
-				<div class="loader-bar"></div>
-				<div class="loader-bar"></div>
+			<!-- SECTION PAGER BAR -->
+			<div class="section-pager-bar" style="width: 360px;">
+				<!-- SECTION PAGER -->
+				<div class="section-pager">
+					<!-- SECTION PAGER ITEM -->
+					<div class="section-pager-item active">
+						<!-- SECTION PAGER ITEM TEXT -->
+						<center>
+							<span>{!! $category_by_id->render("pagination::bootstrap-4") !!}</span>
+						</center>
+						<!-- /SECTION PAGER ITEM TEXT -->
+					</div>
+					<!-- /SECTION PAGER ITEM -->
+				</div>
 			</div>
-			<!-- /LOADER BARS -->
+			<!-- /SECTION PAGER -->
 		</div>
 		<!-- /GRID COLUMN -->
 

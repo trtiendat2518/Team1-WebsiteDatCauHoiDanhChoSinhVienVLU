@@ -26,9 +26,8 @@ class HomeController extends Controller
 		//---------------
 		
 		$category_post = Category::orderBy('category_id', 'DESC')->get();
-
 		$post2 = Post::join('tbl_category','tbl_category.category_id','=','tbl_post.category_id')
-		->orderBy('post_id','DESC')->paginate(10);
+		->orderBy('tbl_post.created_at','DESC')->paginate(5);
 		$comt = Comment::join('tbl_post','tbl_post.post_id','=','tbl_comment.post_id')
 		->join('tbl_student','tbl_student.student_id','=','tbl_comment.student_id')
 		->orderBy('comment_id','DESC')->get();
@@ -45,7 +44,7 @@ class HomeController extends Controller
 		
 		$category_post = Category::orderBy('category_id', 'DESC')->get();
 		$keywords = $request->keywords_submit;
-		$search_product = Post::join('tbl_category','tbl_category.category_id','=','tbl_post.category_id')->where('post_title','like','%'.$keywords.'%')->orderBy('post_id','DESC')->get(); 
+		$search_product = Post::join('tbl_category','tbl_category.category_id','=','tbl_post.category_id')->where('post_title','like','%'.$keywords.'%')->orderBy('tbl_post.created_at','DESC')->paginate(5); 
 		return view('student.page.post.search')->with(compact('meta_desc','meta_title','url_canonical','category_post','search_product'));
 	}
 }
