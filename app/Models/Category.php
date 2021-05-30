@@ -13,4 +13,8 @@ class Category extends Model
     ];
     protected $primaryKey = 'category_id';
     protected $table = 'tbl_category';
+
+    public function posts(){
+        return $this->hasMany('App\Models\Post', 'category_id');
+    }
 }
