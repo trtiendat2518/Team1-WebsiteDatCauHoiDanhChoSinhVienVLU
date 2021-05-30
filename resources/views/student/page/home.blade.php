@@ -98,15 +98,15 @@
 							</div>
 						</div>
 						@php
-							if(Session::get('student_id')){
-						@endphp
-						<button class="postQ button quick-post-footer-actions secondary" name="postQ" type="button">Đăng</button>
-						@php
-							}else{
-						@endphp
-						<a href="{{url('/login')}}" class=" button quick-post-footer-actions secondary btn-block" type="button">Đăng</a>
-						@php
-							}
+						if(Session::get('student_id')){
+							@endphp
+							<button class="postQ button quick-post-footer-actions secondary" name="postQ" type="button">Đăng</button>
+							@php
+						}else{
+							@endphp
+							<a href="{{url('/login')}}" class=" button quick-post-footer-actions secondary btn-block" type="button">Đăng</a>
+							@php
+						}
 						@endphp
 					</form>
 				</div>
@@ -170,11 +170,11 @@
 								</div>
 							</a>
 							<p class="user-status-title medium"><a class="bold" href="profile-timeline.html">{{$post_info->post_student_name}}</a></p>
-							<p class="user-status-text small">39 minutes ago</p>
+							<p class="user-status-text small">{{ \Carbon\Carbon::parse($post_info->created_at)->diffForHumans() }}</p>
 						</div>
 						<p style="font-size: 20px;" class="widget-box-status-text">{{$post_info->post_title}}</p>
 						<br>
-						<p class="widget-box-status-text">{{$post_info->post_content}}</p>
+						<p style="white-space: pre-line;" class="widget-box-status-text">{{$post_info->post_content}}</p>
 
 						<div class="tag-list">
 							<a class="tag-item secondary" style="font-size: 16px" href="{{url('/cau-hoi-theo-loai/'.$post_info->category_id)}}">{{$post_info->category_name}}</a>
@@ -185,31 +185,9 @@
 								<div class="meta-line">
 									<div class="meta-line-list reaction-item-list">
 										<div class="reaction-item">
-											<img class="reaction-image reaction-item-dropdown-trigger" src="{{asset('public/student/img/reaction/dislike.png')}}" alt="reaction-dislike">
-											<div class="simple-dropdown padded reaction-item-dropdown">
-												<p class="simple-dropdown-text"><img class="reaction" src="{{asset('public/student/img/reaction/dislike.png')}}" alt="reaction-dislike"> <span class="bold">Dislike</span></p>
-												<p class="simple-dropdown-text">Matt Parker</p>
-												<p class="simple-dropdown-text">Destroy Dex</p>
-												<p class="simple-dropdown-text">The Green Goo</p>
-											</div>
-										</div>
-										<div class="reaction-item">
-											<img class="reaction-image reaction-item-dropdown-trigger" src="{{asset('public/student/img/reaction/love.png')}}" alt="reaction-love">
-											<div class="simple-dropdown padded reaction-item-dropdown">
-												<p class="simple-dropdown-text"><img class="reaction" src="{{asset('public/student/img/reaction/love.png')}}" alt="reaction-love"> <span class="bold">Love</span></p>
-												<p class="simple-dropdown-text">Sandra Strange</p>
-												<p class="simple-dropdown-text">Jane Rodgers</p>
-											</div>
-										</div>
-										<div class="reaction-item">
 											<img class="reaction-image reaction-item-dropdown-trigger" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
 											<div class="simple-dropdown padded reaction-item-dropdown">
 												<p class="simple-dropdown-text"><img class="reaction" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like"> <span class="bold">Like</span></p>
-												<p class="simple-dropdown-text">Neko Bebop</p>
-												<p class="simple-dropdown-text">Nick Grissom</p>
-												<p class="simple-dropdown-text">Sarah Diamond</p>
-												<p class="simple-dropdown-text">Jett Spiegel</p>
-												<p class="simple-dropdown-text"><span class="bold">and 2 more...</span></p>
 											</div>
 										</div>
 									</div>
@@ -239,30 +217,9 @@
 							<div class="reaction-option text-tooltip-tft" data-title="Like">
 								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
 							</div>
-							<div class="reaction-option text-tooltip-tft" data-title="Love">
-								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/love.png')}}" alt="reaction-love">
-							</div>
-							<div class="reaction-option text-tooltip-tft" data-title="Dislike">
-								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/dislike.png')}}" alt="reaction-dislike">
-							</div>
-							<div class="reaction-option text-tooltip-tft" data-title="Happy">
-								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/happy.png')}}" alt="reaction-happy">
-							</div>
-							<div class="reaction-option text-tooltip-tft" data-title="Funny">
-								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/funny.png')}}" alt="reaction-funny">
-							</div>
-							<div class="reaction-option text-tooltip-tft" data-title="Wow">
-								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/wow.png')}}" alt="reaction-wow">
-							</div>
-							<div class="reaction-option text-tooltip-tft" data-title="Angry">
-								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/angry.png')}}" alt="reaction-angry">
-							</div>
-							<div class="reaction-option text-tooltip-tft" data-title="Sad">
-								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/sad.png')}}" alt="reaction-sad">
-							</div>
 						</div>
 					</div>
-					<div class="post-option">
+					<div class="post-option showCmt" data-toggle="tab" data-id_a="{{$post_info->post_id}}" id="show_{{$post_info->post_id}}">
 						<svg class="post-option-icon icon-comment">
 							<use xlink:href="#svg-comment"></use>
 						</svg>
@@ -276,137 +233,104 @@
 					</div>
 				</div>
 				<!-- POST COMMENT LIST -->
-				<div id="commentId"  class="post-comment-list ">
-					<!-- POST COMMENT -->
-					@foreach ($post_info->comments as $key => $cmt)
-						<div class="post-comment">
-						<!-- USER AVATAR -->
-						@if (Session::get('student_id')==$cmt->student->student_id)
-						<div class="widget-box-settings">
-							<div class="post-settings-wrap">
-								<div class="post-settings widget-box-post-settings-dropdown-trigger">
-									<svg class="post-settings-icon icon-more-dots">
-										<use xlink:href="#svg-more-dots"></use>
-									</svg>
-								</div>
-								<div class="simple-dropdown widget-box-post-settings-dropdown">
-									<a href="javascript:void(0)" type="button" class="postCD simple-dropdown-link" id="postCD" data-id_cmt="{{$cmt->comment_id}}">Xóa bình luận</a>
-								</div>
-							</div>
-						</div>
-						@endif
-						<a class="user-avatar small no-outline" href="profile-timeline.html">
-							<!-- USER AVATAR CONTENT -->
-							<div class="user-avatar-content">
-								<!-- HEXAGON -->
-								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/05.jpg')}}"></div>
-								<!-- /HEXAGON -->
-							</div>
-							<!-- /USER AVATAR CONTENT -->
-
-							<!-- USER AVATAR PROGRESS -->
-							<div class="user-avatar-progress">
-								<!-- HEXAGON -->
-								<div class="hexagon-progress-40-44"></div>
-								<!-- /HEXAGON -->
-							</div>
-							<!-- /USER AVATAR PROGRESS -->
-
-							<!-- USER AVATAR PROGRESS BORDER -->
-							<div class="user-avatar-progress-border">
-								<!-- HEXAGON -->
-								<div class="hexagon-border-40-44"></div>
-								<!-- /HEXAGON -->
-							</div>
-							<!-- /USER AVATAR PROGRESS BORDER -->
-						</a>
-						<p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html" style="color: #007bff;">{{$cmt->student->student_name}}</a>
-							<br>{{$cmt->comment_content}}</p>
-					</div>
-					@endforeach
-					<!-- /POST COMMENT -->
-
-					<!-- POST COMMENT HEADING -->
-					<p class="post-comment-heading">Load More Comments <span class="highlighted">9+</span></p>
-					<!-- /POST COMMENT HEADING -->
-
-					<!-- POST COMMENT FORM -->
+				<div id="commentId_{{$post_info->post_id}}" style="display: none;"  class="post-comment-list ">
 					<div class="post-comment-form">
-						<!-- USER AVATAR -->
 						<div class="user-avatar small no-outline">
-							<!-- USER AVATAR CONTENT -->
 							<div class="user-avatar-content">
-								<!-- HEXAGON -->
 								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/01.jpg')}}"></div>
-								<!-- /HEXAGON -->
 							</div>
-							<!-- /USER AVATAR CONTENT -->
-
-							<!-- USER AVATAR PROGRESS -->
 							<div class="user-avatar-progress">
-								<!-- HEXAGON -->
 								<div class="hexagon-progress-40-44"></div>
-								<!-- /HEXAGON -->
 							</div>
-							<!-- /USER AVATAR PROGRESS -->
-
-							<!-- USER AVATAR PROGRESS BORDER -->
 							<div class="user-avatar-progress-border">
-								<!-- HEXAGON -->
 								<div class="hexagon-border-40-44"></div>
-								<!-- /HEXAGON -->
 							</div>
-							<!-- /USER AVATAR PROGRESS BORDER -->
 						</div>
-						<!-- /USER AVATAR -->
-
-						<!-- FORM -->
 						<form class="form">
 							@csrf
-							<!-- FORM ROW -->
 							<div class="form-row">
-								<!-- FORM ITEM -->
 								<div class="form-item">
-									<!-- FORM INPUT -->
-									<div class="form-input small" style="margin-bottom: 50px;">
+									<div class="form-input small">
 										<label for="post-reply">Bình luận của bạn</label>
-										<textarea class="cmtcontent_{{$post_info->post_id}}" name="comment_content" rows="5" id="post-reply"></textarea>
+										<textarea style="height: 0%; width: 85%;" class="cmtcontent_{{$post_info->post_id}}" name="comment_content" rows="2" id="post-reply"></textarea>
 										@php
-											if(Session::get('student_id')){
-										@endphp
-											<button style="margin-top: 110px; width: 90px;" type="button" data-id_post="{{$post_info->post_id}}" class="postC button secondary">Gửi</button>
-										@php
-											}else{
-										@endphp
-											<a href="{{url('/login')}}" style="margin-left: 360px; width: 90px;" type="button" class="button secondary">Gửi</a>
-										@php
-											}
+										if(Session::get('student_id')){
+											@endphp
+											<button style="margin-top: 40px; line-height: 0px; height: 30px;" type="button" data-id_post="{{$post_info->post_id}}" class="postC button secondary">Gửi</button>
+											@php
+										}else{
+											@endphp
+											<a href="{{url('/login')}}"><button style="margin-top: 40px; line-height: 0px; height: 30px;" class="button secondary">Gửi</button></a>
+											@php
+										}
 										@endphp
 									</div>
-									<!-- /FORM INPUT -->
 								</div>
-								<!-- /FORM ITEM -->
 							</div>
-							<!-- /FORM ROW -->
 						</form>
-						<!-- /FORM -->
 					</div>
-					<!-- /POST COMMENT FORM -->
+					<div id="all_cmt">
+						<input type="hidden" name="postId" class="postId" value="{{$post_info->post_id}}">
+						@foreach ($post_info->comments as $key => $cmt)
+						<div style="display: none;" class="post-comment lineCmt_{{$post_info->post_id}}" id="lineCmt_{{$post_info->post_id}}">
+							@if (Session::get('student_id')==$cmt->student->student_id)
+							<div class="widget-box-settings">
+								<div class="post-settings-wrap">
+									<div class="post-settings widget-box-post-settings-dropdown-trigger">
+										<svg class="post-settings-icon icon-more-dots">
+											<use xlink:href="#svg-more-dots"></use>
+										</svg>
+									</div>
+									<div class="simple-dropdown widget-box-post-settings-dropdown">
+										<a href="javascript:void(0)" type="button" class="postCD simple-dropdown-link" id="postCD" data-id_cmt="{{$cmt->comment_id}}">Xóa bình luận</a>
+									</div>
+								</div>
+							</div>
+							@endif
+							<a class="user-avatar small no-outline" href="profile-timeline.html">
+								<div class="user-avatar-content">
+									<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/05.jpg')}}"></div>
+								</div>
+								<div class="user-avatar-progress">
+									<div class="hexagon-progress-40-44"></div>
+								</div>
+								<div class="user-avatar-progress-border">
+									<div class="hexagon-border-40-44"></div>
+								</div>
+							</a>
+							<p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html" style="color: #007bff;">{{$cmt->student->student_name}}</a>
+								<span class="user-status-text small">
+									{{ \Carbon\Carbon::parse($cmt->created_at)->diffForHumans() }} 
+								</span>
+								<p>{{$cmt->comment_content}}</p>
+							</p>
+						</div>
+						@endforeach
+					</div>
+					@if ($post_info->comments()->count() > 3)
+					<p class="post-comment-heading loadM_{{$post_info->post_id}}">Xem thêm...</p>
+					@endif
 				</div>
 				<!-- /POST COMMENT LIST -->
 			</div>
 			@endforeach
-			<div class="loader-bars">
-				<div class="loader-bar"></div>
-				<div class="loader-bar"></div>
-				<div class="loader-bar"></div>
-				<div class="loader-bar"></div>
-				<div class="loader-bar"></div>
-				<div class="loader-bar"></div>
-				<div class="loader-bar"></div>
-				<div class="loader-bar"></div>
+			<!-- SECTION PAGER BAR -->
+			<div class="section-pager-bar" style="width: 360px;">
+				<!-- SECTION PAGER -->
+				<div class="section-pager">
+					<!-- SECTION PAGER ITEM -->
+					<div class="section-pager-item active">
+						<!-- SECTION PAGER ITEM TEXT -->
+						<center>
+							<span>{!! $post2->render("pagination::bootstrap-4") !!}</span>
+						</center>
+
+						<!-- /SECTION PAGER ITEM TEXT -->
+					</div>
+					<!-- /SECTION PAGER ITEM -->
+				</div>
 			</div>
-			<!-- /LOADER BARS -->
+			<!-- /SECTION PAGER -->
 		</div>
 		<!-- /GRID COLUMN -->
 
