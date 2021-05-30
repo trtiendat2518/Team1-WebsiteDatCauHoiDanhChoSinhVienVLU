@@ -36,7 +36,7 @@
 								</div>
 							</a>
 							<p class="user-status-title"><a class="bold" href="{{url('/cau-hoi-theo-loai/'.$val->category_id)}}">{{$val->category_name}}</a></p>
-							<p class="user-status-text small">24.5K profile views</p>
+							<p class="user-status-text small">Có {{$val->posts()->count()}} câu hỏi</p>
 						</div>
 						@endforeach
 					</div>
@@ -104,7 +104,7 @@
 							@php
 						}else{
 							@endphp
-							<a href="{{url('/login')}}" class=" button quick-post-footer-actions secondary btn-block">Đăng</a>
+							<a href="{{url('/login')}}" class=" button quick-post-footer-actions secondary btn-block" type="button">Đăng</a>
 							@php
 						}
 						@endphp
@@ -235,6 +235,9 @@
 				<!-- POST COMMENT LIST -->
 				<div id="commentId_{{$post_info->post_id}}" style="display: none;"  class="post-comment-list ">
 					<div class="post-comment-form">
+						@php
+						if(Session::get('student_id')){
+						@endphp
 						<div class="user-avatar small no-outline">
 							<div class="user-avatar-content">
 								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/01.jpg')}}"></div>
@@ -251,23 +254,20 @@
 							<div class="form-row">
 								<div class="form-item">
 									<div class="form-input small">
-										<label for="post-reply">Bình luận của bạn</label>
-										<textarea style="height: 0%; width: 85%;" class="cmtcontent_{{$post_info->post_id}}" name="comment_content" rows="2" id="post-reply"></textarea>
-										@php
-										if(Session::get('student_id')){
-											@endphp
-											<button style="margin-top: 40px; line-height: 0px; height: 30px;" type="button" data-id_post="{{$post_info->post_id}}" class="postC button secondary">Gửi</button>
-											@php
-										}else{
-											@endphp
-											<a href="{{url('/login')}}"><button style="margin-top: 40px; line-height: 0px; height: 30px;" class="button secondary">Gửi</button></a>
-											@php
-										}
-										@endphp
+										<label style="margin-top: 20px; margin-left: 80px;" for="post-reply">Bình luận của bạn</label>
+										<textarea style="height: 0%; width: 70%; margin-top: 20px; margin-left: 80px;" class="cmtcontent_{{$post_info->post_id}}" name="comment_content" rows="2" id="post-reply"></textarea>
+										<button style="margin-top: 60px; line-height: 0px; height: 30px; margin-right: 10px" type="button" data-id_post="{{$post_info->post_id}}" class="postC button secondary">Gửi</button>
 									</div>
 								</div>
 							</div>
 						</form>
+						@php
+						}else{
+						@endphp
+						<p class="post-comment-heading" style="color: #e3f850;">Bạn cần đăng nhập để có thể bình luận</p>
+						@php
+						}
+						@endphp
 					</div>
 					<div id="all_cmt">
 						<input type="hidden" name="postId" class="postId" value="{{$post_info->post_id}}">
