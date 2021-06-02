@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    public $timestamp = false;
     protected $fillable = [
     	'post_id', 'student_id', 'comment_content', 'created_at', 'updated_at'
     ];

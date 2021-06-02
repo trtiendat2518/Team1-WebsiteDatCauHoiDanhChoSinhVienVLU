@@ -5002,10 +5002,8 @@ figure > img {
     73. PAGE ITEM
 ---------------------------------*/
 .page-item {
-  height: 24px;
   padding: 0 8px;
   border-radius: 8px;
-  background-color: #293249;
   box-shadow: 2px 3px 10px 0 rgba(0, 0, 0, 0.12);
   font-size: 0.75rem;
   font-weight: 700;
@@ -11155,7 +11153,7 @@ figure > img {
     1. POST COMMENT
 -----------------------*/
 .post-comment {
-  padding: 26px 28px 28px 80px;
+  padding: 15px 15px 15px 80px;
   background-color: #1d2333;
   position: relative;
 }
@@ -11174,7 +11172,6 @@ figure > img {
 
 .post-comment .user-avatar {
   position: absolute;
-  top: 28px;
   left: 28px;
 }
 
@@ -11267,7 +11264,6 @@ figure > img {
     3. POST COMMENT FORM
 ---------------------------*/
 .post-comment-form {
-  padding: 26px 28px 26px 80px;
   background-color: #1d2333;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;

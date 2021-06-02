@@ -2737,7 +2737,7 @@
 <!-- global.popups -->
 <script src="{{asset('public/student/js/global/global.popups.js')}}"></script>
 <!-- global.charts -->
-<script src="{{asset('public/student/js/global/global.charts.')}}js"></script>
+<script src="{{asset('public/student/js/global/global.charts.js')}}"></script>
 <!-- header -->
 <script src="{{asset('public/student/js/header/header.js')}}"></script>
 <!-- sidebar -->
@@ -2906,6 +2906,26 @@
 					swal("Hủy bỏ xóa", "", "error");
 				}
 				
+			});
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.showCmt').click(function(){
+			var id = $(this).data('id_a');
+			$(".lineCmt_"+id).slice(0,3).show();
+			$("#commentId_"+id).toggle();
+			$('.loadM_'+id).click(function (e) {
+				e.preventDefault();
+				$(".lineCmt_"+id+":hidden").slice(0, 3).slideDown();
+				if ($(".lineCmt_"+id+":hidden").length == 0) {
+					$('.loadM_'+id).css('visibility', 'hidden');
+				}
+				$('html,body').animate({
+					scrollTop: $(this).offset().top
+				}, 1000);
 			});
 		});
 	});

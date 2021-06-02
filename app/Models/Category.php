@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    public $timestamp = false;
+    public $timestamps = false;
     protected $fillable = [
     	'category_name', 'updated_at', 'created_at'
     ];
     protected $primaryKey = 'category_id';
     protected $table = 'tbl_category';
+
+    public function posts(){
+        return $this->hasMany('App\Models\Post', 'category_id');
+    }
 }
