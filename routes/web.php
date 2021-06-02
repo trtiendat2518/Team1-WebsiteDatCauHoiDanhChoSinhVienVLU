@@ -37,6 +37,9 @@ Route::get('/cau-hoi-theo-loai/{category_id}','CategoryController@show_category_
 Route::post('/binh-luan/{post_id}', 'CommentController@comment_post');
 Route::get('/xoa-binh-luan', 'CommentController@comment_delete');
 
+//STUDENT LIKE
+Route::post('/thich-bai-viet/{post_id}', 'LikeController@like');
+
 //-----------------------------------------------------------------------------------------
 //ADMIN HOME
 Route::get('/admin-home', 'AdminController@index');

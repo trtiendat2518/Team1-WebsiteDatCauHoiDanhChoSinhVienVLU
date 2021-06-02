@@ -2931,5 +2931,35 @@
 	});
 </script>
 
+<script type="text/javascript" language="javascript">
+	$(document).ready(function(){
+		$('.postL').click(function(e){
+			e.preventDefault();
+			var id = $(this).data('id_like');
+			var like_quantity = 1;
+			var elm = $(this).parents('.optionsocial');
+			var _token = $('input[name="_token"]').val();
+			$.ajax({
+				url:'{{ url('/thich-bai-viet/') }}'+'/'+id,
+				method: 'POST',
+				data: {like_quantity:like_quantity, id:id, _token:_token},
+				success:function(data){
+					elm.find('.likelike').text(data.liking);
+					if (elm.find('.likeunlike').hasClass('active')){
+						elm.find('.likeunlike').removeClass('active');
+					}else{
+						elm.find('.likeunlike').addClass('active');
+					}
+					if (elm.find('.unlikelike').hasClass('active')){
+						elm.find('.unlikelike').removeClass('active');
+					}else{
+						elm.find('.unlikelike').addClass('active');
+					}
+				}
+			})
+		});
+	});
+</script>
+
 </body>
 </html>

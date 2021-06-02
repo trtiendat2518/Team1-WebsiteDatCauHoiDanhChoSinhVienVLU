@@ -19,4 +19,7 @@ class Post extends Model
     public function student(){
         return $this->belongsTo('App\Models\Student','post_student_name');
     }
+    public function likes(){
+        return $this->hasMany('App\Models\Like', 'post_id');
+    }
 }
