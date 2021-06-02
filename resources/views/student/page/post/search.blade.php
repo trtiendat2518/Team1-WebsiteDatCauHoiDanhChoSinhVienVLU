@@ -132,7 +132,7 @@
 				<p class="simple-tab-item">Xem nhiều</p>
 			</div>
 			@foreach ($search_product as $key => $post_info)
-			<div class="widget-box no-padding">
+			<div class="widget-box no-padding optionsocial">
 				@php
 				if(Session::get('student_email')==$post_info->post_student_email){
 					@endphp
@@ -144,8 +144,6 @@
 								</svg>
 							</div>
 							<div class="simple-dropdown widget-box-post-settings-dropdown">
-								{{-- <a href="javascript:void(0)" type="button" class="postE simple-dropdown-link section-filters-bar-actions popup-event-creation-trigger" onclick="getPost({{$post_info->post_id}})" >Chỉnh sửa</a>
-								<p></p> --}}
 								<a href="javascript:void(0)" type="button" class="postD simple-dropdown-link" id="postD" data-id_post="{{$post_info->post_id}}">Xóa câu hỏi</a>
 							</div>
 						</div>
@@ -185,13 +183,10 @@
 								<div class="meta-line">
 									<div class="meta-line-list reaction-item-list">
 										<div class="reaction-item">
-											<img class="reaction-image reaction-item-dropdown-trigger" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
-											<div class="simple-dropdown padded reaction-item-dropdown">
-												<p class="simple-dropdown-text"><img class="reaction" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like"> <span class="bold">Like</span></p>
-											</div>
+											<img class="reaction-image" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
 										</div>
 									</div>
-									<p class="meta-line-text">11</p>
+									<p class="meta-line-text likelike">{{$post_info->likes()->count()}}</p>
 								</div>
 							</div>
 							<div class="content-action">
@@ -206,26 +201,42 @@
 					</div>
 				</div>
 				<div class="post-options">
-					<div class="post-option-wrap">
-						<div class="post-option reaction-options-dropdown-trigger">
+					@php
+					if ($post_info->likes->contains('student_id',Session::get('student_id')) && $post_info->likes->contains('post_id',$post_info->post_id) && $post_info->likes->contains('like_quantity',1)){
+					@endphp
+					<div class="post-option-wrap postL" data-id_like="{{$post_info->post_id}}">
+						<div class="post-option likeunlike active">
 							<svg class="post-option-icon icon-thumbs-up">
 								<use xlink:href="#svg-thumbs-up"></use>
 							</svg>
 							<p class="post-option-text">Thích</p>
 						</div>
-						<div class="reaction-options reaction-options-dropdown">
-							<div class="reaction-option text-tooltip-tft" data-title="Like">
-								<img class="reaction-option-image" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
-							</div>
+					</div>
+					@php
+					}else if(Session::get('student_id')){
+					@endphp
+					<div class="post-option-wrap postL" data-id_like="{{$post_info->post_id}}">
+						<div class="post-option unlikelike">
+							<svg class="post-option-icon icon-thumbs-up">
+								<use xlink:href="#svg-thumbs-up"></use>
+							</svg>
+							<p class="post-option-text">Thích</p>
 						</div>
 					</div>
-					<div class="post-option showCmt" data-toggle="tab" data-id_a="{{$post_info->post_id}}" id="show_{{$post_info->post_id}}">
+					@php
+					}
+					@endphp
+					
+					@if (Session::get('student_id'))
+						<div class="post-option showCmt" data-toggle="tab" data-id_a="{{$post_info->post_id}}" id="show_{{$post_info->post_id}}">
 						<svg class="post-option-icon icon-comment">
 							<use xlink:href="#svg-comment"></use>
 						</svg>
 						<p class="post-option-text">Bình luận</p>
 					</div>
-					<div class="post-option">
+					@endif
+					
+					<div class="post-option popup-event-creation-trigger" onclick="getPost({{$post_info->post_id}})">
 						<svg class="post-option-icon icon-share">
 							<use xlink:href="#svg-quests"></use>
 						</svg>
@@ -399,11 +410,9 @@
 							<!-- /STATS BOX DIFF -->
 						</div>
 						<!-- /STATS BOX VALUE WRAP -->
-
 						<!-- STATS BOX TITLE -->
 						<p class="stats-box-title">Profile Views</p>
 						<!-- /STATS BOX TITLE -->
-
 						<!-- STATS BOX TEXT -->
 						<p class="stats-box-text">In the last month</p>
 						<!-- /STATS BOX TEXT -->
