@@ -134,7 +134,7 @@
 			@foreach ($search_product as $key => $post_info)
 			<div class="widget-box no-padding optionsocial">
 				@php
-				if(Session::get('student_email')==$post_info->post_student_email){
+				if(Session::get('student_email')==$post_info->student->student_email){
 					@endphp
 					<div class="widget-box-settings">
 						<div class="post-settings-wrap">
@@ -167,7 +167,7 @@
 									</div>
 								</div>
 							</a>
-							<p class="user-status-title medium"><a class="bold" href="profile-timeline.html">{{$post_info->post_student_name}}</a></p>
+							<p class="user-status-title medium"><a class="bold" href="profile-timeline.html">{{$post_info->student->student_name}}</a></p>
 							<p class="user-status-text small">{{ \Carbon\Carbon::parse($post_info->created_at)->diffForHumans() }}</p>
 						</div>
 						<p style="font-size: 20px;" class="widget-box-status-text">{{$post_info->post_title}}</p>
@@ -175,7 +175,7 @@
 						<p style="white-space: pre-line;" class="read-more widget-box-status-text">{{$post_info->post_content}}</p>
 
 						<div class="tag-list">
-							<a class="tag-item secondary" style="font-size: 16px" href="{{url('/cau-hoi-theo-loai/'.$post_info->category_id)}}">{{$post_info->category_name}}</a>
+							<a class="tag-item secondary" style="font-size: 16px" href="{{url('/cau-hoi-theo-loai/'.$post_info->category_id)}}">{{$post_info->category->category_name}}</a>
 						</div>
 
 						<div class="content-actions">
@@ -186,7 +186,7 @@
 											<img class="reaction-image" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
 										</div>
 									</div>
-									<p class="meta-line-text likelike">{{$post_info->likes()->count()}}</p>
+									<p class="meta-line-text likelike">{{$post_info->post_like}}</p>
 								</div>
 							</div>
 							<div class="content-action">

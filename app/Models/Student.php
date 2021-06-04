@@ -9,7 +9,7 @@ class Student extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-    	'student_name', 'student_email', 'student_password', 'student_course', 'student_status', 'updated_at', 'created_at'
+    	'student_name', 'student_email', 'student_password', 'student_course', 'student_status'
     ];
     protected $primaryKey = 'student_id';
     protected $table = 'tbl_student';

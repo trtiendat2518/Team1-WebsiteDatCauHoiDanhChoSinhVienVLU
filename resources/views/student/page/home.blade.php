@@ -144,8 +144,6 @@
 								</svg>
 							</div>
 							<div class="simple-dropdown widget-box-post-settings-dropdown">
-								{{-- <a href="javascript:void(0)" type="button" class="postE simple-dropdown-link section-filters-bar-actions popup-event-creation-trigger" onclick="getPost({{$post_info->post_id}})" >Chỉnh sửa</a>
-								<p></p> --}}
 								<a href="javascript:void(0)" type="button" class="postD simple-dropdown-link" id="postD" data-id_post="{{$post_info->post_id}}">Xóa câu hỏi</a>
 							</div>
 						</div>
@@ -169,7 +167,7 @@
 									</div>
 								</div>
 							</a>
-							<p class="user-status-title medium"><a class="bold" href="profile-timeline.html">{{$post_info->post_student_name}}</a></p>
+							<p class="user-status-title medium"><a class="bold" href="profile-timeline.html">{{$post_info->student->student_name}}</a></p>
 							<p class="user-status-text small">{{ \Carbon\Carbon::parse($post_info->created_at)->diffForHumans() }}</p>
 						</div>
 						<p style="font-size: 20px;" class="widget-box-status-text">{{$post_info->post_title}}</p>
@@ -177,7 +175,7 @@
 						<p style="white-space: pre-line;" class="widget-box-status-text">{{$post_info->post_content}}</p>
 
 						<div class="tag-list">
-							<a class="tag-item secondary" style="font-size: 16px" href="{{url('/cau-hoi-theo-loai/'.$post_info->category_id)}}">{{$post_info->category_name}}</a>
+							<a class="tag-item secondary" style="font-size: 16px" href="{{url('/cau-hoi-theo-loai/'.$post_info->category_id)}}">{{$post_info->category->category_name}}</a>
 						</div>
 
 						<div class="content-actions">
@@ -188,7 +186,7 @@
 											<img class="reaction-image" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
 										</div>
 									</div>
-									<p class="meta-line-text likelike">{{$post_info->likes()->count()}}</p>
+									<p class="meta-line-text likelike">{{$post_info->post_like}}</p>
 								</div>
 							</div>
 							<div class="content-action">
