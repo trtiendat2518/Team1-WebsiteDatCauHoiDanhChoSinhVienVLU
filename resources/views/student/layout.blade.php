@@ -2737,7 +2737,7 @@
 <!-- global.popups -->
 <script src="{{asset('public/student/js/global/global.popups.js')}}"></script>
 <!-- global.charts -->
-<script src="{{asset('public/student/js/global/global.charts.')}}js"></script>
+<script src="{{asset('public/student/js/global/global.charts.js')}}"></script>
 <!-- header -->
 <script src="{{asset('public/student/js/header/header.js')}}"></script>
 <!-- sidebar -->
@@ -2915,8 +2915,48 @@
 	$(document).ready(function(){
 		$('.showCmt').click(function(){
 			var id = $(this).data('id_a');
-			// $("#commentId_"+id).css("display", "block");
+			$(".lineCmt_"+id).slice(0,3).show();
 			$("#commentId_"+id).toggle();
+			$('.loadM_'+id).click(function (e) {
+				e.preventDefault();
+				$(".lineCmt_"+id+":hidden").slice(0, 3).slideDown();
+				if ($(".lineCmt_"+id+":hidden").length == 0) {
+					$('.loadM_'+id).css('visibility', 'hidden');
+				}
+				$('html,body').animate({
+					scrollTop: $(this).offset().top
+				}, 1000);
+			});
+		});
+	});
+</script>
+
+<script type="text/javascript" language="javascript">
+	$(document).ready(function(){
+		$('.postL').click(function(e){
+			e.preventDefault();
+			var id = $(this).data('id_like');
+			var like_quantity = 1;
+			var elm = $(this).parents('.optionsocial');
+			var _token = $('input[name="_token"]').val();
+			$.ajax({
+				url:'{{ url('/thich-bai-viet/') }}'+'/'+id,
+				method: 'POST',
+				data: {like_quantity:like_quantity, id:id, _token:_token},
+				success:function(data){
+					elm.find('.likelike').text(data.liking);
+					if (elm.find('.likeunlike').hasClass('active')){
+						elm.find('.likeunlike').removeClass('active');
+					}else{
+						elm.find('.likeunlike').addClass('active');
+					}
+					if (elm.find('.unlikelike').hasClass('active')){
+						elm.find('.unlikelike').removeClass('active');
+					}else{
+						elm.find('.unlikelike').addClass('active');
+					}
+				}
+			})
 		});
 	});
 </script>
