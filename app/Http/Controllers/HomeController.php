@@ -23,7 +23,8 @@ class HomeController extends Controller
 		//---------------
 		
 		$category_post = Category::orderBy('category_id', 'DESC')->get();
-		$post2 = Post::orderBy('tbl_post.created_at','DESC')->paginate(5);
+		$post2 = Post::with('category','student','likes','comments')
+		->orderBy('tbl_post.created_at','DESC')->paginate(5);
 
 		return view('student.page.home')->with(compact('meta_desc','meta_title','url_canonical','category_post','post2'));
 	}
@@ -38,7 +39,9 @@ class HomeController extends Controller
 		
 		$category_post = Category::orderBy('category_id', 'DESC')->get();
 		$keywords = $request->keywords_submit;
-		$search_product = Post::where('post_title','like','%'.$keywords.'%')->orderBy('tbl_post.created_at','DESC')->paginate(5);
+		$search_product = Post::where('post_title','like','%'.$keywords.'%')
+		->with('category','student','likes','comments')
+		->orderBy('tbl_post.created_at','DESC')->paginate(5);
 		
 		return view('student.page.post.search')->with(compact('meta_desc','meta_title','url_canonical','category_post','search_product'));
 	}
