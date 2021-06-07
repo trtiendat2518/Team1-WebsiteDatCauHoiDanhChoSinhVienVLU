@@ -152,9 +152,15 @@
 						<div class="meta-line">
 							<p class="meta-line-link">{{$post_info->comments()->count()}} Lượt bình luận</p>
 						</div>
+						@if ($post_info->post_reply=='')
 						<div class="meta-line">
-							<p class="meta-line-text">1 Câu trả lời</p>
+							<p class="meta-line-text">Chưa có câu trả lời</p>
 						</div>
+						@else
+						<div class="meta-line">
+							<p class="meta-line-text">Đã trả lời</p>
+						</div>
+						@endif
 					</div>
 				</div>
 			</div>
@@ -195,12 +201,21 @@
 			</div>
 			@endif
 			
+			@if ($post_info->post_reply=='')
+			<div class="post-option">
+				<svg class="post-option-icon icon-share">
+					<use xlink:href="#svg-quests"></use>
+				</svg>
+				<p class="post-option-text">Đợi khoa trả lời nhé</p>
+			</div>
+			@else
 			<div class="post-option popup-event-creation-trigger" onclick="getPost({{$post_info->post_id}})">
 				<svg class="post-option-icon icon-share">
 					<use xlink:href="#svg-quests"></use>
 				</svg>
 				<p class="post-option-text">Câu trả lời của Khoa</p>
 			</div>
+			@endif
 		</div>
 		<!-- POST COMMENT LIST -->
 		<div id="commentId_{{$post_info->post_id}}" style="display: none;"  class="post-comment-list ">
