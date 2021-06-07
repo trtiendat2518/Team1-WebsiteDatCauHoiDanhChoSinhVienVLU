@@ -232,6 +232,6 @@ class StudentController extends Controller
 		->where('tbl_post.student_id', Session::get('student_id'))
 		->orderBy('tbl_post.created_at','DESC')->paginate(5);
 
-		return view('student.page.student.show')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'student_by_id'));
+		return view('student.page.student.timeline')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'student_by_id'));
 	}
 }

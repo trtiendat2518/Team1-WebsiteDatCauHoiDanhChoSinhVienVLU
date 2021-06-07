@@ -1777,6 +1777,10 @@ textarea::placeholder {
   grid-template-areas: 'sidebar content';
   grid-template-columns: 23.9864864865% 74.6621621622%;
 }
+.grid.grid-2-4-6 {
+  grid-template-areas: 'sidebar content';
+  grid-template-columns: 3% 40% 50%;
+}
 
 .grid.grid-3-9 > .grid-column:nth-child(1) {
   grid-area: sidebar;
@@ -10745,7 +10749,7 @@ figure > img {
 .profile-header .profile-header-cover {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-  height: 300px;
+  height: 90px;
 }
 
 .profile-header .profile-header-info {
