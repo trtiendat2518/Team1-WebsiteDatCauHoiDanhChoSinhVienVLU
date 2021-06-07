@@ -33,6 +33,9 @@ Route::post('/chinh-sua-cau-hoi/{post_id}', 'PostController@post_update');
 //STUDENT CATEGORY POST
 Route::get('/cau-hoi-theo-loai/{category_id}','CategoryController@show_category_post');
 
+//STUDENT POST
+Route::get('/trang-ca-nhan-cua-sinh-vien/{student_id}','StudentController@show_student_post');
+
 //STUDENT COMMENT
 Route::post('/binh-luan/{post_id}', 'CommentController@comment_post');
 Route::get('/xoa-binh-luan', 'CommentController@comment_delete');

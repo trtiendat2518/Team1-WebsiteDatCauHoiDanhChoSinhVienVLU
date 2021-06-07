@@ -73,7 +73,7 @@
 				</a>
 			</li>
 			<li class="menu-item">
-				<a class="menu-item-link text-tooltip-tfr" href="members.html" data-title="Trang cá nhân">
+				<a class="menu-item-link text-tooltip-tfr" href="{{url('/trang-ca-nhan-cua-sinh-vien/'.Session::get('student_id'))}}" data-title="Trang cá nhân">
 					<svg class="menu-item-link-icon icon-timeline">
 						<use xlink:href="#svg-timeline"></use>
 					</svg>

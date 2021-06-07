@@ -7,6 +7,8 @@ use Illuminate\Http\Response;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Student;
+use App\Models\Post;
+use App\Models\Category;
 use App\Rules\Captcha;
 use DB;
 use Mail;
@@ -218,7 +220,18 @@ class StudentController extends Controller
 		}
 	}
 
-	public function profile(){
-		return view('student.page.profile.profilemine');
+	public function show_student_post(Request $request){
+		//SEO
+		$meta_desc = "Trang cá nhân";
+		$meta_title = "Trang cá nhân";
+		$url_canonical =$request->url();
+		//-----------------------
+
+		$category_post = Category::orderBy('category_id', 'DESC')->get();
+		$student_by_id = Post::with('category','student','likes','comments')
+		->where('tbl_post.student_id', Session::get('student_id'))
+		->orderBy('tbl_post.created_at','DESC')->paginate(5);
+
+		return view('student.page.student.show')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'student_by_id'));
 	}
 }
