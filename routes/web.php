@@ -40,6 +40,9 @@ Route::get('/xoa-binh-luan', 'CommentController@comment_delete');
 //STUDENT LIKE
 Route::post('/thich-bai-viet/{post_id}', 'LikeController@like');
 
+//REPLY FROM FACULTY
+Route::get('/xem-cau-tra-loi-khoa/{post_id}', 'ReplyController@post_reply');
+
 //-----------------------------------------------------------------------------------------
 //ADMIN HOME
 Route::get('/admin-home', 'AdminController@index');

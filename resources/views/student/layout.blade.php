@@ -1632,6 +1632,29 @@
 </div>
 <!-- /CONTENT GRID -->
 
+<div class="popup-box small popup-event-creation" style="max-width: 650px; z-index:600;">
+	<div class="popup-close-button popup-event-creation-trigger">
+		<svg class="popup-close-button-icon icon-cross">
+			<use xlink:href="#svg-cross"></use>
+		</svg>
+	</div>
+	<center><p class="popup-box-title">Câu trả lời của BCN Khoa</p></center>
+	<form class="form">
+		@csrf
+		
+		<div class="form-row">
+			<div class="form-item">
+				<div class="form-input small">
+					<p style="background-color: #1d2333; padding: 0 6px; font-size: 14px; top: -6px; left: 12px; color: #9aa4bf;">Nội dung</p>
+					<textarea  id="formContent" rows="10" style="height: 350px; width: 600px;" name="post_reply" disabled></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="popup-box-actions medium void">
+			
+		</div>
+	</form>
+</div>
 
 <!-- app -->
 <script src="{{asset('public/student/js/utils/app.js')}}"></script>
@@ -1669,6 +1692,14 @@
 <script src="{{asset('public/student/js/global/global.maps.js')}}"></script>
 <script src="{{asset('public/student/js/sweetalert.min.js')}}"></script>
 <script src="{{asset('public/student/js/jquery.min.js')}}"></script>
+
+<script>
+	function getPost(post_id){
+		$.get('{{url('/xem-cau-tra-loi-khoa/')}}'+'/'+post_id, function(post_d){
+			$("#formContent").val(post_d.post_reply);
+		});
+	}
+</script>
 
 <script type="text/javascript">
 	$(document).ready(function(){
