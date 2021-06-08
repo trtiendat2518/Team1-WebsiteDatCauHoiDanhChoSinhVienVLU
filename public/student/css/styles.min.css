@@ -271,6 +271,7 @@ textarea::placeholder {
 
 .form-input.dark input[type=password],
 .form-input.dark input[type=text],
+.form-input.dark input[type=date],
 .form-input.dark textarea {
 	border: none;
 	background-color: #5538b5;
@@ -279,6 +280,7 @@ textarea::placeholder {
 
 .form-input.dark input[type=password]::-webkit-input-placeholder,
 .form-input.dark input[type=text]::-webkit-input-placeholder,
+.form-input.dark input[type=date]::-webkit-input-placeholder,
 .form-input.dark textarea::-webkit-input-placeholder {
 	color: #8b88ff;
 	opacity: .6
@@ -286,6 +288,7 @@ textarea::placeholder {
 
 .form-input.dark input[type=password]::-moz-placeholder,
 .form-input.dark input[type=text]::-moz-placeholder,
+.form-input.dark input[type=date]::-moz-placeholder,
 .form-input.dark textarea::-moz-placeholder {
 	color: #8b88ff;
 	opacity: .6
@@ -293,6 +296,7 @@ textarea::placeholder {
 
 .form-input.dark input[type=password]:-ms-input-placeholder,
 .form-input.dark input[type=text]:-ms-input-placeholder,
+.form-input.dark input[type=date]:-ms-input-placeholder,
 .form-input.dark textarea:-ms-input-placeholder {
 	color: #8b88ff;
 	opacity: .6
@@ -300,6 +304,7 @@ textarea::placeholder {
 
 .form-input.dark input[type=password]::-ms-input-placeholder,
 .form-input.dark input[type=text]::-ms-input-placeholder,
+.form-input.dark input[type=date]::-ms-input-placeholder,
 .form-input.dark textarea::-ms-input-placeholder {
 	color: #8b88ff;
 	opacity: .6
@@ -307,6 +312,7 @@ textarea::placeholder {
 
 .form-input.dark input[type=password]::placeholder,
 .form-input.dark input[type=text]::placeholder,
+.form-input.dark input[type=date]::placeholder,
 .form-input.dark textarea::placeholder {
 	color: #8b88ff;
 	opacity: .6
@@ -4135,10 +4141,8 @@ figure>img {
 }
 
 .page-item {
-	height: 24px;
 	padding: 0 8px;
 	border-radius: 8px;
-	background-color: #293249;
 	box-shadow: 2px 3px 10px 0 rgba(0, 0, 0, .12);
 	font-size: .75rem;
 	font-weight: 700;
@@ -9463,7 +9467,7 @@ figure>img {
 .profile-header .profile-header-cover {
 	border-top-left-radius: 12px;
 	border-top-right-radius: 12px;
-	height: 300px
+	height: 90px
 }
 
 .profile-header .profile-header-info {
@@ -9826,7 +9830,7 @@ figure>img {
 }
 
 .post-comment {
-	padding: 26px 28px 28px 80px;
+	padding: 15px 15px 15px 80px;
 	background-color: #1d2333;
 	position: relative
 }
@@ -9845,7 +9849,6 @@ figure>img {
 
 .post-comment .user-avatar {
 	position: absolute;
-	top: 28px;
 	left: 28px
 }
 
@@ -9932,7 +9935,6 @@ figure>img {
 }
 
 .post-comment-form {
-	padding: 26px 28px 26px 80px;
 	background-color: #1d2333;
 	border-bottom-left-radius: 12px;
 	border-bottom-right-radius: 12px;

@@ -7,6 +7,8 @@ use Illuminate\Http\Response;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Student;
+use App\Models\Post;
+use App\Models\Category;
 use App\Rules\Captcha;
 use DB;
 use Mail;
@@ -57,8 +59,8 @@ class StudentController extends Controller
 	
 	public function login(Request $request){
 		$data = $request->validate([
-			'student_email'=>'required|email',
-			'student_password'=>'required|min:6|max:32',
+			'student_email'=>'bail|required|email',
+			'student_password'=>'bail|required|min:6|max:32',
 			'g-recaptcha-response'=>new Captcha(),
 		],[
 			'student_email.required'=>'Mail không được để trống',
@@ -100,13 +102,13 @@ class StudentController extends Controller
 
 	public function register(Request $request){
 		$data = $request->validate([
-			'student_name'=>'required|alpha|max:100',
-			'student_email'=>'required',
-			'student_password'=>'required|min:6|max:32',
+			'student_name'=>'bail|required|alpha_spaces|max:100',
+			'student_email'=>'bail|required',
+			'student_password'=>'bail|required|min:6|max:32',
 			'g-recaptcha-response'=>new Captcha(),
 		],[
 			'student_name.required'=>'Tên không được để trống',
-			'student_name.alpha'=>'Tên không được chứa ký tự số',
+			'student_name.alpha_spaces'=>'Tên không được chứa ký tự số',
 			'student_email.required'=>'Mail không được để trống',
 			'student_email.email'=>'Mail nhập sai định dạng',
 			'student_password.required'=>'Mật khẩu không được để trống',
@@ -218,7 +220,20 @@ class StudentController extends Controller
 		}
 	}
 
-	public function profile(){
-		return view('student.page.profile.profilemine');
+	public function show_student_post(Request $request){
+		//SEO
+		$meta_desc = "Trang cá nhân";
+		$meta_title = "Trang cá nhân";
+		$url_canonical =$request->url();
+		//-----------------------
+
+		$category_post = Category::orderBy('category_id', 'DESC')->get();
+		$student_by_id = Post::with('category','student','likes','comments')
+		->where('tbl_post.student_id', Session::get('student_id'))
+		->orderBy('tbl_post.created_at','DESC')->paginate(5);
+		$student2 = Student::with('info','posted')->where('student_id',Session::get('student_id'))
+        ->limit(1)->get();
+
+		return view('student.page.student.timeline')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'student_by_id','student2'));
 	}
 }

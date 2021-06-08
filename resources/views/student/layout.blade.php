@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- SEO website -->
 	<meta name="description" content="{{$meta_desc}}">
-    <meta name="author" content="SEP-TEAM1-FWB">
-    <link rel="canonical" href="{{$url_canonical}}">
+	<meta name="author" content="SEP-TEAM1-FWB">
+	<link rel="canonical" href="{{$url_canonical}}">
 	<!-- bootstrap 4.3.1 -->
 	<link rel="stylesheet" href="{{asset('public/student/css/vendor/bootstrap.min.css')}}">
 	<!-- styles -->
@@ -25,199 +25,197 @@
 </head>
 <body">
 
-<!-- PAGE LOADER -->
-<div class="page-loader">
-	<!-- PAGE LOADER DECORATION -->
-	<div class="page-loader-decoration">
-		<!-- ICON LOGO -->
-		<img src="{{asset('public/student/img/vlu.ico')}}" alt="">
-		<!-- /ICON LOGO -->
+	<!-- PAGE LOADER -->
+	<div class="page-loader">
+		<!-- PAGE LOADER DECORATION -->
+		<div class="page-loader-decoration">
+			<!-- ICON LOGO -->
+			<img src="{{asset('public/student/img/vlu.ico')}}" alt="">
+			<!-- /ICON LOGO -->
+		</div>
+		<!-- /PAGE LOADER DECORATION -->
+
+		<!-- PAGE LOADER INFO -->
+		<div class="page-loader-info">
+			<!-- PAGE LOADER INFO TITLE -->
+			<p class="page-loader-info-title">Văn Lang</p>
+			<!-- /PAGE LOADER INFO TITLE -->
+
+			<!-- PAGE LOADER INFO TEXT -->
+			<p class="page-loader-info-text">Đang tải...</p>
+			<!-- /PAGE LOADER INFO TEXT -->
+		</div>
+		<!-- /PAGE LOADER INFO -->
+
+		<!-- PAGE LOADER INDICATOR -->
+		<div class="page-loader-indicator loader-bars">
+			<div class="loader-bar"></div>
+			<div class="loader-bar"></div>
+			<div class="loader-bar"></div>
+			<div class="loader-bar"></div>
+			<div class="loader-bar"></div>
+			<div class="loader-bar"></div>
+			<div class="loader-bar"></div>
+			<div class="loader-bar"></div>
+		</div>
+		<!-- /PAGE LOADER INDICATOR -->
 	</div>
-	<!-- /PAGE LOADER DECORATION -->
+	<!-- /PAGE LOADER -->
 
-	<!-- PAGE LOADER INFO -->
-	<div class="page-loader-info">
-		<!-- PAGE LOADER INFO TITLE -->
-		<p class="page-loader-info-title">Văn Lang</p>
-		<!-- /PAGE LOADER INFO TITLE -->
+	<!-- NAVIGATION WIDGET -->
+	<nav id="navigation-widget-small" class="navigation-widget navigation-widget-desktop closed sidebar left delayed">
+		<ul class="menu small">
+			<li class="menu-item active">
+				<a class="menu-item-link text-tooltip-tfr" href="{{url('/')}}" data-title="Trang câu hỏi">
+					<svg class="menu-item-link-icon icon-newsfeed">
+						<use xlink:href="#svg-newsfeed"></use>
+					</svg>
+				</a>
+			</li>
+			@if (Session::get('student_id'))
+			<li class="menu-item">
+				<a class="menu-item-link text-tooltip-tfr" href="{{url('/trang-ca-nhan-cua-sinh-vien/'.Session::get('student_id'))}}" data-title="Trang cá nhân">
+					<svg class="menu-item-link-icon icon-timeline">
+						<use xlink:href="#svg-timeline"></use>
+					</svg>
+				</a>
+			</li>
+			@endif
+			<li class="menu-item">
+				<a class="menu-item-link text-tooltip-tfr" href="members.html" data-title="Liên hệ">
+					<svg class="menu-item-link-icon icon-members">
+						<use xlink:href="#svg-send-message"></use>
+					</svg>
+				</a>
+			</li>
+			<li class="menu-item">
+				<a class="menu-item-link text-tooltip-tfr" href="members.html" data-title="FAQs">
+					<svg class="menu-item-link-icon icon-forum">
+						<use xlink:href="#svg-forum"></use>
+					</svg>
+				</a>
+			</li>
+			<li class="menu-item">
+				<a class="menu-item-link text-tooltip-tfr" href="members.html" data-title="About us">
+					<svg class="menu-item-link-icon icon-members">
+						<use xlink:href="#svg-profile"></use>
+					</svg>
+				</a>
+			</li>
+		</ul>
+	</nav>
+	<nav id="navigation-widget" class="navigation-widget navigation-widget-desktop sidebar left hidden" data-simplebar>
+		<ul class="menu">
+			<li class="menu-item active">
+				<a class="menu-item-link" href="{{url('/')}}">
+					<svg class="menu-item-link-icon icon-newsfeed">
+						<use xlink:href="#svg-newsfeed"></use>
+					</svg>
+					Trang câu hỏi
+				</a>
+			</li>
+			<li class="menu-item">
+				<a class="menu-item-link" href="members.html">
+					<svg class="menu-item-link-icon icon-members">
+						<use xlink:href="#svg-timeline"></use>
+					</svg>
+					Trang cá nhân
+				</a>
+			</li>
+			<li class="menu-item">
+				<a class="menu-item-link" href="members.html">
+					<svg class="menu-item-link-icon icon-members">
+						<use xlink:href="#svg-send-message"></use>
+					</svg>
+					Liên hệ
+				</a>
+			</li>
+			<li class="menu-item">
+				<a class="menu-item-link" href="members.html">
+					<svg class="menu-item-link-icon icon-members">
+						<use xlink:href="#svg-forum"></use>
+					</svg>
+					FAQs
+				</a>
+			</li>
+			<li class="menu-item">
+				<a class="menu-item-link" href="members.html">
+					<svg class="menu-item-link-icon icon-members">
+						<use xlink:href="#svg-profile"></use>
+					</svg>
+					About us
+				</a>
+			</li>
+			<!-- /MENU ITEM -->
+		</ul>
+		<!-- /MENU -->
+	</nav>
+	<!-- /NAVIGATION WIDGET -->
 
-		<!-- PAGE LOADER INFO TEXT -->
-		<p class="page-loader-info-text">Đang tải...</p>
-		<!-- /PAGE LOADER INFO TEXT -->
+	<!-- NAVIGATION WIDGET -->
+	<nav id="navigation-widget-mobile" class="navigation-widget navigation-widget-mobile sidebar left hidden" data-simplebar>
+		<!-- NAVIGATION WIDGET CLOSE BUTTON -->
+		<div class="navigation-widget-close-button">
+			<!-- NAVIGATION WIDGET CLOSE BUTTON ICON -->
+			<svg class="navigation-widget-close-button-icon icon-back-arrow">
+				<use xlink:href="#svg-back-arrow"></use>
+			</svg>
+			<!-- NAVIGATION WIDGET CLOSE BUTTON ICON -->
+		</div>
+		<!-- /NAVIGATION WIDGET CLOSE BUTTON -->
+
+		<!-- NAVIGATION WIDGET INFO WRAP -->
+		<div class="navigation-widget-info-wrap">
+			<!-- NAVIGATION WIDGET INFO -->
+			<div class="navigation-widget-info">
+				<!-- USER AVATAR -->
+				<a class="user-avatar small no-outline" href="profile-timeline.html">
+					<!-- USER AVATAR PROGRESS -->
+					<div class="user-avatar-progress">
+						<!-- HEXAGON -->
+						<div class="hexagon-progress-40-44"></div>
+						<!-- /HEXAGON -->
+					</div>
+					<!-- /USER AVATAR PROGRESS -->
+
+					<!-- USER AVATAR PROGRESS BORDER -->
+					<div class="user-avatar-progress-border">
+						<!-- HEXAGON -->
+						<div class="hexagon-border-40-44"></div>
+						<!-- /HEXAGON -->
+					</div>
+					<!-- /USER AVATAR PROGRESS BORDER -->
+				</a>
+				<!-- /USER AVATAR -->
+
+				<!-- NAVIGATION WIDGET INFO TITLE -->
+				<p class="navigation-widget-info-title"><a href="profile-timeline.html">@php
+				echo Session::get('student_name');
+			@endphp</a></p>
+			<!-- /NAVIGATION WIDGET INFO TITLE -->
+
+			<!-- NAVIGATION WIDGET INFO TEXT -->
+			<p class="navigation-widget-info-text">Chào mừng bạn trở lại!</p>
+			<!-- /NAVIGATION WIDGET INFO TEXT -->
+		</div>
+		<!-- /NAVIGATION WIDGET INFO -->
+
+		<!-- NAVIGATION WIDGET BUTTON -->
+		<p class="navigation-widget-info-button button small secondary">Đăng xuất</p>
+		<!-- /NAVIGATION WIDGET BUTTON -->
 	</div>
-	<!-- /PAGE LOADER INFO -->
+	<!-- /NAVIGATION WIDGET INFO WRAP -->
 
-	<!-- PAGE LOADER INDICATOR -->
-	<div class="page-loader-indicator loader-bars">
-		<div class="loader-bar"></div>
-		<div class="loader-bar"></div>
-		<div class="loader-bar"></div>
-		<div class="loader-bar"></div>
-		<div class="loader-bar"></div>
-		<div class="loader-bar"></div>
-		<div class="loader-bar"></div>
-		<div class="loader-bar"></div>
-	</div>
-	<!-- /PAGE LOADER INDICATOR -->
-</div>
-<!-- /PAGE LOADER -->
+	<!-- NAVIGATION WIDGET SECTION TITLE -->
+	<p class="navigation-widget-section-title">Menu</p>
+	<!-- /NAVIGATION WIDGET SECTION TITLE -->
 
-<!-- NAVIGATION WIDGET -->
-<nav id="navigation-widget-small" class="navigation-widget navigation-widget-desktop closed sidebar left delayed">
-	<!-- MENU -->
-	<ul class="menu small">
-		<!-- MENU ITEM -->
-		<li class="menu-item active">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link text-tooltip-tfr" href="{{url('/')}}" data-title="Trang câu hỏi">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-newsfeed">
-					<use xlink:href="#svg-newsfeed"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link text-tooltip-tfr" href="overview.html" data-title="Overview">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-overview">
-					<use xlink:href="#svg-overview"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link text-tooltip-tfr" href="groups.html" data-title="Groups">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-group">
-					<use xlink:href="#svg-group"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link text-tooltip-tfr" href="members.html" data-title="Members">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-members">
-					<use xlink:href="#svg-members"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link text-tooltip-tfr" href="badges.html" data-title="Badges">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-badges">
-					<use xlink:href="#svg-badges"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link text-tooltip-tfr" href="quests.html" data-title="Quests">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-quests">
-					<use xlink:href="#svg-quests"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link text-tooltip-tfr" href="streams.html" data-title="Streams">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-streams">
-					<use xlink:href="#svg-streams"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link text-tooltip-tfr" href="events.html" data-title="Events">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-events">
-					<use xlink:href="#svg-events"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link text-tooltip-tfr" href="forums.html" data-title="Forums">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-forums">
-					<use xlink:href="#svg-forums"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link text-tooltip-tfr" href="marketplace.html" data-title="Marketplace">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-marketplace">
-					<use xlink:href="#svg-marketplace"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-	</ul>
-	<!-- /MENU -->
-</nav>
-<!-- /NAVIGATION WIDGET -->
-
-<!-- NAVIGATION WIDGET -->
-<nav id="navigation-widget" class="navigation-widget navigation-widget-desktop sidebar left hidden" data-simplebar>
 	<!-- MENU -->
 	<ul class="menu">
 		<!-- MENU ITEM -->
 		<li class="menu-item active">
 			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="{{url('/')}}">
+			<a class="menu-item-link" href="newsfeed.html">
 				<!-- MENU ITEM LINK ICON -->
 				<svg class="menu-item-link-icon icon-newsfeed">
 					<use xlink:href="#svg-newsfeed"></use>
@@ -238,7 +236,7 @@
 					<use xlink:href="#svg-overview"></use>
 				</svg>
 				<!-- /MENU ITEM LINK ICON -->
-				Overview
+				Trang cá nhân
 			</a>
 			<!-- /MENU ITEM LINK -->
 		</li>
@@ -253,7 +251,7 @@
 					<use xlink:href="#svg-group"></use>
 				</svg>
 				<!-- /MENU ITEM LINK ICON -->
-				Groups
+				Liên hệ
 			</a>
 			<!-- /MENU ITEM LINK -->
 		</li>
@@ -268,7 +266,7 @@
 					<use xlink:href="#svg-members"></use>
 				</svg>
 				<!-- /MENU ITEM LINK ICON -->
-				Members
+				FAQs
 			</a>
 			<!-- /MENU ITEM LINK -->
 		</li>
@@ -283,326 +281,7 @@
 					<use xlink:href="#svg-badges"></use>
 				</svg>
 				<!-- /MENU ITEM LINK ICON -->
-				Badges
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="quests.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-quests">
-					<use xlink:href="#svg-quests"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Quests
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="streams.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-streams">
-					<use xlink:href="#svg-streams"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Streams
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="events.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-events">
-					<use xlink:href="#svg-events"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Events
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="forums.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-forums">
-					<use xlink:href="#svg-forums"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Forums
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="marketplace.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-marketplace">
-					<use xlink:href="#svg-marketplace"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Marketplace
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-	</ul>
-	<!-- /MENU -->
-</nav>
-<!-- /NAVIGATION WIDGET -->
-
-<!-- NAVIGATION WIDGET -->
-<nav id="navigation-widget-mobile" class="navigation-widget navigation-widget-mobile sidebar left hidden" data-simplebar>
-	<!-- NAVIGATION WIDGET CLOSE BUTTON -->
-	<div class="navigation-widget-close-button">
-		<!-- NAVIGATION WIDGET CLOSE BUTTON ICON -->
-		<svg class="navigation-widget-close-button-icon icon-back-arrow">
-			<use xlink:href="#svg-back-arrow"></use>
-		</svg>
-		<!-- NAVIGATION WIDGET CLOSE BUTTON ICON -->
-	</div>
-	<!-- /NAVIGATION WIDGET CLOSE BUTTON -->
-
-	<!-- NAVIGATION WIDGET INFO WRAP -->
-	<div class="navigation-widget-info-wrap">
-		<!-- NAVIGATION WIDGET INFO -->
-		<div class="navigation-widget-info">
-			<!-- USER AVATAR -->
-			<a class="user-avatar small no-outline" href="profile-timeline.html">
-				<!-- USER AVATAR CONTENT -->
-				{{-- <div class="user-avatar-content">
-					<!-- HEXAGON -->
-					<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/02.jpg')}}')}}"></div>
-					<!-- /HEXAGON -->
-				</div> --}}
-				<!-- /USER AVATAR CONTENT -->
-
-				<!-- USER AVATAR PROGRESS -->
-				<div class="user-avatar-progress">
-					<!-- HEXAGON -->
-					<div class="hexagon-progress-40-44"></div>
-					<!-- /HEXAGON -->
-				</div>
-				<!-- /USER AVATAR PROGRESS -->
-
-				<!-- USER AVATAR PROGRESS BORDER -->
-				<div class="user-avatar-progress-border">
-					<!-- HEXAGON -->
-					<div class="hexagon-border-40-44"></div>
-					<!-- /HEXAGON -->
-				</div>
-				<!-- /USER AVATAR PROGRESS BORDER -->
-
-				<!-- USER AVATAR BADGE -->
-				<div class="user-avatar-badge">
-					<!-- USER AVATAR BADGE BORDER -->
-					<div class="user-avatar-badge-border">
-						<!-- HEXAGON -->
-						<div class="hexagon-22-24"></div>
-						<!-- /HEXAGON -->
-					</div>
-					<!-- /USER AVATAR BADGE BORDER -->
-
-					<!-- USER AVATAR BADGE CONTENT -->
-					<div class="user-avatar-badge-content">
-						<!-- HEXAGON -->
-						<div class="hexagon-dark-16-18"></div>
-						<!-- /HEXAGON -->
-					</div>
-					<!-- /USER AVATAR BADGE CONTENT -->
-
-					<!-- USER AVATAR BADGE TEXT -->
-					<p class="user-avatar-badge-text">24</p>
-					<!-- /USER AVATAR BADGE TEXT -->
-				</div>
-				<!-- /USER AVATAR BADGE -->
-			</a>
-			<!-- /USER AVATAR -->
-
-			<!-- NAVIGATION WIDGET INFO TITLE -->
-			<p class="navigation-widget-info-title"><a href="profile-timeline.html">Marina Valentine</a></p>
-			<!-- /NAVIGATION WIDGET INFO TITLE -->
-
-			<!-- NAVIGATION WIDGET INFO TEXT -->
-			<p class="navigation-widget-info-text">Welcome Back!</p>
-			<!-- /NAVIGATION WIDGET INFO TEXT -->
-		</div>
-		<!-- /NAVIGATION WIDGET INFO -->
-
-		<!-- NAVIGATION WIDGET BUTTON -->
-		<p class="navigation-widget-info-button button small secondary">Logout</p>
-		<!-- /NAVIGATION WIDGET BUTTON -->
-	</div>
-	<!-- /NAVIGATION WIDGET INFO WRAP -->
-
-	<!-- NAVIGATION WIDGET SECTION TITLE -->
-	<p class="navigation-widget-section-title">Sections</p>
-	<!-- /NAVIGATION WIDGET SECTION TITLE -->
-
-	<!-- MENU -->
-	<ul class="menu">
-		<!-- MENU ITEM -->
-		<li class="menu-item active">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="newsfeed.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-newsfeed">
-					<use xlink:href="#svg-newsfeed"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Newsfeed
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="overview.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-overview">
-					<use xlink:href="#svg-overview"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Overview
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="groups.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-group">
-					<use xlink:href="#svg-group"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Groups
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="members.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-members">
-					<use xlink:href="#svg-members"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Members
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="badges.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-badges">
-					<use xlink:href="#svg-badges"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Badges
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="quests.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-quests">
-					<use xlink:href="#svg-quests"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Quests
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="streams.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-streams">
-					<use xlink:href="#svg-streams"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Streams
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="events.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-events">
-					<use xlink:href="#svg-events"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Events
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="forums.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-forums">
-					<use xlink:href="#svg-forums"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Forums
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="marketplace.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-marketplace">
-					<use xlink:href="#svg-marketplace"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Marketplace
+				About us
 			</a>
 			<!-- /MENU ITEM LINK -->
 		</li>
@@ -611,47 +290,19 @@
 	<!-- /MENU -->
 
 	<!-- NAVIGATION WIDGET SECTION TITLE -->
-	<p class="navigation-widget-section-title">My Profile</p>
+	<p class="navigation-widget-section-title">Cá nhân</p>
 	<!-- /NAVIGATION WIDGET SECTION TITLE -->
 
 	<!-- NAVIGATION WIDGET SECTION LINK -->
-	<a class="navigation-widget-section-link" href="hub-profile-info.html">Profile Info</a>
+	<a class="navigation-widget-section-link" href="{{url('/thong-tin-tai-khoan/'.Session::get('student_id'))}}">Thông tin tài khoản</a>
 	<!-- /NAVIGATION WIDGET SECTION LINK -->
 
 	<!-- NAVIGATION WIDGET SECTION LINK -->
-	<a class="navigation-widget-section-link" href="hub-profile-social.html">Social &amp; Stream</a>
+	<a class="navigation-widget-section-link" href="hub-profile-notifications.html">Thông báo</a>
+
+	<!-- NAVIGATION WIDGET SECTION LINK -->
+	<a class="navigation-widget-section-link" href="hub-account-password.html">Đổi mật khẩu</a>
 	<!-- /NAVIGATION WIDGET SECTION LINK -->
-
-	<!-- NAVIGATION WIDGET SECTION LINK -->
-	<a class="navigation-widget-section-link" href="hub-profile-notifications.html">Notifications</a>
-
-	<!-- NAVIGATION WIDGET SECTION TITLE -->
-	<p class="navigation-widget-section-title">Account</p>
-	<!-- /NAVIGATION WIDGET SECTION TITLE -->
-
-	<!-- NAVIGATION WIDGET SECTION LINK -->
-	<a class="navigation-widget-section-link" href="hub-account-info.html">Account Info</a>
-	<!-- /NAVIGATION WIDGET SECTION LINK -->
-
-	<!-- NAVIGATION WIDGET SECTION LINK -->
-	<a class="navigation-widget-section-link" href="hub-account-password.html">Change Password</a>
-	<!-- /NAVIGATION WIDGET SECTION LINK -->
-
-	<!-- NAVIGATION WIDGET SECTION LINK -->
-	<a class="navigation-widget-section-link" href="hub-account-settings.html">General Settings</a>
-
-	<!-- NAVIGATION WIDGET SECTION LINK -->
-	<a class="navigation-widget-section-link" href="#">Home</a>
-
-	<!-- NAVIGATION WIDGET SECTION LINK -->
-	<a class="navigation-widget-section-link" href="#">Faqs</a>
-	<!-- /NAVIGATION WIDGET SECTION LINK -->
-
-	<!-- NAVIGATION WIDGET SECTION LINK -->
-	<a class="navigation-widget-section-link" href="#">About Us</a>
-
-	<!-- NAVIGATION WIDGET SECTION LINK -->
-	<a class="navigation-widget-section-link" href="#">Contact Us</a>
 </nav>
 <!-- /NAVIGATION WIDGET -->
 
@@ -707,26 +358,9 @@
 			</div>
 			<!-- /BURGER ICON -->
 		</div>
-
-		<nav class="navigation">
-			<ul class="menu-main">
-				<li class="menu-main-item">
-					<a class="menu-main-item-link" style="font-size: 15px;" href="{{url('/')}}">Trang chủ</a>
-				</li>
-				<li class="menu-main-item">
-					<a class="menu-main-item-link" style="font-size: 15px;" href="#">Liên hệ</a>
-				</li>
-				<li class="menu-main-item">
-					<a class="menu-main-item-link" style="font-size: 15px;" href="#">Faqs</a>
-				</li>
-				<li class="menu-main-item">
-					<a class="menu-main-item-link" style="font-size: 15px;" href="#">About us</a>
-				</li>
-			</ul>
-		</nav>
 	</div>
 
-	<div class="header-actions search-bar">
+	<div style="width: 70%;">
 		<form action="{{url('/tim-kiem')}}" method="post">
 			@csrf
 			<div class="interactive-input dark">
@@ -1226,19 +860,19 @@
 					<!-- USER STATUS -->
 					<div class="user-status" style="padding: 0px;">
 						@php
-							if(Session::get('student_id')){
+						if(Session::get('student_id')){
+							@endphp
+							<!-- USER STATUS TITLE -->
+							<p class="user-status-title"><span class="bold">Xin chào, @php
+							echo Session::get('student_name');
+						@endphp !</span></p>
+						@php
+					}else{
 						@endphp
-						<!-- USER STATUS TITLE -->
-						<p class="user-status-title"><span class="bold">Xin chào, @php
-						echo Session::get('student_name');
-					@endphp !</span></p>
-					@php
-						}else{
-					@endphp
-					<p class="user-status-title"><span class="bold">Xin chào,
-					Bạn cần đăng nhập để sử dụng các tính năng !</span></p>
-					@php
-						}
+						<p class="user-status-title"><span class="bold">Xin chào,
+						Bạn cần đăng nhập để sử dụng các tính năng !</span></p>
+						@php
+					}
 					@endphp
 					<!-- /USER STATUS TITLE -->
 
@@ -1257,7 +891,7 @@
 		<!-- /DROPDOWN NAVIGATION CATEGORY -->
 
 		<!-- DROPDOWN NAVIGATION LINK -->
-		<a class="dropdown-navigation-link" href="hub-profile-info.html">Thông tin cá nhân</a>
+		<a class="dropdown-navigation-link" href="{{url('/thong-tin-tai-khoan/'.Session::get('student_id'))}}">Thông tin tài khoản</a>
 		<!-- /DROPDOWN NAVIGATION LINK -->
 
 		<!-- DROPDOWN NAVIGATION LINK -->
@@ -1380,1342 +1014,38 @@
 <!-- /FLOATY BAR -->
 
 <!-- CONTENT GRID -->
-@yield('content')
+
+
+<div class="content-grid">
+	@yield('content_header')
+	@yield('content_body')
+</div>
 <!-- /CONTENT GRID -->
 
-<!-- POPUP PICTURE -->
-<div class="popup-picture">
-	<!-- POPUP CLOSE BUTTON -->
-	<div class="popup-close-button popup-picture-trigger">
-		<!-- POPUP CLOSE BUTTON ICON -->
+<div class="popup-box small popup-event-creation" style="max-width: 650px; z-index:600;">
+	<div class="popup-close-button popup-event-creation-trigger">
 		<svg class="popup-close-button-icon icon-cross">
 			<use xlink:href="#svg-cross"></use>
 		</svg>
-		<!-- /POPUP CLOSE BUTTON ICON -->
 	</div>
-	<!-- /POPUP CLOSE BUTTON -->
-
-	<!-- WIDGET BOX -->
-	<div class="widget-box no-padding">
-		<!-- WIDGET BOX SCROLLABLE -->
-		<div class="widget-box-scrollable" data-simplebar>
-			<!-- WIDGET BOX SETTINGS -->
-			<div class="widget-box-settings">
-				<!-- POST SETTINGS WRAP -->
-				<div class="post-settings-wrap">
-					<!-- POST SETTINGS -->
-					<div class="post-settings widget-box-post-settings-dropdown-trigger">
-						<!-- POST SETTINGS ICON -->
-						<svg class="post-settings-icon icon-more-dots">
-							<use xlink:href="#svg-more-dots"></use>
-						</svg>
-						<!-- /POST SETTINGS ICON -->
-					</div>
-					<!-- /POST SETTINGS -->
-
-					<!-- SIMPLE DROPDOWN -->
-					<div class="simple-dropdown widget-box-post-settings-dropdown">
-						<!-- SIMPLE DROPDOWN LINK -->
-						<p class="simple-dropdown-link">Edit Post</p>
-						<!-- /SIMPLE DROPDOWN LINK -->
-
-						<!-- SIMPLE DROPDOWN LINK -->
-						<p class="simple-dropdown-link">Delete Post</p>
-						<!-- /SIMPLE DROPDOWN LINK -->
-
-						<!-- SIMPLE DROPDOWN LINK -->
-						<p class="simple-dropdown-link">Make it Featured</p>
-						<!-- /SIMPLE DROPDOWN LINK -->
-
-						<!-- SIMPLE DROPDOWN LINK -->
-						<p class="simple-dropdown-link">Report Post</p>
-						<!-- /SIMPLE DROPDOWN LINK -->
-
-						<!-- SIMPLE DROPDOWN LINK -->
-						<p class="simple-dropdown-link">Report Author</p>
-						<!-- /SIMPLE DROPDOWN LINK -->
-					</div>
-					<!-- /SIMPLE DROPDOWN -->
+	<center><p class="popup-box-title">Câu trả lời của BCN Khoa</p></center>
+	<form class="form">
+		@csrf
+		
+		<div class="form-row">
+			<div class="form-item">
+				<div class="form-input small">
+					<p style="background-color: #1d2333; padding: 0 6px; font-size: 14px; top: -6px; left: 12px; color: #9aa4bf;">Nội dung</p>
+					<textarea  id="formContent" rows="10" style="height: 350px; width: 600px;" name="post_reply" disabled></textarea>
 				</div>
-				<!-- /POST SETTINGS WRAP -->
 			</div>
-			<!-- /WIDGET BOX SETTINGS -->
-
-			<!-- WIDGET BOX STATUS -->
-			<div class="widget-box-status">
-				<!-- WIDGET BOX STATUS CONTENT -->
-				<div class="widget-box-status-content">
-					<!-- USER STATUS -->
-					<div class="user-status">
-						<!-- USER STATUS AVATAR -->
-						<a class="user-status-avatar" href="profile-timeline.html">
-							<!-- USER AVATAR -->
-							<div class="user-avatar small no-outline">
-								<!-- USER AVATAR CONTENT -->
-								<div class="user-avatar-content">
-									<!-- HEXAGON -->
-									<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/01.jpg')}}"></div>
-									<!-- /HEXAGON -->
-								</div>
-								<!-- /USER AVATAR CONTENT -->
-
-								<!-- USER AVATAR PROGRESS -->
-								<div class="user-avatar-progress">
-									<!-- HEXAGON -->
-									<div class="hexagon-progress-40-44"></div>
-									<!-- /HEXAGON -->
-								</div>
-								<!-- /USER AVATAR PROGRESS -->
-
-								<!-- USER AVATAR PROGRESS BORDER -->
-								<div class="user-avatar-progress-border">
-									<!-- HEXAGON -->
-									<div class="hexagon-border-40-44"></div>
-									<!-- /HEXAGON -->
-								</div>
-								<!-- /USER AVATAR PROGRESS BORDER -->
-
-								<!-- USER AVATAR BADGE -->
-								<div class="user-avatar-badge">
-									<!-- USER AVATAR BADGE BORDER -->
-									<div class="user-avatar-badge-border">
-										<!-- HEXAGON -->
-										<div class="hexagon-22-24"></div>
-										<!-- /HEXAGON -->
-									</div>
-									<!-- /USER AVATAR BADGE BORDER -->
-
-									<!-- USER AVATAR BADGE CONTENT -->
-									<div class="user-avatar-badge-content">
-										<!-- HEXAGON -->
-										<div class="hexagon-dark-16-18"></div>
-										<!-- /HEXAGON -->
-									</div>
-									<!-- /USER AVATAR BADGE CONTENT -->
-
-									<!-- USER AVATAR BADGE TEXT -->
-									<p class="user-avatar-badge-text">24</p>
-									<!-- /USER AVATAR BADGE TEXT -->
-								</div>
-								<!-- /USER AVATAR BADGE -->
-							</div>
-							<!-- /USER AVATAR -->
-						</a>
-						<!-- /USER STATUS AVATAR -->
-
-						<!-- USER STATUS TITLE -->
-						<p class="user-status-title medium"><a class="bold" href="profile-timeline.html">Marina Valentine</a></p>
-						<!-- /USER STATUS TITLE -->
-
-						<!-- USER STATUS TEXT -->
-						<p class="user-status-text small">29 minutes ago</p>
-						<!-- /USER STATUS TEXT -->
-					</div>
-					<!-- /USER STATUS -->
-
-					<!-- WIDGET BOX STATUS TEXT -->
-					<p class="widget-box-status-text">Here's a sneak peek of the official box cover art for <a href="#">Machine Wasteland II</a>! Remember that I'll be having a stream showing a preview tommorrow at 9PM PCT!</p>
-					<!-- /WIDGET BOX STATUS TEXT -->
-
-					<!-- TAG LIST -->
-					<div class="tag-list">
-						<!-- TAG ITEM -->
-						<a class="tag-item secondary" href="newsfeed.html">Cover</a>
-						<!-- /TAG ITEM -->
-
-						<!-- TAG ITEM -->
-						<a class="tag-item secondary" href="newsfeed.html">Preview</a>
-						<!-- /TAG ITEM -->
-
-						<!-- TAG ITEM -->
-						<a class="tag-item secondary" href="newsfeed.html">Art</a>
-						<!-- /TAG ITEM -->
-
-						<!-- TAG ITEM -->
-						<a class="tag-item secondary" href="newsfeed.html">Machine</a>
-						<!-- /TAG ITEM -->
-
-						<!-- TAG ITEM -->
-						<a class="tag-item secondary" href="newsfeed.html">Wasteland</a>
-						<!-- /TAG ITEM -->
-					</div>
-					<!-- /TAG LIST -->
-
-					<!-- CONTENT ACTIONS -->
-					<div class="content-actions">
-						<!-- CONTENT ACTION -->
-						<div class="content-action">
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE LIST -->
-								<div class="meta-line-list reaction-item-list">
-									<!-- REACTION ITEM -->
-									<div class="reaction-item">
-										<!-- REACTION IMAGE -->
-										<img class="reaction-image reaction-item-dropdown-trigger" src="{{asset('public/student/img/reaction/love.png')}}" alt="reaction-love">
-										<!-- /REACTION IMAGE -->
-
-										<!-- SIMPLE DROPDOWN -->
-										<div class="simple-dropdown padded reaction-item-dropdown">
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text"><img class="reaction" src="{{asset('public/student/img/reaction/love.png')}}" alt="reaction-love"> <span class="bold">Love</span></p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text">Destroy Dex</p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text">The Green Goo</p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text">Bearded Wonder</p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text">Sandra Strange</p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text">Matt Parker</p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text">James Murdock</p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text"><span class="bold">and 14 more...</span></p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-										</div>
-										<!-- /SIMPLE DROPDOWN -->
-									</div>
-									<!-- /REACTION ITEM -->
-
-									<!-- REACTION ITEM -->
-									<div class="reaction-item">
-										<!-- REACTION IMAGE -->
-										<img class="reaction-image reaction-item-dropdown-trigger" src="{{asset('public/student/img/reaction/wow.png')}}" alt="reaction-wow">
-										<!-- /REACTION IMAGE -->
-
-										<!-- SIMPLE DROPDOWN -->
-										<div class="simple-dropdown padded reaction-item-dropdown">
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text"><img class="reaction" src="{{asset('public/student/img/reaction/wow.png')}}" alt="reaction-wow"> <span class="bold">Wow</span></p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text">Jett Spiegel</p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-										</div>
-										<!-- /SIMPLE DROPDOWN -->
-									</div>
-									<!-- /REACTION ITEM -->
-
-									<!-- REACTION ITEM -->
-									<div class="reaction-item">
-										<!-- REACTION IMAGE -->
-										<img class="reaction-image reaction-item-dropdown-trigger" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
-										<!-- /REACTION IMAGE -->
-
-										<!-- SIMPLE DROPDOWN -->
-										<div class="simple-dropdown padded reaction-item-dropdown">
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text"><img class="reaction" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like"> <span class="bold">Like</span></p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text">Neko Bebop</p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text">Nick Grissom</p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text">Sarah Diamond</p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-										</div>
-										<!-- /SIMPLE DROPDOWN -->
-									</div>
-									<!-- /REACTION ITEM -->
-								</div>
-								<!-- /META LINE LIST -->
-
-								<!-- META LINE TEXT -->
-								<p class="meta-line-text">24</p>
-								<!-- /META LINE TEXT -->
-							</div>
-							<!-- /META LINE -->
-						</div>
-						<!-- /CONTENT ACTION -->
-
-						<!-- CONTENT ACTION -->
-						<div class="content-action">
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE LINK -->
-								<p class="meta-line-link">13 Comments</p>
-								<!-- /META LINE LINK -->
-							</div>
-							<!-- /META LINE -->
-
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE TEXT -->
-								<p class="meta-line-text">0 Shares</p>
-								<!-- /META LINE TEXT -->
-							</div>
-							<!-- /META LINE -->
-						</div>
-						<!-- /CONTENT ACTION -->
-					</div>
-					<!-- /CONTENT ACTIONS -->
-				</div>
-				<!-- /WIDGET BOX STATUS CONTENT -->
-			</div>
-			<!-- /WIDGET BOX STATUS -->
-
-			<!-- POST OPTIONS -->
-			<div class="post-options">
-				<!-- POST OPTION WRAP -->
-				<div class="post-option-wrap">
-					<!-- POST OPTION -->
-					<div class="post-option no-text reaction-options-dropdown-trigger">
-						<!-- POST OPTION ICON -->
-						<svg class="post-option-icon icon-thumbs-up">
-							<use xlink:href="#svg-thumbs-up"></use>
-						</svg>
-						<!-- /POST OPTION ICON -->
-					</div>
-					<!-- /POST OPTION -->
-
-					<!-- REACTION OPTIONS -->
-					<div class="reaction-options small reaction-options-dropdown">
-						<!-- REACTION OPTION -->
-						<div class="reaction-option text-tooltip-tft" data-title="Like">
-							<!-- REACTION OPTION IMAGE -->
-							<img class="reaction-option-image" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
-							<!-- /REACTION OPTION IMAGE -->
-						</div>
-						<!-- /REACTION OPTION -->
-
-						<!-- REACTION OPTION -->
-						<div class="reaction-option text-tooltip-tft" data-title="Love">
-							<!-- REACTION OPTION IMAGE -->
-							<img class="reaction-option-image" src="{{asset('public/student/img/reaction/love.png')}}" alt="reaction-love">
-							<!-- /REACTION OPTION IMAGE -->
-						</div>
-						<!-- /REACTION OPTION -->
-
-						<!-- REACTION OPTION -->
-						<div class="reaction-option text-tooltip-tft" data-title="Dislike">
-							<!-- REACTION OPTION IMAGE -->
-							<img class="reaction-option-image" src="{{asset('public/student/img/reaction/dislike.png')}}" alt="reaction-dislike">
-							<!-- /REACTION OPTION IMAGE -->
-						</div>
-						<!-- /REACTION OPTION -->
-
-						<!-- REACTION OPTION -->
-						<div class="reaction-option text-tooltip-tft" data-title="Happy">
-							<!-- REACTION OPTION IMAGE -->
-							<img class="reaction-option-image" src="{{asset('public/student/img/reaction/happy.png')}}" alt="reaction-happy">
-							<!-- /REACTION OPTION IMAGE -->
-						</div>
-						<!-- /REACTION OPTION -->
-
-						<!-- REACTION OPTION -->
-						<div class="reaction-option text-tooltip-tft" data-title="Funny">
-							<!-- REACTION OPTION IMAGE -->
-							<img class="reaction-option-image" src="{{asset('public/student/img/reaction/funny.png')}}" alt="reaction-funny">
-							<!-- /REACTION OPTION IMAGE -->
-						</div>
-						<!-- /REACTION OPTION -->
-
-						<!-- REACTION OPTION -->
-						<div class="reaction-option text-tooltip-tft" data-title="Wow">
-							<!-- REACTION OPTION IMAGE -->
-							<img class="reaction-option-image" src="{{asset('public/student/img/reaction/wow.png')}}" alt="reaction-wow">
-							<!-- /REACTION OPTION IMAGE -->
-						</div>
-						<!-- /REACTION OPTION -->
-
-						<!-- REACTION OPTION -->
-						<div class="reaction-option text-tooltip-tft" data-title="Angry">
-							<!-- REACTION OPTION IMAGE -->
-							<img class="reaction-option-image" src="{{asset('public/student/img/reaction/angry.png')}}" alt="reaction-angry">
-							<!-- /REACTION OPTION IMAGE -->
-						</div>
-						<!-- /REACTION OPTION -->
-
-						<!-- REACTION OPTION -->
-						<div class="reaction-option text-tooltip-tft" data-title="Sad">
-							<!-- REACTION OPTION IMAGE -->
-							<img class="reaction-option-image" src="{{asset('public/student/img/reaction/sad.png')}}" alt="reaction-sad">
-							<!-- /REACTION OPTION IMAGE -->
-						</div>
-						<!-- /REACTION OPTION -->
-					</div>
-					<!-- /REACTION OPTIONS -->
-				</div>
-				<!-- /POST OPTION WRAP -->
-
-				<!-- POST OPTION -->
-				<div class="post-option no-text active">
-					<!-- POST OPTION ICON -->
-					<svg class="post-option-icon icon-comment">
-						<use xlink:href="#svg-comment"></use>
-					</svg>
-					<!-- /POST OPTION ICON -->
-				</div>
-				<!-- /POST OPTION -->
-
-				<!-- POST OPTION -->
-				<div class="post-option no-text">
-					<!-- POST OPTION ICON -->
-					<svg class="post-option-icon icon-share">
-						<use xlink:href="#svg-share"></use>
-					</svg>
-					<!-- /POST OPTION ICON -->
-				</div>
-				<!-- /POST OPTION -->
-			</div>
-			<!-- /POST OPTIONS -->
-
-			<!-- POST COMMENT LIST -->
-			<div class="post-comment-list">
-				<!-- POST COMMENT -->
-				<div class="post-comment">
-					<!-- USER AVATAR -->
-					<a class="user-avatar small no-outline" href="profile-timeline.html">
-						<!-- USER AVATAR CONTENT -->
-						<div class="user-avatar-content">
-							<!-- HEXAGON -->
-							<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/05.jpg')}}"></div>
-							<!-- /HEXAGON -->
-						</div>
-						<!-- /USER AVATAR CONTENT -->
-
-						<!-- USER AVATAR PROGRESS -->
-						<div class="user-avatar-progress">
-							<!-- HEXAGON -->
-							<div class="hexagon-progress-40-44"></div>
-							<!-- /HEXAGON -->
-						</div>
-						<!-- /USER AVATAR PROGRESS -->
-
-						<!-- USER AVATAR PROGRESS BORDER -->
-						<div class="user-avatar-progress-border">
-							<!-- HEXAGON -->
-							<div class="hexagon-border-40-44"></div>
-							<!-- /HEXAGON -->
-						</div>
-						<!-- /USER AVATAR PROGRESS BORDER -->
-
-						<!-- USER AVATAR BADGE -->
-						<div class="user-avatar-badge">
-							<!-- USER AVATAR BADGE BORDER -->
-							<div class="user-avatar-badge-border">
-								<!-- HEXAGON -->
-								<div class="hexagon-22-24"></div>
-								<!-- /HEXAGON -->
-							</div>
-							<!-- /USER AVATAR BADGE BORDER -->
-
-							<!-- USER AVATAR BADGE CONTENT -->
-							<div class="user-avatar-badge-content">
-								<!-- HEXAGON -->
-								<div class="hexagon-dark-16-18"></div>
-								<!-- /HEXAGON -->
-							</div>
-							<!-- /USER AVATAR BADGE CONTENT -->
-
-							<!-- USER AVATAR BADGE TEXT -->
-							<p class="user-avatar-badge-text">12</p>
-							<!-- /USER AVATAR BADGE TEXT -->
-						</div>
-						<!-- /USER AVATAR BADGE -->
-					</a>
-					<!-- /USER AVATAR -->
-
-					<!-- POST COMMENT TEXT -->
-					<p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html">Neko Bebop</a>It's always a pleasure to do this streams with you! If we have at least half the fun than last time it will be an incredible success!</p>
-					<!-- /POST COMMENT TEXT -->
-
-					<!-- CONTENT ACTIONS -->
-					<div class="content-actions">
-						<!-- CONTENT ACTION -->
-						<div class="content-action">
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE LIST -->
-								<div class="meta-line-list reaction-item-list small">
-									<!-- REACTION ITEM -->
-									<div class="reaction-item">
-										<!-- REACTION IMAGE -->
-										<img class="reaction-image reaction-item-dropdown-trigger" src="{{asset('public/student/img/reaction/happy.png')}}" alt="reaction-happy">
-										<!-- /REACTION IMAGE -->
-
-										<!-- SIMPLE DROPDOWN -->
-										<div class="simple-dropdown padded reaction-item-dropdown">
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text"><img class="reaction" src="{{asset('public/student/img/reaction/happy.png')}}" alt="reaction-happy"> <span class="bold">Happy</span></p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text">Marcus Jhonson</p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-										</div>
-										<!-- /SIMPLE DROPDOWN -->
-									</div>
-									<!-- /REACTION ITEM -->
-
-									<!-- REACTION ITEM -->
-									<div class="reaction-item">
-										<!-- REACTION IMAGE -->
-										<img class="reaction-image reaction-item-dropdown-trigger" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
-										<!-- /REACTION IMAGE -->
-
-										<!-- SIMPLE DROPDOWN -->
-										<div class="simple-dropdown padded reaction-item-dropdown">
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text"><img class="reaction" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like"> <span class="bold">Like</span></p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text">Neko Bebop</p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text">Nick Grissom</p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text">Sarah Diamond</p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-										</div>
-										<!-- /SIMPLE DROPDOWN -->
-									</div>
-									<!-- /REACTION ITEM -->
-								</div>
-								<!-- /META LINE LIST -->
-
-								<!-- META LINE TEXT -->
-								<p class="meta-line-text">4</p>
-								<!-- /META LINE TEXT -->
-							</div>
-							<!-- /META LINE -->
-
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE LINK -->
-								<p class="meta-line-link light reaction-options-small-dropdown-trigger">React!</p>
-								<!-- /META LINE LINK -->
-
-								<!-- REACTION OPTIONS -->
-								<div class="reaction-options small reaction-options-small-dropdown">
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Like">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Love">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/love.png')}}" alt="reaction-love">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Dislike">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/dislike.png')}}" alt="reaction-dislike">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Happy">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/happy.png')}}" alt="reaction-happy">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Funny">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/funny.png')}}" alt="reaction-funny">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Wow">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/wow.png')}}" alt="reaction-wow">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Angry">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/angry.png')}}" alt="reaction-angry">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Sad">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/sad.png')}}" alt="reaction-sad">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-								</div>
-								<!-- /REACTION OPTIONS -->
-							</div>
-							<!-- /META LINE -->
-
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE LINK -->
-								<p class="meta-line-link light">Reply</p>
-								<!-- /META LINE LINK -->
-							</div>
-							<!-- /META LINE -->
-
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE TIMESTAMP -->
-								<p class="meta-line-timestamp">15 min ago</p>
-								<!-- /META LINE TIMESTAMP -->
-							</div>
-							<!-- /META LINE -->
-
-							<!-- META LINE -->
-							<div class="meta-line settings">
-								<!-- POST SETTINGS WRAP -->
-								<div class="post-settings-wrap">
-									<!-- POST SETTINGS -->
-									<div class="post-settings post-settings-dropdown-trigger">
-										<!-- POST SETTINGS ICON -->
-										<svg class="post-settings-icon icon-more-dots">
-											<use xlink:href="#svg-more-dots"></use>
-										</svg>
-										<!-- /POST SETTINGS ICON -->
-									</div>
-									<!-- /POST SETTINGS -->
-
-									<!-- SIMPLE DROPDOWN -->
-									<div class="simple-dropdown post-settings-dropdown">
-										<!-- SIMPLE DROPDOWN LINK -->
-										<p class="simple-dropdown-link">Report Post</p>
-										<!-- /SIMPLE DROPDOWN LINK -->
-									</div>
-									<!-- /SIMPLE DROPDOWN -->
-								</div>
-								<!-- /POST SETTINGS WRAP -->
-							</div>
-							<!-- /META LINE -->
-						</div>
-						<!-- /CONTENT ACTION -->
-					</div>
-					<!-- /CONTENT ACTIONS -->
-				</div>
-				<!-- /POST COMMENT -->
-
-				<!-- POST COMMENT -->
-				<div class="post-comment unread reply-2">
-					<!-- USER AVATAR -->
-					<a class="user-avatar small no-outline" href="profile-timeline.html">
-						<!-- USER AVATAR CONTENT -->
-						<div class="user-avatar-content">
-							<!-- HEXAGON -->
-							<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/03.jpg')}}"></div>
-							<!-- /HEXAGON -->
-						</div>
-						<!-- /USER AVATAR CONTENT -->
-
-						<!-- USER AVATAR PROGRESS -->
-						<div class="user-avatar-progress">
-							<!-- HEXAGON -->
-							<div class="hexagon-progress-40-44"></div>
-							<!-- /HEXAGON -->
-						</div>
-						<!-- /USER AVATAR PROGRESS -->
-
-						<!-- USER AVATAR PROGRESS BORDER -->
-						<div class="user-avatar-progress-border">
-							<!-- HEXAGON -->
-							<div class="hexagon-border-40-44"></div>
-							<!-- /HEXAGON -->
-						</div>
-						<!-- /USER AVATAR PROGRESS BORDER -->
-
-						<!-- USER AVATAR BADGE -->
-						<div class="user-avatar-badge">
-							<!-- USER AVATAR BADGE BORDER -->
-							<div class="user-avatar-badge-border">
-								<!-- HEXAGON -->
-								<div class="hexagon-22-24"></div>
-								<!-- /HEXAGON -->
-							</div>
-							<!-- /USER AVATAR BADGE BORDER -->
-
-							<!-- USER AVATAR BADGE CONTENT -->
-							<div class="user-avatar-badge-content">
-								<!-- HEXAGON -->
-								<div class="hexagon-dark-16-18"></div>
-								<!-- /HEXAGON -->
-							</div>
-							<!-- /USER AVATAR BADGE CONTENT -->
-
-							<!-- USER AVATAR BADGE TEXT -->
-							<p class="user-avatar-badge-text">16</p>
-							<!-- /USER AVATAR BADGE TEXT -->
-						</div>
-						<!-- /USER AVATAR BADGE -->
-					</a>
-					<!-- /USER AVATAR -->
-
-					<!-- POST COMMENT TEXT -->
-					<p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html">Nick Grissom</a>I wouldn't miss it for anything!! Love both streams!</p>
-					<!-- /POST COMMENT TEXT -->
-
-					<!-- CONTENT ACTIONS -->
-					<div class="content-actions">
-						<!-- CONTENT ACTION -->
-						<div class="content-action">
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE LIST -->
-								<div class="meta-line-list reaction-item-list small">
-									<!-- REACTION ITEM -->
-									<div class="reaction-item">
-										<!-- REACTION IMAGE -->
-										<img class="reaction-image reaction-item-dropdown-trigger" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
-										<!-- /REACTION IMAGE -->
-
-										<!-- SIMPLE DROPDOWN -->
-										<div class="simple-dropdown padded reaction-item-dropdown">
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text"><img class="reaction" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like"> <span class="bold">Like</span></p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-
-											<!-- SIMPLE DROPDOWN TEXT -->
-											<p class="simple-dropdown-text">Neko Bebop</p>
-											<!-- /SIMPLE DROPDOWN TEXT -->
-										</div>
-										<!-- /SIMPLE DROPDOWN -->
-									</div>
-									<!-- /REACTION ITEM -->
-								</div>
-								<!-- /META LINE LIST -->
-
-								<!-- META LINE TEXT -->
-								<p class="meta-line-text">1</p>
-								<!-- /META LINE TEXT -->
-							</div>
-							<!-- /META LINE -->
-
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE LINK -->
-								<p class="meta-line-link light reaction-options-small-dropdown-trigger">React!</p>
-								<!-- /META LINE LINK -->
-
-								<!-- REACTION OPTIONS -->
-								<div class="reaction-options small reaction-options-small-dropdown">
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Like">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Love">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/love.png')}}" alt="reaction-love">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Dislike">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/dislike.png')}}" alt="reaction-dislike">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Happy">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/happy.png')}}" alt="reaction-happy">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Funny">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/funny.png')}}" alt="reaction-funny">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Wow">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/wow.png')}}" alt="reaction-wow">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Angry">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/angry.png')}}" alt="reaction-angry">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Sad">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/sad.png')}}" alt="reaction-sad">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-								</div>
-								<!-- /REACTION OPTIONS -->
-							</div>
-							<!-- /META LINE -->
-
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE LINK -->
-								<p class="meta-line-link light">Reply</p>
-								<!-- /META LINE LINK -->
-							</div>
-							<!-- /META LINE -->
-
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE TIMESTAMP -->
-								<p class="meta-line-timestamp">2 min ago</p>
-								<!-- /META LINE TIMESTAMP -->
-							</div>
-							<!-- /META LINE -->
-
-							<!-- META LINE -->
-							<div class="meta-line settings">
-								<!-- POST SETTINGS WRAP -->
-								<div class="post-settings-wrap">
-									<!-- POST SETTINGS -->
-									<div class="post-settings post-settings-dropdown-trigger">
-										<!-- POST SETTINGS ICON -->
-										<svg class="post-settings-icon icon-more-dots">
-											<use xlink:href="#svg-more-dots"></use>
-										</svg>
-										<!-- /POST SETTINGS ICON -->
-									</div>
-									<!-- /POST SETTINGS -->
-
-									<!-- SIMPLE DROPDOWN -->
-									<div class="simple-dropdown post-settings-dropdown">
-										<!-- SIMPLE DROPDOWN LINK -->
-										<p class="simple-dropdown-link">Report Post</p>
-										<!-- /SIMPLE DROPDOWN LINK -->
-									</div>
-									<!-- /SIMPLE DROPDOWN -->
-								</div>
-								<!-- /POST SETTINGS WRAP -->
-							</div>
-							<!-- /META LINE -->
-						</div>
-						<!-- /CONTENT ACTION -->
-					</div>
-					<!-- /CONTENT ACTIONS -->
-				</div>
-				<!-- /POST COMMENT -->
-
-				<!-- POST COMMENT -->
-				<div class="post-comment">
-					<!-- USER AVATAR -->
-					<a class="user-avatar small no-outline" href="profile-timeline.html">
-						<!-- USER AVATAR CONTENT -->
-						<div class="user-avatar-content">
-							<!-- HEXAGON -->
-							<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/02.jpg')}}"></div>
-							<!-- /HEXAGON -->
-						</div>
-						<!-- /USER AVATAR CONTENT -->
-
-						<!-- USER AVATAR PROGRESS -->
-						<div class="user-avatar-progress">
-							<!-- HEXAGON -->
-							<div class="hexagon-progress-40-44"></div>
-							<!-- /HEXAGON -->
-						</div>
-						<!-- /USER AVATAR PROGRESS -->
-
-						<!-- USER AVATAR PROGRESS BORDER -->
-						<div class="user-avatar-progress-border">
-							<!-- HEXAGON -->
-							<div class="hexagon-border-40-44"></div>
-							<!-- /HEXAGON -->
-						</div>
-						<!-- /USER AVATAR PROGRESS BORDER -->
-
-						<!-- USER AVATAR BADGE -->
-						<div class="user-avatar-badge">
-							<!-- USER AVATAR BADGE BORDER -->
-							<div class="user-avatar-badge-border">
-								<!-- HEXAGON -->
-								<div class="hexagon-22-24"></div>
-								<!-- /HEXAGON -->
-							</div>
-							<!-- /USER AVATAR BADGE BORDER -->
-
-							<!-- USER AVATAR BADGE CONTENT -->
-							<div class="user-avatar-badge-content">
-								<!-- HEXAGON -->
-								<div class="hexagon-dark-16-18"></div>
-								<!-- /HEXAGON -->
-							</div>
-							<!-- /USER AVATAR BADGE CONTENT -->
-
-							<!-- USER AVATAR BADGE TEXT -->
-							<p class="user-avatar-badge-text">19</p>
-							<!-- /USER AVATAR BADGE TEXT -->
-						</div>
-						<!-- /USER AVATAR BADGE -->
-					</a>
-					<!-- /USER AVATAR -->
-
-					<!-- POST COMMENT TEXT -->
-					<p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html">Destroy Dex</a>YEAHHH!! <a href="profile-timeline.html">@MarinaValentine</a> I really enjoyed your last stream and it also was really funny! Can't wait!</p>
-					<!-- /POST COMMENT TEXT -->
-
-					<!-- CONTENT ACTIONS -->
-					<div class="content-actions">
-						<!-- CONTENT ACTION -->
-						<div class="content-action">
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE LINK -->
-								<p class="meta-line-link light reaction-options-small-dropdown-trigger">React!</p>
-								<!-- /META LINE LINK -->
-
-								<!-- REACTION OPTIONS -->
-								<div class="reaction-options small reaction-options-small-dropdown">
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Like">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Love">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/love.png')}}" alt="reaction-love">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Dislike">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/dislike.png')}}" alt="reaction-dislike">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Happy">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/happy.png')}}" alt="reaction-happy">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Funny">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/funny.png')}}" alt="reaction-funny">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Wow">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/wow.png')}}" alt="reaction-wow">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Angry">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/angry.png')}}" alt="reaction-angry">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Sad">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/sad.png')}}" alt="reaction-sad">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-								</div>
-								<!-- /REACTION OPTIONS -->
-							</div>
-							<!-- /META LINE -->
-
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE LINK -->
-								<p class="meta-line-link light">Reply</p>
-								<!-- /META LINE LINK -->
-							</div>
-							<!-- /META LINE -->
-
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE TIMESTAMP -->
-								<p class="meta-line-timestamp">27 min ago</p>
-								<!-- /META LINE TIMESTAMP -->
-							</div>
-							<!-- /META LINE -->
-
-							<!-- META LINE -->
-							<div class="meta-line settings">
-								<!-- POST SETTINGS WRAP -->
-								<div class="post-settings-wrap">
-									<!-- POST SETTINGS -->
-									<div class="post-settings post-settings-dropdown-trigger">
-										<!-- POST SETTINGS ICON -->
-										<svg class="post-settings-icon icon-more-dots">
-											<use xlink:href="#svg-more-dots"></use>
-										</svg>
-										<!-- /POST SETTINGS ICON -->
-									</div>
-									<!-- /POST SETTINGS -->
-
-									<!-- SIMPLE DROPDOWN -->
-									<div class="simple-dropdown post-settings-dropdown">
-										<!-- SIMPLE DROPDOWN LINK -->
-										<p class="simple-dropdown-link">Report Post</p>
-										<!-- /SIMPLE DROPDOWN LINK -->
-									</div>
-									<!-- /SIMPLE DROPDOWN -->
-								</div>
-								<!-- /POST SETTINGS WRAP -->
-							</div>
-							<!-- /META LINE -->
-						</div>
-						<!-- /CONTENT ACTION -->
-					</div>
-					<!-- /CONTENT ACTIONS -->
-				</div>
-				<!-- /POST COMMENT -->
-
-				<!-- POST COMMENT -->
-				<div class="post-comment">
-					<!-- USER AVATAR -->
-					<a class="user-avatar small no-outline" href="profile-timeline.html">
-						<!-- USER AVATAR CONTENT -->
-						<div class="user-avatar-content">
-							<!-- HEXAGON -->
-							<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/07.jpg')}}"></div>
-							<!-- /HEXAGON -->
-						</div>
-						<!-- /USER AVATAR CONTENT -->
-
-						<!-- USER AVATAR PROGRESS -->
-						<div class="user-avatar-progress">
-							<!-- HEXAGON -->
-							<div class="hexagon-progress-40-44"></div>
-							<!-- /HEXAGON -->
-						</div>
-						<!-- /USER AVATAR PROGRESS -->
-
-						<!-- USER AVATAR PROGRESS BORDER -->
-						<div class="user-avatar-progress-border">
-							<!-- HEXAGON -->
-							<div class="hexagon-border-40-44"></div>
-							<!-- /HEXAGON -->
-						</div>
-						<!-- /USER AVATAR PROGRESS BORDER -->
-
-						<!-- USER AVATAR BADGE -->
-						<div class="user-avatar-badge">
-							<!-- USER AVATAR BADGE BORDER -->
-							<div class="user-avatar-badge-border">
-								<!-- HEXAGON -->
-								<div class="hexagon-22-24"></div>
-								<!-- /HEXAGON -->
-							</div>
-							<!-- /USER AVATAR BADGE BORDER -->
-
-							<!-- USER AVATAR BADGE CONTENT -->
-							<div class="user-avatar-badge-content">
-								<!-- HEXAGON -->
-								<div class="hexagon-dark-16-18"></div>
-								<!-- /HEXAGON -->
-							</div>
-							<!-- /USER AVATAR BADGE CONTENT -->
-
-							<!-- USER AVATAR BADGE TEXT -->
-							<p class="user-avatar-badge-text">26</p>
-							<!-- /USER AVATAR BADGE TEXT -->
-						</div>
-						<!-- /USER AVATAR BADGE -->
-					</a>
-					<!-- /USER AVATAR -->
-
-					<!-- POST COMMENT TEXT -->
-					<p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html">Sarah Diamond</a>That sounds awesome Marina! And also thanks a lot for the art sneak peek! I went to the GameCon last week and had a great time playing the game's open demo.</p>
-					<!-- /POST COMMENT TEXT -->
-
-					<!-- CONTENT ACTIONS -->
-					<div class="content-actions">
-						<!-- CONTENT ACTION -->
-						<div class="content-action">
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE LINK -->
-								<p class="meta-line-link light reaction-options-small-dropdown-trigger">React!</p>
-								<!-- /META LINE LINK -->
-
-								<!-- REACTION OPTIONS -->
-								<div class="reaction-options small reaction-options-small-dropdown">
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Like">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Love">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/love.png')}}" alt="reaction-love">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Dislike">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/dislike.png')}}" alt="reaction-dislike">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Happy">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/happy.png')}}" alt="reaction-happy">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Funny">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/funny.png')}}" alt="reaction-funny">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Wow">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/wow.png')}}" alt="reaction-wow">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Angry">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/angry.png')}}" alt="reaction-angry">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-
-									<!-- REACTION OPTION -->
-									<div class="reaction-option text-tooltip-tft" data-title="Sad">
-										<!-- REACTION OPTION IMAGE -->
-										<img class="reaction-option-image" src="{{asset('public/student/img/reaction/sad.png')}}" alt="reaction-sad">
-										<!-- /REACTION OPTION IMAGE -->
-									</div>
-									<!-- /REACTION OPTION -->
-								</div>
-								<!-- /REACTION OPTIONS -->
-							</div>
-							<!-- /META LINE -->
-
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE LINK -->
-								<p class="meta-line-link light">Reply</p>
-								<!-- /META LINE LINK -->
-							</div>
-							<!-- /META LINE -->
-
-							<!-- META LINE -->
-							<div class="meta-line">
-								<!-- META LINE TIMESTAMP -->
-								<p class="meta-line-timestamp">39 min ago</p>
-								<!-- /META LINE TIMESTAMP -->
-							</div>
-							<!-- /META LINE -->
-
-							<!-- META LINE -->
-							<div class="meta-line settings">
-								<!-- POST SETTINGS WRAP -->
-								<div class="post-settings-wrap">
-									<!-- POST SETTINGS -->
-									<div class="post-settings post-settings-dropdown-trigger">
-										<!-- POST SETTINGS ICON -->
-										<svg class="post-settings-icon icon-more-dots">
-											<use xlink:href="#svg-more-dots"></use>
-										</svg>
-										<!-- /POST SETTINGS ICON -->
-									</div>
-									<!-- /POST SETTINGS -->
-
-									<!-- SIMPLE DROPDOWN -->
-									<div class="simple-dropdown post-settings-dropdown">
-										<!-- SIMPLE DROPDOWN LINK -->
-										<p class="simple-dropdown-link">Report Post</p>
-										<!-- /SIMPLE DROPDOWN LINK -->
-									</div>
-									<!-- /SIMPLE DROPDOWN -->
-								</div>
-								<!-- /POST SETTINGS WRAP -->
-							</div>
-							<!-- /META LINE -->
-						</div>
-						<!-- /CONTENT ACTION -->
-					</div>
-					<!-- /CONTENT ACTIONS -->
-				</div>
-				<!-- /POST COMMENT -->
-
-				<!-- POST COMMENT HEADING -->
-				<p class="post-comment-heading">Load More Comments <span class="highlighted">9+</span></p>
-				<!-- /POST COMMENT HEADING -->
-			</div>
-			<!-- /POST COMMENT LIST -->
 		</div>
-		<!-- /WIDGET BOX SCROLLABLE -->
-
-		<!-- POST COMMENT FORM -->
-		<div class="post-comment-form bordered-top">
-			<!-- USER AVATAR -->
-			<div class="user-avatar small no-outline">
-				<!-- USER AVATAR CONTENT -->
-				<div class="user-avatar-content">
-					<!-- HEXAGON -->
-					<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/01.jpg')}}"></div>
-					<!-- /HEXAGON -->
-				</div>
-				<!-- /USER AVATAR CONTENT -->
-
-				<!-- USER AVATAR PROGRESS -->
-				<div class="user-avatar-progress">
-					<!-- HEXAGON -->
-					<div class="hexagon-progress-40-44"></div>
-					<!-- /HEXAGON -->
-				</div>
-				<!-- /USER AVATAR PROGRESS -->
-
-				<!-- USER AVATAR PROGRESS BORDER -->
-				<div class="user-avatar-progress-border">
-					<!-- HEXAGON -->
-					<div class="hexagon-border-40-44"></div>
-					<!-- /HEXAGON -->
-				</div>
-				<!-- /USER AVATAR PROGRESS BORDER -->
-
-				<!-- USER AVATAR BADGE -->
-				<div class="user-avatar-badge">
-					<!-- USER AVATAR BADGE BORDER -->
-					<div class="user-avatar-badge-border">
-						<!-- HEXAGON -->
-						<div class="hexagon-22-24"></div>
-						<!-- /HEXAGON -->
-					</div>
-					<!-- /USER AVATAR BADGE BORDER -->
-
-					<!-- USER AVATAR BADGE CONTENT -->
-					<div class="user-avatar-badge-content">
-						<!-- HEXAGON -->
-						<div class="hexagon-dark-16-18"></div>
-						<!-- /HEXAGON -->
-					</div>
-					<!-- /USER AVATAR BADGE CONTENT -->
-
-					<!-- USER AVATAR BADGE TEXT -->
-					<p class="user-avatar-badge-text">24</p>
-					<!-- /USER AVATAR BADGE TEXT -->
-				</div>
-				<!-- /USER AVATAR BADGE -->
-			</div>
-			<!-- /USER AVATAR -->
-
-			<!-- FORM -->
-			<form class="form">
-				<!-- FORM ROW -->
-				<div class="form-row">
-					<!-- FORM ITEM -->
-					<div class="form-item">
-						<!-- FORM INPUT -->
-						<div class="form-input small">
-							<label for="popup-post-reply">Your Reply</label>
-							<input type="text" id="popup-post-reply" name="popup_post_reply">
-						</div>
-						<!-- /FORM INPUT -->
-					</div>
-					<!-- /FORM ITEM -->
-				</div>
-				<!-- /FORM ROW -->
-			</form>
-			<!-- /FORM -->
+		<div class="popup-box-actions medium void">
+			
 		</div>
-		<!-- /POST COMMENT FORM -->
-	</div>
-	<!-- /WIDGET BOX -->
-
-	<!-- POPUP PICTURE IMAGE WRAP -->
-	<div class="popup-picture-image-wrap">
-		<!-- POPUP PICTURE IMAGE -->
-		<figure class="popup-picture-image">
-			<img src="{{asset('public/student/img/cover/04.jpg')}}" alt="cover-04">
-		</figure>
-		<!-- /POPUP PICTURE IMAGE -->
-	</div>
-	<!-- /POPUP PICTURE IMAGE WRAP -->
+	</form>
 </div>
+
 <!-- app -->
 <script src="{{asset('public/student/js/utils/app.js')}}"></script>
 <!-- page loader -->
@@ -2737,7 +1067,7 @@
 <!-- global.popups -->
 <script src="{{asset('public/student/js/global/global.popups.js')}}"></script>
 <!-- global.charts -->
-<script src="{{asset('public/student/js/global/global.charts.')}}js"></script>
+<script src="{{asset('public/student/js/global/global.charts.js')}}"></script>
 <!-- header -->
 <script src="{{asset('public/student/js/header/header.js')}}"></script>
 <!-- sidebar -->
@@ -2753,25 +1083,33 @@
 <script src="{{asset('public/student/js/sweetalert.min.js')}}"></script>
 <script src="{{asset('public/student/js/jquery.min.js')}}"></script>
 
+<script>
+	function getPost(post_id){
+		$.get('{{url('/xem-cau-tra-loi-khoa/')}}'+'/'+post_id, function(post_d){
+			$("#formContent").val(post_d.post_reply);
+		});
+	}
+</script>
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.postQ').click(function(){
 			var dm = "dm", 
-				du = "đụ", 
-				cc = "cc",
-				cl = "cl", 
-				cac = "cặc", 
-				lon = "lồn",
-				dit = "địt",
-				dmm = "dmm",
-				cdl = "cdl",
-				clgv = "clgv",
-				clm = "clm",
-				deo = "đéo",
-				dcm = "dcm",
-				vl = "vl",
-				vai = "vãi",
-				di = "đĩ";
+			du = "đụ", 
+			cc = "cc",
+			cl = "cl", 
+			cac = "cặc", 
+			lon = "lồn",
+			dit = "địt",
+			dmm = "dmm",
+			cdl = "cdl",
+			clgv = "clgv",
+			clm = "clm",
+			deo = "đéo",
+			dcm = "dcm",
+			vl = "vl",
+			vai = "vãi",
+			di = "đĩ";
 			var post_title = $('.title').val();
 			var category_id = $('.category').val();
 			var post_content = $('.content').val();
@@ -2826,12 +1164,180 @@
 						location.reload();
 					},2000);
 				}else{
-					swal("", "", "error");
+					swal("Hủy bỏ xóa", "", "error");
 				}
 				
 			});
 		});
 	});
 </script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.postC').click(function(){
+			var id = $(this).data('id_post');
+			var dm = "dm", 
+			du = "đụ", 
+			cc = "cc",
+			cl = "cl", 
+			cac = "cặc", 
+			lon = "lồn",
+			dit = "địt",
+			dmm = "dmm",
+			cdl = "cdl",
+			clgv = "clgv",
+			clm = "clm",
+			deo = "đéo",
+			dcm = "dcm",
+			vl = "vl",
+			vai = "vãi",
+			di = "đĩ";
+			var comment_content = $('.cmtcontent_'+id).val();
+			var _token = $('input[name="_token"]').val();
+			if(comment_content==''){
+				swal("Vui lòng không để trống!", "", "warning");
+			}else if(comment_content.includes(dm)||comment_content.includes(du)||comment_content.includes(cc)||comment_content.includes(cac)||comment_content.includes(lon)||comment_content.includes(dit)||comment_content.includes(dmm)||comment_content.includes(cdl)||comment_content.includes(clgv)||comment_content.includes(clm)||comment_content.includes(deo)||comment_content.includes(di)||comment_content.includes(dcm)||comment_content.includes(vai)||comment_content.includes(vl)){
+				swal("Nội dung có chứa từ không phù hợp!", "", "error");
+			}else{
+				$.ajax({
+					url:'{{ url('/binh-luan/') }}'+'/'+id,
+					method: 'POST',
+					data: {comment_content:comment_content, id:id, _token:_token},
+					success:function(data){
+						swal("", "", "success");
+					}
+				});
+				window.setTimeout(function(){
+					location.reload();
+				},3000);
+			}
+		});
+
+		$('.postCD').click(function(){
+			var id = $(this).data('id_cmt');
+			swal({
+				title: "Bạn có chắc chắn muốn xóa?",
+				text: "",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonClass:"btn-danger",
+				cancelButtonText: "Không",
+				confirmButtonClass: "btn-success",
+				confirmButtonText: "Chắc chắn!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			},
+			function(isConfirm){
+				if (isConfirm) {
+					$.ajax({
+						url: '{{url('/xoa-binh-luan/')}}',
+						method:'GET',
+						data:{id:id},
+						success:function(response){						
+							swal("Bạn đã xóa thành công!", "", "success");
+						}
+					});
+					window.setTimeout(function(){
+						location.reload();
+					},2000);
+				}else{
+					swal("Hủy bỏ xóa", "", "error");
+				}
+				
+			});
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.showCmt').click(function(){
+			var id = $(this).data('id_a');
+			$(".lineCmt_"+id).slice(0,3).show();
+			$("#commentId_"+id).toggle();
+			$('.loadM_'+id).click(function (e) {
+				e.preventDefault();
+				$(".lineCmt_"+id+":hidden").slice(0, 3).slideDown();
+				if ($(".lineCmt_"+id+":hidden").length == 0) {
+					$('.loadM_'+id).css('visibility', 'hidden');
+				}
+				$('html,body').animate({
+					scrollTop: $(this).offset().top
+				}, 1000);
+			});
+		});
+	});
+</script>
+
+<script type="text/javascript" language="javascript">
+	$(document).ready(function(){
+		$('.postL').click(function(e){
+			e.preventDefault();
+			var id = $(this).data('id_like');
+			var like_quantity = 1;
+			var elm = $(this).parents('.optionsocial');
+			var _token = $('input[name="_token"]').val();
+			$.ajax({
+				url:'{{ url('/thich-bai-viet/') }}'+'/'+id,
+				method: 'POST',
+				data: {like_quantity:like_quantity, id:id, _token:_token},
+				success:function(data){
+					elm.find('.likelike').text(data.liking);
+					if (elm.find('.likeunlike').hasClass('active')){
+						elm.find('.likeunlike').removeClass('active');
+					}else{
+						elm.find('.likeunlike').addClass('active');
+					}
+					if (elm.find('.unlikelike').hasClass('active')){
+						elm.find('.unlikelike').removeClass('active');
+					}else{
+						elm.find('.unlikelike').addClass('active');
+					}
+				}
+			})
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.postI').click(function(e){
+			var id = $(this).data('id_student');
+			var student_info_date = $('.Sdate').val();
+			var student_info_gender = $('.Sgender').val();
+			var student_info_faculty = $('.Sfaculty').val();
+			var student_info_specialized = $('.Sspecialized').val();
+			var student_info_course = $('.Scourse').val();
+			var student_info_address = $('.Saddress').val();
+			var student_info_note = $('.Snote').val();
+			var _token = $('input[name="_token"]').val();
+			if(student_info_date=='' || student_info_gender==0 || student_info_faculty=='' || student_info_specialized=='' || student_info_course=='' || student_info_address==''){
+				swal("Vui lòng không để trống!", "", "warning");
+			}else{
+				$.ajax({
+					url:'{{ url('/them-thong-tin') }}'+'/'+id,
+					method: 'POST',
+					data: {	id:id,
+							student_info_date:student_info_date, 
+							student_info_gender:student_info_gender, 
+							student_info_faculty:student_info_faculty,
+							student_info_specialized:student_info_specialized, 
+							student_info_course:student_info_course, 
+							student_info_address:student_info_address, 
+							student_info_note:student_info_note, 
+							_token:_token },
+					success:function(data){
+						swal("Thêm thông tin thành công!", "", "success");
+					}
+				});
+				window.setTimeout(function(){
+					location.reload();
+				},3000);
+			}
+			
+		});
+	});
+</script>
+
 </body>
 </html>
