@@ -23,7 +23,8 @@ Route::get('/xac-nhan-tai-khoan-email', 'MailController@verifymail');
 Route::get('/xac-nhan-mail-mat-khau-moi', 'MailController@verifychangepassword');
 
 //STUDENT PROFILE
-Route::get('/trang-ca-nhan', 'StudentController@profile');
+Route::get('/thong-tin-tai-khoan/{student_id}', 'StudentInfoController@studentinfo_profile');
+Route::post('/them-thong-tin/{student_id}', 'StudentInfoController@studentinfo_create');
 
 //STUDENT POST
 Route::post('/dang-cau-hoi', 'PostController@post_new');

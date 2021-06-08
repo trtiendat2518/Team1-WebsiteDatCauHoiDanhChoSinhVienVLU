@@ -159,13 +159,15 @@
 		</div>
 		<!-- /USER STATS -->
 
-		<!-- PROFILE HEADER INFO ACTIONS -->
+		@if (Session::get('student_id'))
+			<!-- PROFILE HEADER INFO ACTIONS -->
 		<div class="profile-header-info-actions" style="top: 40px;">
 			<!-- PROFILE HEADER INFO ACTION -->
-			<p class="profile-header-info-action button secondary">Chỉnh sửa thông tin</p>
+			<a href="{{url('/thong-tin-tai-khoan/'.Session::get('student_id'))}}"><p class="profile-header-info-action button secondary">Chỉnh sửa thông tin</p></a>
 			<!-- /PROFILE HEADER INFO ACTION -->
 		</div>
 		<!-- /PROFILE HEADER INFO ACTIONS -->
+		@endif
 	</div>
 	<!-- /PROFILE HEADER INFO -->
 </div>
