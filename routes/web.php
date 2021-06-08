@@ -55,3 +55,7 @@ Route::get('/xem-cau-tra-loi-khoa/{post_id}', 'ReplyController@post_reply');
 //ADMIN HOME
 Route::get('/admin-home', 'AdminController@index');
 
+//ADMIN ACCOUNT
+Route::get('/admin-login', 'AdminController@index_login');
+Route::post('/login-admin', 'AdminController@login');
+Route::get('/logout-admin', 'AdminController@logout');
