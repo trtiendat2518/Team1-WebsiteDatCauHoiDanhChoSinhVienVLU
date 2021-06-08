@@ -294,7 +294,7 @@
 	<!-- /NAVIGATION WIDGET SECTION TITLE -->
 
 	<!-- NAVIGATION WIDGET SECTION LINK -->
-	<a class="navigation-widget-section-link" href="hub-profile-info.html">Thông tin tài khoản</a>
+	<a class="navigation-widget-section-link" href="{{url('/thong-tin-tai-khoan/'.Session::get('student_id'))}}">Thông tin tài khoản</a>
 	<!-- /NAVIGATION WIDGET SECTION LINK -->
 
 	<!-- NAVIGATION WIDGET SECTION LINK -->
@@ -891,7 +891,7 @@
 		<!-- /DROPDOWN NAVIGATION CATEGORY -->
 
 		<!-- DROPDOWN NAVIGATION LINK -->
-		<a class="dropdown-navigation-link" href="hub-profile-info.html">Thông tin cá nhân</a>
+		<a class="dropdown-navigation-link" href="{{url('/thong-tin-tai-khoan/'.Session::get('student_id'))}}">Thông tin tài khoản</a>
 		<!-- /DROPDOWN NAVIGATION LINK -->
 
 		<!-- DROPDOWN NAVIGATION LINK -->
@@ -1295,6 +1295,46 @@
 					}
 				}
 			})
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.postI').click(function(e){
+			var id = $(this).data('id_student');
+			var student_info_date = $('.Sdate').val();
+			var student_info_gender = $('.Sgender').val();
+			var student_info_faculty = $('.Sfaculty').val();
+			var student_info_specialized = $('.Sspecialized').val();
+			var student_info_course = $('.Scourse').val();
+			var student_info_address = $('.Saddress').val();
+			var student_info_note = $('.Snote').val();
+			var _token = $('input[name="_token"]').val();
+			if(student_info_date=='' || student_info_gender==0 || student_info_faculty=='' || student_info_specialized=='' || student_info_course=='' || student_info_address==''){
+				swal("Vui lòng không để trống!", "", "warning");
+			}else{
+				$.ajax({
+					url:'{{ url('/them-thong-tin') }}'+'/'+id,
+					method: 'POST',
+					data: {	id:id,
+							student_info_date:student_info_date, 
+							student_info_gender:student_info_gender, 
+							student_info_faculty:student_info_faculty,
+							student_info_specialized:student_info_specialized, 
+							student_info_course:student_info_course, 
+							student_info_address:student_info_address, 
+							student_info_note:student_info_note, 
+							_token:_token },
+					success:function(data){
+						swal("Thêm thông tin thành công!", "", "success");
+					}
+				});
+				window.setTimeout(function(){
+					location.reload();
+				},3000);
+			}
+			
 		});
 	});
 </script>
