@@ -288,7 +288,7 @@
 		<!-- /MENU ITEM -->
 	</ul>
 	<!-- /MENU -->
-
+	@if (Session::get('student_id'))
 	<!-- NAVIGATION WIDGET SECTION TITLE -->
 	<p class="navigation-widget-section-title">Cá nhân</p>
 	<!-- /NAVIGATION WIDGET SECTION TITLE -->
@@ -301,8 +301,9 @@
 	<a class="navigation-widget-section-link" href="hub-profile-notifications.html">Thông báo</a>
 
 	<!-- NAVIGATION WIDGET SECTION LINK -->
-	<a class="navigation-widget-section-link" href="hub-account-password.html">Đổi mật khẩu</a>
+	<a class="navigation-widget-section-link" href="{{url('/thay-doi-mat-khau/'.Session::get('student_id'))}}">Đổi mật khẩu</a>
 	<!-- /NAVIGATION WIDGET SECTION LINK -->
+	@endif
 </nav>
 <!-- /NAVIGATION WIDGET -->
 
@@ -885,26 +886,25 @@
 			<!-- /USER STATUS -->
 		</div>
 		<!-- /DROPDOWN NAVIGATION HEADER -->
-
-		<!-- DROPDOWN NAVIGATION CATEGORY -->
-		<p class="dropdown-navigation-category">Cá nhân</p>
-		<!-- /DROPDOWN NAVIGATION CATEGORY -->
-
-		<!-- DROPDOWN NAVIGATION LINK -->
-		<a class="dropdown-navigation-link" href="{{url('/thong-tin-tai-khoan/'.Session::get('student_id'))}}">Thông tin tài khoản</a>
-		<!-- /DROPDOWN NAVIGATION LINK -->
-
-		<!-- DROPDOWN NAVIGATION LINK -->
-		<a class="dropdown-navigation-link" href="hub-profile-notifications.html">Thông báo</a>
-		<!-- /DROPDOWN NAVIGATION LINK -->
-
-		<!-- DROPDOWN NAVIGATION LINK -->
-		<a class="dropdown-navigation-link" href="hub-account-password.html">Thay đổi mật khẩu</a>
-
-		<!-- DROPDOWN NAVIGATION BUTTON -->
 		@php
 		if(Session::get('student_id')){
 			@endphp
+			<!-- DROPDOWN NAVIGATION CATEGORY -->
+			<p class="dropdown-navigation-category">Cá nhân</p>
+			<!-- /DROPDOWN NAVIGATION CATEGORY -->
+
+			<!-- DROPDOWN NAVIGATION LINK -->
+			<a class="dropdown-navigation-link" href="{{url('/thong-tin-tai-khoan/'.Session::get('student_id'))}}">Thông tin tài khoản</a>
+			<!-- /DROPDOWN NAVIGATION LINK -->
+
+			<!-- DROPDOWN NAVIGATION LINK -->
+			<a class="dropdown-navigation-link" href="hub-profile-notifications.html">Thông báo</a>
+			<!-- /DROPDOWN NAVIGATION LINK -->
+
+			<!-- DROPDOWN NAVIGATION LINK -->
+			<a class="dropdown-navigation-link" href="{{url('/thay-doi-mat-khau/'.Session::get('student_id'))}}">Thay đổi mật khẩu</a>
+
+			<!-- DROPDOWN NAVIGATION BUTTON -->
 			<a href="{{url('/dang-xuat')}}" title="">
 				<button class="dropdown-navigation-button button small secondary">Đăng xuất</button>
 			</a>
@@ -1318,23 +1318,57 @@
 					url:'{{ url('/them-thong-tin') }}'+'/'+id,
 					method: 'POST',
 					data: {	id:id,
-							student_info_date:student_info_date, 
-							student_info_gender:student_info_gender, 
-							student_info_faculty:student_info_faculty,
-							student_info_specialized:student_info_specialized, 
-							student_info_course:student_info_course, 
-							student_info_address:student_info_address, 
-							student_info_note:student_info_note, 
-							_token:_token },
-					success:function(data){
-						swal("Thêm thông tin thành công!", "", "success");
-					}
-				});
+						student_info_date:student_info_date, 
+						student_info_gender:student_info_gender, 
+						student_info_faculty:student_info_faculty,
+						student_info_specialized:student_info_specialized, 
+						student_info_course:student_info_course, 
+						student_info_address:student_info_address, 
+						student_info_note:student_info_note, 
+						_token:_token },
+						success:function(data){
+							swal("Thêm thông tin thành công!", "", "success");
+						}
+					});
 				window.setTimeout(function(){
 					location.reload();
 				},3000);
 			}
-			
+		});
+
+		$('.postIU').click(function(e){
+			var id = $(this).data('id_studentu');
+			var student_info_date = $('.Sdate').val();
+			var student_info_gender = $('.Sgender').val();
+			var student_info_faculty = $('.Sfaculty').val();
+			var student_info_specialized = $('.Sspecialized').val();
+			var student_info_course = $('.Scourse').val();
+			var student_info_address = $('.Saddress').val();
+			var student_info_note = $('.Snote').val();
+			var _token = $('input[name="_token"]').val();
+			if(student_info_date=='' || student_info_gender==0 || student_info_faculty=='' || student_info_specialized=='' || student_info_course=='' || student_info_address==''){
+				swal("Vui lòng không để trống!", "", "warning");
+			}else{
+				$.ajax({
+					url:'{{ url('/sua-thong-tin') }}'+'/'+id,
+					method: 'POST',
+					data: {	id:id,
+						student_info_date:student_info_date, 
+						student_info_gender:student_info_gender, 
+						student_info_faculty:student_info_faculty,
+						student_info_specialized:student_info_specialized, 
+						student_info_course:student_info_course, 
+						student_info_address:student_info_address, 
+						student_info_note:student_info_note, 
+						_token:_token },
+						success:function(data){
+							swal("Cập nhật thông tin thành công!", "", "success");
+						}
+					});
+				window.setTimeout(function(){
+					location.reload();
+				},3000);
+			}
 		});
 	});
 </script>
