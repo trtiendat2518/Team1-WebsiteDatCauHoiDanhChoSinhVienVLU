@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    public $timestamps = false;
     protected $fillable = [
-    	'post_id', 'student_id', 'comment_content', 'created_at', 'updated_at'
+    	'post_id', 'student_id', 'comment_content', 'created_at'
     ];
     protected $primaryKey = 'comment_id';
     protected $table = 'tbl_comment';                
