@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Hi5Dash - HTML5 Admin Template By Jewel Theme</title>
+  <title>Admin VLU</title>
   <meta name="description" content="Hi5Dash - HTML5 Admin Template By Jewel Theme">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -173,15 +173,13 @@
 
         <div class="dropdown user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="images/avatar/1.jpg" class="rounded-circle float-left mr-2" alt="User Image">
-            <span class="status"></span>
             <h4 class="name">Jonathon Doe</h4>
           </a>
           <ul class="dropdown-menu">
             <li><a href="#"><i class="fa fa-user"></i> My Profile</a></li>
             <li><a href="#"><i class="fa fa-envelope"></i> Inbox</a></li>
             <li><a href="#"><i class="fa fa-gears"></i> Account Setting</a></li>
-            <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+            <li><a href="{{url('/logout-admin')}}"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
           </ul>
         </div>
 
