@@ -9,7 +9,7 @@ class Category extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-    	'category_name', 'updated_at', 'created_at'
+    	'category_name'
     ];
     protected $primaryKey = 'category_id';
     protected $table = 'tbl_category';
