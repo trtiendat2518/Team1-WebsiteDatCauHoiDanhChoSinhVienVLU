@@ -236,4 +236,23 @@ class StudentController extends Controller
 
 		return view('student.page.student.timeline')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'student_by_id','student2'));
 	}
+
+	public function other_student_post(Request $request, $student_id){
+		$category_post = Category::orderBy('category_id', 'DESC')->get();
+		$student_other_id = Post::with('category','student','likes','comments')
+		->where('tbl_post.student_id', $student_id)
+		->orderBy('tbl_post.created_at','DESC')->paginate(5);
+		$student2 = Student::with('info','posted')->where('student_id',$student_id)
+		->limit(1)->get();
+
+		//SEO
+		foreach($student2 as $key => $seo){
+			$meta_desc = "Trang sinh viên";
+			$meta_title = $seo->student_name;
+			$url_canonical =$request->url();
+		}
+		//-----------------------
+		
+		return view('student.page.student.friend')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'student_other_id','student2'));
+	}
 }
