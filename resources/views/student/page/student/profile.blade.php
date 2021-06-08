@@ -57,7 +57,7 @@
 
 			<!-- SIDEBAR BOX FOOTER -->
 			<div class="sidebar-box-footer">
-				<p class="button primary postI" data-id_student="<?php echo Session::get('student_id') ?>">Cập nhật!</p>
+				<p class="button primary postIU" data-id_studentu="{{$st->info->student_info_id}}">Cập nhật!</p>
 			</div>
 			<!-- /SIDEBAR BOX FOOTER -->
 		</div>
@@ -230,7 +230,7 @@
 						<div class="form-row split">
 							<div class="form-item">
 								<div class="form-input small full">
-									<textarea id="profile-description" name="student_info_note" placeholder="Giới thiệu về bản thân...">{{$st->info->student_info_note}}</textarea>
+									<textarea id="profile-description" name="student_info_note" placeholder="Giới thiệu về bản thân..." class="Snote">{{$st->info->student_info_note}}</textarea>
 								</div>
 							</div>
 						</div>

@@ -25,6 +25,7 @@ Route::get('/xac-nhan-mail-mat-khau-moi', 'MailController@verifychangepassword')
 //STUDENT PROFILE
 Route::get('/thong-tin-tai-khoan/{student_id}', 'StudentInfoController@studentinfo_profile');
 Route::post('/them-thong-tin/{student_id}', 'StudentInfoController@studentinfo_create');
+Route::post('/sua-thong-tin/{student_info_id}', 'StudentInfoController@studentinfo_update');
 
 //STUDENT POST
 Route::post('/dang-cau-hoi', 'PostController@post_new');
