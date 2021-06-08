@@ -19,5 +19,8 @@ class Student extends Model
     }
     public function info(){
         return $this->belongsTo('App\Models\StudentInfo', 'student_info_id');
+    }   
+    public function posted(){
+        return $this->hasMany('App\Models\Post', 'student_id');
     }
 }
