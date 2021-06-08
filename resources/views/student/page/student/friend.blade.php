@@ -106,18 +106,15 @@
 				<!-- /USER AVATAR BADGE -->
 			</a>
 			<!-- /USER SHORT DESCRIPTION AVATAR -->
-
-			<!-- USER SHORT DESCRIPTION TITLE -->
-			<p class="user-short-description-title">@php
-				echo Session::get('student_name');
-			@endphp</p>
+			@foreach ($student2 as $key => $Sother)
+				<!-- USER SHORT DESCRIPTION TITLE -->
+			<p class="user-short-description-title">{{$Sother->student_name}}</p>
 			<!-- /USER SHORT DESCRIPTION TITLE -->
 
 			<!-- USER SHORT DESCRIPTION TEXT -->
-			<p class="user-short-description-text">@php
-				echo Session::get('student_email');
-			@endphp</p>
+			<p class="user-short-description-text">{{$Sother->student_email}}</p>
 			<!-- /USER SHORT DESCRIPTION TEXT -->
+			@endforeach
 		</div>
 		<!-- /USER SHORT DESCRIPTION -->
 		@php
@@ -163,19 +160,11 @@
 				}
 			}
 		@endphp
-		@if (Session::get('student_id'))
-			<!-- PROFILE HEADER INFO ACTIONS -->
-		<div class="profile-header-info-actions" style="top: 40px;">
-			<!-- PROFILE HEADER INFO ACTION -->
-			<a href="{{url('/thong-tin-tai-khoan/'.Session::get('student_id'))}}"><p class="profile-header-info-action button secondary">Chỉnh sửa thông tin</p></a>
-			<!-- /PROFILE HEADER INFO ACTION -->
-		</div>
-		<!-- /PROFILE HEADER INFO ACTIONS -->
-		@endif
 	</div>
 	<!-- /PROFILE HEADER INFO -->
 </div>
 <!-- /PROFILE HEADER -->
+
 <!-- GRID -->
 <div class="grid grid-2-4-6 mobile-prefer-content">
 	<div class="grid-column">
@@ -309,70 +298,9 @@
 			}
 		}
 	@endphp
-
 	<!-- GRID COLUMN -->
 	<div class="grid-column">
-		<!-- QUICK POST -->
-		<div class="quick-post">
-			<!-- QUICK POST HEADER -->
-			<div class="quick-post-header">
-				<!-- OPTION ITEMS -->
-				<div class="option-items">
-					<!-- OPTION ITEM -->
-					<div class="option-item active">
-						<!-- OPTION ITEM ICON -->
-						<svg class="option-item-icon icon-status">
-							<use xlink:href="#svg-status"></use>
-						</svg>
-						<!-- /OPTION ITEM ICON -->
-
-						<!-- OPTION ITEM TITLE -->
-						<p class="option-item-title">Câu hỏi</p>
-						<!-- /OPTION ITEM TITLE -->
-					</div>
-				</div>
-			</div>
-			<div class="quick-post-body">
-				<form class="form">
-					@csrf
-					<div class="form-row">
-						<div class="form-item">
-							<div class="form-textarea">
-								<textarea id="title" name="title" rows="1" class="title" placeholder="Tiêu đề" style="height: 50%"></textarea>
-								<div class="form-row">
-									<div class="form-item">
-										<div class="form-select">
-											<select style="background-color: #21283b; border-radius: 0px;" id="category" class="category" name="category">
-												<option value="0" selected>Loại câu hỏi</option>
-												@foreach ($category_post as $key => $cate)
-												<option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
-												@endforeach
-											</select>
-											<svg class="form-select-icon icon-small-arrow">
-												<use xlink:href="#svg-small-arrow"></use>
-											</svg>
-										</div>
-									</div>
-								</div>
-								<textarea id="content" class="content" name="content" placeholder="Nội dung"></textarea>
-							</div>
-						</div>
-					</div>
-					@php
-					if(Session::get('student_id')){
-						@endphp
-						<button class="postQ button quick-post-footer-actions secondary" name="postQ" type="button">Đăng</button>
-						@php
-					}else{
-						@endphp
-						<a href="{{url('/login')}}" class=" button quick-post-footer-actions secondary btn-block" type="button">Đăng</a>
-						@php
-					}
-					@endphp
-				</form>
-			</div>
-		</div>
-		@foreach ($student_by_id as $key => $post_info)
+		@foreach ($student_other_id as $key => $post_info)
 		<div class="widget-box no-padding optionsocial">
 			@php
 			if(Session::get('student_email')==$post_info->student->student_email){
@@ -554,11 +482,7 @@
 							</div>
 						</div>
 						@endif
-<<<<<<< HEAD
-						<a class="user-avatar small no-outline" href="profile-timeline.html">
-=======
 						<a class="user-avatar small no-outline" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">
->>>>>>> nguyenduyquang
 							<div class="user-avatar-content">
 								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/05.jpg')}}"></div>
 							</div>
@@ -569,11 +493,7 @@
 								<div class="hexagon-border-40-44"></div>
 							</div>
 						</a>
-<<<<<<< HEAD
-						<p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html" style="color: #007bff;">{{$cmt->student->student_name}}</a>
-=======
 						<p class="post-comment-text"><a class="post-comment-text-author" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}" style="color: #007bff;">{{$cmt->student->student_name}}</a>
->>>>>>> nguyenduyquang
 							<span class="user-status-text small">
 								{{ \Carbon\Carbon::parse($cmt->created_at)->diffForHumans() }} 
 							</span>
@@ -597,7 +517,7 @@
 				<div class="section-pager-item active">
 					<!-- SECTION PAGER ITEM TEXT -->
 					<center>
-						<span>{!! $student_by_id->render("pagination::bootstrap-4") !!}</span>
+						<span>{!! $student_other_id->render("pagination::bootstrap-4") !!}</span>
 					</center>
 					<!-- /SECTION PAGER ITEM TEXT -->
 				</div>
