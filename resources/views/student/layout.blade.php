@@ -301,7 +301,7 @@
 	<a class="navigation-widget-section-link" href="hub-profile-notifications.html">Thông báo</a>
 
 	<!-- NAVIGATION WIDGET SECTION LINK -->
-	<a class="navigation-widget-section-link" href="hub-account-password.html">Đổi mật khẩu</a>
+	<a class="navigation-widget-section-link" href="{{url('/thay-doi-mat-khau/'.Session::get('student_id'))}}">Đổi mật khẩu</a>
 	<!-- /NAVIGATION WIDGET SECTION LINK -->
 	@endif
 </nav>
@@ -904,7 +904,7 @@
 			<!-- /DROPDOWN NAVIGATION LINK -->
 
 			<!-- DROPDOWN NAVIGATION LINK -->
-			<a class="dropdown-navigation-link" href="hub-account-password.html">Thay đổi mật khẩu</a>
+			<a class="dropdown-navigation-link" href="{{url('/thay-doi-mat-khau/'.Session::get('student_id'))}}">Thay đổi mật khẩu</a>
 
 			<!-- DROPDOWN NAVIGATION BUTTON -->
 			<a href="{{url('/dang-xuat')}}" title="">

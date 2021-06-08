@@ -45,7 +45,7 @@
 						<!-- /SIDEBAR MENU LINK -->
 
 						<!-- SIDEBAR MENU LINK -->
-						<a class="sidebar-menu-link" href="hub-account-password.html">Thay đổi mật khẩu</a>
+						<a class="sidebar-menu-link" href="{{url('/thay-doi-mat-khau/'.Session::get('student_id'))}}">Thay đổi mật khẩu</a>
 						<!-- /SIDEBAR MENU LINK -->
 
 					</div>
@@ -284,7 +284,7 @@
 						<!-- /SIDEBAR MENU LINK -->
 
 						<!-- SIDEBAR MENU LINK -->
-						<a class="sidebar-menu-link" href="hub-account-password.html">Thay đổi mật khẩu</a>
+						<a class="sidebar-menu-link" href="{{url('/thay-doi-mat-khau/'.Session::get('student_id'))}}">Thay đổi mật khẩu</a>
 						<!-- /SIDEBAR MENU LINK -->
 
 					</div>

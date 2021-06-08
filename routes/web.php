@@ -11,12 +11,14 @@ Route::get('/login', 'StudentController@index_login');
 Route::get('/register', 'StudentController@index_register');
 Route::get('/forgetpass', 'StudentController@index_forgetpass');
 Route::get('/newpass', 'StudentController@index_newpass');
+Route::get('/thay-doi-mat-khau/{student_id}', 'StudentController@changepass');
 
 Route::post('/dang-nhap', 'StudentController@login');
 Route::post('/dang-ky', 'StudentController@register');
 Route::get('/dang-xuat', 'StudentController@logout');
 Route::post('/xac-nhan-mail', 'StudentController@confirm_mail');
 Route::post('/tao-mat-khau-moi', 'StudentController@newpassword');
+Route::post('/doi-mat-khau/{student_id}', 'StudentController@changenewpass');
 
 //STUDENT MAIL
 Route::get('/xac-nhan-tai-khoan-email', 'MailController@verifymail');
