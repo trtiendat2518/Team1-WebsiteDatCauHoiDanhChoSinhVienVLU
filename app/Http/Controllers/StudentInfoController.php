@@ -43,8 +43,19 @@ class StudentInfoController extends Controller
             $student = Student::find($student_id);
             $student->student_info_id = Session::get('student_info');
             $student->save();
-            
         }
-        
+    }
+
+    public function studentinfo_update(Request $request, $student_info_id){
+        $info = StudentInfo::find($student_info_id);
+        $data = $request->all();
+        $info->student_info_date = $data['student_info_date'];
+        $info->student_info_gender = $data['student_info_gender'];
+        $info->student_info_faculty = $data['student_info_faculty'];
+        $info->student_info_specialized = $data['student_info_specialized'];
+        $info->student_info_course = $data['student_info_course'];
+        $info->student_info_address = $data['student_info_address'];
+        $info->student_info_note = $data['student_info_note'];
+        $info->save();
     }
 }

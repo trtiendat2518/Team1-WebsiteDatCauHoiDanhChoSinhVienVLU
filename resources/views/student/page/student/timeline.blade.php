@@ -120,45 +120,49 @@
 			<!-- /USER SHORT DESCRIPTION TEXT -->
 		</div>
 		<!-- /USER SHORT DESCRIPTION -->
-
+		@php
+			foreach ($student2 as $key => $Sinfo){
+				if($Sinfo->student_info_id){
+		@endphp
 		<!-- USER STATS -->
 		<div class="user-stats">
-			<!-- USER STAT -->
 			<div class="user-stat big">
-				<!-- USER STAT TITLE -->
-				<p class="user-stat-title">930</p>
-				<!-- /USER STAT TITLE -->
-
-				<!-- USER STAT TEXT -->
+				<p class="user-stat-title">{{$Sinfo->posted->count()}}</p>
 				<p class="user-stat-text">Câu hỏi</p>
-				<!-- /USER STAT TEXT -->
 			</div>
-			<!-- /USER STAT -->
-			<!-- USER STAT -->
 			<div class="user-stat big">
-				<!-- USER STAT TITLE -->
-				<p class="user-stat-title">K24</p>
-				<!-- /USER STAT TITLE -->
-
-				<!-- USER STAT TEXT -->
+				<p class="user-stat-title">{{$Sinfo->info->student_info_course}}</p>
 				<p class="user-stat-text">Khóa</p>
-				<!-- /USER STAT TEXT -->
 			</div>
-			<!-- /USER STAT -->
-			<!-- USER STAT -->
 			<div class="user-stat big">
-				<!-- USER STAT TITLE -->
-				<p class="user-stat-title">CNTT</p>
-				<!-- /USER STAT TITLE -->
-
-				<!-- USER STAT TEXT -->
+				<p class="user-stat-title">{{$Sinfo->info->student_info_specialized}}</p>
 				<p class="user-stat-text">Chuyên ngành</p>
-				<!-- /USER STAT TEXT -->
 			</div>
-			<!-- /USER STAT -->
 		</div>
 		<!-- /USER STATS -->
-
+		@php
+				}else{
+		@endphp
+		<!-- USER STATS -->
+		<div class="user-stats">
+			<div class="user-stat big">
+				<p class="user-stat-title">{{$Sinfo->posted->count()}}</p>
+				<p class="user-stat-text">Câu hỏi</p>
+			</div>
+			<div class="user-stat big">
+				<p class="user-stat-title">-</p>
+				<p class="user-stat-text">Khóa</p>
+			</div>
+			<div class="user-stat big">
+				<p class="user-stat-title">-</p>
+				<p class="user-stat-text">Chuyên ngành</p>
+			</div>
+		</div>
+		<!-- /USER STATS -->
+		@php
+				}
+			}
+		@endphp
 		@if (Session::get('student_id'))
 			<!-- PROFILE HEADER INFO ACTIONS -->
 		<div class="profile-header-info-actions" style="top: 40px;">
@@ -172,50 +176,14 @@
 	<!-- /PROFILE HEADER INFO -->
 </div>
 <!-- /PROFILE HEADER -->
-
-<!-- SECTION NAVIGATION -->
-<nav class="section-navigation">
-	<center>
-		<!-- SECTION MENU -->
-		<div id="section-navigation-slider" class="section-menu">
-			<!-- SECTION MENU ITEM -->
-			<a class="section-menu-item" href="profile-about.html">
-				<!-- SECTION MENU ITEM ICON -->
-				<svg class="section-menu-item-icon icon-profile">
-					<use xlink:href="#svg-members"></use>
-				</svg>
-				<!-- /SECTION MENU ITEM ICON -->
-
-				<!-- SECTION MENU ITEM TEXT -->
-				<p class="section-menu-item-text">Thông tin</p>
-				<!-- /SECTION MENU ITEM TEXT -->
-			</a>
-			<!-- /SECTION MENU ITEM -->
-
-			<!-- SECTION MENU ITEM -->
-			<a class="section-menu-item active" href="profile-timeline.html">
-				<!-- SECTION MENU ITEM ICON -->
-				<svg class="section-menu-item-icon icon-timeline">
-					<use xlink:href="#svg-timeline"></use>
-				</svg>
-				<!-- /SECTION MENU ITEM ICON -->
-
-				<!-- SECTION MENU ITEM TEXT -->
-				<p class="section-menu-item-text">Trang cá nhân</p>
-				<!-- /SECTION MENU ITEM TEXT -->
-			</a>
-			<!-- /SECTION MENU ITEM -->
-		</div>
-		<!-- /SECTION MENU -->
-	</center>
-	
-</nav>
-<!-- /SECTION NAVIGATION -->
-
 <!-- GRID -->
 <div class="grid grid-2-4-6 mobile-prefer-content">
 	<div class="grid-column">
 	</div>
+	@php
+		foreach($student2 as $key => $infomation){
+			if($infomation->student_info_id){
+	@endphp
 	<!-- GRID COLUMN -->
 	<div class="grid-column">
 		<!-- WIDGET BOX -->
@@ -228,7 +196,7 @@
 			<!-- WIDGET BOX CONTENT -->
 			<div class="widget-box-content">
 				<!-- PARAGRAPH -->
-				<p class="paragraph">Hi! My name is Marina but some people may know me as GameHuntress! I have a Twitch channel where I stream, play and review all the newest games.</p>
+				<p class="paragraph">{{$infomation->info->student_info_note}}</p>
 				<!-- /PARAGRAPH -->
 
 				<!-- INFORMATION LINE LIST -->
@@ -240,7 +208,7 @@
 						<!-- /INFORMATION LINE TITLE -->
 
 						<!-- INFORMATION LINE TEXT -->
-						<p class="information-line-text">Los Angeles, California</p>
+						<p class="information-line-text">{{$infomation->info->student_info_address}}</p>
 						<!-- /INFORMATION LINE TEXT -->
 					</div>
 					<!-- /INFORMATION LINE -->
@@ -252,7 +220,7 @@
 						<!-- /INFORMATION LINE TITLE -->
 
 						<!-- INFORMATION LINE TEXT -->
-						<p class="information-line-text">United States</p>
+						<p class="information-line-text">{{$infomation->info->student_info_date}}</p>
 						<!-- /INFORMATION LINE TEXT -->
 					</div>
 					<!-- /INFORMATION LINE -->
@@ -262,10 +230,11 @@
 						<!-- INFORMATION LINE TITLE -->
 						<p class="information-line-title">Giới tính</p>
 						<!-- /INFORMATION LINE TITLE -->
-
-						<!-- INFORMATION LINE TEXT -->
-						<p class="information-line-text">32 Years</p>
-						<!-- /INFORMATION LINE TEXT -->
+						@if ($infomation->info->student_info_gender == 1)
+							<p class="information-line-text">Nam</p>
+						@elseif ($infomation->info->student_info_gender == 2)
+							<p class="information-line-text">Nữ</p>
+						@endif
 					</div>
 					<!-- /INFORMATION LINE -->
 				</div>
@@ -276,6 +245,70 @@
 		<!-- /WIDGET BOX -->
 	</div>
 	<!-- /GRID COLUMN -->
+	@php
+			}else{
+	@endphp
+	<!-- GRID COLUMN -->
+	<div class="grid-column">
+		<!-- WIDGET BOX -->
+		<div class="widget-box">
+
+			<!-- WIDGET BOX TITLE -->
+			<p class="widget-box-title">Thông tin của tôi</p>
+			<!-- /WIDGET BOX TITLE -->
+
+			<!-- WIDGET BOX CONTENT -->
+			<div class="widget-box-content">
+				<!-- PARAGRAPH -->
+				<p class="paragraph"></p>
+				<!-- /PARAGRAPH -->
+
+				<!-- INFORMATION LINE LIST -->
+				<div class="information-line-list">
+					<!-- INFORMATION LINE -->
+					<div class="information-line">
+						<!-- INFORMATION LINE TITLE -->
+						<p class="information-line-title">Địa chỉ</p>
+						<!-- /INFORMATION LINE TITLE -->
+
+						<!-- INFORMATION LINE TEXT -->
+						<p class="information-line-text">-</p>
+						<!-- /INFORMATION LINE TEXT -->
+					</div>
+					<!-- /INFORMATION LINE -->
+
+					<!-- INFORMATION LINE -->
+					<div class="information-line">
+						<!-- INFORMATION LINE TITLE -->
+						<p class="information-line-title">Ngày sinh</p>
+						<!-- /INFORMATION LINE TITLE -->
+
+						<!-- INFORMATION LINE TEXT -->
+						<p class="information-line-text">-</p>
+						<!-- /INFORMATION LINE TEXT -->
+					</div>
+					<!-- /INFORMATION LINE -->
+
+					<!-- INFORMATION LINE -->
+					<div class="information-line">
+						<!-- INFORMATION LINE TITLE -->
+						<p class="information-line-title">Giới tính</p>
+						<!-- /INFORMATION LINE TITLE -->
+						<p class="information-line-text">-</p>
+					</div>
+					<!-- /INFORMATION LINE -->
+				</div>
+				<!-- /INFORMATION LINE LIST -->
+			</div>
+			<!-- /WIDGET BOX CONTENT -->
+		</div>
+		<!-- /WIDGET BOX -->
+	</div>
+	<!-- /GRID COLUMN -->
+	@php
+			}
+		}
+	@endphp
 
 	<!-- GRID COLUMN -->
 	<div class="grid-column">
@@ -362,7 +395,7 @@
 			<div class="widget-box-status">
 				<div class="widget-box-status-content">
 					<div class="user-status">
-						<a class="user-status-avatar" href="profile-timeline.html">
+						<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">
 							<div class="user-avatar small no-outline">
 								<div class="user-avatar-content">
 									<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/04.jpg')}}"></div>
@@ -375,7 +408,7 @@
 								</div>
 							</div>
 						</a>
-						<p class="user-status-title medium"><a class="bold" href="profile-timeline.html">{{$post_info->student->student_name}}</a></p>
+						<p class="user-status-title medium"><a class="bold" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">{{$post_info->student->student_name}}</a></p>
 						<p class="user-status-text small">{{ \Carbon\Carbon::parse($post_info->created_at)->diffForHumans() }}</p>
 					</div>
 					<p style="font-size: 20px;" class="widget-box-status-text">{{$post_info->post_title}}</p>
@@ -521,7 +554,11 @@
 							</div>
 						</div>
 						@endif
+<<<<<<< HEAD
 						<a class="user-avatar small no-outline" href="profile-timeline.html">
+=======
+						<a class="user-avatar small no-outline" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">
+>>>>>>> nguyenduyquang
 							<div class="user-avatar-content">
 								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/05.jpg')}}"></div>
 							</div>
@@ -532,7 +569,11 @@
 								<div class="hexagon-border-40-44"></div>
 							</div>
 						</a>
+<<<<<<< HEAD
 						<p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html" style="color: #007bff;">{{$cmt->student->student_name}}</a>
+=======
+						<p class="post-comment-text"><a class="post-comment-text-author" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}" style="color: #007bff;">{{$cmt->student->student_name}}</a>
+>>>>>>> nguyenduyquang
 							<span class="user-status-text small">
 								{{ \Carbon\Carbon::parse($cmt->created_at)->diffForHumans() }} 
 							</span>
