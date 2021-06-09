@@ -74,7 +74,7 @@
 			</li>
 			@if (Session::get('student_id'))
 			<li class="menu-item">
-				<a class="menu-item-link text-tooltip-tfr" href="{{url('/trang-ca-nhan-cua-sinh-vien/'.Session::get('student_id'))}}" data-title="Trang cá nhân">
+				<a class="menu-item-link text-tooltip-tfr" href="{{url('/trang-sinh-vien/'.Session::get('student_id'))}}" data-title="Trang cá nhân">
 					<svg class="menu-item-link-icon icon-timeline">
 						<use xlink:href="#svg-timeline"></use>
 					</svg>
@@ -115,7 +115,7 @@
 				</a>
 			</li>
 			<li class="menu-item">
-				<a class="menu-item-link" href="members.html">
+				<a class="menu-item-link" href="{{url('/trang-sinh-vien/'.Session::get('student_id'))}}">
 					<svg class="menu-item-link-icon icon-members">
 						<use xlink:href="#svg-timeline"></use>
 					</svg>
@@ -230,7 +230,7 @@
 		<!-- MENU ITEM -->
 		<li class="menu-item">
 			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="overview.html">
+			<a class="menu-item-link" href="{{url('/trang-sinh-vien/'.Session::get('student_id'))}}">
 				<!-- MENU ITEM LINK ICON -->
 				<svg class="menu-item-link-icon icon-overview">
 					<use xlink:href="#svg-overview"></use>
@@ -1295,80 +1295,6 @@
 					}
 				}
 			})
-		});
-	});
-</script>
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('.postI').click(function(e){
-			var id = $(this).data('id_student');
-			var student_info_date = $('.Sdate').val();
-			var student_info_gender = $('.Sgender').val();
-			var student_info_faculty = $('.Sfaculty').val();
-			var student_info_specialized = $('.Sspecialized').val();
-			var student_info_course = $('.Scourse').val();
-			var student_info_address = $('.Saddress').val();
-			var student_info_note = $('.Snote').val();
-			var _token = $('input[name="_token"]').val();
-			if(student_info_date=='' || student_info_gender==0 || student_info_faculty=='' || student_info_specialized=='' || student_info_course=='' || student_info_address==''){
-				swal("Vui lòng không để trống!", "", "warning");
-			}else{
-				$.ajax({
-					url:'{{ url('/them-thong-tin') }}'+'/'+id,
-					method: 'POST',
-					data: {	id:id,
-						student_info_date:student_info_date, 
-						student_info_gender:student_info_gender, 
-						student_info_faculty:student_info_faculty,
-						student_info_specialized:student_info_specialized, 
-						student_info_course:student_info_course, 
-						student_info_address:student_info_address, 
-						student_info_note:student_info_note, 
-						_token:_token },
-						success:function(data){
-							swal("Thêm thông tin thành công!", "", "success");
-						}
-					});
-				window.setTimeout(function(){
-					location.reload();
-				},3000);
-			}
-		});
-
-		$('.postIU').click(function(e){
-			var id = $(this).data('id_studentu');
-			var student_info_date = $('.Sdate').val();
-			var student_info_gender = $('.Sgender').val();
-			var student_info_faculty = $('.Sfaculty').val();
-			var student_info_specialized = $('.Sspecialized').val();
-			var student_info_course = $('.Scourse').val();
-			var student_info_address = $('.Saddress').val();
-			var student_info_note = $('.Snote').val();
-			var _token = $('input[name="_token"]').val();
-			if(student_info_date=='' || student_info_gender==0 || student_info_faculty=='' || student_info_specialized=='' || student_info_course=='' || student_info_address==''){
-				swal("Vui lòng không để trống!", "", "warning");
-			}else{
-				$.ajax({
-					url:'{{ url('/sua-thong-tin') }}'+'/'+id,
-					method: 'POST',
-					data: {	id:id,
-						student_info_date:student_info_date, 
-						student_info_gender:student_info_gender, 
-						student_info_faculty:student_info_faculty,
-						student_info_specialized:student_info_specialized, 
-						student_info_course:student_info_course, 
-						student_info_address:student_info_address, 
-						student_info_note:student_info_note, 
-						_token:_token },
-						success:function(data){
-							swal("Cập nhật thông tin thành công!", "", "success");
-						}
-					});
-				window.setTimeout(function(){
-					location.reload();
-				},3000);
-			}
 		});
 	});
 </script>

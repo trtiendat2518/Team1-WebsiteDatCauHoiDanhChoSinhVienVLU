@@ -48,6 +48,7 @@ ul {
 button,
 input[type=password],
 input[type=text],
+input[type=file],
 label,
 select,
 textarea {
@@ -64,6 +65,7 @@ label {
 button,
 input[type=password],
 input[type=text],
+input[type=file],
 select,
 textarea {
 	width: 100%;
@@ -74,6 +76,7 @@ textarea {
 
 input[type=password],
 input[type=text],
+input[type=file],
 select,
 textarea {
 	background-color: #1d2333;
@@ -84,47 +87,54 @@ textarea {
 
 input[type=password]:focus,
 input[type=text]:focus,
+input[type=file]:focus,
 select:focus,
 textarea:focus {
 	border-color: #040aae
 }
 
 input[type=password],
-input[type=text] {
+input[type=text],
+input[type=file] {
 	height: 54px;
 	padding: 0 18px
 }
 
 input[type=password]::-webkit-input-placeholder,
-input[type=text]::-webkit-input-placeholder {
+input[type=text]::-webkit-input-placeholder,
+input[type=file]::-webkit-input-placeholder {
 	color: #9aa4bf;
 	font-size: .875rem;
 	font-weight: 500
 }
 
 input[type=password]::-moz-placeholder,
-input[type=text]::-moz-placeholder {
+input[type=text]::-moz-placeholder,
+input[type=file]::-moz-placeholder {
 	color: #9aa4bf;
 	font-size: .875rem;
 	font-weight: 500
 }
 
 input[type=password]:-ms-input-placeholder,
-input[type=text]:-ms-input-placeholder {
+input[type=text]:-ms-input-placeholder,
+input[type=file]:-ms-input-placeholder {
 	color: #9aa4bf;
 	font-size: .875rem;
 	font-weight: 500
 }
 
 input[type=password]::-ms-input-placeholder,
-input[type=text]::-ms-input-placeholder {
+input[type=text]::-ms-input-placeholder,
+input[type=file]::-ms-input-placeholder {
 	color: #9aa4bf;
 	font-size: .875rem;
 	font-weight: 500
 }
 
 input[type=password]::placeholder,
-input[type=text]::placeholder {
+input[type=text]::placeholder,
+input[type=file]::placeholder {
 	color: #9aa4bf;
 	font-size: .875rem;
 	font-weight: 500
@@ -272,6 +282,7 @@ textarea::placeholder {
 .form-input.dark input[type=password],
 .form-input.dark input[type=text],
 .form-input.dark input[type=date],
+.form-input.dark input[type=file],
 .form-input.dark textarea {
 	border: none;
 	background-color: #5538b5;
@@ -281,6 +292,7 @@ textarea::placeholder {
 .form-input.dark input[type=password]::-webkit-input-placeholder,
 .form-input.dark input[type=text]::-webkit-input-placeholder,
 .form-input.dark input[type=date]::-webkit-input-placeholder,
+.form-input.dark input[type=file]::-webkit-input-placeholder,
 .form-input.dark textarea::-webkit-input-placeholder {
 	color: #8b88ff;
 	opacity: .6
@@ -289,6 +301,7 @@ textarea::placeholder {
 .form-input.dark input[type=password]::-moz-placeholder,
 .form-input.dark input[type=text]::-moz-placeholder,
 .form-input.dark input[type=date]::-moz-placeholder,
+.form-input.dark input[type=file]::-moz-placeholder,
 .form-input.dark textarea::-moz-placeholder {
 	color: #8b88ff;
 	opacity: .6
@@ -297,6 +310,7 @@ textarea::placeholder {
 .form-input.dark input[type=password]:-ms-input-placeholder,
 .form-input.dark input[type=text]:-ms-input-placeholder,
 .form-input.dark input[type=date]:-ms-input-placeholder,
+.form-input.dark input[type=file]:-ms-input-placeholder,
 .form-input.dark textarea:-ms-input-placeholder {
 	color: #8b88ff;
 	opacity: .6
@@ -305,6 +319,7 @@ textarea::placeholder {
 .form-input.dark input[type=password]::-ms-input-placeholder,
 .form-input.dark input[type=text]::-ms-input-placeholder,
 .form-input.dark input[type=date]::-ms-input-placeholder,
+.form-input.dark input[type=file]::-ms-input-placeholder,
 .form-input.dark textarea::-ms-input-placeholder {
 	color: #8b88ff;
 	opacity: .6
@@ -313,6 +328,7 @@ textarea::placeholder {
 .form-input.dark input[type=password]::placeholder,
 .form-input.dark input[type=text]::placeholder,
 .form-input.dark input[type=date]::placeholder,
+.form-input.dark input[type=file]::placeholder,
 .form-input.dark textarea::placeholder {
 	color: #8b88ff;
 	opacity: .6
