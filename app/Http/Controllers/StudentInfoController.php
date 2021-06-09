@@ -37,18 +37,38 @@ class StudentInfoController extends Controller
         $info->student_info_course = $data['student_info_course'];
         $info->student_info_address = $data['student_info_address'];
         $info->student_info_note = $data['student_info_note'];
-        $info->save();
-        if($info){
+        $get_image = $request->file('student_info_avatar');
+
+        if($data['student_info_date']=='' || $data['student_info_gender']==0 || $data['student_info_faculty']=='' || $data['student_info_specialized']=='' || $data['student_info_course']=='' || $data['student_info_address']==''){
+            Session::put('message','<div class="alert alert-danger">Các thông tin không được để trống!</div>');
+            return Redirect::to('/thong-tin-tai-khoan'.'/'.Session::get('student_id'));
+        }
+
+        if($get_image){
+            $get_name_image = $get_image->getClientOriginalName();
+            $name_image = current(explode('.',$get_name_image));
+            $new_image = $name_image.rand(0, 9999).time().'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('public/student/img/avatar', $new_image);
+            $info->student_info_avatar = $new_image;
+            $info->save();
+
             Session::put('student_info', $info->student_info_id);
             $student = Student::find($student_id);
             $student->student_info_id = Session::get('student_info');
-            $student->save();
+            $student->student_avatar = $info->student_info_avatar;
+            $student->save(); 
+
+            Session::put('message','<div class="alert alert-success">Thêm thông tin chi tiết thành công!</div>');
+            return Redirect::to('/thong-tin-tai-khoan'.'/'.Session::get('student_id'));
+        }else{
+            Session::put('message','<div class="alert alert-danger">Hình ảnh không được để trống!</div>');
+            return Redirect::to('/thong-tin-tai-khoan'.'/'.Session::get('student_id'));
         }
     }
 
-    public function studentinfo_update(Request $request, $student_info_id){
-        $info = StudentInfo::find($student_info_id);
+    public function studentinfo_update(Request $request, $student_info_id){      
         $data = $request->all();
+        $info = StudentInfo::find($student_info_id);
         $info->student_info_date = $data['student_info_date'];
         $info->student_info_gender = $data['student_info_gender'];
         $info->student_info_faculty = $data['student_info_faculty'];
@@ -56,6 +76,32 @@ class StudentInfoController extends Controller
         $info->student_info_course = $data['student_info_course'];
         $info->student_info_address = $data['student_info_address'];
         $info->student_info_note = $data['student_info_note'];
-        $info->save();
+        $get_image = $request->file('student_info_avatar');
+
+        if($data['student_info_date']=='' || $data['student_info_gender']==0 || $data['student_info_faculty']=='' || $data['student_info_specialized']=='' || $data['student_info_course']=='' || $data['student_info_address']==''){
+            Session::put('message','<div class="alert alert-danger">Các thông tin không được để trống!</div>');
+            return Redirect::to('/thong-tin-tai-khoan'.'/'.Session::get('student_id'));
+        }
+
+        if($get_image){
+            $get_name_image = $get_image->getClientOriginalName();
+            $name_image = current(explode('.',$get_name_image));
+            $new_image = $name_image.rand(0, 9999).time().'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('public/student/img/avatar', $new_image);
+            $info->student_info_avatar = $new_image;
+            $info->save();
+
+            Session::put('student_info', $info->student_info_id);
+            $student_id = Session::get('student_id');
+            $student = Student::find($student_id);
+            $student->student_avatar = $info->student_info_avatar;
+            $student->save();
+
+            Session::put('message','<div class="alert alert-success">Cập nhật thông tin chi tiết thành công!</div>');
+            return Redirect::to('/thong-tin-tai-khoan'.'/'.Session::get('student_id'));
+        }else{
+            Session::put('message','<div class="alert alert-danger">Hình ảnh không được để trống!</div>');
+            return Redirect::to('/thong-tin-tai-khoan'.'/'.Session::get('student_id'));
+        }
     }
 }

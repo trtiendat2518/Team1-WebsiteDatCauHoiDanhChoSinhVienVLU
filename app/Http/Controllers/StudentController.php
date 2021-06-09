@@ -220,29 +220,14 @@ class StudentController extends Controller
 		}
 	}
 
-	public function show_student_post(Request $request){
-		//SEO
-		$meta_desc = "Trang cá nhân";
-		$meta_title = "Trang cá nhân";
-		$url_canonical =$request->url();
-		//-----------------------
-
-		$category_post = Category::orderBy('category_id', 'DESC')->get();
-		$student_by_id = Post::with('category','student','likes','comments')
-		->where('tbl_post.student_id', Session::get('student_id'))
-		->orderBy('tbl_post.created_at','DESC')->paginate(5);
-		$student2 = Student::with('info','posted')->where('student_id',Session::get('student_id'))
-        ->limit(1)->get();
-
-		return view('student.page.student.timeline')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'student_by_id','student2'));
-	}
-
-	public function other_student_post(Request $request, $student_id){
+	public function show_student_post(Request $request, $student_id){
 		$category_post = Category::orderBy('category_id', 'DESC')->get();
 		$student_other_id = Post::with('category','student','likes','comments')
 		->where('tbl_post.student_id', $student_id)
 		->orderBy('tbl_post.created_at','DESC')->paginate(5);
 		$student2 = Student::with('info','posted')->where('student_id',$student_id)
+		->limit(1)->get();
+		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
 		->limit(1)->get();
 
 		//SEO
@@ -253,7 +238,7 @@ class StudentController extends Controller
 		}
 		//-----------------------
 		
-		return view('student.page.student.friend')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'student_other_id','student2'));
+		return view('student.page.student.timeline')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'student_other_id','student2','studentSS'));
 	}
 
 	public function changepass(Request $request,$student_id){

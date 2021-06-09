@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Student;
 use DB;
 use Mail;
 use Session;
@@ -23,6 +24,8 @@ class CategoryController extends Controller
     	->where('tbl_post.category_id', $category_id)
     	->orderBy('tbl_post.created_at','DESC')->paginate(5);
     	$category_by_name = Category::where('tbl_category.category_id', $category_id)->limit(1)->get();
+    	$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
+		->limit(1)->get();
 
     	//SEO
     	foreach ($category_by_id as $key => $value) {
@@ -32,6 +35,6 @@ class CategoryController extends Controller
 		}
 		//-----------------------
 
-    	return view('student.page.category.show')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'category_by_id', 'category_by_name'));
+    	return view('student.page.category.show')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'category_by_id', 'category_by_name','studentSS'));
     }
 }
