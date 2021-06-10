@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Student;
 use App\Models\StudentInfo;
+use App\Models\Nofication;
 use DB;
 use Session;
 session_start();
@@ -23,7 +24,9 @@ class StudentInfoController extends Controller
         
         $student2 = Student::with('info')->where('student_id',Session::get('student_id'))
         ->limit(1)->get();
-        return view('student.page.student.profile')->with(compact('meta_desc','meta_title','url_canonical','student2'));
+        $nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
+
+        return view('student.page.student.profile')->with(compact('meta_desc','meta_title','url_canonical','student2','nofi'));
     }
 
     public function studentinfo_create(Request $request, $student_id){

@@ -298,7 +298,7 @@
 	<!-- /NAVIGATION WIDGET SECTION LINK -->
 
 	<!-- NAVIGATION WIDGET SECTION LINK -->
-	<a class="navigation-widget-section-link" href="hub-profile-notifications.html">Thông báo</a>
+	<a class="navigation-widget-section-link" href="{{url('/tat-ca-thong-bao')}}">Thông báo</a>
 
 	<!-- NAVIGATION WIDGET SECTION LINK -->
 	<a class="navigation-widget-section-link" href="{{url('/thay-doi-mat-khau/'.Session::get('student_id'))}}">Đổi mật khẩu</a>
@@ -409,10 +409,6 @@
 							<!-- DROPDOWN BOX HEADER ACTION -->
 							<p class="dropdown-box-header-action">Đọc tất cả</p>
 							<!-- /DROPDOWN BOX HEADER ACTION -->
-
-							<!-- DROPDOWN BOX HEADER ACTION -->
-							<p class="dropdown-box-header-action">Cài đặt</p>
-							<!-- /DROPDOWN BOX HEADER ACTION -->
 						</div>
 						<!-- /DROPDOWN BOX HEADER ACTIONS -->
 					</div>
@@ -420,21 +416,21 @@
 
 					<!-- DROPDOWN BOX LIST -->
 					<div class="dropdown-box-list" data-simplebar>
+						@foreach($nofi as $key => $nofication)
+						@if ($nofication->postes->student_id==Session::get('student_id'))
 						<!-- DROPDOWN BOX LIST ITEM -->
 						<div class="dropdown-box-list-item unread">
 							<!-- USER STATUS -->
 							<div class="user-status notification">
 								<!-- USER STATUS AVATAR -->
-								<a class="user-status-avatar" href="profile-timeline.html">
+								<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">
 									<!-- USER AVATAR -->
 									<div class="user-avatar small no-outline">
-										<!-- USER AVATAR CONTENT -->
-										<div class="user-avatar-content">
-											<!-- HEXAGON -->
-											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/03.jpg')}}"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR CONTENT -->
+										@if ($nofication->studentes->student_info_id)
+										<div class="hexagon-image-40-44" data-src="{{asset('public/student/img/avatar/'.$nofication->studentes->student_avatar)}}"></div>
+										@else
+										<div class="hexagon-image-40-44" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
+										@endif
 
 										<!-- USER AVATAR PROGRESS -->
 										<div class="user-avatar-progress">
@@ -451,205 +447,35 @@
 											<!-- /HEXAGON -->
 										</div>
 										<!-- /USER AVATAR PROGRESS BORDER -->
-
-										<!-- USER AVATAR BADGE -->
-										<div class="user-avatar-badge">
-											<!-- USER AVATAR BADGE BORDER -->
-											<div class="user-avatar-badge-border">
-												<!-- HEXAGON -->
-												<div class="hexagon-22-24"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE BORDER -->
-
-											<!-- USER AVATAR BADGE CONTENT -->
-											<div class="user-avatar-badge-content">
-												<!-- HEXAGON -->
-												<div class="hexagon-dark-16-18"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE CONTENT -->
-
-											<!-- USER AVATAR BADGE TEXT -->
-											<p class="user-avatar-badge-text">16</p>
-											<!-- /USER AVATAR BADGE TEXT -->
-										</div>
-										<!-- /USER AVATAR BADGE -->
 									</div>
 									<!-- /USER AVATAR -->
 								</a>
 								<!-- /USER STATUS AVATAR -->
-
+								@if ($nofication->nofication_kind=='Like')
 								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">Nick Grissom</a> posted a comment on your <a class="highlighted" href="profile-timeline.html">status update</a></p>
+								<p class="user-status-title"><a class="bold" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">{{$nofication->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="profile-timeline.html">{{$nofication->postes->post_title}}</a> của bạn</p>
 								<!-- /USER STATUS TITLE -->
 
 								<!-- USER STATUS TIMESTAMP -->
-								<p class="user-status-timestamp">2 minutes ago</p>
+								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
 								<!-- /USER STATUS TIMESTAMP -->
 
 								<!-- USER STATUS ICON -->
 								<div class="user-status-icon">
 									<!-- ICON COMMENT -->
-									<svg class="icon-comment">
-										<use xlink:href="#svg-comment"></use>
-									</svg>
-									<!-- /ICON COMMENT -->
-								</div>
-								<!-- /USER STATUS ICON -->
-							</div>
-							<!-- /USER STATUS -->
-						</div>
-						<!-- /DROPDOWN BOX LIST ITEM -->
-
-						<!-- DROPDOWN BOX LIST ITEM -->
-						<div class="dropdown-box-list-item">
-							<!-- USER STATUS -->
-							<div class="user-status notification">
-								<!-- USER STATUS AVATAR -->
-								<a class="user-status-avatar" href="profile-timeline.html">
-									<!-- USER AVATAR -->
-									<div class="user-avatar small no-outline">
-										<!-- USER AVATAR CONTENT -->
-										<div class="user-avatar-content">
-											<!-- HEXAGON -->
-											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/07.jpg')}}"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR CONTENT -->
-
-										<!-- USER AVATAR PROGRESS -->
-										<div class="user-avatar-progress">
-											<!-- HEXAGON -->
-											<div class="hexagon-progress-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS -->
-
-										<!-- USER AVATAR PROGRESS BORDER -->
-										<div class="user-avatar-progress-border">
-											<!-- HEXAGON -->
-											<div class="hexagon-border-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS BORDER -->
-
-										<!-- USER AVATAR BADGE -->
-										<div class="user-avatar-badge">
-											<!-- USER AVATAR BADGE BORDER -->
-											<div class="user-avatar-badge-border">
-												<!-- HEXAGON -->
-												<div class="hexagon-22-24"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE BORDER -->
-
-											<!-- USER AVATAR BADGE CONTENT -->
-											<div class="user-avatar-badge-content">
-												<!-- HEXAGON -->
-												<div class="hexagon-dark-16-18"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE CONTENT -->
-
-											<!-- USER AVATAR BADGE TEXT -->
-											<p class="user-avatar-badge-text">26</p>
-											<!-- /USER AVATAR BADGE TEXT -->
-										</div>
-										<!-- /USER AVATAR BADGE -->
-									</div>
-									<!-- /USER AVATAR -->
-								</a>
-								<!-- /USER STATUS AVATAR -->
-
-								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">Sarah Diamond</a> left a like <img class="reaction" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like"> reaction on your <a class="highlighted" href="profile-timeline.html">status update</a></p>
-								<!-- /USER STATUS TITLE -->
-
-								<!-- USER STATUS TIMESTAMP -->
-								<p class="user-status-timestamp">17 minutes ago</p>
-								<!-- /USER STATUS TIMESTAMP -->
-
-								<!-- USER STATUS ICON -->
-								<div class="user-status-icon">
-									<!-- ICON THUMBS UP -->
 									<svg class="icon-thumbs-up">
 										<use xlink:href="#svg-thumbs-up"></use>
 									</svg>
-									<!-- /ICON THUMBS UP -->
+									<!-- /ICON COMMENT -->
 								</div>
 								<!-- /USER STATUS ICON -->
-							</div>
-							<!-- /USER STATUS -->
-						</div>
-						<!-- /DROPDOWN BOX LIST ITEM -->
-
-						<!-- DROPDOWN BOX LIST ITEM -->
-						<div class="dropdown-box-list-item">
-							<!-- USER STATUS -->
-							<div class="user-status notification">
-								<!-- USER STATUS AVATAR -->
-								<a class="user-status-avatar" href="profile-timeline.html">
-									<!-- USER AVATAR -->
-									<div class="user-avatar small no-outline">
-										<!-- USER AVATAR CONTENT -->
-										<div class="user-avatar-content">
-											<!-- HEXAGON -->
-											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/02.jpg')}}"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR CONTENT -->
-
-										<!-- USER AVATAR PROGRESS -->
-										<div class="user-avatar-progress">
-											<!-- HEXAGON -->
-											<div class="hexagon-progress-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS -->
-
-										<!-- USER AVATAR PROGRESS BORDER -->
-										<div class="user-avatar-progress-border">
-											<!-- HEXAGON -->
-											<div class="hexagon-border-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS BORDER -->
-
-										<!-- USER AVATAR BADGE -->
-										<div class="user-avatar-badge">
-											<!-- USER AVATAR BADGE BORDER -->
-											<div class="user-avatar-badge-border">
-												<!-- HEXAGON -->
-												<div class="hexagon-22-24"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE BORDER -->
-
-											<!-- USER AVATAR BADGE CONTENT -->
-											<div class="user-avatar-badge-content">
-												<!-- HEXAGON -->
-												<div class="hexagon-dark-16-18"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE CONTENT -->
-
-											<!-- USER AVATAR BADGE TEXT -->
-											<p class="user-avatar-badge-text">13</p>
-											<!-- /USER AVATAR BADGE TEXT -->
-										</div>
-										<!-- /USER AVATAR BADGE -->
-									</div>
-									<!-- /USER AVATAR -->
-								</a>
-								<!-- /USER STATUS AVATAR -->
-
+								@elseif($nofication->nofication_kind=='Comment')
 								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">Destroy Dex</a> posted a comment on your <a class="highlighted" href="profile-photos.html">photo</a></p>
+								<p class="user-status-title"><a class="bold" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">{{$nofication->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted" href="profile-timeline.html">{{$nofication->postes->post_title}}</a> của bạn</p>
 								<!-- /USER STATUS TITLE -->
 
 								<!-- USER STATUS TIMESTAMP -->
-								<p class="user-status-timestamp">31 minutes ago</p>
+								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
 								<!-- /USER STATUS TIMESTAMP -->
 
 								<!-- USER STATUS ICON -->
@@ -661,179 +487,45 @@
 									<!-- /ICON COMMENT -->
 								</div>
 								<!-- /USER STATUS ICON -->
-							</div>
-							<!-- /USER STATUS -->
-						</div>
-						<!-- /DROPDOWN BOX LIST ITEM -->
-
-						<!-- DROPDOWN BOX LIST ITEM -->
-						<div class="dropdown-box-list-item">
-							<!-- USER STATUS -->
-							<div class="user-status notification">
-								<!-- USER STATUS AVATAR -->
-								<a class="user-status-avatar" href="profile-timeline.html">
-									<!-- USER AVATAR -->
-									<div class="user-avatar small no-outline">
-										<!-- USER AVATAR CONTENT -->
-										<div class="user-avatar-content">
-											<!-- HEXAGON -->
-											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/10.jpg')}}"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR CONTENT -->
-
-										<!-- USER AVATAR PROGRESS -->
-										<div class="user-avatar-progress">
-											<!-- HEXAGON -->
-											<div class="hexagon-progress-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS -->
-
-										<!-- USER AVATAR PROGRESS BORDER -->
-										<div class="user-avatar-progress-border">
-											<!-- HEXAGON -->
-											<div class="hexagon-border-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS BORDER -->
-
-										<!-- USER AVATAR BADGE -->
-										<div class="user-avatar-badge">
-											<!-- USER AVATAR BADGE BORDER -->
-											<div class="user-avatar-badge-border">
-												<!-- HEXAGON -->
-												<div class="hexagon-22-24"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE BORDER -->
-
-											<!-- USER AVATAR BADGE CONTENT -->
-											<div class="user-avatar-badge-content">
-												<!-- HEXAGON -->
-												<div class="hexagon-dark-16-18"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE CONTENT -->
-
-											<!-- USER AVATAR BADGE TEXT -->
-											<p class="user-avatar-badge-text">5</p>
-											<!-- /USER AVATAR BADGE TEXT -->
-										</div>
-										<!-- /USER AVATAR BADGE -->
-									</div>
-									<!-- /USER AVATAR -->
-								</a>
-								<!-- /USER STATUS AVATAR -->
-
+								@else
 								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">The Green Goo</a> left a love <img class="reaction" src="{{asset('public/student/img/reaction/love.png')}}" alt="reaction-love"> reaction on your <a class="highlighted" href="profile-timeline.html">status update</a></p>
+								<p class="user-status-title">Khoa đã trả lời câu hỏi <a class="highlighted" href="profile-timeline.html">{{$nofication->postes->post_title}}</a> của bạn</p>
 								<!-- /USER STATUS TITLE -->
 
 								<!-- USER STATUS TIMESTAMP -->
-								<p class="user-status-timestamp">2 hours ago</p>
+								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
 								<!-- /USER STATUS TIMESTAMP -->
 
 								<!-- USER STATUS ICON -->
 								<div class="user-status-icon">
-									<!-- ICON THUMBS UP -->
+									<!-- ICON COMMENT -->
 									<svg class="icon-thumbs-up">
 										<use xlink:href="#svg-thumbs-up"></use>
 									</svg>
-									<!-- /ICON THUMBS UP -->
+									<!-- /ICON COMMENT -->
 								</div>
 								<!-- /USER STATUS ICON -->
-							</div>
-							<!-- /USER STATUS -->
-						</div>
-						<!-- /DROPDOWN BOX LIST ITEM -->
-
-						<!-- DROPDOWN BOX LIST ITEM -->
-						<div class="dropdown-box-list-item">
-							<!-- USER STATUS -->
-							<div class="user-status notification">
-								<!-- USER STATUS AVATAR -->
-								<a class="user-status-avatar" href="profile-timeline.html">
-									<!-- USER AVATAR -->
-									<div class="user-avatar small no-outline">
-										<!-- USER AVATAR CONTENT -->
-										<div class="user-avatar-content">
-											<!-- HEXAGON -->
-											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/05.jpg')}}"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR CONTENT -->
-
-										<!-- USER AVATAR PROGRESS -->
-										<div class="user-avatar-progress">
-											<!-- HEXAGON -->
-											<div class="hexagon-progress-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS -->
-
-										<!-- USER AVATAR PROGRESS BORDER -->
-										<div class="user-avatar-progress-border">
-											<!-- HEXAGON -->
-											<div class="hexagon-border-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS BORDER -->
-
-										<!-- USER AVATAR BADGE -->
-										<div class="user-avatar-badge">
-											<!-- USER AVATAR BADGE BORDER -->
-											<div class="user-avatar-badge-border">
-												<!-- HEXAGON -->
-												<div class="hexagon-22-24"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE BORDER -->
-
-											<!-- USER AVATAR BADGE CONTENT -->
-											<div class="user-avatar-badge-content">
-												<!-- HEXAGON -->
-												<div class="hexagon-dark-16-18"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE CONTENT -->
-
-											<!-- USER AVATAR BADGE TEXT -->
-											<p class="user-avatar-badge-text">12</p>
-											<!-- /USER AVATAR BADGE TEXT -->
-										</div>
-										<!-- /USER AVATAR BADGE -->
-									</div>
-									<!-- /USER AVATAR -->
-								</a>
-								<!-- /USER STATUS AVATAR -->
-
-								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">Neko Bebop</a> posted a comment on your <a class="highlighted" href="profile-timeline.html">status update</a></p>
-								<!-- /USER STATUS TITLE -->
-
-								<!-- USER STATUS TIMESTAMP -->
-								<p class="user-status-timestamp">3 hours ago</p>
-								<!-- /USER STATUS TIMESTAMP -->
-
 								<!-- USER STATUS ICON -->
 								<div class="user-status-icon">
 									<!-- ICON COMMENT -->
-									<svg class="icon-comment">
-										<use xlink:href="#svg-comment"></use>
+									<svg class="icon-quests">
+										<use xlink:href="#svg-quests"></use>
 									</svg>
 									<!-- /ICON COMMENT -->
 								</div>
 								<!-- /USER STATUS ICON -->
+								@endif
 							</div>
 							<!-- /USER STATUS -->
 						</div>
 						<!-- /DROPDOWN BOX LIST ITEM -->
+						@endif
+						@endforeach
 					</div>
 					<!-- /DROPDOWN BOX LIST -->
 
 					<!-- DROPDOWN BOX BUTTON -->
-					<a class="dropdown-box-button secondary" href="hub-profile-notifications.html">View all Notifications</a>
+					<a class="dropdown-box-button secondary" href="{{url('/tat-ca-thong-bao')}}">Xem tất cả thông báo</a>
 					<!-- /DROPDOWN BOX BUTTON -->
 				</div>
 				<!-- /DROPDOWN BOX -->
@@ -898,7 +590,7 @@
 			<!-- /DROPDOWN NAVIGATION LINK -->
 
 			<!-- DROPDOWN NAVIGATION LINK -->
-			<a class="dropdown-navigation-link" href="hub-profile-notifications.html">Thông báo</a>
+			<a class="dropdown-navigation-link" href="{{url('/tat-ca-thong-bao')}}">Thông báo</a>
 			<!-- /DROPDOWN NAVIGATION LINK -->
 
 			<!-- DROPDOWN NAVIGATION LINK -->

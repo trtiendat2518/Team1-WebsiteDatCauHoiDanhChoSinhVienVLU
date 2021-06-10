@@ -41,7 +41,7 @@ foreach($student2 as $key => $st){
 								<a class="sidebar-menu-link active" style="color: #007bff;">Thông tin cá nhân</a>
 
 								<!-- SIDEBAR MENU LINK -->
-								<a class="sidebar-menu-link" href="hub-profile-notifications.html">Tất cả thông báo</a>
+								<a class="sidebar-menu-link" href="{{url('/tat-ca-thong-bao')}}">Tất cả thông báo</a>
 								<!-- /SIDEBAR MENU LINK -->
 
 								<!-- SIDEBAR MENU LINK -->

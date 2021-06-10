@@ -50,6 +50,9 @@ Route::post('/thich-bai-viet/{post_id}', 'LikeController@like');
 //REPLY FROM FACULTY
 Route::get('/xem-cau-tra-loi-khoa/{post_id}', 'ReplyController@post_reply');
 
+//STUDENT NOFICATION
+Route::get('/tat-ca-thong-bao', 'NoficationController@nofication_list');
+
 //-----------------------------------------------------------------------------------------
 //ADMIN HOME
 Route::get('/admin-home', 'AdminController@index');

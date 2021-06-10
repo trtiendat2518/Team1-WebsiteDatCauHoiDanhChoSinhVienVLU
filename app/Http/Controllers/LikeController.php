@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Like;
 use App\Models\Post;
 use App\Models\Student;
+use App\Models\Nofication;
 use DB;
 use Mail;
 use Session;
@@ -20,13 +21,27 @@ class LikeController extends Controller
     public function like(Request $request, $post_id){
         $post = Post::find($post_id);
         $unlike = Like::where('post_id',$post_id)->where('student_id',Session::get('student_id'))->delete();
-        if(!$unlike){
+        if($unlike){
+            $delnofi = Nofication::where('post_id',$post_id)
+            ->where('student_id',Session::get('student_id'))
+            ->where('nofication_kind','=','Like')->delete();
+        }else if(!$unlike){
             $data = $request->all();
             $like = new Like();
             $like->post_id = $post_id;
             $like->student_id = Session::get('student_id');
             $like->like_quantity = $data['like_quantity'];
             $like->save();
+
+            $nofi = new Nofication();
+            $nofi->post_id = $post_id;
+            $nofi->student_id = Session::get('student_id');
+            $nofi->nofication_kind = "Like";
+            $nofi->nofication_desc = "Bạn có một lượt thích";
+            $nofi->nofication_status = 0;
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
+            $nofi->nofication_created = now();
+            $nofi->save();
         }
         $post->post_like = $post->likes->count();
         $post->save();
