@@ -140,7 +140,7 @@ iframe {
   border: none;
   -webkit-box-shadow: none;
           box-shadow: none;
-  height: auto;
+  height: 100px;
   max-width: 100%;
   width: 100%; }
 

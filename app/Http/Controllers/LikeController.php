@@ -28,6 +28,8 @@ class LikeController extends Controller
             $like->like_quantity = $data['like_quantity'];
             $like->save();
         }
+        $post->post_like = $post->likes->count();
+        $post->save();
         return response()->json(['liking'=>$post->likes->count()]);
     }
 }
