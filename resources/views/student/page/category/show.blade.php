@@ -261,7 +261,11 @@
 						<div class="user-avatar small no-outline">
 							<div class="user-avatar-content">
 								@foreach ($studentSS as $avaSS)
+								@if ($avaSS->student_info_id)
 								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$avaSS->info->student_info_avatar)}}"></div>
+								@else
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
+								@endif
 								@endforeach
 							</div>
 							<div class="user-avatar-progress">
