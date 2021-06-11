@@ -1231,5 +1231,39 @@
 	});
 </script>
 
+<script type="text/javascript" language="javascript">
+	$(document).ready(function(){
+		$('.btnReadnofi').click(function(e){
+			var id = $(this).data('id_readnofi');
+			var elm = $(this).parents('.account-hub-content');
+			var _token = $('input[name="_token"]').val();
+			$.ajax({
+				url:'{{ url('/danh-dau-da-doc/') }}'+'/'+id,
+				method: 'POST',
+				data: {id:id, _token:_token},
+				success:function(data){
+					if (elm.find('.nofi_'+id).hasClass('unread')){
+						elm.find('.nofi_'+id).removeClass('unread');
+					}
+				}
+			})
+		});
+
+		$('.btnDelnofi').click(function(e){
+			var id = $(this).data('id_delnofi');
+			var elm = $(this).parents('.account-hub-content');
+			var _token = $('input[name="_token"]').val();
+			$.ajax({
+				url:'{{ url('/xoa-thong-bao') }}',
+				method: 'GET',
+				data: {id:id, _token:_token},
+			})
+			window.setTimeout(function(){
+				location.reload();
+			},500);
+		});
+	});
+</script>
+
 </body>
 </html>

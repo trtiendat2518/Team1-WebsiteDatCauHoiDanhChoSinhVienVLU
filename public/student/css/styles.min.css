@@ -6057,7 +6057,7 @@ figure>img {
 }
 
 .notification-box.unread {
-	background-color: #21283b
+	background-color: #2f3749
 }
 
 .notification-box:hover .notification-box-close-button {
@@ -8878,7 +8878,7 @@ figure>img {
 }
 
 .dropdown-box-list .dropdown-box-list-item.unread {
-	background-color: #21283b
+	background-color: #2f3749
 }
 
 .dropdown-box-list .dropdown-box-list-item:hover {

@@ -52,6 +52,8 @@ Route::get('/xem-cau-tra-loi-khoa/{post_id}', 'ReplyController@post_reply');
 
 //STUDENT NOFICATION
 Route::get('/tat-ca-thong-bao', 'NoficationController@nofication_list');
+Route::post('/danh-dau-da-doc/{nofication_id}', 'NoficationController@nofication_readone');
+Route::get('/xoa-thong-bao', 'NoficationController@nofication_delnofi');
 
 //-----------------------------------------------------------------------------------------
 //ADMIN HOME

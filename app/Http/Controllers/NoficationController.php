@@ -17,8 +17,7 @@ session_start();
 
 class NoficationController extends Controller
 {
-    public function nofication_list(Request $request)
-    {
+    public function nofication_list(Request $request){
         //SEO
         $meta_desc = "Website đặt câu hỏi dành cho sinh viên Văn Lang";
         $meta_title = "Trang chủ";
@@ -30,5 +29,15 @@ class NoficationController extends Controller
         ->paginate(10);
 
         return view('student.page.nofication.list')->with(compact('meta_desc','meta_title','url_canonical','list','nofi'));
+    }
+
+    public function nofication_readone($nofication_id){
+        $nofi = Nofication::find($nofication_id);
+        $nofi->nofication_status=1;
+        $nofi->save();
+    }
+
+    public function nofication_delnofi(Request $request){
+        Nofication::find($request->input('id'))->delete();
     }
 }

@@ -84,22 +84,19 @@
 		<!-- NOTIFICATION BOX LIST -->
 		<div class="notification-box-list">
 			@foreach ($list as $key => $list_nofi)
-			@if ($list_nofi->postes->student_id==Session::get('student_id'))
-			<!-- NOTIFICATION BOX -->
-			<div class="notification-box">
+			@if($list_nofi->postes->student_id==Session::get('student_id') && $list_nofi->nofication_status==0)
+			<div class="notification-box unread nofi_{{$list_nofi->nofication_id}}">
 				<!-- USER STATUS -->
 				<div class="user-status notification">
 					<!-- USER STATUS AVATAR -->
-					<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$list_nofi->studentes->student_id)}}">
+					<a class="user-status-avatar" href="profile-timeline.html">
 						<!-- USER AVATAR -->
 						<div class="user-avatar small no-outline">
 							<!-- USER AVATAR CONTENT -->
 							<div class="user-avatar-content">
-								@if ($list_nofi->studentes->student_info_id)
-								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$list_nofi->studentes->student_avatar)}}"></div>
-								@else
-									<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
-								@endif
+								<!-- HEXAGON -->
+								<div class="hexagon-image-30-32" data-src="img/avatar/03.jpg"></div>
+								<!-- /HEXAGON -->
 							</div>
 							<!-- /USER AVATAR CONTENT -->
 
@@ -126,7 +123,7 @@
 					<!-- /USER STATUS AVATAR -->
 					@if ($list_nofi->nofication_kind=='Like')
 					<!-- USER STATUS TITLE -->
-					<p class="user-status-title"><a class="bold" href="{{url('/trang-sinh-vien/'.$list_nofi->studentes->student_id)}}">{{$list_nofi->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="profile-timeline.html">{{$list_nofi->postes->post_title}}</a> của bạn</p>
+					<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$list_nofi->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="profile-timeline.html">{{$list_nofi->postes->post_title}}</a> của bạn</p>
 					<!-- /USER STATUS TITLE -->
 
 					<!-- USER STATUS TIMESTAMP -->
@@ -144,7 +141,126 @@
 					<!-- /USER STATUS ICON -->
 					@elseif($list_nofi->nofication_kind=='Comment')
 					<!-- USER STATUS TITLE -->
-					<p class="user-status-title"><a class="bold" href="{{url('/trang-sinh-vien/'.$list_nofi->studentes->student_id)}}">{{$list_nofi->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted" href="profile-timeline.html">{{$list_nofi->postes->post_title}}</a> của bạn</p>
+					<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$list_nofi->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted" href="profile-timeline.html">{{$list_nofi->postes->post_title}}</a> của bạn</p>
+					<!-- /USER STATUS TITLE -->
+
+					<!-- USER STATUS TIMESTAMP -->
+					<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($list_nofi->nofication_created)->diffForHumans() }}</p>
+					<!-- /USER STATUS TIMESTAMP -->
+
+					<!-- USER STATUS ICON -->
+					<div class="user-status-icon">
+						<!-- ICON COMMENT -->
+						<svg class="icon-comment">
+							<use xlink:href="#svg-comment"></use>
+						</svg>
+						<!-- /ICON COMMENT -->
+					</div>
+					<!-- /USER STATUS ICON -->
+					@else
+					<!-- USER STATUS TITLE -->
+					<p class="user-status-title">Khoa đã trả lời câu hỏi <a class="highlighted" href="profile-timeline.html">{{$list_nofi->postes->post_title}}</a> của bạn</p>
+					<!-- /USER STATUS TITLE -->
+
+					<!-- USER STATUS TIMESTAMP -->
+					<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($list_nofi->nofication_created)->diffForHumans() }}</p>
+					<!-- /USER STATUS TIMESTAMP -->
+
+					<!-- USER STATUS ICON -->
+					<div class="user-status-icon">
+						<!-- ICON COMMENT -->
+						<svg class="icon-thumbs-up">
+							<use xlink:href="#svg-thumbs-up"></use>
+						</svg>
+						<!-- /ICON COMMENT -->
+					</div>
+					<!-- /USER STATUS ICON -->
+					<!-- USER STATUS ICON -->
+					<div class="user-status-icon">
+						<!-- ICON COMMENT -->
+						<svg class="icon-quests">
+							<use xlink:href="#svg-quests"></use>
+						</svg>
+						<!-- /ICON COMMENT -->
+					</div>
+					<!-- /USER STATUS ICON -->
+					@endif
+				</div>
+				<!-- /USER STATUS -->
+
+				<!-- NOTIFICATION BOX CLOSE BUTTON -->
+				<div class="notification-box-close-button btnDelnofi" data-id_delnofi="{{$list_nofi->nofication_id}}">
+					<!-- NOTIFICATION BOX CLOSE BUTTON ICON -->
+					<svg class="notification-box-close-button-icon icon-cross">
+						<use xlink:href="#svg-cross"></use>
+					</svg>
+					<!-- /NOTIFICATION BOX CLOSE BUTTON ICON -->
+				</div>
+				<!-- /NOTIFICATION BOX CLOSE BUTTON -->
+
+				<!-- MARK UNREAD BUTTON -->
+				<div class="mark-unread-button btnReadnofi" data-id_readnofi="{{$list_nofi->nofication_id}}">
+				</div>
+				<!-- /MARK UNREAD BUTTON -->
+			</div>
+			@elseif($list_nofi->postes->student_id==Session::get('student_id') && $list_nofi->nofication_status==1)
+			<div class="notification-box">
+				<!-- USER STATUS -->
+				<div class="user-status notification">
+					<!-- USER STATUS AVATAR -->
+					<a class="user-status-avatar" href="profile-timeline.html">
+						<!-- USER AVATAR -->
+						<div class="user-avatar small no-outline">
+							<!-- USER AVATAR CONTENT -->
+							<div class="user-avatar-content">
+								<!-- HEXAGON -->
+								<div class="hexagon-image-30-32" data-src="img/avatar/03.jpg"></div>
+								<!-- /HEXAGON -->
+							</div>
+							<!-- /USER AVATAR CONTENT -->
+
+							<!-- USER AVATAR PROGRESS -->
+							<div class="user-avatar-progress">
+								<!-- HEXAGON -->
+								<div class="hexagon-progress-40-44"></div>
+								<!-- /HEXAGON -->
+							</div>
+							<!-- /USER AVATAR PROGRESS -->
+
+							<!-- USER AVATAR PROGRESS BORDER -->
+							<div class="user-avatar-progress-border">
+								<!-- HEXAGON -->
+								<div class="hexagon-border-40-44"></div>
+								<!-- /HEXAGON -->
+							</div>
+							<!-- /USER AVATAR PROGRESS BORDER -->
+						</div>
+						<!-- /USER AVATAR -->
+					</a>
+					<!-- /USER STATUS AVATAR -->
+
+					<!-- /USER STATUS AVATAR -->
+					@if ($list_nofi->nofication_kind=='Like')
+					<!-- USER STATUS TITLE -->
+					<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$list_nofi->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="profile-timeline.html">{{$list_nofi->postes->post_title}}</a> của bạn</p>
+					<!-- /USER STATUS TITLE -->
+
+					<!-- USER STATUS TIMESTAMP -->
+					<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($list_nofi->nofication_created)->diffForHumans() }}</p>
+					<!-- /USER STATUS TIMESTAMP -->
+
+					<!-- USER STATUS ICON -->
+					<div class="user-status-icon">
+						<!-- ICON COMMENT -->
+						<svg class="icon-thumbs-up">
+							<use xlink:href="#svg-thumbs-up"></use>
+						</svg>
+						<!-- /ICON COMMENT -->
+					</div>
+					<!-- /USER STATUS ICON -->
+					@elseif($list_nofi->nofication_kind=='Comment')
+					<!-- USER STATUS TITLE -->
+					<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$list_nofi->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted" href="profile-timeline.html">{{$list_nofi->postes->post_title}}</a> của bạn</p>
 					<!-- /USER STATUS TITLE -->
 
 					<!-- USER STATUS TIMESTAMP -->
@@ -200,12 +316,7 @@
 					<!-- /NOTIFICATION BOX CLOSE BUTTON ICON -->
 				</div>
 				<!-- /NOTIFICATION BOX CLOSE BUTTON -->
-
-				<!-- MARK UNREAD BUTTON -->
-				<div class="mark-unread-button"></div>
-				<!-- /MARK UNREAD BUTTON -->
 			</div>
-			<!-- /NOTIFICATION BOX -->
 			@endif
 			@endforeach
 		</div>
