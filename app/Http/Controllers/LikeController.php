@@ -30,6 +30,7 @@ class LikeController extends Controller
             $like = new Like();
             $like->post_id = $post_id;
             $like->student_id = Session::get('student_id');
+            $like->like_code = "LIKE".md5(time().rand(1000,9999).$post_id);
             $like->like_quantity = $data['like_quantity'];
             $like->save();
 
@@ -37,7 +38,7 @@ class LikeController extends Controller
             $nofi->post_id = $post_id;
             $nofi->student_id = Session::get('student_id');
             $nofi->nofication_kind = "Like";
-            $nofi->nofication_desc = "Bạn có một lượt thích";
+            $nofi->nofication_code = $like->like_code;
             $nofi->nofication_status = 0;
             date_default_timezone_set('Asia/Ho_Chi_Minh');
             $nofi->nofication_created = now();

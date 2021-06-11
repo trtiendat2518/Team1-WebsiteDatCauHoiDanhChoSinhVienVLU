@@ -25,6 +25,7 @@ class CommentController extends Controller
 		$cmt = new Comment();
 		$cmt->post_id = $post_id;
 		$cmt->student_id = Session::get('student_id');
+		$cmt->comment_code = "COMMENT".md5(time().rand(1000,9999).$post_id);
 		$cmt->comment_content = $data['comment_content'];
 		date_default_timezone_set('Asia/Ho_Chi_Minh');
 		$cmt->created_at = now();
@@ -34,7 +35,7 @@ class CommentController extends Controller
             $nofi->post_id = $post_id;
             $nofi->student_id = Session::get('student_id');
             $nofi->nofication_kind = "Comment";
-            $nofi->nofication_desc = "Bạn có một bình luận";
+            $nofi->nofication_code = $cmt->comment_code;
             $nofi->nofication_status = 0;
             date_default_timezone_set('Asia/Ho_Chi_Minh');
             $nofi->nofication_created = now();
@@ -44,6 +45,9 @@ class CommentController extends Controller
 
 	public function comment_delete(Request $request)
 	{
-		Comment::find($request->input('id'))->delete();
+		$cmt = Comment::find($request->input('id'));
+		$delnofi = Nofication::where('student_id',Session::get('student_id'))
+			->where('nofication_code',$cmt->comment_code)->delete();
+		$cmt->delete();
 	}
 }

@@ -9,7 +9,7 @@ class Like extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'post_id', 'student_id', 'like_quantity'
+        'post_id', 'student_id', 'like_code' ,'like_quantity'
     ];
     protected $primaryKey = 'like_id';
     protected $table = 'tbl_like';                
