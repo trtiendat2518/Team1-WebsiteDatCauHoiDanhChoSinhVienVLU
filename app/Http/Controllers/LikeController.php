@@ -37,6 +37,7 @@ class LikeController extends Controller
             $nofi = new Nofication();
             $nofi->post_id = $post_id;
             $nofi->student_id = Session::get('student_id');
+            $nofi->nofication_mine = md5($post->student_id);
             $nofi->nofication_kind = "Like";
             $nofi->nofication_code = $like->like_code;
             $nofi->nofication_status = 0;

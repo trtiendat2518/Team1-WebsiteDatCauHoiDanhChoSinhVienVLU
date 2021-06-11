@@ -20,6 +20,7 @@ class CommentController extends Controller
 {
 	public function comment_post(Request $request, $post_id)
 	{
+		$post = Post::find($post_id);
 		$data = $request->all();
 
 		$cmt = new Comment();
@@ -34,6 +35,7 @@ class CommentController extends Controller
 			$nofi = new Nofication();
             $nofi->post_id = $post_id;
             $nofi->student_id = Session::get('student_id');
+			$nofi->nofication_mine = md5($post->student_id);
             $nofi->nofication_kind = "Comment";
             $nofi->nofication_code = $cmt->comment_code;
             $nofi->nofication_status = 0;

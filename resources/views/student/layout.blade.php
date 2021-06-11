@@ -1262,6 +1262,21 @@
 				location.reload();
 			},500);
 		});
+
+		$('.btnReadall').click(function(e){
+			var elm = $(this).parents('.account-hub-content');
+			var _token = $('input[name="_token"]').val();
+			$.ajax({
+				url:'{{ url('/doc-tat-ca') }}',
+				method: 'POST',
+				data: {_token:_token},
+				success:function(data){
+					if (elm.find('.notification-box').hasClass('unread')){
+						elm.find('.notification-box').removeClass('unread');
+					}
+				}
+			})
+		});
 	});
 </script>
 

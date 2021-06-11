@@ -40,4 +40,14 @@ class NoficationController extends Controller
     public function nofication_delnofi(Request $request){
         Nofication::find($request->input('id'))->delete();
     }
+    
+    public function nofication_readall(){
+        $minde_id = md5(Session::get('student_id'));
+        $nofi = Nofication::where('nofication_status',0)->where('nofication_mine',$minde_id)->get();
+        
+        foreach($nofi as $val){
+            $val->nofication_status=1;
+            $val->save();
+        }
+    }
 }

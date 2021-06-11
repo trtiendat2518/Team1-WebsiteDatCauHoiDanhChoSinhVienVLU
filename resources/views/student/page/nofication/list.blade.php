@@ -75,7 +75,7 @@
 			<!-- SECTION HEADER ACTIONS -->
 			<div class="section-header-actions">
 				<!-- SECTION HEADER ACTION -->
-				<p class="section-header-action">Đọc tất cả</p>
+				<p class="section-header-action btnReadall">Đọc tất cả</p>
 			</div>
 			<!-- /SECTION HEADER ACTIONS -->
 		</div>
@@ -94,9 +94,11 @@
 						<div class="user-avatar small no-outline">
 							<!-- USER AVATAR CONTENT -->
 							<div class="user-avatar-content">
-								<!-- HEXAGON -->
-								<div class="hexagon-image-30-32" data-src="img/avatar/03.jpg"></div>
-								<!-- /HEXAGON -->
+								@if ($list_nofi->studentes->student_info_id)
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$list_nofi->studentes->student_avatar)}}"></div>
+								@else
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
+								@endif
 							</div>
 							<!-- /USER AVATAR CONTENT -->
 
@@ -213,9 +215,11 @@
 						<div class="user-avatar small no-outline">
 							<!-- USER AVATAR CONTENT -->
 							<div class="user-avatar-content">
-								<!-- HEXAGON -->
-								<div class="hexagon-image-30-32" data-src="img/avatar/03.jpg"></div>
-								<!-- /HEXAGON -->
+								@if ($list_nofi->studentes->student_info_id)
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$list_nofi->studentes->student_avatar)}}"></div>
+								@else
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
+								@endif
 							</div>
 							<!-- /USER AVATAR CONTENT -->
 
@@ -308,7 +312,7 @@
 				<!-- /USER STATUS -->
 
 				<!-- NOTIFICATION BOX CLOSE BUTTON -->
-				<div class="notification-box-close-button">
+				<div class="notification-box-close-button btnDelnofi" data-id_delnofi="{{$list_nofi->nofication_id}}" >
 					<!-- NOTIFICATION BOX CLOSE BUTTON ICON -->
 					<svg class="notification-box-close-button-icon icon-cross">
 						<use xlink:href="#svg-cross"></use>
