@@ -36,7 +36,7 @@ class CategoryController extends Controller
 			$url_canonical =$request->url();
 		}
 		//-----------------------
-
+		
     	return view('student.page.category.show')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'category_by_id', 'category_by_name','studentSS','nofi'));
     }
 }
