@@ -34,16 +34,18 @@ class LikeController extends Controller
             $like->like_quantity = $data['like_quantity'];
             $like->save();
 
-            $nofi = new Nofication();
-            $nofi->post_id = $post_id;
-            $nofi->student_id = Session::get('student_id');
-            $nofi->nofication_mine = md5($post->student_id);
-            $nofi->nofication_kind = "Like";
-            $nofi->nofication_code = $like->like_code;
-            $nofi->nofication_status = 0;
-            date_default_timezone_set('Asia/Ho_Chi_Minh');
-            $nofi->nofication_created = now();
-            $nofi->save();
+            if($post->student_id != Session::get('student_id')){
+                $nofi = new Nofication();
+                $nofi->post_id = $post_id;
+                $nofi->student_id = Session::get('student_id');
+                $nofi->nofication_mine = md5($post->student_id);
+                $nofi->nofication_kind = "Like";
+                $nofi->nofication_code = $like->like_code;
+                $nofi->nofication_status = 0;
+                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                $nofi->nofication_created = now();
+                $nofi->save();
+            }
         }
         $post->post_like = $post->likes->count();
         $post->save();

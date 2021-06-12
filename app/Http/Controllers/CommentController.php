@@ -31,7 +31,7 @@ class CommentController extends Controller
 		date_default_timezone_set('Asia/Ho_Chi_Minh');
 		$cmt->created_at = now();
 		$cmt->save();
-		if($cmt){
+		if($cmt == true && $post->student_id != Session::get('student_id')){
 			$nofi = new Nofication();
             $nofi->post_id = $post_id;
             $nofi->student_id = Session::get('student_id');

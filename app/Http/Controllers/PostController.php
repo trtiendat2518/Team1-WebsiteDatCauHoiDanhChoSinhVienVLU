@@ -29,11 +29,11 @@ class PostController extends Controller
 		$post->save();
     }
     public function post_delete(Request $request){
-		$post_del = Post::find($request->input('id'))->delete();
-		if($post_del){
-			$cmt_del = Comment::where('post_id',$request->input('id'))->delete();
-			$like_del = Like::where('post_id',$request->input('id'))->delete();
-		}
+		$pst = Post::find($request->input('id'));
+		$like_del = Like::where('post_id',$request->input('id'))->delete();
+		$cmt_del = Comment::where('post_id',$request->input('id'))->delete();
+		$del_nofi = Nofication::where('post_id',$request->input('id'))->delete();
+		$pst->delete();
 	}
 
 	public function post_detail($post_id, Request $request){
