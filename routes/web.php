@@ -33,6 +33,7 @@ Route::post('/sua-thong-tin/{student_info_id}', 'StudentInfoController@studentin
 Route::post('/dang-cau-hoi', 'PostController@post_new');
 Route::get('/xoa-cau-hoi', 'PostController@post_delete');
 Route::post('/chinh-sua-cau-hoi/{post_id}', 'PostController@post_update');
+Route::get('/chi-tiet-cau-hoi/{post_id}', 'PostController@post_detail');
 
 //STUDENT CATEGORY POST
 Route::get('/cau-hoi-theo-loai/{category_id}','CategoryController@show_category_post');

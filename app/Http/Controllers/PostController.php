@@ -9,6 +9,8 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Nofication;
+use App\Models\Student;
 use DB;
 use Session;
 session_start();
@@ -32,5 +34,20 @@ class PostController extends Controller
 			$cmt_del = Comment::where('post_id',$request->input('id'))->delete();
 			$like_del = Like::where('post_id',$request->input('id'))->delete();
 		}
+	}
+
+	public function post_detail($post_id, Request $request){
+		//SEO
+		$meta_desc = "Chi tiết câu hỏi";
+        $meta_title = "Chi tiết câu hỏi";
+        $url_canonical = $request->url();
+		//---------------
+		
+		$post_detail = Post::where('post_id',$post_id)->with('category','student','likes','comments')->get();
+		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
+		->limit(1)->get();
+		$nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
+
+		return view('student.page.post.detail')->with(compact('meta_desc','meta_title','url_canonical','post_detail','nofi','studentSS'));
 	}
 }

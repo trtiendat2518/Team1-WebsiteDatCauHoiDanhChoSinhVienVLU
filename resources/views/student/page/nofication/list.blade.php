@@ -125,7 +125,7 @@
 					<!-- /USER STATUS AVATAR -->
 					@if ($list_nofi->nofication_kind=='Like')
 					<!-- USER STATUS TITLE -->
-					<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$list_nofi->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="profile-timeline.html">{{$list_nofi->postes->post_title}}</a> của bạn</p>
+					<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$list_nofi->studentes->student_name}}</a> đã thích bài viết <a class="highlighted btnReadnofi" data-id_readnofi="{{$list_nofi->nofication_id}}" href="{{url('/chi-tiet-cau-hoi/'.$list_nofi->postes->post_id)}}">{{$list_nofi->postes->post_title}}</a> của bạn</p>
 					<!-- /USER STATUS TITLE -->
 
 					<!-- USER STATUS TIMESTAMP -->
@@ -143,7 +143,7 @@
 					<!-- /USER STATUS ICON -->
 					@elseif($list_nofi->nofication_kind=='Comment')
 					<!-- USER STATUS TITLE -->
-					<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$list_nofi->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted" href="profile-timeline.html">{{$list_nofi->postes->post_title}}</a> của bạn</p>
+					<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$list_nofi->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted btnReadnofi" data-id_readnofi="{{$list_nofi->nofication_id}}" href="{{url('/chi-tiet-cau-hoi/'.$list_nofi->postes->post_id)}}">{{$list_nofi->postes->post_title}}</a> của bạn</p>
 					<!-- /USER STATUS TITLE -->
 
 					<!-- USER STATUS TIMESTAMP -->
@@ -161,22 +161,13 @@
 					<!-- /USER STATUS ICON -->
 					@else
 					<!-- USER STATUS TITLE -->
-					<p class="user-status-title">Khoa đã trả lời câu hỏi <a class="highlighted" href="profile-timeline.html">{{$list_nofi->postes->post_title}}</a> của bạn</p>
+					<p class="user-status-title">Khoa đã trả lời câu hỏi <a class="highlighted btnReadnofi" data-id_readnofi="{{$list_nofi->nofication_id}}" href="{{url('/chi-tiet-cau-hoi/'.$list_nofi->postes->post_id)}}">{{$list_nofi->postes->post_title}}</a> của bạn</p>
 					<!-- /USER STATUS TITLE -->
 
 					<!-- USER STATUS TIMESTAMP -->
 					<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($list_nofi->nofication_created)->diffForHumans() }}</p>
 					<!-- /USER STATUS TIMESTAMP -->
 
-					<!-- USER STATUS ICON -->
-					<div class="user-status-icon">
-						<!-- ICON COMMENT -->
-						<svg class="icon-thumbs-up">
-							<use xlink:href="#svg-thumbs-up"></use>
-						</svg>
-						<!-- /ICON COMMENT -->
-					</div>
-					<!-- /USER STATUS ICON -->
 					<!-- USER STATUS ICON -->
 					<div class="user-status-icon">
 						<!-- ICON COMMENT -->
@@ -246,7 +237,7 @@
 					<!-- /USER STATUS AVATAR -->
 					@if ($list_nofi->nofication_kind=='Like')
 					<!-- USER STATUS TITLE -->
-					<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$list_nofi->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="profile-timeline.html">{{$list_nofi->postes->post_title}}</a> của bạn</p>
+					<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$list_nofi->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$list_nofi->postes->post_id)}}">{{$list_nofi->postes->post_title}}</a> của bạn</p>
 					<!-- /USER STATUS TITLE -->
 
 					<!-- USER STATUS TIMESTAMP -->
@@ -264,7 +255,7 @@
 					<!-- /USER STATUS ICON -->
 					@elseif($list_nofi->nofication_kind=='Comment')
 					<!-- USER STATUS TITLE -->
-					<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$list_nofi->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted" href="profile-timeline.html">{{$list_nofi->postes->post_title}}</a> của bạn</p>
+					<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$list_nofi->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$list_nofi->postes->post_id)}}">{{$list_nofi->postes->post_title}}</a> của bạn</p>
 					<!-- /USER STATUS TITLE -->
 
 					<!-- USER STATUS TIMESTAMP -->
@@ -282,22 +273,13 @@
 					<!-- /USER STATUS ICON -->
 					@else
 					<!-- USER STATUS TITLE -->
-					<p class="user-status-title">Khoa đã trả lời câu hỏi <a class="highlighted" href="profile-timeline.html">{{$list_nofi->postes->post_title}}</a> của bạn</p>
+					<p class="user-status-title">Khoa đã trả lời câu hỏi <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$list_nofi->postes->post_id)}}">{{$list_nofi->postes->post_title}}</a> của bạn</p>
 					<!-- /USER STATUS TITLE -->
 
 					<!-- USER STATUS TIMESTAMP -->
 					<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($list_nofi->nofication_created)->diffForHumans() }}</p>
 					<!-- /USER STATUS TIMESTAMP -->
 
-					<!-- USER STATUS ICON -->
-					<div class="user-status-icon">
-						<!-- ICON COMMENT -->
-						<svg class="icon-thumbs-up">
-							<use xlink:href="#svg-thumbs-up"></use>
-						</svg>
-						<!-- /ICON COMMENT -->
-					</div>
-					<!-- /USER STATUS ICON -->
 					<!-- USER STATUS ICON -->
 					<div class="user-status-icon">
 						<!-- ICON COMMENT -->
