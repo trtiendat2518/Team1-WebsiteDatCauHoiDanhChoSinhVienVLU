@@ -2219,13 +2219,13 @@ figure>img {
 
 .action-list .action-list-item.unread:after {
 	content: "";
-	width: 4px;
-	height: 4px;
+	width: 8px;
+	height: 8px;
 	border-radius: 50%;
-	background-color: #040aae;
+	background-color: red;
 	position: absolute;
 	top: 26px;
-	right: 10px
+	right: 12px
 }
 
 .action-list .action-list-item .action-list-item-icon {

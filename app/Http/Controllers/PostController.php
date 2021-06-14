@@ -9,6 +9,8 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Like;
+use App\Models\Comment;
 use App\Models\Nofication;
 use App\Models\Student;
 use DB;
