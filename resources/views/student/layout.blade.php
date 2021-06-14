@@ -381,19 +381,27 @@
 	</div>
 
 	<!-- HEADER ACTIONS -->
-	<div class="header-actions">
+	<div class="header-actions headertop">
 		<!-- ACTION LIST -->
 		<div class="action-list dark">
 			<!-- ACTION LIST ITEM WRAP -->
 			<div class="action-list-item-wrap">
 				<!-- ACTION LIST ITEM -->
-				<div class="action-list-item unread header-dropdown-trigger">
-					<!-- ACTION LIST ITEM ICON -->
+				@foreach ($nofi2 as $key => $val)
+				@if($val->postes->student_id==Session::get('student_id') && $val->nofication_status==0)
+				<div class="action-list-item iconnofi unread header-dropdown-trigger">
 					<svg class="action-list-item-icon icon-notification">
 						<use xlink:href="#svg-notification"></use>
 					</svg>
-					<!-- /ACTION LIST ITEM ICON -->
 				</div>
+				@else
+				<div class="action-list-item header-dropdown-trigger">
+					<svg class="action-list-item-icon icon-notification">
+						<use xlink:href="#svg-notification"></use>
+					</svg>
+				</div>
+				@endif
+				@endforeach
 				<!-- /ACTION LIST ITEM -->
 
 				<!-- DROPDOWN BOX -->
@@ -1390,7 +1398,7 @@
 						}
 					});
 					window.setTimeout(function(){
-						location.reload();
+						location.href = "{{url('/')}}";;
 					},2000);
 				}else{
 					swal("Hủy bỏ xóa", "", "error");
@@ -1499,15 +1507,16 @@
 		});
 
 		$('.readallnofi').click(function(e){
-			var elm = $(this).parents('.header-dropdown');
+			var elm = $(this).parents('.headertop');
 			var _token = $('input[name="_token"]').val();
 			$.ajax({
 				url:'{{ url('/doc-tat-ca') }}',
 				method: 'POST',
 				data: {_token:_token},
 				success:function(data){
-					if (elm.find('.dropdown-box-list-item').hasClass('unread')){
+					if (elm.find('.dropdown-box-list-item').hasClass('unread') && elm.find('.dropdown-box-list-item').hasClass('unread') && elm.find('.iconnofi').hasClass('unread')){
 						elm.find('.dropdown-box-list-item').removeClass('unread');
+						elm.find('.iconnofi').removeClass('unread');
 					}
 				}
 			})
