@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Like extends Model
+class Nofication extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'post_id', 'student_id', 'like_code' ,'like_quantity'
+        'post_id', 'student_id', 'nofication_mine', 'nofication_kind', 'nofication_code', 'nofication_status'
     ];
-    protected $primaryKey = 'like_id';
-    protected $table = 'tbl_like';                
-    
-    public function post(){
+    protected $primaryKey = 'nofication_id';
+    protected $table = 'tbl_nofication';  
+
+    public function postes(){
         return $this->belongsTo('App\Models\Post', 'post_id');
     }
-    public function student(){
+    public function studentes(){
         return $this->belongsTo('App\Models\Student', 'student_id');
-    }
+    }              
 }

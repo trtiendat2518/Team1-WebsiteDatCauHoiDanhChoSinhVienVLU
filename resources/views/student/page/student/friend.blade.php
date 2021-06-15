@@ -1,18 +1,18 @@
 @extends('student.layout')
 @section('content_header')
-@foreach ($student2 as $key => $Sinfo)
 <!-- PROFILE HEADER -->
 <div class="profile-header">
 	<!-- PROFILE HEADER COVER -->
 	<figure class="profile-header-cover liquid">
 	</figure>
 	<!-- /PROFILE HEADER COVER -->
+
 	<!-- PROFILE HEADER INFO -->
 	<div class="profile-header-info">
 		<!-- USER SHORT DESCRIPTION -->
 		<div class="user-short-description big">
 			<!-- USER SHORT DESCRIPTION AVATAR -->
-			<a class="user-short-description-avatar user-avatar big">
+			<a class="user-short-description-avatar user-avatar big" href="profile-timeline.html">
 				<!-- USER AVATAR BORDER -->
 				<div class="user-avatar-border">
 					<!-- HEXAGON -->
@@ -24,11 +24,7 @@
 				<!-- USER AVATAR CONTENT -->
 				<div class="user-avatar-content">
 					<!-- HEXAGON -->
-					@if ($Sinfo->student_info_id)
-					<div class="hexagon-image-100-110" data-src="{{asset('public/student/img/avatar/'.$Sinfo->info->student_info_avatar)}}"></div>
-					@else
-					<div class="hexagon-image-100-110" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
-					@endif
+					<div class="hexagon-image-100-110" data-src="{{url('public/student/img/avatar/01.jpg')}}"></div>
 					<!-- /HEXAGON -->
 				</div>
 				<!-- /USER AVATAR CONTENT -->
@@ -109,11 +105,22 @@
 				</div>
 				<!-- /USER AVATAR BADGE -->
 			</a>
-			<p class="user-short-description-title">{{$Sinfo->student_name}}</p>
-			<p class="user-short-description-text">{{$Sinfo->student_email}}</p>
+			<!-- /USER SHORT DESCRIPTION AVATAR -->
+			@foreach ($student2 as $key => $Sother)
+				<!-- USER SHORT DESCRIPTION TITLE -->
+			<p class="user-short-description-title">{{$Sother->student_name}}</p>
+			<!-- /USER SHORT DESCRIPTION TITLE -->
+
+			<!-- USER SHORT DESCRIPTION TEXT -->
+			<p class="user-short-description-text">{{$Sother->student_email}}</p>
+			<!-- /USER SHORT DESCRIPTION TEXT -->
+			@endforeach
 		</div>
 		<!-- /USER SHORT DESCRIPTION -->
-		@if($Sinfo->student_info_id)
+		@php
+			foreach ($student2 as $key => $Sinfo){
+				if($Sinfo->student_info_id){
+		@endphp
 		<!-- USER STATS -->
 		<div class="user-stats">
 			<div class="user-stat big">
@@ -130,7 +137,9 @@
 			</div>
 		</div>
 		<!-- /USER STATS -->
-		@else
+		@php
+				}else{
+		@endphp
 		<!-- USER STATS -->
 		<div class="user-stats">
 			<div class="user-stat big">
@@ -147,24 +156,23 @@
 			</div>
 		</div>
 		<!-- /USER STATS -->
-		@endif
-
-		@if ($Sinfo->student_id==Session::get('student_id'))
-		<!-- PROFILE HEADER INFO ACTIONS -->
-		<div class="profile-header-info-actions" style="top: 40px;">
-			<a href="{{url('/thong-tin-tai-khoan/'.Session::get('student_id'))}}"><p class="profile-header-info-action button secondary">Chỉnh sửa thông tin</p></a>
-		</div>
-		<!-- /PROFILE HEADER INFO ACTIONS -->
-		@endif
+		@php
+				}
+			}
+		@endphp
 	</div>
 	<!-- /PROFILE HEADER INFO -->
 </div>
 <!-- /PROFILE HEADER -->
+
 <!-- GRID -->
 <div class="grid grid-2-4-6 mobile-prefer-content">
 	<div class="grid-column">
 	</div>
-	@if($Sinfo->student_info_id)
+	@php
+		foreach($student2 as $key => $infomation){
+			if($infomation->student_info_id){
+	@endphp
 	<!-- GRID COLUMN -->
 	<div class="grid-column">
 		<!-- WIDGET BOX -->
@@ -177,7 +185,7 @@
 			<!-- WIDGET BOX CONTENT -->
 			<div class="widget-box-content">
 				<!-- PARAGRAPH -->
-				<p class="paragraph">{{$Sinfo->info->student_info_note}}</p>
+				<p class="paragraph">{{$infomation->info->student_info_note}}</p>
 				<!-- /PARAGRAPH -->
 
 				<!-- INFORMATION LINE LIST -->
@@ -189,7 +197,7 @@
 						<!-- /INFORMATION LINE TITLE -->
 
 						<!-- INFORMATION LINE TEXT -->
-						<p class="information-line-text">{{$Sinfo->info->student_info_address}}</p>
+						<p class="information-line-text">{{$infomation->info->student_info_address}}</p>
 						<!-- /INFORMATION LINE TEXT -->
 					</div>
 					<!-- /INFORMATION LINE -->
@@ -201,7 +209,7 @@
 						<!-- /INFORMATION LINE TITLE -->
 
 						<!-- INFORMATION LINE TEXT -->
-						<p class="information-line-text">{{$Sinfo->info->student_info_date}}</p>
+						<p class="information-line-text">{{$infomation->info->student_info_date}}</p>
 						<!-- /INFORMATION LINE TEXT -->
 					</div>
 					<!-- /INFORMATION LINE -->
@@ -211,10 +219,10 @@
 						<!-- INFORMATION LINE TITLE -->
 						<p class="information-line-title">Giới tính</p>
 						<!-- /INFORMATION LINE TITLE -->
-						@if ($Sinfo->info->student_info_gender == 1)
-						<p class="information-line-text">Nam</p>
-						@elseif ($Sinfo->info->student_info_gender == 2)
-						<p class="information-line-text">Nữ</p>
+						@if ($infomation->info->student_info_gender == 1)
+							<p class="information-line-text">Nam</p>
+						@elseif ($infomation->info->student_info_gender == 2)
+							<p class="information-line-text">Nữ</p>
 						@endif
 					</div>
 					<!-- /INFORMATION LINE -->
@@ -226,7 +234,9 @@
 		<!-- /WIDGET BOX -->
 	</div>
 	<!-- /GRID COLUMN -->
-	@else
+	@php
+			}else{
+	@endphp
 	<!-- GRID COLUMN -->
 	<div class="grid-column">
 		<!-- WIDGET BOX -->
@@ -284,70 +294,12 @@
 		<!-- /WIDGET BOX -->
 	</div>
 	<!-- /GRID COLUMN -->
-	@endif
+	@php
+			}
+		}
+	@endphp
 	<!-- GRID COLUMN -->
 	<div class="grid-column">
-		@if ($Sinfo->student_id==Session::get('student_id'))
-		<div class="quick-post">
-			<!-- QUICK POST HEADER -->
-			<div class="quick-post-header">
-				<!-- OPTION ITEMS -->
-				<div class="option-items">
-					<!-- OPTION ITEM -->
-					<div class="option-item active">
-						<!-- OPTION ITEM ICON -->
-						<svg class="option-item-icon icon-status">
-							<use xlink:href="#svg-status"></use>
-						</svg>
-						<!-- /OPTION ITEM ICON -->
-
-						<!-- OPTION ITEM TITLE -->
-						<p class="option-item-title">Câu hỏi</p>
-						<!-- /OPTION ITEM TITLE -->
-					</div>
-				</div>
-			</div>
-			<div class="quick-post-body">
-				<form class="form">
-					@csrf
-					<div class="form-row">
-						<div class="form-item">
-							<div class="form-textarea">
-								<textarea id="title" name="title" rows="1" class="title" placeholder="Tiêu đề" style="height: 50%"></textarea>
-								<div class="form-row">
-									<div class="form-item">
-										<div class="form-select">
-											<select style="background-color: #21283b; border-radius: 0px;" id="category" class="category" name="category">
-												<option value="0" selected>Loại câu hỏi</option>
-												@foreach ($category_post as $key => $cate)
-												<option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
-												@endforeach
-											</select>
-											<svg class="form-select-icon icon-small-arrow">
-												<use xlink:href="#svg-small-arrow"></use>
-											</svg>
-										</div>
-									</div>
-								</div>
-								<textarea id="content" class="content" name="content" placeholder="Nội dung"></textarea>
-							</div>
-						</div>
-					</div>
-					@php
-					if(Session::get('student_id')){
-						@endphp
-						<button class="postQ button quick-post-footer-actions secondary" name="postQ" type="button">Đăng</button>
-						@php
-					}else{
-						@endphp
-						<a href="{{url('/login')}}" class=" button quick-post-footer-actions secondary btn-block" type="button">Đăng</a>
-						@php
-					}
-					@endphp
-				</form>
-			</div>
-		</div>
-		@endif
 		@foreach ($student_other_id as $key => $post_info)
 		<div class="widget-box no-padding optionsocial">
 			@php
@@ -374,11 +326,7 @@
 						<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">
 							<div class="user-avatar small no-outline">
 								<div class="user-avatar-content">
-									@if ($Sinfo->student_info_id)
-									<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$Sinfo->info->student_info_avatar)}}"></div>
-									@else
-									<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
-									@endif
+									<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/04.jpg')}}"></div>
 								</div>
 								<div class="user-avatar-progress">
 									<div class="hexagon-progress-40-44"></div>
@@ -482,39 +430,39 @@
 			<!-- POST COMMENT LIST -->
 			<div id="commentId_{{$post_info->post_id}}" style="display: none;"  class="post-comment-list ">
 				<div class="post-comment-form">
-					@if(Session::get('student_id'))
-					<div class="user-avatar small no-outline">
-						<div class="user-avatar-content">
-							@foreach ($studentSS as $avaSS)
-								@if ($avaSS->student_info_id)
-								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$avaSS->info->student_info_avatar)}}"></div>
-								@else
-								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
-								@endif
-								@endforeach
-						</div>
-						<div class="user-avatar-progress">
-							<div class="hexagon-progress-40-44"></div>
-						</div>
-						<div class="user-avatar-progress-border">
-							<div class="hexagon-border-40-44"></div>
-						</div>
-					</div>
-					<form class="form">
-						@csrf
-						<div class="form-row">
-							<div class="form-item">
-								<div class="form-input small">
-									<label style="margin-top: 20px; margin-left: 80px;" for="post-reply">Bình luận của bạn</label>
-									<textarea style="height: 0%; width: 70%; margin-top: 20px; margin-left: 80px;" class="cmtcontent_{{$post_info->post_id}}" name="comment_content" rows="2" id="post-reply"></textarea>
-									<button style="margin-top: 60px; line-height: 0px; height: 30px; margin-right: 10px" type="button" data-id_post="{{$post_info->post_id}}" class="postC button secondary">Gửi</button>
-								</div>
+					@php
+					if(Session::get('student_id')){
+						@endphp
+						<div class="user-avatar small no-outline">
+							<div class="user-avatar-content">
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/01.jpg')}}"></div>
+							</div>
+							<div class="user-avatar-progress">
+								<div class="hexagon-progress-40-44"></div>
+							</div>
+							<div class="user-avatar-progress-border">
+								<div class="hexagon-border-40-44"></div>
 							</div>
 						</div>
-					</form>
-					@else
-					<p class="post-comment-heading" style="color: #e3f850;">Bạn cần đăng nhập để có thể bình luận</p>
-					@endif
+						<form class="form">
+							@csrf
+							<div class="form-row">
+								<div class="form-item">
+									<div class="form-input small">
+										<label style="margin-top: 20px; margin-left: 80px;" for="post-reply">Bình luận của bạn</label>
+										<textarea style="height: 0%; width: 70%; margin-top: 20px; margin-left: 80px;" class="cmtcontent_{{$post_info->post_id}}" name="comment_content" rows="2" id="post-reply"></textarea>
+										<button style="margin-top: 60px; line-height: 0px; height: 30px; margin-right: 10px" type="button" data-id_post="{{$post_info->post_id}}" class="postC button secondary">Gửi</button>
+									</div>
+								</div>
+							</div>
+						</form>
+						@php
+					}else{
+						@endphp
+						<p class="post-comment-heading" style="color: #e3f850;">Bạn cần đăng nhập để có thể bình luận</p>
+						@php
+					}
+					@endphp
 				</div>
 				<div id="all_cmt">
 					<input type="hidden" name="postId" class="postId" value="{{$post_info->post_id}}">
@@ -536,11 +484,7 @@
 						@endif
 						<a class="user-avatar small no-outline" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">
 							<div class="user-avatar-content">
-								@if ($cmt->student->student_info_id)
-								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$cmt->student->student_avatar)}}"></div>
-								@else
-								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
-								@endif
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/05.jpg')}}"></div>
 							</div>
 							<div class="user-avatar-progress">
 								<div class="hexagon-progress-40-44"></div>
@@ -549,7 +493,7 @@
 								<div class="hexagon-border-40-44"></div>
 							</div>
 						</a>
-						<p class="post-comment-text"><a class="post-comment-text-author" href="{{url('/trang-sinh-vien/'.$cmt->student->student_id)}}" style="color: #007bff;">{{$cmt->student->student_name}}</a>
+						<p class="post-comment-text"><a class="post-comment-text-author" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}" style="color: #007bff;">{{$cmt->student->student_name}}</a>
 							<span class="user-status-text small">
 								{{ \Carbon\Carbon::parse($cmt->created_at)->diffForHumans() }} 
 							</span>
@@ -585,5 +529,4 @@
 	<!-- /GRID COLUMN -->
 </div>
 <!-- /GRID -->
-@endforeach
 @endsection
