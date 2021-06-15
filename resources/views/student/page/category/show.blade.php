@@ -328,7 +328,7 @@
 								<div class="hexagon-border-40-44"></div>
 							</div>
 						</a>
-						<p class="post-comment-text"><a class="post-comment-text-author" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}" style="color: #007bff;">{{$cmt->student->student_name}}</a>
+						<p class="post-comment-text"><a class="post-comment-text-author" href="{{url('/trang-sinh-vien/'.$cmt->student->student_id)}}" style="color: #007bff;">{{$cmt->student->student_name}}</a>
 							<span class="user-status-text small">
 								{{ \Carbon\Carbon::parse($cmt->created_at)->diffForHumans() }} 
 							</span>

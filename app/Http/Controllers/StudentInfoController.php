@@ -25,8 +25,9 @@ class StudentInfoController extends Controller
         $student2 = Student::with('info')->where('student_id',Session::get('student_id'))
         ->limit(1)->get();
         $nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
+        $nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
 
-        return view('student.page.student.profile')->with(compact('meta_desc','meta_title','url_canonical','student2','nofi'));
+        return view('student.page.student.profile')->with(compact('meta_desc','meta_title','url_canonical','student2','nofi','nofi2'));
     }
 
     public function studentinfo_create(Request $request, $student_id){
@@ -102,8 +103,12 @@ class StudentInfoController extends Controller
 
             Session::put('message','<div class="alert alert-success">Cập nhật thông tin chi tiết thành công!</div>');
             return Redirect::to('/thong-tin-tai-khoan'.'/'.Session::get('student_id'));
-        }else{
+        }else if($data['student_info_avatar'] =''){
             Session::put('message','<div class="alert alert-danger">Hình ảnh không được để trống!</div>');
+            return Redirect::to('/thong-tin-tai-khoan'.'/'.Session::get('student_id'));
+        }else{
+            $info->save();
+            Session::put('message','<div class="alert alert-success">Cập nhật thông tin chi tiết thành công!</div>');
             return Redirect::to('/thong-tin-tai-khoan'.'/'.Session::get('student_id'));
         }
     }

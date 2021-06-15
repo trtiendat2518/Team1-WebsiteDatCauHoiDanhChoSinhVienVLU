@@ -1321,7 +1321,7 @@
 						}
 					});
 					window.setTimeout(function(){
-						location.reload();
+						location.href = "{{url('/')}}";;
 					},2000);
 				}else{
 					swal("Hủy bỏ xóa", "", "error");
@@ -1398,7 +1398,7 @@
 						}
 					});
 					window.setTimeout(function(){
-						location.href = "{{url('/')}}";;
+						location.reload();
 					},2000);
 				}else{
 					swal("Hủy bỏ xóa", "", "error");

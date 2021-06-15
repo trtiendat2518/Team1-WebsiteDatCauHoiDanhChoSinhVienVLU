@@ -27,8 +27,9 @@ class NoficationController extends Controller
         $nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
         $list = Nofication::with('postes','studentes')->orderBy('nofication_created','DESC')
         ->paginate(10);
+        $nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
 
-        return view('student.page.nofication.list')->with(compact('meta_desc','meta_title','url_canonical','list','nofi'));
+        return view('student.page.nofication.list')->with(compact('meta_desc','meta_title','url_canonical','list','nofi','nofi2'));
     }
 
     public function nofication_readone($nofication_id){
