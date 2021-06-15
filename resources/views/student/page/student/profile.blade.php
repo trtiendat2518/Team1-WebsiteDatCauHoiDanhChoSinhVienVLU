@@ -443,7 +443,7 @@ foreach($student2 as $key => $st){
 										<div class="form-select">
 											<label for="profile-country">Giới tính</label>
 											<select id="profile-country" name="student_info_gender" class="Sgender">
-												<option value="0"></option>
+												<option value="0">---Chọn giới tính của bạn---</option>
 												<option value="1">Nam</option>
 												<option value="2">Nữ</option>
 											</select>
@@ -461,24 +461,56 @@ foreach($student2 as $key => $st){
 
 								<!-- FORM ROW -->
 								<div class="form-row split">
-									<div class="form-item">
-										<div class="form-input small active">
-											<label for="profile-faculty">Khoa</label>
-											<input type="text" id="student_info_faculty" name="student_info_faculty" class="Sfaculty">
-										</div>
+									<!-- FORM SELECT -->
+									<div class="form-select">
+										<label for="profile-country">Khoa</label>
+										<select id="profile-country" name="faculty_id" class="Sfaculty">
+											<option value="0">---Chọn khoa bạn đang học---</option>
+											@foreach ($faculty as $key => $fac)
+											<option value="{{$fac->faculty_id}}">{{$fac->faculty_name}}</option>
+											@endforeach
+										</select>
+										<!-- FORM SELECT ICON -->
+										<svg class="form-select-icon icon-small-arrow">
+											<use xlink:href="#svg-small-arrow"></use>
+										</svg>
+										<!-- /FORM SELECT ICON -->
 									</div>
-									<div class="form-item">
-										<div class="form-input small active">
-											<label for="profile-specialized">Chuyên ngành</label>
-											<input type="text" id="student_info_specialized" name="student_info_specialized" class="Sspecialized">
-										</div>
+									<!-- /FORM SELECT -->
+
+									<!-- FORM SELECT -->
+									<div class="form-select">
+										<label for="profile-country">Chuyên ngành</label>
+										<select id="profile-country" name="specialized_id" class="Sspecialized">
+											<option value="0">---Chuyên ngành bạn đang học---</option>
+											@foreach ($specialized as $key => $spe)
+											<option value="{{$spe->specialized_id}}">{{$spe->specialized_name}}</option>
+											@endforeach
+										</select>
+										<!-- FORM SELECT ICON -->
+										<svg class="form-select-icon icon-small-arrow">
+											<use xlink:href="#svg-small-arrow"></use>
+										</svg>
+										<!-- /FORM SELECT ICON -->
 									</div>
-									<div class="form-item">
-										<div class="form-input small active">
-											<label for="profile-course">Khóa hiện tại</label>
-											<input type="text" id="student_info_course" name="student_info_course" class="Scourse">
-										</div>
+									<!-- /FORM SELECT -->
+
+									<!-- FORM SELECT -->
+									<div class="form-select">
+										<label for="profile-country">Khóa hiện tại</label>
+										<select id="profile-country" name="course_id" class="Scourse">
+											<option value="0">---Chuyên khóa hiện tại của bạn---</option>
+											@foreach ($course as $key => $crs)
+											<option value="{{$crs->course_id}}">{{$crs->course_name}}</option>
+											@endforeach
+										</select>
+										<!-- FORM SELECT ICON -->
+										<svg class="form-select-icon icon-small-arrow">
+											<use xlink:href="#svg-small-arrow"></use>
+										</svg>
+										<!-- /FORM SELECT ICON -->
 									</div>
+									<!-- /FORM SELECT -->
 								</div>
 
 								<div class="form-row split">
