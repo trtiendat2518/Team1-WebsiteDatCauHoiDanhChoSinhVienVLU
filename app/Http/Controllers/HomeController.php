@@ -8,6 +8,8 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Student;
+use App\Models\Nofication;
 use DB;
 use Mail;
 use Session;
@@ -25,8 +27,12 @@ class HomeController extends Controller
 		$category_post = Category::orderBy('category_id', 'DESC')->get();
 		$post2 = Post::with('category','student','likes','comments')
 		->orderBy('tbl_post.created_at','DESC')->paginate(5);
+		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
+		->limit(1)->get();
+		$nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
+		$nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
 
-		return view('student.page.home')->with(compact('meta_desc','meta_title','url_canonical','category_post','post2'));
+		return view('student.page.home')->with(compact('meta_desc','meta_title','url_canonical','category_post','post2','studentSS','nofi','nofi2'));
 	}
 
 	public function search(Request $request)
@@ -42,7 +48,11 @@ class HomeController extends Controller
 		$search_product = Post::where('post_title','like','%'.$keywords.'%')
 		->with('category','student','likes','comments')
 		->orderBy('tbl_post.created_at','DESC')->paginate(5);
+		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
+		->limit(1)->get();
+		$nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
+		$nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
 		
-		return view('student.page.post.search')->with(compact('meta_desc','meta_title','url_canonical','category_post','search_product'));
+		return view('student.page.post.search')->with(compact('meta_desc','meta_title','url_canonical','category_post','search_product','studentSS','nofi','nofi2'));
 	}
 }

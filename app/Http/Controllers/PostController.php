@@ -9,6 +9,10 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Like;
+use App\Models\Comment;
+use App\Models\Nofication;
+use App\Models\Student;
 use DB;
 use Session;
 session_start();
@@ -27,10 +31,26 @@ class PostController extends Controller
 		$post->save();
     }
     public function post_delete(Request $request){
-		$post_del = Post::find($request->input('id'))->delete();
-		if($post_del){
-			$cmt_del = Comment::where('post_id',$request->input('id'))->delete();
-			$like_del = Like::where('post_id',$request->input('id'))->delete();
-		}
+		$pst = Post::find($request->input('id'));
+		$like_del = Like::where('post_id',$request->input('id'))->delete();
+		$cmt_del = Comment::where('post_id',$request->input('id'))->delete();
+		$del_nofi = Nofication::where('post_id',$request->input('id'))->delete();
+		$pst->delete();
+	}
+
+	public function post_detail($post_id, Request $request){
+		//SEO
+		$meta_desc = "Chi tiết câu hỏi";
+        $meta_title = "Chi tiết câu hỏi";
+        $url_canonical = $request->url();
+		//---------------
+		
+		$post_detail = Post::where('post_id',$post_id)->with('category','student','likes','comments')->get();
+		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
+		->limit(1)->get();
+		$nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
+		$nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
+
+		return view('student.page.post.detail')->with(compact('meta_desc','meta_title','url_canonical','post_detail','nofi','studentSS','nofi2'));
 	}
 }

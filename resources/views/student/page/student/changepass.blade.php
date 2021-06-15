@@ -38,7 +38,7 @@
 						<a class="sidebar-menu-link" href="{{url('/thong-tin-tai-khoan/'.Session::get('student_id'))}}">Thông tin cá nhân</a>
 
 						<!-- SIDEBAR MENU LINK -->
-						<a class="sidebar-menu-link" href="hub-profile-notifications.html">Tất cả thông báo</a>
+						<a class="sidebar-menu-link" href="{{url('/tat-ca-thong-bao')}}">Tất cả thông báo</a>
 						<!-- /SIDEBAR MENU LINK -->
 
 						<!-- SIDEBAR MENU LINK -->
