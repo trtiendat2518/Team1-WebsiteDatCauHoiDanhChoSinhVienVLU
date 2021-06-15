@@ -53,6 +53,14 @@ class StudentInfoController extends Controller
             return Redirect::to('/thong-tin-tai-khoan'.'/'.Session::get('student_id'));
         }
 
+        $faculty = Faculty::where('faculty_id',$info->faculty_id)->first();
+        $specialized = Specialized::where('specialized_id',$info->specialized_id)->first();
+
+        if($faculty->faculty_code != $specialized->faculty_code){
+            Session::put('message','<div class="alert alert-danger">Khoa và Chuyên ngành không khớp!</div>');
+            return Redirect::to('/thong-tin-tai-khoan'.'/'.Session::get('student_id'));
+        }
+
         if($get_image){
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.',$get_name_image));
@@ -89,6 +97,14 @@ class StudentInfoController extends Controller
 
         if($data['student_info_date']=='' || $data['student_info_gender']==0 || $data['faculty_id']==0 || $data['specialized_id']==0 || $data['course_id']==0 || $data['student_info_address']==''){
             Session::put('message','<div class="alert alert-danger">Các thông tin không được để trống!</div>');
+            return Redirect::to('/thong-tin-tai-khoan'.'/'.Session::get('student_id'));
+        }
+
+        $faculty = Faculty::where('faculty_id',$info->faculty_id)->first();
+        $specialized = Specialized::where('specialized_id',$info->specialized_id)->first();
+
+        if($faculty->faculty_code != $specialized->faculty_code){
+            Session::put('message','<div class="alert alert-danger">Khoa và Chuyên ngành không khớp!</div>');
             return Redirect::to('/thong-tin-tai-khoan'.'/'.Session::get('student_id'));
         }
 
