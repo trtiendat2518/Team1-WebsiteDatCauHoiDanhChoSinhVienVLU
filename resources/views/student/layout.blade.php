@@ -619,6 +619,134 @@
 							<!-- /USER STATUS -->
 						</div>
 						<!-- /DROPDOWN BOX LIST ITEM -->
+						@elseif ($nofication->postes->student_id==Session::get('student_id') && $nofication->nofication_status==1)
+						<!-- DROPDOWN BOX LIST ITEM -->
+						<div class="dropdown-box-list-item">
+							<!-- USER STATUS -->
+							<div class="user-status notification">
+								<!-- USER STATUS AVATAR -->
+								<a class="user-status-avatar" href="profile-timeline.html">
+									<!-- USER AVATAR -->
+									<div class="user-avatar small no-outline">
+										<!-- USER AVATAR CONTENT -->
+										<div class="user-avatar-content">
+											<!-- HEXAGON -->
+											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/03.jpg')}}"></div>
+											<!-- /HEXAGON -->
+										</div>
+										<!-- /USER AVATAR CONTENT -->
+
+										<!-- USER AVATAR PROGRESS -->
+										<div class="user-avatar-progress">
+											<!-- HEXAGON -->
+											<div class="hexagon-progress-40-44"></div>
+											<!-- /HEXAGON -->
+										</div>
+										<!-- /USER AVATAR PROGRESS -->
+
+										<!-- USER AVATAR PROGRESS BORDER -->
+										<div class="user-avatar-progress-border">
+											<!-- HEXAGON -->
+											<div class="hexagon-border-40-44"></div>
+											<!-- /HEXAGON -->
+										</div>
+										<!-- /USER AVATAR PROGRESS BORDER -->
+
+										<!-- USER AVATAR BADGE -->
+										<div class="user-avatar-badge">
+											<!-- USER AVATAR BADGE BORDER -->
+											<div class="user-avatar-badge-border">
+												<!-- HEXAGON -->
+												<div class="hexagon-22-24"></div>
+												<!-- /HEXAGON -->
+											</div>
+											<!-- /USER AVATAR BADGE BORDER -->
+
+											<!-- USER AVATAR BADGE CONTENT -->
+											<div class="user-avatar-badge-content">
+												<!-- HEXAGON -->
+												<div class="hexagon-dark-16-18"></div>
+												<!-- /HEXAGON -->
+											</div>
+											<!-- /USER AVATAR BADGE CONTENT -->
+
+											<!-- USER AVATAR BADGE TEXT -->
+											<p class="user-avatar-badge-text">16</p>
+											<!-- /USER AVATAR BADGE TEXT -->
+										</div>
+										<!-- /USER AVATAR BADGE -->
+									</div>
+									<!-- /USER AVATAR -->
+								</a>
+								<!-- /USER STATUS AVATAR -->
+								@if ($nofication->nofication_kind=='Like')
+								<!-- USER STATUS TITLE -->
+								<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$nofication->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="profile-timeline.html">{{$nofication->postes->post_title}}</a> của bạn</p>
+								<!-- /USER STATUS TITLE -->
+
+								<!-- USER STATUS TIMESTAMP -->
+								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
+								<!-- /USER STATUS TIMESTAMP -->
+
+								<!-- USER STATUS ICON -->
+								<div class="user-status-icon">
+									<!-- ICON COMMENT -->
+									<svg class="icon-thumbs-up">
+										<use xlink:href="#svg-thumbs-up"></use>
+									</svg>
+									<!-- /ICON COMMENT -->
+								</div>
+								<!-- /USER STATUS ICON -->
+								@elseif($nofication->nofication_kind=='Comment')
+								<!-- USER STATUS TITLE -->
+								<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$nofication->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted" href="profile-timeline.html">{{$nofication->postes->post_title}}</a> của bạn</p>
+								<!-- /USER STATUS TITLE -->
+
+								<!-- USER STATUS TIMESTAMP -->
+								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
+								<!-- /USER STATUS TIMESTAMP -->
+
+								<!-- USER STATUS ICON -->
+								<div class="user-status-icon">
+									<!-- ICON COMMENT -->
+									<svg class="icon-comment">
+										<use xlink:href="#svg-comment"></use>
+									</svg>
+									<!-- /ICON COMMENT -->
+								</div>
+								<!-- /USER STATUS ICON -->
+								@else
+								<!-- USER STATUS TITLE -->
+								<p class="user-status-title">Khoa đã trả lời câu hỏi <a class="highlighted" href="profile-timeline.html">{{$nofication->postes->post_title}}</a> của bạn</p>
+								<!-- /USER STATUS TITLE -->
+
+								<!-- USER STATUS TIMESTAMP -->
+								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
+								<!-- /USER STATUS TIMESTAMP -->
+
+								<!-- USER STATUS ICON -->
+								<div class="user-status-icon">
+									<!-- ICON COMMENT -->
+									<svg class="icon-thumbs-up">
+										<use xlink:href="#svg-thumbs-up"></use>
+									</svg>
+									<!-- /ICON COMMENT -->
+								</div>
+								<!-- /USER STATUS ICON -->
+								<!-- USER STATUS ICON -->
+								<div class="user-status-icon">
+									<!-- ICON COMMENT -->
+									<svg class="icon-quests">
+										<use xlink:href="#svg-quests"></use>
+									</svg>
+									<!-- /ICON COMMENT -->
+								</div>
+								<!-- /USER STATUS ICON -->
+								@endif
+							</div>
+							<!-- /USER STATUS -->
+						</div>
+						<!-- /DROPDOWN BOX LIST ITEM -->
 						@endif
 						@endforeach
 					</div>
@@ -1193,7 +1321,7 @@
 						}
 					});
 					window.setTimeout(function(){
-						location.reload();
+						location.href = "{{url('/')}}";;
 					},2000);
 				}else{
 					swal("Hủy bỏ xóa", "", "error");
@@ -1270,7 +1398,7 @@
 						}
 					});
 					window.setTimeout(function(){
-						location.href = "{{url('/')}}";;
+						location.reload();
 					},2000);
 				}else{
 					swal("Hủy bỏ xóa", "", "error");
