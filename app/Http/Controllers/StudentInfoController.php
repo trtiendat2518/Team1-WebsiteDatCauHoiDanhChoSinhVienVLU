@@ -26,9 +26,9 @@ class StudentInfoController extends Controller
         //-----------------------
         
         $student2 = Student::with('info')->where('student_id',Session::get('student_id'))->limit(1)->get();
-        $faculty = Faculty::with('faculty_student')->orderBy('faculty_name','ASC')->get();
-        $specialized = Specialized::with('specialized_student')->orderBy('faculty_code','ASC')->get();
-        $course = Course::with('course_student')->orderBy('course_name','ASC')->get();
+        $faculty = Faculty::orderBy('faculty_name','ASC')->get();
+        $specialized = Specialized::orderBy('faculty_id','ASC')->get();
+        $course = Course::orderBy('course_name','ASC')->get();
         $nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
         $nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
 
@@ -56,7 +56,7 @@ class StudentInfoController extends Controller
         $faculty = Faculty::where('faculty_id',$info->faculty_id)->first();
         $specialized = Specialized::where('specialized_id',$info->specialized_id)->first();
 
-        if($faculty->faculty_code != $specialized->faculty_code){
+        if($faculty->faculty_code != $specialized->faculty->faculty_code){
             Session::put('message','<div class="alert alert-danger">Khoa và Chuyên ngành không khớp!</div>');
             return Redirect::to('/thong-tin-tai-khoan'.'/'.Session::get('student_id'));
         }
@@ -103,7 +103,7 @@ class StudentInfoController extends Controller
         $faculty = Faculty::where('faculty_id',$info->faculty_id)->first();
         $specialized = Specialized::where('specialized_id',$info->specialized_id)->first();
 
-        if($faculty->faculty_code != $specialized->faculty_code){
+        if($faculty->faculty_code != $specialized->faculty->faculty_code){
             Session::put('message','<div class="alert alert-danger">Khoa và Chuyên ngành không khớp!</div>');
             return Redirect::to('/thong-tin-tai-khoan'.'/'.Session::get('student_id'));
         }

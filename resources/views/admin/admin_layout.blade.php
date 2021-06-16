@@ -1,5 +1,3 @@
-  
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,12 +40,10 @@
 
 
 <body class="index-01">
-
-
-  <header class="top-header media">
+  <header class="top-header media" style="background-color: #343542;">
     <div class="top-left mr-3">
-      <a class="navbar-brand" href="./index.html"><img src="images/logo.png" alt="Site Logo"></a><!-- /.navbar-brand -->
-    </div><!-- /.top-left -->
+      <a class="navbar-brand" href="./index.html"><img src="{{asset('public/admin/images/vlulogo2.png')}}" alt="VLU"></a>
+    </div>
 
     <div class="top-right media-body">
       <div class="left-content float-left">
@@ -55,134 +51,20 @@
           <span class="sr-only">Toggle navigation</span>
           <i class="fa fa-bars"></i>
         </a><!-- /.sidenav-toggle -->
-
-        <form class="search-form" action="#">
-          <input type="text" class="form-control" id="search1" placeholder="Search ...">
-          <input type="submit" class="form-control" id="submit1">
-        </form><!-- /.search-form -->
       </div><!-- /.left-content -->
 
       <div class="right-content float-right">
-        <div class="country dropdown">
-          <div id="country_selector"></div>
-        </div><!-- /.country -->
-
-        <div class="dropdown messages-menu">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-            <i class="fa fa-envelope-o"></i>
-            <span class="count">5</span>
-          </a>
-
-          <ul class="dropdown-menu">
-            <li class="header">You have 5 messages</li>
-            <li>
-              <div class="slimScrollDiv">
-                <ul class="dropdown-content">
-                  <li>
-                    <a href="#" class="media">
-                      <img src="images/avatar/1.jpg" class="rounded-circle mr-3" alt="User Image">
-                      <div class="message-contnet media-body">
-                        <h4 class="name">Jacob Stewart</h4>
-                        <span class="time"><i class="fa fa-clock-o"></i> 15 mins</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end message -->
-                  <li>
-                    <a href="#" class="media">
-                      <img src="images/avatar/2.jpg" class="rounded-circle mr-3" alt="User Image">
-                      <div class="message-contnet media-body">
-                        <h4 class="name">Lawrence Wright</h4>
-                        <span class="time"><i class="fa fa-clock-o"></i> 4 hours</span>
-                        <p>Curabitur facilisis erat quis metus congue viverra.</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="media">
-                      <img src="images/avatar/3.jpg" class="rounded-circle mr-3" alt="User Image">
-                      <div class="message-contnet media-body">
-                        <h4 class="name">Alan Perez</h4>
-                        <span class="time"><i class="fa fa-clock-o"></i> Today</span>
-                        <p>Vestibulum nec ligula nec quam sodales rutrum sed luctus.</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="media">
-                      <img src="images/avatar/4.jpg" class="rounded-circle mr-3" alt="User Image">
-                      <div class="message-contnet media-body">
-                        <h4 class="name">Jason Johnson</h4>
-                        <span class="time"><i class="fa fa-clock-o"></i> Yesterday</span>
-                        <p>Curabitur quis risus aliquet, luctus arcu nec, venenatis neque.</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="media">
-                      <img src="images/avatar/5.jpg" class="rounded-circle mr-3" alt="User Image">
-                      <div class="message-contnet media-body">
-                        <h4 class="name">David Morrison</h4>
-                        <span class="time"><i class="fa fa-clock-o"></i> 2 days</span>
-                        <p>Praesent vitae tellus eget nibh lacinia pretium.</p>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="footer"><a href="#">See all Messages</a></li>
-          </ul><!-- /.dropdown-menu -->
-        </div><!-- /.dropdown -->
-
-        <div class="dropdown notifications-menu">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-bell-o"></i>
-            <span class="count">4</span>
-          </a>
-          <ul class="dropdown-menu">
-            <li class="header">You have 4 notifications</li>
-            <li>
-              <ul class="dropdown-content">
-                <li>
-                  <a href="#">
-                    <i class="fa fa-users alert-primary"></i> Curabitur id eros quis nunc suscipit blandit.
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fa fa-warning alert-secondary"></i> Duis malesuada justo eu sapien elementum, in semper diam posuere.
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fa fa-shopping-cart alert-success"></i> In gravida mauris et nisi
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fa fa-user alert-danger"></i> Praesent eu lacus in libero dictum fermentum.
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="footer"><a href="#">View all</a></li>
-          </ul><!-- /.dropdown-menu -->
-        </div><!-- /.dropdown -->
-
         <div class="dropdown user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <h4 class="name">Jonathon Doe</h4>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#"><i class="fa fa-user"></i> My Profile</a></li>
+            <li><a href="#"><i class="fa fa-user"></i> Thông tin cá nhân</a></li>
             <li><a href="#"><i class="fa fa-envelope"></i> Inbox</a></li>
             <li><a href="#"><i class="fa fa-gears"></i> Account Setting</a></li>
             <li><a href="{{url('/logout-admin')}}"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
           </ul>
         </div>
-
       </div><!-- /.right-content -->
     </div><!-- /.top-right -->
   </header><!-- /.top-header -->
@@ -190,7 +72,7 @@
 
   <div class="content-wrapper container-fluid">
     <aside class="left-panel">
-      <div class="user-card background-bg" data-image-src="images/bg5.jpg">
+      <div class="user-card background-bg">
         <a href="#">
           <div class="avatar mr-3 float-left"><img class="rounded-circle" src="images/avatar/4.jpg" alt="Avatar"></div><!-- /.avatar -->
           <div class="details">
@@ -201,160 +83,53 @@
       </div>
       <nav class="navbar">
         <ul class="navbar-nav">
-
-          <li class="nav-item dropdown active">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-dashboard"></i> <span class="menu-title">Dashboard</span>
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="index.html">Dashboard 01</a>
-              <a class="dropdown-item" href="index-02.html">Dashboard 02</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="icon icon-basic-webpage-multiple"></i> <span class="menu-title">Layout</span>
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="layout/boxed.html">Boxed</a>
-              <a class="dropdown-item" href="layout/fixed.html">Fixed</a>
-              <a class="dropdown-item" href="layout/sidebar.html">Sidebar Collapsed</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-envelope"></i> <span class="menu-title">Mailbox</span>
-              <span class="badge notifications">4</span>
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="mail/inbox.html">Inbox</a>
-              <a class="dropdown-item" href="mail/compose.html">Compose</a>
-              <a class="dropdown-item" href="mail/read.html">Read</a>
-            </div>
-          </li>
           <li class="nav-item">
-            <a class="nav-link" href="calendar.html">
-              <i class="fa fa-calendar-o"></i> <span class="menu-title">Calendar</span>
+            <a class="nav-link" href="{{url('/admin-home')}}">
+              <i class="fa fa-dashboard"></i> <span class="menu-title">Trang chủ</span>
             </a>
           </li>
-          <li class="nav-item header"><span class="menu-title">Elements</span></li>
+
+          <li class="nav-item header"><span class="menu-title">Sinh viên</span></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-sliders"></i> <span class="menu-title">UI Elements</span>
-              <span class="badge hot">hot</span>
+              <i class="fa fa-id-card-o"></i> <span class="menu-title">Tài khoản sinh viên</span>
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="ui/alerts.html">Alerts</a>
-              <a class="dropdown-item" href="ui/badges.html">Badges</a>
-              <a class="dropdown-item" href="ui/buttons.html">Buttons</a>
-              <a class="dropdown-item" href="ui/cards.html">User Card</a>
-              <a class="dropdown-item" href="ui/dropdown.html">Dropdown</a>
-              <a class="dropdown-item" href="ui/list.html">List</a>
-              <a class="dropdown-item" href="ui/modals.html">Modals</a>
-              <a class="dropdown-item" href="ui/progress-bars.html">Pregress Bars</a>
-              <a class="dropdown-item" href="ui/ribbons.html">Ribbons</a>
-              <a class="dropdown-item" href="ui/sliders.html">Sliders</a>
-              <a class="dropdown-item" href="ui/tab.html">Tabs</a>
+              <a class="dropdown-item" href="index.html">Thêm mới tài khoản</a>
+              <a class="dropdown-item" href="index-02.html">Danh sách tài khoản</a>
             </div>
           </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-laptop"></i> <span class="menu-title">Widgets</span>
+              <i class="fa fa-university"></i> <span class="menu-title">Quản lý khoa</span>
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="widgets/chart.html">Chart</a>
-              <a class="dropdown-item" href="widgets/social.html">Social</a>
-              <a class="dropdown-item" href="widgets/statistic.html">Statistic</a>
-              <a class="dropdown-item" href="widgets/weather.html">Weather</a>
+              <a class="dropdown-item" href="{{url('/them-moi-khoa')}}">Thêm mới khoa</a>
+              <a class="dropdown-item" href="{{url('/danh-sach-khoa')}}">Danh sách khoa</a>
             </div>
           </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-pie-chart"></i> <span class="menu-title">Charts</span>
-              <span class="badge danger">11</span>
+              <i class="fa fa-suitcase"></i> <span class="menu-title">Quản lý chuyên ngành</span>
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="charts/chartjs.html">ChartJs</a>
-              <a class="dropdown-item" href="charts/morris.html">Morris</a>
-              <a class="dropdown-item" href="charts/flot-chart.html">Float</a>
-              <a class="dropdown-item" href="charts/google-charts.html">Google charts</a>
-              <a class="dropdown-item" href="charts/sparkline.html">Sparkline js</a>
-              <a class="dropdown-item" href="charts/c3.html">C3 charts</a>
-              <a class="dropdown-item" href="charts/chartist.html">Chartists</a>
-              <a class="dropdown-item" href="charts/rickshaw.html">Rickshaw</a>
-              <a class="dropdown-item" href="charts/justGage.html">JustGage</a>
+              <a class="dropdown-item" href="{{url('/them-moi-chuyen-nganh')}}">Thêm mới chuyên ngành</a>
+              <a class="dropdown-item" href="{{url('/danh-sach-chuyen-nganh')}}">Danh sách chuyên ngành</a>
             </div>
           </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-table"></i> <span class="menu-title">Tables</span>
+              <i class="fa fa-graduation-cap"></i> <span class="menu-title">Quản lý khóa học</span>
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="tables/simple.html">Simple tables</a>
-              <a class="dropdown-item" href="tables/data.html">Data tables</a>
-              <a class="dropdown-item" href="tables/editable-tables.html">Editable Tables</a>
-              <a class="dropdown-item" href="tables/table-color.html">Table Color</a>
+              <a class="dropdown-item" href="{{url('/them-moi-nam-hoc')}}">Thêm mới khóa học</a>
+              <a class="dropdown-item" href="{{url('/danh-sach-nam-hoc')}}">Danh sách khóa học</a>
             </div>
           </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-wpforms"></i> <span class="menu-title">Forms</span>
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="forms/basic.html">Basic Elements</a>
-              <a class="dropdown-item" href="forms/advanced.html">Advanced Elements</a>
-              <a class="dropdown-item" href="forms/wizard.html">Wizard Forms</a>
-            </div>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-flask"></i> <span class="menu-title">Icons</span>
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="icons/fontawesome.html">FontAwesome</a>
-              <a class="dropdown-item" href="icons/simple.html">Simple Line Icons</a>
-              <a class="dropdown-item" href="icons/linea.html">Linea Basic</a>
-              <a class="dropdown-item" href="icons/stroke.html">Pe 7 stroke</a>
-              <a class="dropdown-item" href="icons/weather.html">Icon Weather</a>
-            </div>
-          </li>
-
-          <li class="nav-item header"><span class="menu-title">Extras</span></li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-clone"></i> <span class="menu-title">Pages</span>
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="pages/blog.html">Blog</a>
-              <a class="dropdown-item" href="pages/log-in.html">Login</a>
-              <a class="dropdown-item" href="pages/register.html">Register</a>
-              <a class="dropdown-item" href="pages/404.html">Error 404</a>
-              <a class="dropdown-item" href="pages/500.html">Error 500</a>
-            </div>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-credit-card"></i> <span class="menu-title">E-Commerce</span>
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="e-commerce/pricing.html">Pricing</a>
-              <a class="dropdown-item" href="e-commerce/order.html">Order</a>
-              <a class="dropdown-item" href="e-commerce/invoice.html">Invoice</a>
-            </div>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="change-log.html">
-              <i class="fa fa-stop-circle"></i> <span class="menu-title">Changelogs</span>
-            </a>
-          </li>
         </ul>
       </nav>
     </aside><!-- /.left-panel -->
