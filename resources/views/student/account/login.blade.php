@@ -46,14 +46,14 @@
 				{{-- <p class="tab-switch-button login-register-form-trigger">Đăng nhập</p> --}}
 				
 				<a href="{{url('login')}}">
-					<button class="submit tab-switch-button login-register-form-trigger">Đăng nhập</button>
+					<button class="submit tab-switch-button" style="background-color: #21283b; color: white;">Đăng nhập</button>
 				</a>
 				<!-- /TAB SWITCH BUTTON -->
 
 				<!-- TAB SWITCH BUTTON -->
 				{{-- <p class="tab-switch-button login-register-form-trigger">Đăng ký</p> --}}
 				<a href="{{url('register')}}">
-					<button class="submit tab-switch-button login-register-form-trigger">Đăng ký</button>
+					<button class="submit tab-switch-button">Đăng ký</button>
 				</a>
 				<!-- /TAB SWITCH BUTTON -->
 			</div>
@@ -62,7 +62,7 @@
 		<!-- /LANDING INFO -->
 
 		<!-- LANDING FORM -->
-		<div class="landing-form">
+		<div class="landing-form" style="margin-top: 60px;">
 			<!-- FORM BOX -->
 			<div class="form-box login-register-form-element">
 				<!-- FORM BOX DECORATION -->
@@ -160,112 +160,6 @@
 						<div class="form-item">
 							<!-- BUTTON -->
 							<button type="submit" class="button medium secondary">Đăng nhập!</button>
-							<!-- /BUTTON -->
-						</div>
-						<!-- /FORM ITEM -->
-					</div>
-					<!-- /FORM ROW -->
-				</form>
-				<!-- /FORM -->
-			</div>
-			<!-- /FORM BOX -->
-
-			<!-- FORM BOX -->
-			<div class="form-box login-register-form-element">
-				<!-- FORM BOX DECORATION -->
-				<img class="form-box-decoration" src="{{asset('public/student/img/landing/rocket.png')}}" alt="rocket">
-				<!-- /FORM BOX DECORATION -->
-
-				<!-- FORM BOX TITLE -->
-				<h2 class="form-box-title">Tạo tài khoản!</h2>
-				<!-- /FORM BOX TITLE -->
-				@php
-				$message=Session::get('message');
-				if($message){
-					echo $message;
-					Session::put('message', null);
-				}
-				@endphp
-				<!-- FORM -->
-				<form action="{{url('/dang-ky')}}" method="post" class="form">
-					<!-- FORM ROW -->
-					{{csrf_field()}}
-					@foreach ($errors->all() as $val)
-					<div class="alert alert-danger">{{$val}}</div>
-					@endforeach
-					<div class="form-row">
-						<!-- FORM ITEM -->
-						<div class="form-item">
-							<!-- FORM INPUT -->
-							<div class="form-input">
-								<label for="register-email">Email</label>
-								<input class="fa fa-envelope" type="text" name="student_email" id="register-email">
-							</div>
-							<!-- /FORM INPUT -->
-						</div>
-						<!-- /FORM ITEM -->
-					</div>
-					<!-- /FORM ROW -->
-
-					<!-- FORM ROW -->
-					<div class="form-row">
-						<!-- FORM ITEM -->
-						<div class="form-item">
-							<!-- FORM INPUT -->
-							<div class="form-input">
-								<label for="register-username">Họ tên</label>
-								<input type="text" name="student_name" id="register-username">
-							</div>
-							<!-- /FORM INPUT -->
-						</div>
-						<!-- /FORM ITEM -->
-					</div>
-					<!-- /FORM ROW -->
-
-					<!-- FORM ROW -->
-					<div class="form-row">
-						<!-- FORM ITEM -->
-						<div class="form-item">
-							<!-- FORM INPUT -->
-							<div class="form-input">
-								<label for="register-password">Mật khẩu</label>
-								<input type="password" name="student_password" id="register-password">
-							</div>
-							<!-- /FORM INPUT -->
-						</div>
-						<!-- /FORM ITEM -->
-					</div>
-					<!-- /FORM ROW -->
-
-					<!-- FORM ROW -->
-					<div class="form-row">
-						<!-- FORM ITEM -->
-						<div class="form-item">
-							<!-- FORM INPUT -->
-							<div class="form-input">
-								<label for="register-password-repeat">Nhập lại mật khẩu</label>
-								<input type="password" name="student_password_confirm" id="register-password-repeat">
-							</div>
-							<!-- /FORM INPUT -->
-						</div>
-						<!-- /FORM ITEM -->
-					</div>
-					<!-- /FORM ROW -->
-					<br>
-					<div class="col-lg-12 no-pdd">
-						<div class="sn-field">
-							<center>
-								<div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
-							</center>
-						</div>
-					</div>
-					<br>
-					<!-- FORM ROW -->
-					<div class="form-row">
-						<!-- FORM ITEM -->
-						<div class="form-item">
-							<!-- BUTTON -->
-							<button class="button medium primary">Đăng ký!</button>
 							<!-- /BUTTON -->
 						</div>
 						<!-- /FORM ITEM -->
