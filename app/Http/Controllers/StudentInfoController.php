@@ -30,73 +30,69 @@ class StudentInfoController extends Controller
         foreach ($student2 as $key => $value) {
             if($value->student_info_id ){
                 if($value->info->faculty_id==0 && $value->info->specialized_id==0 && $value->info->course_id==0){
-                    $faculty = Faculty::orderBy('faculty_name','ASC')->get();
-                    $specialized = Specialized::orderBy('faculty_id','ASC')->get();
-                    $course = Course::orderBy('course_name','ASC')->get();
+                    $faculty = Faculty::where('faculty_status',0)->orderBy('faculty_name','ASC')->get();
+                    $specialized = Specialized::where('specialized_status',0)->orderBy('faculty_id','ASC')->get();
+                    $course = Course::where('course_status',0)->orderBy('course_name','ASC')->get();
                 }else if($value->info->faculty_id==0 && $value->info->specialized_id==0){
                     $courseId = $value->info->course->course_id;
 
-                    $faculty = Faculty::orderBy('faculty_name','ASC')->get();
-                    $specialized = Specialized::orderBy('faculty_id','ASC')->get();
-                    $course = Course::whereNotIn('course_id', [$courseId])
+                    $faculty = Faculty::where('faculty_status',0)->orderBy('faculty_name','ASC')->get();
+                    $specialized = Specialized::where('specialized_status',0)->orderBy('faculty_id','ASC')->get();
+                    $course = Course::where('course_status',0)->whereNotIn('course_id', [$courseId])
                     ->orderBy('course_name','ASC')->get();
                 }else if($value->info->specialized_id==0 && $value->info->course_id==0){
                     $facultyId = $value->info->faculty->faculty_id;
 
-                    $faculty = Faculty::whereNotIn('faculty_id', [$facultyId])
+                    $faculty = Faculty::where('faculty_status',0)->whereNotIn('faculty_id', [$facultyId])
                     ->orderBy('faculty_name','ASC')->get();
-                    $specialized = Specialized::orderBy('faculty_id','ASC')->get();
-                    $course = Course::orderBy('course_name','ASC')->get();
+                    $specialized = Specialized::where('specialized_status',0)->orderBy('faculty_id','ASC')->get();
+                    $course = Course::where('course_status',0)->orderBy('course_name','ASC')->get();
                 }else if($value->info->faculty_id==0 && $value->info->course_id==0){
                     $specializedId = $value->info->specialized->specialized_id;
 
-                    $faculty = Faculty::orderBy('faculty_name','ASC')->get();
-                    $specialized = Specialized::whereNotIn('specialized_id', [$specializedId])
-                    ->orderBy('faculty_id','ASC')->get();
-                    $course = Course::orderBy('course_name','ASC')->get();
+                    $faculty = Faculty::where('faculty_status',0)->orderBy('faculty_name','ASC')->get();
+                    $specialized = Specialized::where('specialized_status',0)->whereNotIn('specialized_id', [$specializedId])->orderBy('faculty_id','ASC')->get();
+                    $course = Course::where('course_status',0)->orderBy('course_name','ASC')->get();
                 }else if($value->info->faculty_id==0){
                     $specializedId = $value->info->specialized->specialized_id;
                     $courseId = $value->info->course->course_id;
 
-                    $faculty = Faculty::orderBy('faculty_name','ASC')->get();
-                    $specialized = Specialized::whereNotIn('specialized_id', [$specializedId])
-                    ->orderBy('faculty_id','ASC')->get();
-                    $course = Course::whereNotIn('course_id', [$courseId])
+                    $faculty = Faculty::where('faculty_status',0)->orderBy('faculty_name','ASC')->get();
+                    $specialized = Specialized::where('specialized_status',0)->whereNotIn('specialized_id', [$specializedId])->orderBy('faculty_id','ASC')->get();
+                    $course = Course::where('course_status',0)->whereNotIn('course_id', [$courseId])
                     ->orderBy('course_name','ASC')->get();
                 }else if($value->info->specialized_id==0){
                     $facultyId = $value->info->faculty->faculty_id;
                     $courseId = $value->info->course->course_id;
 
-                    $faculty = Faculty::whereNotIn('faculty_id', [$facultyId])
+                    $faculty = Faculty::where('faculty_status',0)->whereNotIn('faculty_id', [$facultyId])
                     ->orderBy('faculty_name','ASC')->get();
-                    $specialized = Specialized::orderBy('faculty_id','ASC')->get();
-                    $course = Course::whereNotIn('course_id', [$courseId])
+                    $specialized = Specialized::where('specialized_status',0)->orderBy('faculty_id','ASC')->get();
+                    $course = Course::where('course_status',0)->whereNotIn('course_id', [$courseId])
                     ->orderBy('course_name','ASC')->get();
                 }else if($value->info->course_id==0){
                     $facultyId = $value->info->specialized->faculty_id;
                     $specializedId = $value->info->specialized->specialized_id;
 
-                    $faculty = Faculty::whereNotIn('faculty_id', [$facultyId])
+                    $faculty = Faculty::where('faculty_status',0)->whereNotIn('faculty_id', [$facultyId])
                     ->orderBy('faculty_name','ASC')->get();
-                    $specialized = Specialized::whereNotIn('specialized_id', [$specializedId])
-                    ->orderBy('faculty_id','ASC')->get();
-                    $course = Course::orderBy('course_name','ASC')->get();
+                    $specialized = Specialized::where('specialized_status',0)->whereNotIn('specialized_id', [$specializedId])->orderBy('faculty_id','ASC')->get();
+                    $course = Course::where('course_status',0)->orderBy('course_name','ASC')->get();
                 }else{
                     $facultyId = $value->info->faculty->faculty_id;
                     $specializedId = $value->info->specialized->specialized_id;
                     $courseId = $value->info->course->course_id;
 
-                    $faculty = Faculty::whereNotIn('faculty_id', [$facultyId])
+                    $faculty = Faculty::where('faculty_status',0)->whereNotIn('faculty_id', [$facultyId])
                     ->orderBy('faculty_name','ASC')->get();
-                    $specialized = Specialized::whereNotIn('specialized_id', [$specializedId])
-                    ->orderBy('faculty_id','ASC')->get();
-                    $course = Course::whereNotIn('course_id', [$courseId])
+                    $specialized = Specialized::where('specialized_status',0)->whereNotIn('specialized_id', [$specializedId])->orderBy('faculty_id','ASC')->get();
+                    $course = Course::where('course_status',0)->whereNotIn('course_id', [$courseId])
                     ->orderBy('course_name','ASC')->get();
                 }
             }else{
-                $faculty = Faculty::orderBy('faculty_name','ASC')->get();
-                $specialized = Specialized::orderBy('faculty_id','ASC')->get();
-                $course = Course::orderBy('course_name','ASC')->get();
+                $faculty = Faculty::where('faculty_status',0)->orderBy('faculty_name','ASC')->get();
+                $specialized = Specialized::where('specialized_status',0)->orderBy('faculty_id','ASC')->get();
+                $course = Course::where('course_status',0)->orderBy('course_name','ASC')->get();
             }
         }
        
