@@ -74,7 +74,7 @@
 			</li>
 			@if (Session::get('student_id'))
 			<li class="menu-item">
-				<a class="menu-item-link text-tooltip-tfr" href="{{url('/trang-ca-nhan-cua-sinh-vien/'.Session::get('student_id'))}}" data-title="Trang cá nhân">
+				<a class="menu-item-link text-tooltip-tfr" href="{{url('/trang-sinh-vien/'.Session::get('student_id'))}}" data-title="Trang cá nhân">
 					<svg class="menu-item-link-icon icon-timeline">
 						<use xlink:href="#svg-timeline"></use>
 					</svg>
@@ -115,7 +115,7 @@
 				</a>
 			</li>
 			<li class="menu-item">
-				<a class="menu-item-link" href="members.html">
+				<a class="menu-item-link" href="{{url('/trang-sinh-vien/'.Session::get('student_id'))}}">
 					<svg class="menu-item-link-icon icon-members">
 						<use xlink:href="#svg-timeline"></use>
 					</svg>
@@ -230,7 +230,7 @@
 		<!-- MENU ITEM -->
 		<li class="menu-item">
 			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="overview.html">
+			<a class="menu-item-link" href="{{url('/trang-sinh-vien/'.Session::get('student_id'))}}">
 				<!-- MENU ITEM LINK ICON -->
 				<svg class="menu-item-link-icon icon-overview">
 					<use xlink:href="#svg-overview"></use>
@@ -298,7 +298,7 @@
 	<!-- /NAVIGATION WIDGET SECTION LINK -->
 
 	<!-- NAVIGATION WIDGET SECTION LINK -->
-	<a class="navigation-widget-section-link" href="hub-profile-notifications.html">Thông báo</a>
+	<a class="navigation-widget-section-link" href="{{url('/tat-ca-thong-bao')}}">Thông báo</a>
 
 	<!-- NAVIGATION WIDGET SECTION LINK -->
 	<a class="navigation-widget-section-link" href="{{url('/thay-doi-mat-khau/'.Session::get('student_id'))}}">Đổi mật khẩu</a>
@@ -381,19 +381,27 @@
 	</div>
 
 	<!-- HEADER ACTIONS -->
-	<div class="header-actions">
+	<div class="header-actions headertop">
 		<!-- ACTION LIST -->
 		<div class="action-list dark">
 			<!-- ACTION LIST ITEM WRAP -->
 			<div class="action-list-item-wrap">
 				<!-- ACTION LIST ITEM -->
-				<div class="action-list-item unread header-dropdown-trigger">
-					<!-- ACTION LIST ITEM ICON -->
+				@foreach ($nofi2 as $key => $val)
+				@if($val->postes->student_id==Session::get('student_id') && $val->nofication_status==0)
+				<div class="action-list-item iconnofi unread header-dropdown-trigger">
 					<svg class="action-list-item-icon icon-notification">
 						<use xlink:href="#svg-notification"></use>
 					</svg>
-					<!-- /ACTION LIST ITEM ICON -->
 				</div>
+				@else
+				<div class="action-list-item header-dropdown-trigger">
+					<svg class="action-list-item-icon icon-notification">
+						<use xlink:href="#svg-notification"></use>
+					</svg>
+				</div>
+				@endif
+				@endforeach
 				<!-- /ACTION LIST ITEM -->
 
 				<!-- DROPDOWN BOX -->
@@ -405,13 +413,9 @@
 						<!-- /DROPDOWN BOX HEADER TITLE -->
 
 						<!-- DROPDOWN BOX HEADER ACTIONS -->
-						<div class="dropdown-box-header-actions">
+						<div class="dropdown-box-header-actions readallnofi">
 							<!-- DROPDOWN BOX HEADER ACTION -->
 							<p class="dropdown-box-header-action">Đọc tất cả</p>
-							<!-- /DROPDOWN BOX HEADER ACTION -->
-
-							<!-- DROPDOWN BOX HEADER ACTION -->
-							<p class="dropdown-box-header-action">Cài đặt</p>
 							<!-- /DROPDOWN BOX HEADER ACTION -->
 						</div>
 						<!-- /DROPDOWN BOX HEADER ACTIONS -->
@@ -420,8 +424,204 @@
 
 					<!-- DROPDOWN BOX LIST -->
 					<div class="dropdown-box-list" data-simplebar>
+						@foreach($nofi as $key => $nofication)
+						@if ($nofication->postes->student_id==Session::get('student_id') && $nofication->nofication_status==0)
 						<!-- DROPDOWN BOX LIST ITEM -->
 						<div class="dropdown-box-list-item unread">
+							<!-- USER STATUS -->
+							<div class="user-status notification">
+								<!-- USER STATUS AVATAR -->
+								<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">
+									<!-- USER AVATAR -->
+									<div class="user-avatar small no-outline">
+										<!-- USER AVATAR CONTENT -->
+										<div class="user-avatar-content">
+											@if ($nofication->studentes->student_info_id)
+											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$nofication->studentes->student_avatar)}}"></div>
+											@else
+											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
+											@endif
+										</div>
+										<!-- /USER AVATAR CONTENT -->
+
+										<!-- USER AVATAR PROGRESS -->
+										<div class="user-avatar-progress">
+											<!-- HEXAGON -->
+											<div class="hexagon-progress-40-44"></div>
+											<!-- /HEXAGON -->
+										</div>
+										<!-- /USER AVATAR PROGRESS -->
+
+										<!-- USER AVATAR PROGRESS BORDER -->
+										<div class="user-avatar-progress-border">
+											<!-- HEXAGON -->
+											<div class="hexagon-border-40-44"></div>
+											<!-- /HEXAGON -->
+										</div>
+										<!-- /USER AVATAR PROGRESS BORDER -->
+									</div>
+									<!-- /USER AVATAR -->
+								</a>
+								<!-- /USER STATUS AVATAR -->
+								@if ($nofication->nofication_kind=='Like')
+								<!-- USER STATUS TITLE -->
+								<p class="user-status-title"><a class="bold" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">{{$nofication->studentes->student_name}}</a> đã thích bài viết <a class="highlighted btnReadnofi" data-id_readnofi="{{$nofication->nofication_id}}" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
+								<!-- /USER STATUS TITLE -->
+
+								<!-- USER STATUS TIMESTAMP -->
+								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
+								<!-- /USER STATUS TIMESTAMP -->
+
+								<!-- USER STATUS ICON -->
+								<div class="user-status-icon">
+									<!-- ICON COMMENT -->
+									<svg class="icon-thumbs-up">
+										<use xlink:href="#svg-thumbs-up"></use>
+									</svg>
+									<!-- /ICON COMMENT -->
+								</div>
+								<!-- /USER STATUS ICON -->
+								@elseif($nofication->nofication_kind=='Comment')
+								<!-- USER STATUS TITLE -->
+								<p class="user-status-title"><a class="bold" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">{{$nofication->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted btnReadnofi" data-id_readnofi="{{$nofication->nofication_id}}" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
+								<!-- /USER STATUS TITLE -->
+
+								<!-- USER STATUS TIMESTAMP -->
+								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
+								<!-- /USER STATUS TIMESTAMP -->
+
+								<!-- USER STATUS ICON -->
+								<div class="user-status-icon">
+									<!-- ICON COMMENT -->
+									<svg class="icon-comment">
+										<use xlink:href="#svg-comment"></use>
+									</svg>
+									<!-- /ICON COMMENT -->
+								</div>
+								<!-- /USER STATUS ICON -->
+								@else
+								<!-- USER STATUS TITLE -->
+								<p class="user-status-title">Khoa đã trả lời câu hỏi <a class="highlighted btnReadnofi" data-id_readnofi="{{$nofication->nofication_id}}" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
+								<!-- /USER STATUS TITLE -->
+
+								<!-- USER STATUS TIMESTAMP -->
+								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
+								<!-- /USER STATUS TIMESTAMP -->
+
+								<!-- USER STATUS ICON -->
+								<div class="user-status-icon">
+									<!-- ICON COMMENT -->
+									<svg class="icon-quests">
+										<use xlink:href="#svg-quests"></use>
+									</svg>
+									<!-- /ICON COMMENT -->
+								</div>
+								<!-- /USER STATUS ICON -->
+								@endif
+							</div>
+							<!-- /USER STATUS -->
+						</div>
+						<!-- /DROPDOWN BOX LIST ITEM -->
+						@elseif ($nofication->postes->student_id==Session::get('student_id') && $nofication->nofication_status==1)
+						<!-- DROPDOWN BOX LIST ITEM -->
+						<div class="dropdown-box-list-item">
+							<!-- USER STATUS -->
+							<div class="user-status notification">
+								<!-- USER STATUS AVATAR -->
+								<a class="user-status-avatar" href="profile-timeline.html">
+									<!-- USER AVATAR -->
+									<div class="user-avatar small no-outline">
+										<!-- USER AVATAR CONTENT -->
+										<div class="user-avatar-content">
+											@if ($nofication->studentes->student_info_id)
+											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$nofication->studentes->student_avatar)}}"></div>
+											@else
+											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
+											@endif
+										</div>
+										<!-- /USER AVATAR CONTENT -->
+
+										<!-- USER AVATAR PROGRESS -->
+										<div class="user-avatar-progress">
+											<!-- HEXAGON -->
+											<div class="hexagon-progress-40-44"></div>
+											<!-- /HEXAGON -->
+										</div>
+										<!-- /USER AVATAR PROGRESS -->
+
+										<!-- USER AVATAR PROGRESS BORDER -->
+										<div class="user-avatar-progress-border">
+											<!-- HEXAGON -->
+											<div class="hexagon-border-40-44"></div>
+											<!-- /HEXAGON -->
+										</div>
+										<!-- /USER AVATAR PROGRESS BORDER -->
+									</div>
+									<!-- /USER AVATAR -->
+								</a>
+								<!-- /USER STATUS AVATAR -->
+								@if ($nofication->nofication_kind=='Like')
+								<!-- USER STATUS TITLE -->
+								<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$nofication->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
+								<!-- /USER STATUS TITLE -->
+
+								<!-- USER STATUS TIMESTAMP -->
+								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
+								<!-- /USER STATUS TIMESTAMP -->
+
+								<!-- USER STATUS ICON -->
+								<div class="user-status-icon">
+									<!-- ICON COMMENT -->
+									<svg class="icon-thumbs-up">
+										<use xlink:href="#svg-thumbs-up"></use>
+									</svg>
+									<!-- /ICON COMMENT -->
+								</div>
+								<!-- /USER STATUS ICON -->
+								@elseif($nofication->nofication_kind=='Comment')
+								<!-- USER STATUS TITLE -->
+								<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$nofication->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
+								<!-- /USER STATUS TITLE -->
+
+								<!-- USER STATUS TIMESTAMP -->
+								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
+								<!-- /USER STATUS TIMESTAMP -->
+
+								<!-- USER STATUS ICON -->
+								<div class="user-status-icon">
+									<!-- ICON COMMENT -->
+									<svg class="icon-comment">
+										<use xlink:href="#svg-comment"></use>
+									</svg>
+									<!-- /ICON COMMENT -->
+								</div>
+								<!-- /USER STATUS ICON -->
+								@else
+								<!-- USER STATUS TITLE -->
+								<p class="user-status-title">Khoa đã trả lời câu hỏi <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
+								<!-- /USER STATUS TITLE -->
+
+								<!-- USER STATUS TIMESTAMP -->
+								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
+								<!-- /USER STATUS TIMESTAMP -->
+
+								<!-- USER STATUS ICON -->
+								<div class="user-status-icon">
+									<!-- ICON COMMENT -->
+									<svg class="icon-quests">
+										<use xlink:href="#svg-quests"></use>
+									</svg>
+									<!-- /ICON COMMENT -->
+								</div>
+								<!-- /USER STATUS ICON -->
+								@endif
+							</div>
+							<!-- /USER STATUS -->
+						</div>
+						<!-- /DROPDOWN BOX LIST ITEM -->
+						@elseif ($nofication->postes->student_id==Session::get('student_id') && $nofication->nofication_status==1)
+						<!-- DROPDOWN BOX LIST ITEM -->
+						<div class="dropdown-box-list-item">
 							<!-- USER STATUS -->
 							<div class="user-status notification">
 								<!-- USER STATUS AVATAR -->
@@ -479,177 +679,31 @@
 									<!-- /USER AVATAR -->
 								</a>
 								<!-- /USER STATUS AVATAR -->
-
+								@if ($nofication->nofication_kind=='Like')
 								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">Nick Grissom</a> posted a comment on your <a class="highlighted" href="profile-timeline.html">status update</a></p>
+								<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$nofication->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="profile-timeline.html">{{$nofication->postes->post_title}}</a> của bạn</p>
 								<!-- /USER STATUS TITLE -->
 
 								<!-- USER STATUS TIMESTAMP -->
-								<p class="user-status-timestamp">2 minutes ago</p>
+								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
 								<!-- /USER STATUS TIMESTAMP -->
 
 								<!-- USER STATUS ICON -->
 								<div class="user-status-icon">
 									<!-- ICON COMMENT -->
-									<svg class="icon-comment">
-										<use xlink:href="#svg-comment"></use>
-									</svg>
-									<!-- /ICON COMMENT -->
-								</div>
-								<!-- /USER STATUS ICON -->
-							</div>
-							<!-- /USER STATUS -->
-						</div>
-						<!-- /DROPDOWN BOX LIST ITEM -->
-
-						<!-- DROPDOWN BOX LIST ITEM -->
-						<div class="dropdown-box-list-item">
-							<!-- USER STATUS -->
-							<div class="user-status notification">
-								<!-- USER STATUS AVATAR -->
-								<a class="user-status-avatar" href="profile-timeline.html">
-									<!-- USER AVATAR -->
-									<div class="user-avatar small no-outline">
-										<!-- USER AVATAR CONTENT -->
-										<div class="user-avatar-content">
-											<!-- HEXAGON -->
-											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/07.jpg')}}"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR CONTENT -->
-
-										<!-- USER AVATAR PROGRESS -->
-										<div class="user-avatar-progress">
-											<!-- HEXAGON -->
-											<div class="hexagon-progress-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS -->
-
-										<!-- USER AVATAR PROGRESS BORDER -->
-										<div class="user-avatar-progress-border">
-											<!-- HEXAGON -->
-											<div class="hexagon-border-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS BORDER -->
-
-										<!-- USER AVATAR BADGE -->
-										<div class="user-avatar-badge">
-											<!-- USER AVATAR BADGE BORDER -->
-											<div class="user-avatar-badge-border">
-												<!-- HEXAGON -->
-												<div class="hexagon-22-24"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE BORDER -->
-
-											<!-- USER AVATAR BADGE CONTENT -->
-											<div class="user-avatar-badge-content">
-												<!-- HEXAGON -->
-												<div class="hexagon-dark-16-18"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE CONTENT -->
-
-											<!-- USER AVATAR BADGE TEXT -->
-											<p class="user-avatar-badge-text">26</p>
-											<!-- /USER AVATAR BADGE TEXT -->
-										</div>
-										<!-- /USER AVATAR BADGE -->
-									</div>
-									<!-- /USER AVATAR -->
-								</a>
-								<!-- /USER STATUS AVATAR -->
-
-								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">Sarah Diamond</a> left a like <img class="reaction" src="{{asset('public/student/img/reaction/like.png')}}" alt="reaction-like"> reaction on your <a class="highlighted" href="profile-timeline.html">status update</a></p>
-								<!-- /USER STATUS TITLE -->
-
-								<!-- USER STATUS TIMESTAMP -->
-								<p class="user-status-timestamp">17 minutes ago</p>
-								<!-- /USER STATUS TIMESTAMP -->
-
-								<!-- USER STATUS ICON -->
-								<div class="user-status-icon">
-									<!-- ICON THUMBS UP -->
 									<svg class="icon-thumbs-up">
 										<use xlink:href="#svg-thumbs-up"></use>
 									</svg>
-									<!-- /ICON THUMBS UP -->
+									<!-- /ICON COMMENT -->
 								</div>
 								<!-- /USER STATUS ICON -->
-							</div>
-							<!-- /USER STATUS -->
-						</div>
-						<!-- /DROPDOWN BOX LIST ITEM -->
-
-						<!-- DROPDOWN BOX LIST ITEM -->
-						<div class="dropdown-box-list-item">
-							<!-- USER STATUS -->
-							<div class="user-status notification">
-								<!-- USER STATUS AVATAR -->
-								<a class="user-status-avatar" href="profile-timeline.html">
-									<!-- USER AVATAR -->
-									<div class="user-avatar small no-outline">
-										<!-- USER AVATAR CONTENT -->
-										<div class="user-avatar-content">
-											<!-- HEXAGON -->
-											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/02.jpg')}}"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR CONTENT -->
-
-										<!-- USER AVATAR PROGRESS -->
-										<div class="user-avatar-progress">
-											<!-- HEXAGON -->
-											<div class="hexagon-progress-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS -->
-
-										<!-- USER AVATAR PROGRESS BORDER -->
-										<div class="user-avatar-progress-border">
-											<!-- HEXAGON -->
-											<div class="hexagon-border-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS BORDER -->
-
-										<!-- USER AVATAR BADGE -->
-										<div class="user-avatar-badge">
-											<!-- USER AVATAR BADGE BORDER -->
-											<div class="user-avatar-badge-border">
-												<!-- HEXAGON -->
-												<div class="hexagon-22-24"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE BORDER -->
-
-											<!-- USER AVATAR BADGE CONTENT -->
-											<div class="user-avatar-badge-content">
-												<!-- HEXAGON -->
-												<div class="hexagon-dark-16-18"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE CONTENT -->
-
-											<!-- USER AVATAR BADGE TEXT -->
-											<p class="user-avatar-badge-text">13</p>
-											<!-- /USER AVATAR BADGE TEXT -->
-										</div>
-										<!-- /USER AVATAR BADGE -->
-									</div>
-									<!-- /USER AVATAR -->
-								</a>
-								<!-- /USER STATUS AVATAR -->
-
+								@elseif($nofication->nofication_kind=='Comment')
 								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">Destroy Dex</a> posted a comment on your <a class="highlighted" href="profile-photos.html">photo</a></p>
+								<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$nofication->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted" href="profile-timeline.html">{{$nofication->postes->post_title}}</a> của bạn</p>
 								<!-- /USER STATUS TITLE -->
 
 								<!-- USER STATUS TIMESTAMP -->
-								<p class="user-status-timestamp">31 minutes ago</p>
+								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
 								<!-- /USER STATUS TIMESTAMP -->
 
 								<!-- USER STATUS ICON -->
@@ -661,179 +715,45 @@
 									<!-- /ICON COMMENT -->
 								</div>
 								<!-- /USER STATUS ICON -->
-							</div>
-							<!-- /USER STATUS -->
-						</div>
-						<!-- /DROPDOWN BOX LIST ITEM -->
-
-						<!-- DROPDOWN BOX LIST ITEM -->
-						<div class="dropdown-box-list-item">
-							<!-- USER STATUS -->
-							<div class="user-status notification">
-								<!-- USER STATUS AVATAR -->
-								<a class="user-status-avatar" href="profile-timeline.html">
-									<!-- USER AVATAR -->
-									<div class="user-avatar small no-outline">
-										<!-- USER AVATAR CONTENT -->
-										<div class="user-avatar-content">
-											<!-- HEXAGON -->
-											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/10.jpg')}}"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR CONTENT -->
-
-										<!-- USER AVATAR PROGRESS -->
-										<div class="user-avatar-progress">
-											<!-- HEXAGON -->
-											<div class="hexagon-progress-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS -->
-
-										<!-- USER AVATAR PROGRESS BORDER -->
-										<div class="user-avatar-progress-border">
-											<!-- HEXAGON -->
-											<div class="hexagon-border-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS BORDER -->
-
-										<!-- USER AVATAR BADGE -->
-										<div class="user-avatar-badge">
-											<!-- USER AVATAR BADGE BORDER -->
-											<div class="user-avatar-badge-border">
-												<!-- HEXAGON -->
-												<div class="hexagon-22-24"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE BORDER -->
-
-											<!-- USER AVATAR BADGE CONTENT -->
-											<div class="user-avatar-badge-content">
-												<!-- HEXAGON -->
-												<div class="hexagon-dark-16-18"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE CONTENT -->
-
-											<!-- USER AVATAR BADGE TEXT -->
-											<p class="user-avatar-badge-text">5</p>
-											<!-- /USER AVATAR BADGE TEXT -->
-										</div>
-										<!-- /USER AVATAR BADGE -->
-									</div>
-									<!-- /USER AVATAR -->
-								</a>
-								<!-- /USER STATUS AVATAR -->
-
+								@else
 								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">The Green Goo</a> left a love <img class="reaction" src="{{asset('public/student/img/reaction/love.png')}}" alt="reaction-love"> reaction on your <a class="highlighted" href="profile-timeline.html">status update</a></p>
+								<p class="user-status-title">Khoa đã trả lời câu hỏi <a class="highlighted" href="profile-timeline.html">{{$nofication->postes->post_title}}</a> của bạn</p>
 								<!-- /USER STATUS TITLE -->
 
 								<!-- USER STATUS TIMESTAMP -->
-								<p class="user-status-timestamp">2 hours ago</p>
+								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
 								<!-- /USER STATUS TIMESTAMP -->
 
 								<!-- USER STATUS ICON -->
 								<div class="user-status-icon">
-									<!-- ICON THUMBS UP -->
+									<!-- ICON COMMENT -->
 									<svg class="icon-thumbs-up">
 										<use xlink:href="#svg-thumbs-up"></use>
 									</svg>
-									<!-- /ICON THUMBS UP -->
+									<!-- /ICON COMMENT -->
 								</div>
 								<!-- /USER STATUS ICON -->
-							</div>
-							<!-- /USER STATUS -->
-						</div>
-						<!-- /DROPDOWN BOX LIST ITEM -->
-
-						<!-- DROPDOWN BOX LIST ITEM -->
-						<div class="dropdown-box-list-item">
-							<!-- USER STATUS -->
-							<div class="user-status notification">
-								<!-- USER STATUS AVATAR -->
-								<a class="user-status-avatar" href="profile-timeline.html">
-									<!-- USER AVATAR -->
-									<div class="user-avatar small no-outline">
-										<!-- USER AVATAR CONTENT -->
-										<div class="user-avatar-content">
-											<!-- HEXAGON -->
-											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/05.jpg')}}"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR CONTENT -->
-
-										<!-- USER AVATAR PROGRESS -->
-										<div class="user-avatar-progress">
-											<!-- HEXAGON -->
-											<div class="hexagon-progress-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS -->
-
-										<!-- USER AVATAR PROGRESS BORDER -->
-										<div class="user-avatar-progress-border">
-											<!-- HEXAGON -->
-											<div class="hexagon-border-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS BORDER -->
-
-										<!-- USER AVATAR BADGE -->
-										<div class="user-avatar-badge">
-											<!-- USER AVATAR BADGE BORDER -->
-											<div class="user-avatar-badge-border">
-												<!-- HEXAGON -->
-												<div class="hexagon-22-24"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE BORDER -->
-
-											<!-- USER AVATAR BADGE CONTENT -->
-											<div class="user-avatar-badge-content">
-												<!-- HEXAGON -->
-												<div class="hexagon-dark-16-18"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE CONTENT -->
-
-											<!-- USER AVATAR BADGE TEXT -->
-											<p class="user-avatar-badge-text">12</p>
-											<!-- /USER AVATAR BADGE TEXT -->
-										</div>
-										<!-- /USER AVATAR BADGE -->
-									</div>
-									<!-- /USER AVATAR -->
-								</a>
-								<!-- /USER STATUS AVATAR -->
-
-								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">Neko Bebop</a> posted a comment on your <a class="highlighted" href="profile-timeline.html">status update</a></p>
-								<!-- /USER STATUS TITLE -->
-
-								<!-- USER STATUS TIMESTAMP -->
-								<p class="user-status-timestamp">3 hours ago</p>
-								<!-- /USER STATUS TIMESTAMP -->
-
 								<!-- USER STATUS ICON -->
 								<div class="user-status-icon">
 									<!-- ICON COMMENT -->
-									<svg class="icon-comment">
-										<use xlink:href="#svg-comment"></use>
+									<svg class="icon-quests">
+										<use xlink:href="#svg-quests"></use>
 									</svg>
 									<!-- /ICON COMMENT -->
 								</div>
 								<!-- /USER STATUS ICON -->
+								@endif
 							</div>
 							<!-- /USER STATUS -->
 						</div>
 						<!-- /DROPDOWN BOX LIST ITEM -->
+						@endif
+						@endforeach
 					</div>
 					<!-- /DROPDOWN BOX LIST -->
 
 					<!-- DROPDOWN BOX BUTTON -->
-					<a class="dropdown-box-button secondary" href="hub-profile-notifications.html">View all Notifications</a>
+					<a class="dropdown-box-button secondary" href="{{url('/tat-ca-thong-bao')}}">Xem tất cả thông báo</a>
 					<!-- /DROPDOWN BOX BUTTON -->
 				</div>
 				<!-- /DROPDOWN BOX -->
@@ -886,8 +806,6 @@
 			<!-- /USER STATUS -->
 		</div>
 		<!-- /DROPDOWN NAVIGATION HEADER -->
-
-		
 		@php
 		if(Session::get('student_id')){
 			@endphp
@@ -900,7 +818,7 @@
 			<!-- /DROPDOWN NAVIGATION LINK -->
 
 			<!-- DROPDOWN NAVIGATION LINK -->
-			<a class="dropdown-navigation-link" href="hub-profile-notifications.html">Thông báo</a>
+			<a class="dropdown-navigation-link" href="{{url('/tat-ca-thong-bao')}}">Thông báo</a>
 			<!-- /DROPDOWN NAVIGATION LINK -->
 
 			<!-- DROPDOWN NAVIGATION LINK -->
@@ -1024,6 +942,247 @@
 </div>
 <!-- /CONTENT GRID -->
 
+<!-- FOOTER WRAP-->
+<footer class="footer-wrap">
+	<!-- FOOTER -->
+	<div class="footer content-grid" style="transform: translate(0px, 0px); margin-top: 50px;  transition: transform 0.4s ease-in-out 0s;">
+		<!-- FOOTER TOP -->
+		<div class="footer-top">
+			<!-- FOOTER INFO -->
+			<div class="footer-info">
+				<!-- FOOTER INFO BRAND -->
+				<div class="footer-info-brand">
+					<!-- FOOTER INFO BRAND IMAGE -->
+					<img class="footer-info-brand-image" src="https://odindesignthemes.com/vikinger-theme/wp-content/uploads/2020/09/vkfooterlogo.png" alt="brand-image">
+					<!-- /FOOTER INFO BRAND IMAGE -->
+
+					<!-- FOOTER INFO BRAND INFO -->
+					<div class="footer-info-brand-info">
+						<!-- FOOTER INFO BRAND TITLE -->
+						<p class="footer-info-brand-title">Vikinger</p>
+						<!-- /FOOTER INFO BRAND TITLE -->
+
+						<!-- FOOTER INFO BRAND SUBTITLE -->
+						<p class="footer-info-brand-subtitle" style="color: white;">BuddyPress Social Community</p>
+						<!-- /FOOTER INFO BRAND SUBTITLE -->
+					</div>
+					<!-- FOOTER INFO BRAND INFO -->
+				</div>
+				<!-- /FOOTER INFO BRAND -->
+
+				<!-- FOOTER INFO TEXT -->
+				<p class="footer-info-text" style="color: white;">Vikinger Social Community was created in 2020, designed to be a new and exciting way to bring people together!</p>
+				<!-- /FOOTER INFO TEXT -->
+
+
+				<!-- SOCIAL ITEMS -->
+				<div class="social-items ">
+					<!-- SOCIAL ITEM -->
+					<a class="social-item facebook " href="https://www.facebook.com/Odin-Design-Themes-and-Templates-1985202918413398/" target="_blank">
+
+						<!-- ICON SVG -->
+						<svg class="icon-facebook social-item-icon">
+							<use href="#svg-facebook"></use>
+						</svg>
+						<!-- ICON SVG -->  
+					</a>
+					<!-- /SOCIAL ITEM -->
+					<!-- SOCIAL ITEM -->
+					<a class="social-item twitter " href="https://twitter.com/odindesign_tw" target="_blank">
+
+						<!-- ICON SVG -->
+						<svg class="icon-twitter social-item-icon">
+							<use href="#svg-twitter"></use>
+						</svg>
+						<!-- ICON SVG -->  
+					</a>
+					<!-- /SOCIAL ITEM -->
+					<!-- SOCIAL ITEM -->
+					<a class="social-item instagram " href="https://www.instagram.com/odindesign_themes/" target="_blank">
+
+						<!-- ICON SVG -->
+						<svg class="icon-instagram social-item-icon">
+							<use href="#svg-instagram"></use>
+						</svg>
+						<!-- ICON SVG -->  
+					</a>
+					<!-- /SOCIAL ITEM -->
+					<!-- SOCIAL ITEM -->
+					<a class="social-item youtube " href="https://youtube.com/channel/UCae_4SDcDGCgHHW6wd7aBAg" target="_blank">
+
+						<!-- ICON SVG -->
+						<svg class="icon-youtube social-item-icon">
+							<use href="#svg-youtube"></use>
+						</svg>
+						<!-- ICON SVG -->  
+					</a>
+					<!-- /SOCIAL ITEM -->
+				</div>
+				<!-- /SOCIAL ITEMS -->      
+			</div>
+			<!-- /FOOTER INFO -->
+
+			<!-- FOOTER NAVIGATION -->
+			<div class="footer-navigation">
+
+				<!-- NAVIGATION SECTION -->
+				<div class="navigation-section">
+					<!-- NAVIGATION SECTION TITLE -->
+					<p class="navigation-section-title">BuddyPress</p>
+					<!-- /NAVIGATION SECTION TITLE -->
+
+					<!-- NAVIGATION SECTION LINKS -->
+					<div class="navigation-section-links">
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/members/odindesign-themes/">Profile Timeline</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/members/odindesign-themes/about/">Profile About</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/members/odindesign-themes/friends/">Profile Friends</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/members/odindesign-themes/groups/">Profile Groups</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/members/odindesign-themes/posts/">Profile Blog Posts</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/members/odindesign-themes/photos/">Profile Photos</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/activity/">Activity</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/members/">Members</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/groups/">Groups</a>
+						<!-- /NAVIGATION SECTION LINK -->
+					</div>
+					<!-- /NAVIGATION SECTION LINKS -->
+				</div>
+				<!-- /NAVIGATION SECTION -->
+				<!-- NAVIGATION SECTION -->
+				<div class="navigation-section">
+					<!-- NAVIGATION SECTION TITLE -->
+					<p class="navigation-section-title">GamiPress</p>
+					<!-- /NAVIGATION SECTION TITLE -->
+
+					<!-- NAVIGATION SECTION LINKS -->
+					<div class="navigation-section-links">
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/badges/">Badges</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/members/odindesign-themes/badges/">Profile Badges</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/quests/">Quests</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/members/odindesign-themes/quests/">Profile Quests</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/ranks/">Ranks</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/members/odindesign-themes/ranks/">Profile Rank</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/credits/">Credits</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/members/odindesign-themes/credits/">Profile Credits</a>
+						<!-- /NAVIGATION SECTION LINK -->
+					</div>
+					<!-- /NAVIGATION SECTION LINKS -->
+				</div>
+				<!-- /NAVIGATION SECTION -->
+				<!-- NAVIGATION SECTION -->
+				<div class="navigation-section">
+					<!-- NAVIGATION SECTION TITLE -->
+					<p class="navigation-section-title">bbPress</p>
+					<!-- /NAVIGATION SECTION TITLE -->
+
+					<!-- NAVIGATION SECTION LINKS -->
+					<div class="navigation-section-links">
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/forums/">Forums</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/forums/forum/animation-watchtower/">SubForums</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/forums/topic/lets-discuss-the-current-state-of-the-comics-cinematic-universe/">Open Topic</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/members/odindesign-themes/forums/">Profile Forum Activity</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/members/odindesign-themes/forums/replies/">Profile Forum Replies</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/members/odindesign-themes/forums/engagements/">Profile Forum Engagement</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/members/odindesign-themes/forums/favorites/">Profile Forum Favorites</a>
+						<!-- /NAVIGATION SECTION LINK -->
+					</div>
+					<!-- /NAVIGATION SECTION LINKS -->
+				</div>
+				<!-- /NAVIGATION SECTION -->
+				<!-- NAVIGATION SECTION -->
+				<div class="navigation-section">
+					<!-- NAVIGATION SECTION TITLE -->
+					<p class="navigation-section-title">More Links</p>
+					<!-- /NAVIGATION SECTION TITLE -->
+
+					<!-- NAVIGATION SECTION LINKS -->
+					<div class="navigation-section-links">
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/groups/cosplayers-of-the-world/">Group Timeline</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/groups/cosplayers-of-the-world/members/">Group Members</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/groups/cosplayers-of-the-world/photos/">Group Photos</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/landing/">Landing</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/blog/">Blog</a>
+						<!-- /NAVIGATION SECTION LINK -->
+						<!-- NAVIGATION SECTION LINK -->
+						<a class="navigation-section-link" href="https://odindesignthemes.com/vikinger-theme/groups/gaming-watchtower/">Private Group</a>
+						<!-- /NAVIGATION SECTION LINK -->
+					</div>
+					<!-- /NAVIGATION SECTION LINKS -->
+				</div>
+			</div>
+			<!-- /FOOTER NAVIGATION -->
+		</div>
+		<!-- /FOOTER TOP -->
+
+		<!-- FOOTER BOTTOM -->
+		<div class="footer-bottom">
+			<!-- FOOTER BOTTOM TEXT -->
+			<p class="footer-bottom-text">© 2020, Vikinger Theme by <a href="https://themeforest.net/user/odin_design" target="_blank">Odin_Design</a></p>
+			<!-- /FOOTER BOTTOM TEXT -->
+
+			<!-- FOOTER BOTTOM TEXT -->
+			<p class="footer-bottom-text">BuddyPress + GamiPress</p>
+			<!-- /FOOTER BOTTOM TEXT -->
+		</div>
+		<!-- /FOOTER BOTTOM -->
+	</div>
+	<!-- /FOOTER -->
+</footer>
+<!-- /FOOTER WRAP-->
+
 <div class="popup-box small popup-event-creation" style="max-width: 650px; z-index:600;">
 	<div class="popup-close-button popup-event-creation-trigger">
 		<svg class="popup-close-button-icon icon-cross">
@@ -1081,7 +1240,6 @@
 <!-- SVG icons -->
 <script src="{{asset('public/student/js/utils/svg-loader.js')}}"></script>
 
-<script src="{{asset('public/student/js/global/global.maps.js')}}"></script>
 <script src="{{asset('public/student/js/sweetalert.min.js')}}"></script>
 <script src="{{asset('public/student/js/jquery.min.js')}}"></script>
 
@@ -1163,7 +1321,7 @@
 						}
 					});
 					window.setTimeout(function(){
-						location.reload();
+						location.href = "{{url('/')}}";;
 					},2000);
 				}else{
 					swal("Hủy bỏ xóa", "", "error");
@@ -1301,76 +1459,67 @@
 	});
 </script>
 
-<script type="text/javascript">
+<script type="text/javascript" language="javascript">
 	$(document).ready(function(){
-		$('.postI').click(function(e){
-			var id = $(this).data('id_student');
-			var student_info_date = $('.Sdate').val();
-			var student_info_gender = $('.Sgender').val();
-			var student_info_faculty = $('.Sfaculty').val();
-			var student_info_specialized = $('.Sspecialized').val();
-			var student_info_course = $('.Scourse').val();
-			var student_info_address = $('.Saddress').val();
-			var student_info_note = $('.Snote').val();
+		$('.btnReadnofi').click(function(e){
+			var id = $(this).data('id_readnofi');
+			var elm = $(this).parents('.account-hub-content');
 			var _token = $('input[name="_token"]').val();
-			if(student_info_date=='' || student_info_gender==0 || student_info_faculty=='' || student_info_specialized=='' || student_info_course=='' || student_info_address==''){
-				swal("Vui lòng không để trống!", "", "warning");
-			}else{
-				$.ajax({
-					url:'{{ url('/them-thong-tin') }}'+'/'+id,
-					method: 'POST',
-					data: {	id:id,
-						student_info_date:student_info_date, 
-						student_info_gender:student_info_gender, 
-						student_info_faculty:student_info_faculty,
-						student_info_specialized:student_info_specialized, 
-						student_info_course:student_info_course, 
-						student_info_address:student_info_address, 
-						student_info_note:student_info_note, 
-						_token:_token },
-						success:function(data){
-							swal("Thêm thông tin thành công!", "", "success");
-						}
-					});
-				window.setTimeout(function(){
-					location.reload();
-				},3000);
-			}
+			$.ajax({
+				url:'{{ url('/danh-dau-da-doc/') }}'+'/'+id,
+				method: 'POST',
+				data: {id:id, _token:_token},
+				success:function(data){
+					if (elm.find('.nofi_'+id).hasClass('unread')){
+						elm.find('.nofi_'+id).removeClass('unread');
+					}
+				}
+			})
 		});
 
-		$('.postIU').click(function(e){
-			var id = $(this).data('id_studentu');
-			var student_info_date = $('.Sdate').val();
-			var student_info_gender = $('.Sgender').val();
-			var student_info_faculty = $('.Sfaculty').val();
-			var student_info_specialized = $('.Sspecialized').val();
-			var student_info_course = $('.Scourse').val();
-			var student_info_address = $('.Saddress').val();
-			var student_info_note = $('.Snote').val();
+		$('.btnDelnofi').click(function(e){
+			var id = $(this).data('id_delnofi');
+			var elm = $(this).parents('.account-hub-content');
 			var _token = $('input[name="_token"]').val();
-			if(student_info_date=='' || student_info_gender==0 || student_info_faculty=='' || student_info_specialized=='' || student_info_course=='' || student_info_address==''){
-				swal("Vui lòng không để trống!", "", "warning");
-			}else{
-				$.ajax({
-					url:'{{ url('/sua-thong-tin') }}'+'/'+id,
-					method: 'POST',
-					data: {	id:id,
-						student_info_date:student_info_date, 
-						student_info_gender:student_info_gender, 
-						student_info_faculty:student_info_faculty,
-						student_info_specialized:student_info_specialized, 
-						student_info_course:student_info_course, 
-						student_info_address:student_info_address, 
-						student_info_note:student_info_note, 
-						_token:_token },
-						success:function(data){
-							swal("Cập nhật thông tin thành công!", "", "success");
-						}
-					});
-				window.setTimeout(function(){
-					location.reload();
-				},3000);
-			}
+			$.ajax({
+				url:'{{ url('/xoa-thong-bao') }}',
+				method: 'GET',
+				data: {id:id, _token:_token},
+			})
+			window.setTimeout(function(){
+				location.reload();
+			},500);
+		});
+
+		$('.btnReadall').click(function(e){
+			var elm = $(this).parents('.account-hub-content');
+			var _token = $('input[name="_token"]').val();
+			$.ajax({
+				url:'{{ url('/doc-tat-ca') }}',
+				method: 'POST',
+				data: {_token:_token},
+				success:function(data){
+					if (elm.find('.notification-box').hasClass('unread')){
+						elm.find('.notification-box').removeClass('unread');
+					}
+				}
+			})
+		});
+
+		$('.readallnofi').click(function(e){
+			var elm = $(this).parents('.headertop');
+			var _token = $('input[name="_token"]').val();
+			$.ajax({
+				url:'{{ url('/doc-tat-ca') }}',
+				method: 'POST',
+				data: {_token:_token},
+				success:function(data){
+					if (elm.find('.dropdown-box-list-item').hasClass('unread') && elm.find('.dropdown-box-list-item').hasClass('unread') && elm.find('.iconnofi').hasClass('unread')){
+						elm.find('.dropdown-box-list-item').removeClass('unread');
+						elm.find('.iconnofi').removeClass('unread');
+					}
+				}
+			})
 		});
 	});
 </script>
