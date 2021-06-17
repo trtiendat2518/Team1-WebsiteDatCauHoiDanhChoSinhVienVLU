@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Course;
+use App\Models\StudentInfo;
 use Session;
 session_start();
 
@@ -79,7 +80,13 @@ class CourseController extends Controller
 
    public function course_delete($course_id){
       $this->AuthLogin(); 
-      course::find($course_id)->delete();
+      $del = Course::find($course_id);
+      $info = StudentInfo::where('course_id', $course_id)->get();
+      foreach($info as $key => $value){
+         $value->course_id=0;
+         $value->save();
+      }
+      $del->delete();
       Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
       return Redirect::to('danh-sach-nam-hoc');
    }

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Specialized;
 use App\Models\Faculty;
+use App\Models\StudentInfo;
 use Session;
 session_start();
 
@@ -86,7 +87,13 @@ class SpecializedController extends Controller
 
     public function specialized_delete($specialized_id){
         $this->AuthLogin(); 
-        Specialized::find($specialized_id)->delete();
+        $del = Specialized::find($specialized_id);
+        $info = StudentInfo::where('specialized_id', $specialized_id)->get();
+        foreach ($info as $key => $value) {
+            $value->specialized_id=0;
+            $value->save();
+        }
+        $del->delete();
         Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
         return Redirect::to('danh-sach-chuyen-nganh');
     }

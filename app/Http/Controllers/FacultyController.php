@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Faculty;
 use App\Models\Specialized;
+use App\Models\StudentInfo;
 use Session;
 session_start();
 
@@ -85,6 +86,12 @@ class FacultyController extends Controller
         $this->AuthLogin(); 
         $del = Faculty::find($faculty_id);
         if($del){
+            $info = StudentInfo::where('faculty_id', $faculty_id)->get();
+            foreach ($info as $key => $value) {
+                $value->faculty_id=0;
+                $value->specialized_id=0;
+                $value->save();
+            }
             Specialized::where('faculty_id', $faculty_id)->delete();
         }
         $del->delete();
