@@ -24,6 +24,8 @@ class CategoryController extends Controller
     	$category_by_id = Post::with('category','student','likes','comments')
     	->where('tbl_post.category_id', $category_id)
     	->orderBy('tbl_post.created_at','DESC')->paginate(5);
+    	$posthot = Post::with('category','student','likes','comments')
+		->orderBy('tbl_post.post_like','DESC')->limit(5)->get();
     	$category_by_name = Category::where('tbl_category.category_id', $category_id)->limit(1)->get();
     	$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
 		->limit(1)->get();
@@ -38,6 +40,6 @@ class CategoryController extends Controller
 		}
 		//-----------------------
 		
-    	return view('student.page.category.show')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'category_by_id', 'category_by_name','studentSS','nofi','nofi2'));
+    	return view('student.page.category.show')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'category_by_id', 'category_by_name','studentSS','nofi','nofi2','posthot'));
     }
 }
