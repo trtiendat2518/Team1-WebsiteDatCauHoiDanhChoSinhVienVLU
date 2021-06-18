@@ -48,6 +48,7 @@ ul {
 button,
 input[type=password],
 input[type=text],
+input[type=file],
 label,
 select,
 textarea {
@@ -64,6 +65,7 @@ label {
 button,
 input[type=password],
 input[type=text],
+input[type=file],
 select,
 textarea {
 	width: 100%;
@@ -74,6 +76,7 @@ textarea {
 
 input[type=password],
 input[type=text],
+input[type=file],
 select,
 textarea {
 	background-color: #1d2333;
@@ -84,47 +87,54 @@ textarea {
 
 input[type=password]:focus,
 input[type=text]:focus,
+input[type=file]:focus,
 select:focus,
 textarea:focus {
 	border-color: #040aae
 }
 
 input[type=password],
-input[type=text] {
+input[type=text],
+input[type=file] {
 	height: 54px;
 	padding: 0 18px
 }
 
 input[type=password]::-webkit-input-placeholder,
-input[type=text]::-webkit-input-placeholder {
+input[type=text]::-webkit-input-placeholder,
+input[type=file]::-webkit-input-placeholder {
 	color: #9aa4bf;
 	font-size: .875rem;
 	font-weight: 500
 }
 
 input[type=password]::-moz-placeholder,
-input[type=text]::-moz-placeholder {
+input[type=text]::-moz-placeholder,
+input[type=file]::-moz-placeholder {
 	color: #9aa4bf;
 	font-size: .875rem;
 	font-weight: 500
 }
 
 input[type=password]:-ms-input-placeholder,
-input[type=text]:-ms-input-placeholder {
+input[type=text]:-ms-input-placeholder,
+input[type=file]:-ms-input-placeholder {
 	color: #9aa4bf;
 	font-size: .875rem;
 	font-weight: 500
 }
 
 input[type=password]::-ms-input-placeholder,
-input[type=text]::-ms-input-placeholder {
+input[type=text]::-ms-input-placeholder,
+input[type=file]::-ms-input-placeholder {
 	color: #9aa4bf;
 	font-size: .875rem;
 	font-weight: 500
 }
 
 input[type=password]::placeholder,
-input[type=text]::placeholder {
+input[type=text]::placeholder,
+input[type=file]::placeholder {
 	color: #9aa4bf;
 	font-size: .875rem;
 	font-weight: 500
@@ -271,6 +281,8 @@ textarea::placeholder {
 
 .form-input.dark input[type=password],
 .form-input.dark input[type=text],
+.form-input.dark input[type=date],
+.form-input.dark input[type=file],
 .form-input.dark textarea {
 	border: none;
 	background-color: #5538b5;
@@ -279,6 +291,8 @@ textarea::placeholder {
 
 .form-input.dark input[type=password]::-webkit-input-placeholder,
 .form-input.dark input[type=text]::-webkit-input-placeholder,
+.form-input.dark input[type=date]::-webkit-input-placeholder,
+.form-input.dark input[type=file]::-webkit-input-placeholder,
 .form-input.dark textarea::-webkit-input-placeholder {
 	color: #8b88ff;
 	opacity: .6
@@ -286,6 +300,8 @@ textarea::placeholder {
 
 .form-input.dark input[type=password]::-moz-placeholder,
 .form-input.dark input[type=text]::-moz-placeholder,
+.form-input.dark input[type=date]::-moz-placeholder,
+.form-input.dark input[type=file]::-moz-placeholder,
 .form-input.dark textarea::-moz-placeholder {
 	color: #8b88ff;
 	opacity: .6
@@ -293,6 +309,8 @@ textarea::placeholder {
 
 .form-input.dark input[type=password]:-ms-input-placeholder,
 .form-input.dark input[type=text]:-ms-input-placeholder,
+.form-input.dark input[type=date]:-ms-input-placeholder,
+.form-input.dark input[type=file]:-ms-input-placeholder,
 .form-input.dark textarea:-ms-input-placeholder {
 	color: #8b88ff;
 	opacity: .6
@@ -300,6 +318,8 @@ textarea::placeholder {
 
 .form-input.dark input[type=password]::-ms-input-placeholder,
 .form-input.dark input[type=text]::-ms-input-placeholder,
+.form-input.dark input[type=date]::-ms-input-placeholder,
+.form-input.dark input[type=file]::-ms-input-placeholder,
 .form-input.dark textarea::-ms-input-placeholder {
 	color: #8b88ff;
 	opacity: .6
@@ -307,6 +327,8 @@ textarea::placeholder {
 
 .form-input.dark input[type=password]::placeholder,
 .form-input.dark input[type=text]::placeholder,
+.form-input.dark input[type=date]::placeholder,
+.form-input.dark input[type=file]::placeholder,
 .form-input.dark textarea::placeholder {
 	color: #8b88ff;
 	opacity: .6
@@ -2197,13 +2219,13 @@ figure>img {
 
 .action-list .action-list-item.unread:after {
 	content: "";
-	width: 4px;
-	height: 4px;
+	width: 8px;
+	height: 8px;
 	border-radius: 50%;
-	background-color: #040aae;
+	background-color: red;
 	position: absolute;
 	top: 26px;
-	right: 10px
+	right: 12px
 }
 
 .action-list .action-list-item .action-list-item-icon {
@@ -5054,7 +5076,7 @@ figure>img {
 }
 
 .sidebar-menu-header {
-	height: 112px;
+	height: 70px;
 	padding: 28px 26px 0 60px;
 	background-color: #1d2333;
 	cursor: pointer;
@@ -6035,7 +6057,7 @@ figure>img {
 }
 
 .notification-box.unread {
-	background-color: #21283b
+	background-color: #2f3749
 }
 
 .notification-box:hover .notification-box-close-button {
@@ -8856,7 +8878,7 @@ figure>img {
 }
 
 .dropdown-box-list .dropdown-box-list-item.unread {
-	background-color: #21283b
+	background-color: #2f3749
 }
 
 .dropdown-box-list .dropdown-box-list-item:hover {

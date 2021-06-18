@@ -14,12 +14,12 @@ app.plugins.createHexagon({
   lineWidth: 8,
   roundedCorners: true,
   gradient: {
-    colors: ['#d9ff65', '#40d04f']
+    colors: ['#41efff', '#615dfa']
   },
   scale: {
     start: 0,
     end: 1,
-    stop: .74
+    stop: 1
   }
 });
 
@@ -56,12 +56,12 @@ app.plugins.createHexagon({
   lineWidth: 6,
   roundedCorners: true,
   gradient: {
-    colors: ['#d9ff65', '#40d04f']
+    colors: ['#41efff', '#615dfa']
   },
   scale: {
     start: 0,
     end: 1,
-    stop: .8
+    stop: 1
   }
 });
 
@@ -100,12 +100,12 @@ app.plugins.createHexagon({
   roundedCorners: true,
   roundedCornerRadius: 3,
   gradient: {
-    colors: ['#d9ff65', '#40d04f']
+    colors: ['#41efff', '#615dfa']
   },
   scale: {
     start: 0,
     end: 1,
-    stop: .8
+    stop: 1
   }
 });
 
@@ -146,12 +146,12 @@ app.plugins.createHexagon({
   roundedCorners: true,
   roundedCornerRadius: 1,
   gradient: {
-    colors: ['#d9ff65', '#40d04f']
+    colors: ['#41efff', '#615dfa']
   },
   scale: {
     start: 0,
     end: 1,
-    stop: .8
+    stop: 1
   }
 });
 

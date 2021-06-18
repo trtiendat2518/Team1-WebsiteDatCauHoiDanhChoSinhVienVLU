@@ -144,10 +144,14 @@
 			<div class="widget-box-status">
 				<div class="widget-box-status-content">
 					<div class="user-status">
-						<a class="user-status-avatar" href="profile-timeline.html">
+						<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">
 							<div class="user-avatar small no-outline">
 								<div class="user-avatar-content">
-									<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/04.jpg')}}"></div>
+									@if ($post_info->student->student_info_id)
+									<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$post_info->student->student_avatar)}}"></div>
+									@else
+									<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
+									@endif
 								</div>
 								<div class="user-avatar-progress">
 									<div class="hexagon-progress-40-44"></div>
@@ -157,7 +161,7 @@
 								</div>
 							</div>
 						</a>
-						<p class="user-status-title medium"><a class="bold" href="profile-timeline.html">{{$post_info->student->student_name}}</a></p>
+						<p class="user-status-title medium"><a class="bold" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">{{$post_info->student->student_name}}</a></p>
 						<p class="user-status-text small">{{ \Carbon\Carbon::parse($post_info->created_at)->diffForHumans() }}</p>
 					</div>
 					<p style="font-size: 20px;" class="widget-box-status-text">{{$post_info->post_title}}</p>
@@ -256,7 +260,13 @@
 						@endphp
 						<div class="user-avatar small no-outline">
 							<div class="user-avatar-content">
-								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/01.jpg')}}"></div>
+								@foreach ($studentSS as $avaSS)
+								@if ($avaSS->student_info_id)
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$avaSS->info->student_info_avatar)}}"></div>
+								@else
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
+								@endif
+								@endforeach
 							</div>
 							<div class="user-avatar-progress">
 								<div class="hexagon-progress-40-44"></div>
@@ -303,9 +313,13 @@
 							</div>
 						</div>
 						@endif
-						<a class="user-avatar small no-outline" href="profile-timeline.html">
+						<a class="user-avatar small no-outline" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">
 							<div class="user-avatar-content">
-								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/05.jpg')}}"></div>
+								@if ($cmt->student->student_info_id)
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$cmt->student->student_avatar)}}"></div>
+								@else
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
+								@endif
 							</div>
 							<div class="user-avatar-progress">
 								<div class="hexagon-progress-40-44"></div>
@@ -314,7 +328,7 @@
 								<div class="hexagon-border-40-44"></div>
 							</div>
 						</a>
-						<p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html" style="color: #007bff;">{{$cmt->student->student_name}}</a>
+						<p class="post-comment-text"><a class="post-comment-text-author" href="{{url('/trang-sinh-vien/'.$cmt->student->student_id)}}" style="color: #007bff;">{{$cmt->student->student_name}}</a>
 							<span class="user-status-text small">
 								{{ \Carbon\Carbon::parse($cmt->created_at)->diffForHumans() }} 
 							</span>
