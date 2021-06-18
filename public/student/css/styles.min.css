@@ -2815,7 +2815,7 @@ figure>img {
 .information-line .information-line-title {
 	-ms-flex-negative: 0;
 	flex-shrink: 0;
-	width: 80px;
+	width: 100px;
 	color: #9aa4bf
 }
 
@@ -13765,11 +13765,11 @@ figure>img {
 }
 
 .section-menu .section-menu-item.active {
-	border-bottom: 4px solid #040aae
+	border-bottom: 4px solid #007bff
 }
 
 .section-menu .section-menu-item.active .section-menu-item-icon {
-	fill: #040aae;
+	fill: #007bff;
 	opacity: 1
 }
 
