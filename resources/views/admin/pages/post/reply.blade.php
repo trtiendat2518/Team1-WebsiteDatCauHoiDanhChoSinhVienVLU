@@ -50,13 +50,20 @@
 				Session::put('message', null);
 			}     
 			@endphp
+			@foreach ($errors->all() as $val)
+			<div class="alert alert-danger">{{$val}}</div>
+			@endforeach
 			<div class="panel-body">
 				<div class="position-center">
 					<form role="form" action="{{URL::to('/tra-loi-cau-hoi/'.$post_detail->post_id)}}" method="POST" style="margin-bottom: 20px" >
 						{{csrf_field()}}
 						<div class="form-group">
 							<label>Nội dung</label>
-							<textarea rows="7" type="text" name="reply_cpntent" class="form-control" style="resize: none; white-space: pre-line;"></textarea>
+							@if ($post_detail->post_reply=='')
+							<textarea rows="7" name="reply_content" class="form-control" style="resize: none;"></textarea>
+							@else
+							<textarea rows="7" name="reply_content" class="form-control" style="resize: none;">{{$post_detail->post_reply}}</textarea>
+							@endif
 						</div>
 						<button type="submit" name="reply_post" class="btn btn-primary btn-block">Trả lời</button>
 					</form>
