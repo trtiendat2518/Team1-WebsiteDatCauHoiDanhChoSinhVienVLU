@@ -113,6 +113,7 @@
             </div>
           </li>
 
+          <li class="nav-item header"><span class="menu-title">Sinh viên</span></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-suitcase"></i> <span class="menu-title">Quản lý chuyên ngành</span>
@@ -131,6 +132,13 @@
               <a class="dropdown-item" href="{{url('/them-moi-nam-hoc')}}">Thêm mới khóa học</a>
               <a class="dropdown-item" href="{{url('/danh-sach-nam-hoc')}}">Danh sách khóa học</a>
             </div>
+          </li>
+
+          <li class="nav-item header"><span class="menu-title">Câu hỏi sinh viên</span></li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('danh-sach-cau-hoi')}}">
+              <i class="fa fa-question-circle"></i> <span class="menu-title">Quản lý câu hỏi</span>
+            </a>
           </li>
 
         </ul>
