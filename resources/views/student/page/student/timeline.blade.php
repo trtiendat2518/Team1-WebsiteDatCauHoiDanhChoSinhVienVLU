@@ -84,30 +84,6 @@
 					<!-- /HEXAGON -->
 				</div>
 				<!-- /USER AVATAR PROGRESS BORDER -->
-
-				<!-- USER AVATAR BADGE -->
-				<div class="user-avatar-badge">
-					<!-- USER AVATAR BADGE BORDER -->
-					<div class="user-avatar-badge-border">
-						<!-- HEXAGON -->
-						<div class="hexagon-32-36"></div>
-						<!-- /HEXAGON -->
-					</div>
-					<!-- /USER AVATAR BADGE BORDER -->
-
-					<!-- USER AVATAR BADGE CONTENT -->
-					<div class="user-avatar-badge-content">
-						<!-- HEXAGON -->
-						<div class="hexagon-dark-26-28"></div>
-						<!-- /HEXAGON -->
-					</div>
-					<!-- /USER AVATAR BADGE CONTENT -->
-
-					<!-- USER AVATAR BADGE TEXT -->
-					<p class="user-avatar-badge-text">24</p>
-					<!-- /USER AVATAR BADGE TEXT -->
-				</div>
-				<!-- /USER AVATAR BADGE -->
 			</a>
 			<p class="user-short-description-title">{{$Sinfo->student_name}}</p>
 			<p class="user-short-description-text">{{$Sinfo->student_email}}</p>
@@ -125,8 +101,12 @@
 				<p class="user-stat-text">Khóa</p>
 			</div>
 			<div class="user-stat big">
-				<p class="user-stat-title">{{$Sinfo->info->student_info_specialized}}</p>
-				<p class="user-stat-text">Chuyên ngành</p>
+				@if ($Sinfo->info->student_info_gender == 1)
+				<p class="user-stat-title">Nam</p>
+				@elseif ($Sinfo->info->student_info_gender == 2)
+				<p class="user-stat-title">Nữ</p>
+				@endif
+				<p class="user-stat-text">Giới tính</p>
 			</div>
 		</div>
 		<!-- /USER STATS -->
@@ -143,7 +123,7 @@
 			</div>
 			<div class="user-stat big">
 				<p class="user-stat-title">-</p>
-				<p class="user-stat-text">Chuyên ngành</p>
+				<p class="user-stat-text">Giới tính</p>
 			</div>
 		</div>
 		<!-- /USER STATS -->
@@ -209,13 +189,91 @@
 					<!-- INFORMATION LINE -->
 					<div class="information-line">
 						<!-- INFORMATION LINE TITLE -->
-						<p class="information-line-title">Giới tính</p>
+						<p class="information-line-title">Khoa</p>
+						<!-- /INFORMATION LINE TITLE -->
+
+						<!-- INFORMATION LINE TEXT -->
+						@if($Sinfo->info->faculty_id==0)
+						<p class="information-line-text">-</p>
+						@else
+						<p class="information-line-text">{{$Sinfo->info->faculty->faculty_name}}</p>
+						@endif
+						<!-- /INFORMATION LINE TEXT -->
+					</div>
+					<!-- /INFORMATION LINE -->
+
+					<!-- INFORMATION LINE -->
+					<div class="information-line">
+						<!-- INFORMATION LINE TITLE -->
+						<p class="information-line-title">Chuyên ngành</p>
 						<!-- /INFORMATION LINE TITLE -->
 						@if ($Sinfo->info->student_info_gender == 1)
 						<p class="information-line-text">Nam</p>
 						@elseif ($Sinfo->info->student_info_gender == 2)
 						<p class="information-line-text">Nữ</p>
 						@endif
+					</div>
+					<!-- /INFORMATION LINE -->
+				</div>
+				<!-- /INFORMATION LINE LIST -->
+			</div>
+			<!-- /WIDGET BOX CONTENT -->
+		</div>
+		<!-- /WIDGET BOX -->
+	</div>
+	<!-- /GRID COLUMN -->
+	@else
+	<!-- GRID COLUMN -->
+	<div class="grid-column">
+		<!-- WIDGET BOX -->
+		<div class="widget-box">
+
+			<!-- WIDGET BOX TITLE -->
+			<p class="widget-box-title">Thông tin của tôi</p>
+			<!-- /WIDGET BOX TITLE -->
+
+			<!-- WIDGET BOX CONTENT -->
+			<div class="widget-box-content">
+				<!-- PARAGRAPH -->
+				<p class="paragraph"></p>
+				<!-- /PARAGRAPH -->
+
+				<!-- INFORMATION LINE LIST -->
+				<div class="information-line-list">
+					<!-- INFORMATION LINE -->
+					<div class="information-line">
+						<!-- INFORMATION LINE TITLE -->
+						<p class="information-line-title">Địa chỉ</p>
+						<!-- /INFORMATION LINE TITLE -->
+
+						<!-- INFORMATION LINE TEXT -->
+						<p class="information-line-text">-</p>
+						<!-- /INFORMATION LINE TEXT -->
+					</div>
+					<!-- /INFORMATION LINE -->
+
+					<!-- INFORMATION LINE -->
+					<div class="information-line">
+						<!-- INFORMATION LINE TITLE -->
+						<p class="information-line-title">Ngày sinh</p>
+						<!-- /INFORMATION LINE TITLE -->
+
+						<!-- INFORMATION LINE TEXT -->
+						@if($Sinfo->info->specialized_id==0)
+						<p class="information-line-text">-</p>
+						@else
+						<p class="information-line-text">{{$Sinfo->info->specialized->specialized_name}}</p>
+						@endif
+						<!-- /INFORMATION LINE TEXT -->
+					</div>
+					<!-- /INFORMATION LINE -->
+
+					<!-- INFORMATION LINE -->
+					<div class="information-line">
+						<!-- INFORMATION LINE TITLE -->
+						<p class="information-line-title">Giới tính</p>
+						<!-- /INFORMATION LINE TITLE -->
+						<p class="information-line-text">-</p>
 					</div>
 					<!-- /INFORMATION LINE -->
 				</div>
@@ -271,7 +329,16 @@
 					<!-- INFORMATION LINE -->
 					<div class="information-line">
 						<!-- INFORMATION LINE TITLE -->
-						<p class="information-line-title">Giới tính</p>
+						<p class="information-line-title">Khoa</p>
+						<!-- /INFORMATION LINE TITLE -->
+						<p class="information-line-text">-</p>
+					</div>
+					<!-- /INFORMATION LINE -->
+
+					<!-- INFORMATION LINE -->
+					<div class="information-line">
+						<!-- INFORMATION LINE TITLE -->
+						<p class="information-line-title">Chuyên ngành</p>
 						<!-- /INFORMATION LINE TITLE -->
 						<p class="information-line-text">-</p>
 					</div>
