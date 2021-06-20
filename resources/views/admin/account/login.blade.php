@@ -3,7 +3,8 @@
   <meta charset="UTF-8">
   <title>Đăng nhập</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
+  <meta name="description" content="Đăng nhập Admin VLU">
+  <link rel="icon" href="{{asset('public/student/img/vlu.ico')}}">
   <meta name="keywords" content="">
   <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/login/animate.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/login/bootstrap.min.css')}}">
