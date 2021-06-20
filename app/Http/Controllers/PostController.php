@@ -153,4 +153,18 @@ class PostController extends Controller
 		Session::put('message','<div class="alert alert-warning">Bỏ ghim câu hỏi!</div>');
 		return Redirect::to('danh-sach-cau-hoi'); 
 	}
+
+	public function postadmin_listhot(Request $request){
+		$this->AuthLogin();
+      	//SEO
+		$meta_desc = "Danh sách câu hỏi HOT";
+		$meta_title = "Danh sách câu hỏi HOT";
+		$url_canonical = $request->url();
+      	//---------------
+
+		$list = Post::with('category','student')->where('post_like','>',99)
+		->orderBy('created_at','DESC')->paginate(5);
+
+		return view('admin.pages.hotpost.list')->with(compact('meta_desc','meta_title','url_canonical','list'));
+	}
 }
