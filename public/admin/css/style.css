@@ -36,6 +36,15 @@ body {
   font-size: 16px;
   line-height: 1; }
 
+span.fa-eye-styling.fa.fa-eye{
+    font-size: 20px;
+    color: #495057;
+}
+span.fa-eye-styling.fa.fa-eye-slash{
+    font-size: 20px;
+    color: #868e96;
+}
+
 a {
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease; }
@@ -125,6 +134,24 @@ textarea:visited,
   color: #6a7074;
   font-family: "Source Sans Pro", sans-serif;
   font-size: 15px; }
+
+.panel-heading {
+    position: relative;
+    height: 57px;
+    line-height: 57px;
+    letter-spacing: 0.2px;
+    color: #000;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 0 16px;
+    background:#ddd;
+   border-top-right-radius: 2px;
+   border-top-left-radius: 2px; 
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
 
 canvas {
   max-width: 100%; }
@@ -591,7 +618,7 @@ header.top-header {
       padding: 0 0 0 45px;
       width: 100%; }
       header.top-header .top-left .navbar-brand img {
-        max-height: 45px; }
+         }
   header.top-header .top-right .left-content .sidenav-toggle {
     background: transparent;
     border: none;
@@ -832,7 +859,8 @@ header.top-header {
             color: #6a7074;
             line-height: 22px;
             padding: 19px 45px;
-            text-transform: uppercase; }
+            text-transform: uppercase;
+            font-weight: bold; }
           .content-wrapper aside.left-panel .navbar .navbar-nav li.active > a {
             background: #30313e;
             color: #cfd8dc; }
