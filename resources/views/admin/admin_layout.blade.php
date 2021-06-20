@@ -59,7 +59,9 @@
       <div class="right-content float-right">
         <div class="dropdown user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <h4 class="name">Jonathon Doe</h4>
+            <h4 class="name">@php
+              echo Session::get('admin_name')
+            @endphp</h4>
           </a>
           <ul class="dropdown-menu">
             <li><a href="#"><i class="fa fa-user"></i> Thông tin cá nhân</a></li>
@@ -79,7 +81,9 @@
         <a href="#">
           <div class="avatar mr-3 float-left"><img class="rounded-circle" src="images/avatar/4.jpg" alt="Avatar"></div><!-- /.avatar -->
           <div class="details">
-            <h4 class="name">Bobby Payne</h4><!-- /.name -->
+            <h4 class="name">@php
+              echo Session::get('admin_name')
+            @endphp</h4><!-- /.name -->
             <span class="designation">Designer</span><!-- /.designation -->
           </div><!-- /.details -->
         </a>
@@ -112,7 +116,7 @@
               <a class="dropdown-item" href="{{url('/danh-sach-khoa')}}">Danh sách khoa</a>
             </div>
           </li>
-
+          
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-suitcase"></i> <span class="menu-title">Quản lý chuyên ngành</span>
@@ -137,6 +141,12 @@
           <li class="nav-item">
             <a class="nav-link" href="{{url('danh-sach-cau-hoi')}}">
               <i class="fa fa-question-circle"></i> <span class="menu-title">Quản lý câu hỏi</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('cau-hoi-dang-chu-y')}}">
+              <i class="fa fa-warning"></i> <span class="menu-title">Câu hỏi đáng chú ý</span>
             </a>
           </li>
 

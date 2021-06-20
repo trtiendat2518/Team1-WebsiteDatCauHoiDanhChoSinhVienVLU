@@ -334,23 +334,6 @@
 			<!-- /POST COMMENT LIST -->
 		</div>
 		@endforeach
-		<!-- SECTION PAGER BAR -->
-		<div class="section-pager-bar" style="width: 360px;">
-			<!-- SECTION PAGER -->
-			<div class="section-pager">
-				<!-- SECTION PAGER ITEM -->
-				<div class="section-pager-item active">
-					<!-- SECTION PAGER ITEM TEXT -->
-					<center>
-						<span>{!! $search_product->render("pagination::bootstrap-4") !!}</span>
-					</center>
-
-					<!-- /SECTION PAGER ITEM TEXT -->
-				</div>
-				<!-- /SECTION PAGER ITEM -->
-			</div>
-		</div>
-		<!-- /SECTION PAGER -->
 	</div>
 	<!-- /GRID COLUMN -->
 	<!-- GRID COLUMN -->

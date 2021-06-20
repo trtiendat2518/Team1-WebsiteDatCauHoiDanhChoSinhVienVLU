@@ -132,4 +132,18 @@ class CourseController extends Controller
       Session::put('message','<div class="alert alert-warning">Đã hiển thị trạng thái!</div>');
       return Redirect::to('danh-sach-nam-hoc'); 
    }
+
+   public function course_search(Request $request){
+      $this->AuthLogin();
+      //SEO
+      $meta_desc = "Tìm kiếm";
+      $meta_title = "Tìm kiếm";
+      $url_canonical = $request->url();
+      //---------------
+      
+      $keywords = $request->keywords_submit;
+      $search = Course::where('course_name','like','%'.$keywords.'%')
+      ->orderBy('course_id','DESC')->get();
+      return view('admin.pages.course.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+   }
 }
