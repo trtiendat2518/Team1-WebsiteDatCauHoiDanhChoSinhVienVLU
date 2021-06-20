@@ -112,8 +112,7 @@
               <a class="dropdown-item" href="{{url('/danh-sach-khoa')}}">Danh sách khoa</a>
             </div>
           </li>
-
-          <li class="nav-item header"><span class="menu-title">Sinh viên</span></li>
+          
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-suitcase"></i> <span class="menu-title">Quản lý chuyên ngành</span>
