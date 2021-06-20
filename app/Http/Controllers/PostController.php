@@ -181,4 +181,16 @@ class PostController extends Controller
 		->with('category','student')->orderBy('tbl_post.created_at','DESC')->get();
 		return view('admin.pages.hotpost.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
 	}
+
+	public function postadmin_detailhot(Request $request, $post_id){
+		$this->AuthLogin();
+      	//SEO
+		$meta_desc = "Chi tiết câu hỏi";
+		$meta_title = "Chi tiết câu hỏi";
+		$url_canonical = $request->url();
+      	//---------------
+
+		$post_detail = Post::find($post_id);
+		return view('admin.pages.hotpost.reply')->with(compact('meta_desc','meta_title','url_canonical','post_detail'));
+	}
 }
