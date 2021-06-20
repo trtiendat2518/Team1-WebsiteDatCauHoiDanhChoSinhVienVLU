@@ -23,9 +23,14 @@ class AdminController extends Controller
         }
     }
 
-    public function index(){
+    public function index(Request $request){
         $this->AuthLogin();
-        return view('admin.pages.admin_home');
+        //SEO
+        $meta_desc = "Admin VLU";
+        $meta_title = "Dashboard";
+        $url_canonical = $request->url();
+        //---------------
+        return view('admin.pages.admin_home')->with(compact('meta_desc','meta_title','url_canonical'));
     }
 
     public function index_login(){

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 //STUDENT HOME
 Route::get('/', 'HomeController@index');
+Route::get('/cau-hoi-hot', 'HomeController@hot');
 Route::post('/tim-kiem','HomeController@search');
 
 //STUDENT ACCOUNT
@@ -75,6 +76,7 @@ Route::post('/cap-nhat-khoa-thanh-cong/{faculty_id}', 'FacultyController@faculty
 Route::get('/xoa-khoa/{faculty_id}', 'FacultyController@faculty_delete');
 Route::get('/an-khoa/{faculty_id}', 'FacultyController@faculty_unactive');
 Route::get('/hien-thi-khoa/{faculty_id}', 'FacultyController@faculty_active');
+Route::post('tim-kiem-khoa','FacultyController@faculty_search');
 
 //ADMIN SPECIALIZED
 Route::get('/them-moi-chuyen-nganh', 'SpecializedController@specialized_open');
@@ -85,6 +87,7 @@ Route::post('/cap-nhat-chuyen-nganh-thanh-cong/{specialized_id}', 'SpecializedCo
 Route::get('/xoa-chuyen-nganh/{specialized_id}', 'SpecializedController@specialized_delete');
 Route::get('/an-chuyen-nganh/{specialized_id}', 'SpecializedController@specialized_unactive');
 Route::get('/hien-thi-chuyen-nganh/{specialized_id}', 'SpecializedController@specialized_active');
+Route::post('/tim-kiem-chuyen-nganh','SpecializedController@specialized_search');
 
 //ADMIN COURSE
 Route::get('/them-moi-nam-hoc', 'CourseController@course_open');
@@ -95,3 +98,13 @@ Route::post('/cap-nhat-nam-hoc-thanh-cong/{course_id}', 'CourseController@course
 Route::get('/xoa-nam-hoc/{course_id}', 'CourseController@course_delete');
 Route::get('/an-nam-hoc/{course_id}', 'CourseController@course_unactive');
 Route::get('/hien-thi-nam-hoc/{course_id}', 'CourseController@course_active');
+Route::post('/tim-kiem-nam-hoc','CourseController@course_search');
+
+//ADMIN POST
+Route::get('/danh-sach-cau-hoi', 'PostController@postadmin_list');
+Route::post('/tim-kiem-cau-hoi','PostController@postadmin_search');
+Route::get('/xem-cau-hoi/{post_id}', 'PostController@postadmin_detail');
+Route::get('/xoa-cau-hoi/{post_id}', 'PostController@postadmin_delete');
+
+//ADMIN REPLY
+Route::post('/tra-loi-cau-hoi/{post_id}', 'ReplyController@reply_post');

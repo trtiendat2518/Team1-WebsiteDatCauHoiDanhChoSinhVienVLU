@@ -27,16 +27,17 @@ class HomeController extends Controller
 		$category_post = Category::orderBy('category_id', 'DESC')->get();
 		$post2 = Post::with('category','student','likes','comments')
 		->orderBy('tbl_post.created_at','DESC')->paginate(5);
+		$posthot = Post::with('category','student','likes','comments')
+		->orderBy('tbl_post.post_like','DESC')->limit(5)->get();
 		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
 		->limit(1)->get();
 		$nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
 		$nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
 
-		return view('student.page.home')->with(compact('meta_desc','meta_title','url_canonical','category_post','post2','studentSS','nofi','nofi2'));
+		return view('student.page.home')->with(compact('meta_desc','meta_title','url_canonical','category_post','post2','studentSS','nofi','nofi2','posthot'));
 	}
 
-	public function search(Request $request)
-	{
+	public function search(Request $request){
 		//SEO
 		$meta_desc = "Tìm kiếm câu hỏi";
         $meta_title = "Tìm kiếm câu hỏi";
@@ -47,12 +48,14 @@ class HomeController extends Controller
 		$keywords = $request->keywords_submit;
 		$search_product = Post::where('post_title','like','%'.$keywords.'%')
 		->with('category','student','likes','comments')
-		->orderBy('tbl_post.created_at','DESC')->paginate(5);
+		->orderBy('tbl_post.created_at','DESC')->get();
+		$posthot = Post::with('category','student','likes','comments')
+		->orderBy('tbl_post.post_like','DESC')->limit(5)->get();
 		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
 		->limit(1)->get();
 		$nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
 		$nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
 		
-		return view('student.page.post.search')->with(compact('meta_desc','meta_title','url_canonical','category_post','search_product','studentSS','nofi','nofi2'));
+		return view('student.page.post.search')->with(compact('meta_desc','meta_title','url_canonical','category_post','search_product','studentSS','nofi','nofi2','posthot'));
 	}
 }

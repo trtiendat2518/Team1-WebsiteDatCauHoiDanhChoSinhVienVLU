@@ -82,13 +82,6 @@
 			</li>
 			@endif
 			<li class="menu-item">
-				<a class="menu-item-link text-tooltip-tfr" href="members.html" data-title="Liên hệ">
-					<svg class="menu-item-link-icon icon-members">
-						<use xlink:href="#svg-send-message"></use>
-					</svg>
-				</a>
-			</li>
-			<li class="menu-item">
 				<a class="menu-item-link text-tooltip-tfr" href="members.html" data-title="FAQs">
 					<svg class="menu-item-link-icon icon-forum">
 						<use xlink:href="#svg-forum"></use>
@@ -120,14 +113,6 @@
 						<use xlink:href="#svg-timeline"></use>
 					</svg>
 					Trang cá nhân
-				</a>
-			</li>
-			<li class="menu-item">
-				<a class="menu-item-link" href="members.html">
-					<svg class="menu-item-link-icon icon-members">
-						<use xlink:href="#svg-send-message"></use>
-					</svg>
-					Liên hệ
 				</a>
 			</li>
 			<li class="menu-item">
