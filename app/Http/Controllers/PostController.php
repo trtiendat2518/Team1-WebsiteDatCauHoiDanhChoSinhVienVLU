@@ -129,4 +129,28 @@ class PostController extends Controller
 	public function postadmin_export(Request $request){
 		return Excel::download(new PostExport , 'post_vlu.xlsx');
 	}
+
+	public function postadmin_pin($post_id){
+		$this->AuthLogin();
+		$all = Post::where('post_pin',1)->get();
+		foreach ($all as $key => $value) {
+			$value->post_pin=0;
+			$value->save();
+		}
+		$post = Post::find($post_id);
+		$post->post_pin=1;
+		$post->save();
+		Session::put('message','<div class="alert alert-warning">Đã ghim câu hỏi!</div>');
+		return Redirect::to('danh-sach-cau-hoi');
+	}
+
+	public function postadmin_unpin($post_id){
+		$this->AuthLogin();
+		$post = Post::find($post_id);
+		$post->post_pin=0;
+		$post->save();
+
+		Session::put('message','<div class="alert alert-warning">Bỏ ghim câu hỏi!</div>');
+		return Redirect::to('danh-sach-cau-hoi'); 
+	}
 }

@@ -21,7 +21,8 @@ class PostImport implements ToModel
             'post_content'=>$row[3],
             'post_like'=>$row[4],
             'post_reply'=>$row[5],
-            'created_at'=>$row[6],
+            'post_pin'=>$row[6],
+            'created_at'=>$row[7],
         ]);
     }
 }

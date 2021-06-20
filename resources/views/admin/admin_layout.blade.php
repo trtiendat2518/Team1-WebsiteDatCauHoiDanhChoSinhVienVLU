@@ -59,7 +59,9 @@
       <div class="right-content float-right">
         <div class="dropdown user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <h4 class="name">Jonathon Doe</h4>
+            <h4 class="name">@php
+              echo Session::get('admin_name')
+            @endphp</h4>
           </a>
           <ul class="dropdown-menu">
             <li><a href="#"><i class="fa fa-user"></i> Thông tin cá nhân</a></li>
@@ -79,7 +81,9 @@
         <a href="#">
           <div class="avatar mr-3 float-left"><img class="rounded-circle" src="images/avatar/4.jpg" alt="Avatar"></div><!-- /.avatar -->
           <div class="details">
-            <h4 class="name">Bobby Payne</h4><!-- /.name -->
+            <h4 class="name">@php
+              echo Session::get('admin_name')
+            @endphp</h4><!-- /.name -->
             <span class="designation">Designer</span><!-- /.designation -->
           </div><!-- /.details -->
         </a>
