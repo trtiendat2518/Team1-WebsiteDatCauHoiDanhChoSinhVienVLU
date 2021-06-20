@@ -57,7 +57,7 @@
 				<tbody>
 					@foreach ($list as $key => $listpost) 
 					<tr>
-						<td style="text-align: center; color: black"><a href="#">{{$listpost->post_title}}</a></td>
+						<td style="text-align: center; color: black">{{$listpost->post_title}}</td>
 						<td style="text-align: center; color: black">{{$listpost->category->category_name}}</td>
 						<td style="text-align: center; color: black">
 							@if ($listpost->post_reply=='')
