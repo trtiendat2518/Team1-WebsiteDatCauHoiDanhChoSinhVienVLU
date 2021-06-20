@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 //STUDENT HOME
 Route::get('/', 'HomeController@index');
+Route::get('/cau-hoi-hot', 'HomeController@hot');
 Route::post('/tim-kiem','HomeController@search');
 
 //STUDENT ACCOUNT
@@ -65,3 +66,40 @@ Route::get('/admin-home', 'AdminController@index');
 Route::get('/admin-login', 'AdminController@index_login');
 Route::post('/login-admin', 'AdminController@login');
 Route::get('/logout-admin', 'AdminController@logout');
+
+//ADMIN FACULTY
+Route::get('/them-moi-khoa', 'FacultyController@faculty_open');
+Route::post('/them-moi-khoa-thanh-cong', 'FacultyController@faculty_add');
+Route::get('/danh-sach-khoa', 'FacultyController@faculty_list');
+Route::get('/cap-nhat-khoa/{faculty_id}', 'FacultyController@faculty_openupdate');
+Route::post('/cap-nhat-khoa-thanh-cong/{faculty_id}', 'FacultyController@faculty_update');
+Route::get('/xoa-khoa/{faculty_id}', 'FacultyController@faculty_delete');
+Route::get('/an-khoa/{faculty_id}', 'FacultyController@faculty_unactive');
+Route::get('/hien-thi-khoa/{faculty_id}', 'FacultyController@faculty_active');
+Route::post('tim-kiem-khoa','FacultyController@faculty_search');
+
+//ADMIN SPECIALIZED
+Route::get('/them-moi-chuyen-nganh', 'SpecializedController@specialized_open');
+Route::post('/them-moi-chuyen-nganh-thanh-cong', 'SpecializedController@specialized_add');
+Route::get('/danh-sach-chuyen-nganh', 'SpecializedController@specialized_list');
+Route::get('/cap-nhat-chuyen-nganh/{specialized_id}', 'SpecializedController@specialized_openupdate');
+Route::post('/cap-nhat-chuyen-nganh-thanh-cong/{specialized_id}', 'SpecializedController@specialized_update');
+Route::get('/xoa-chuyen-nganh/{specialized_id}', 'SpecializedController@specialized_delete');
+Route::get('/an-chuyen-nganh/{specialized_id}', 'SpecializedController@specialized_unactive');
+Route::get('/hien-thi-chuyen-nganh/{specialized_id}', 'SpecializedController@specialized_active');
+Route::post('/tim-kiem-chuyen-nganh','SpecializedController@specialized_search');
+
+//ADMIN COURSE
+Route::get('/them-moi-nam-hoc', 'CourseController@course_open');
+Route::post('/them-moi-nam-hoc-thanh-cong', 'CourseController@course_add');
+Route::get('/danh-sach-nam-hoc', 'CourseController@course_list');
+Route::get('/cap-nhat-nam-hoc/{course_id}', 'CourseController@course_openupdate');
+Route::post('/cap-nhat-nam-hoc-thanh-cong/{course_id}', 'CourseController@course_update');
+Route::get('/xoa-nam-hoc/{course_id}', 'CourseController@course_delete');
+Route::get('/an-nam-hoc/{course_id}', 'CourseController@course_unactive');
+Route::get('/hien-thi-nam-hoc/{course_id}', 'CourseController@course_active');
+Route::post('/tim-kiem-nam-hoc','CourseController@course_search');
+
+//ADMIN POST
+Route::get('/danh-sach-cau-hoi', 'PostController@postadmin_list');
+Route::post('/tim-kiem-cau-hoi','PostController@postadmin_search');
