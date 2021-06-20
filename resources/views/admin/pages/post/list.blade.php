@@ -47,7 +47,7 @@
 							<a href="{{URL::to('/xem-cau-hoi/'.$listpost->post_id)}}" class="active styling-edit" ui-toggle-class="">
 								<i class="fa fa-reply text-success text-active"></i>
 							</a>
-							<a href="{{URL::to('/xoa-cau-hoi/'.$listpost->post_id)}}" class="active styling-edit" ui-toggle-class="" onclick="return confirm('Bạn có chắc chắn muốn xóa {{$listpost->post_name}} không?')">
+							<a href="{{URL::to('/xoa-cau-hoi/'.$listpost->post_id)}}" class="active styling-edit" ui-toggle-class="" onclick="return confirm('Bạn có chắc chắn muốn xóa {{$listpost->post_title}} không?')">
 								<i class="fa fa-trash text-danger text"></i>
 							</a>
 						</td>

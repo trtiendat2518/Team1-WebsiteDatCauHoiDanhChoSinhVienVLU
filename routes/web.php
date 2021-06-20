@@ -104,3 +104,4 @@ Route::post('/tim-kiem-nam-hoc','CourseController@course_search');
 Route::get('/danh-sach-cau-hoi', 'PostController@postadmin_list');
 Route::post('/tim-kiem-cau-hoi','PostController@postadmin_search');
 Route::get('/xem-cau-hoi/{post_id}', 'PostController@postadmin_detail');
+Route::get('/xoa-cau-hoi/{post_id}', 'PostController@postadmin_delete');
