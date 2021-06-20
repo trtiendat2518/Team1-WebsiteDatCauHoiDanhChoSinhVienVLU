@@ -14,6 +14,9 @@ use App\Models\Comment;
 use App\Models\Nofication;
 use App\Models\Reply;
 use App\Models\Student;
+use App\Imports\PostImport;
+use App\Exports\PostExport;
+use Excel;
 use DB;
 use Session;
 session_start();
@@ -115,5 +118,15 @@ class PostController extends Controller
 		$pst->delete();
 		Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
         return Redirect::to('danh-sach-cau-hoi');
+	}
+
+	public function postadmin_import(Request $request){
+		$path = $request->file('file')->getRealPath();
+        Excel::import(new PostImport, $path);
+        return back();
+	}
+
+	public function postadmin_export(Request $request){
+		return Excel::download(new PostExport , 'post_vlu.xlsx');
 	}
 }

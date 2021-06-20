@@ -13,6 +13,23 @@
 		}     
 		@endphp
 		<div class="row w3-res-tb">
+			<div class="col-sm-7 m-b-xs">
+				<table>
+					<tbody>
+						<tr>
+							<form action="{{url('import-cau-hoi')}}" method="POST" enctype="multipart/form-data">
+								@csrf
+								<td><input type="file" name="file" accept=".xlsx" required=""></td>
+								<td><input type="submit" value="Import file Excel " name="import_csv" class="btn btn-warning"></td>
+							</form>
+							<form action="{{url('export-cau-hoi')}}" method="POST">
+								@csrf
+								<td><input type="submit" value="Export file Excel" name="export_csv" class="btn btn-success"></td>
+							</form>
+						</tr>
+					</tbody>
+				</table>                
+			</div>
 			<div class="col-sm-5">
 				<form action="{{url('/tim-kiem-cau-hoi')}}" method="post">
 					@csrf
