@@ -3,8 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Admin VLU</title>
-  <meta name="description" content="Hi5Dash - HTML5 Admin Template By Jewel Theme">
+  <title>{{$meta_title}}</title>
+  <meta name="description" content="{{$meta_desc}}">
+  <meta name="author" content="SEP-TEAM1-FWB">
+  <link rel="canonical" href="{{$url_canonical}}">
+  <link rel="icon" href="{{asset('public/student/img/vlu.ico')}}">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="apple-touch-icon" href="apple-touch-icon.png">

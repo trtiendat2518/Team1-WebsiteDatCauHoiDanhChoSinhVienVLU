@@ -23,9 +23,14 @@ class FacultyController extends Controller
         }
     }
 
-    public function faculty_open(){
+    public function faculty_open(Request $request){
         $this->AuthLogin();
-        return view('admin.pages.faculty.add');
+        //SEO
+        $meta_desc = "Thêm mới khoa";
+        $meta_title = "Thêm mới khoa";
+        $url_canonical = $request->url();
+        //---------------
+        return view('admin.pages.faculty.add')->with(compact('meta_desc','meta_title','url_canonical'));
     }
 
     public function faculty_add(Request $request){
@@ -51,11 +56,18 @@ class FacultyController extends Controller
         }
     }
 
-    public function faculty_openupdate($faculty_id){
+    public function faculty_openupdate(Request $request, $faculty_id){
         $this->AuthLogin();
         $faculty_update = Faculty::find($faculty_id);
-        $manage = view('admin.pages.faculty.update')->with('faculty_update', $faculty_update);
-        return view('admin.admin_layout')->with('admin.pages.faculty.update', $manage);
+        $facultyId = Faculty::where('faculty_id',$faculty_id)->get();
+        foreach ($facultyId as $key => $value){
+            //SEO
+            $meta_desc = "Cập nhật khoa ".$value->faculty_name;
+            $meta_title = "Cập nhật khoa ".$value->faculty_name;
+            $url_canonical = $request->url();
+            //---------------
+        }
+        return view('admin.pages.faculty.update')->with(compact('faculty_update','meta_desc','meta_title','url_canonical'));
     }
 
     public function faculty_update(Request $request, $faculty_id)
@@ -99,11 +111,15 @@ class FacultyController extends Controller
         return Redirect::to('danh-sach-khoa');
     }
 
-    public function faculty_list(){
+    public function faculty_list(Request $request){
         $this->AuthLogin();
+        //SEO
+        $meta_desc = "Danh sách khoa";
+        $meta_title = "Danh sách khoa";
+        $url_canonical = $request->url();
+        //---------------
         $list = Faculty::orderBy('faculty_id', 'DESC')->paginate(5);
-        $manage = view('admin.pages.faculty.list')->with('list', $list);
-        return view('admin.admin_layout')->with('admin.pages.faculty.list', $manage);
+        return view('admin.pages.faculty.list')->with(compact('list','meta_desc','meta_title','url_canonical'));
     }
 
     public function faculty_active($faculty_id){
