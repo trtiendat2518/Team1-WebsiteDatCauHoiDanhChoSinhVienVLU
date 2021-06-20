@@ -31,7 +31,7 @@
 					<tr>
 						<th style="text-align: center">Tiêu đề</th>
 						<th style="text-align: center">Loại câu hỏi</th>
-						<th style="text-align: center">Lượt thích</th>
+						<th style="text-align: center">Trạng thái</th>
 						<th style="text-align: center">Ngày đăng</th>
 						<th style="width:30px;"></th>
 					</tr>
@@ -41,7 +41,13 @@
 					<tr>
 						<td style="text-align: center; color: black"><a href="#">{{$listpost->post_title}}</a></td>
 						<td style="text-align: center; color: black">{{$listpost->category->category_name}}</td>
-						<td style="text-align: center; color: black">{{$listpost->post_like}}</td>
+						<td style="text-align: center; color: black">
+							@if ($listpost->post_reply=='')
+							Chưa trả lời
+							@else
+							Đã trả lời
+							@endif
+						</td>
 						<td style="text-align: center; color: black">{{$listpost->created_at}}</td>
 						<td style="text-align: center">
 							<a href="{{URL::to('/xem-cau-hoi/'.$listpost->post_id)}}" class="active styling-edit" ui-toggle-class="">
