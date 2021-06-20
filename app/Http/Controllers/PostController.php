@@ -167,4 +167,18 @@ class PostController extends Controller
 
 		return view('admin.pages.hotpost.list')->with(compact('meta_desc','meta_title','url_canonical','list'));
 	}
+
+	public function postadmin_searchhot(Request $request){
+		$this->AuthLogin();
+      	//SEO
+		$meta_desc = "Tìm kiếm câu hỏi HOT";
+		$meta_title = "Tìm kiếm câu hỏi HOT";
+		$url_canonical = $request->url();
+      	//---------------
+      	
+		$keywords = $request->keywords_submit;
+		$search = Post::where('post_title','like','%'.$keywords.'%')->where('post_like','>',99)
+		->with('category','student')->orderBy('tbl_post.created_at','DESC')->get();
+		return view('admin.pages.hotpost.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+	}
 }
