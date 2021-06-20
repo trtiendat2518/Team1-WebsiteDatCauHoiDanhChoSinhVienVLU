@@ -25,7 +25,8 @@ class HomeController extends Controller
 		//---------------
 		
 		$category_post = Category::orderBy('category_id', 'DESC')->get();
-		$post2 = Post::with('category','student','likes','comments')
+		$postpin = Post::with('category','student','likes','comments')->where('post_pin',1)->limit(1)->get();
+		$post2 = Post::with('category','student','likes','comments')->where('post_pin',0)
 		->orderBy('tbl_post.created_at','DESC')->paginate(5);
 		$posthot = Post::with('category','student','likes','comments')
 		->orderBy('tbl_post.post_like','DESC')->limit(5)->get();
@@ -34,7 +35,7 @@ class HomeController extends Controller
 		$nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
 		$nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
 
-		return view('student.page.home')->with(compact('meta_desc','meta_title','url_canonical','category_post','post2','studentSS','nofi','nofi2','posthot'));
+		return view('student.page.home')->with(compact('meta_desc','meta_title','url_canonical','category_post','post2','studentSS','nofi','nofi2','posthot','postpin'));
 	}
 
 	public function search(Request $request){
