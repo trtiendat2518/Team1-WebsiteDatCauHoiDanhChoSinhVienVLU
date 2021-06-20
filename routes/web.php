@@ -96,3 +96,6 @@ Route::post('/cap-nhat-nam-hoc-thanh-cong/{course_id}', 'CourseController@course
 Route::get('/xoa-nam-hoc/{course_id}', 'CourseController@course_delete');
 Route::get('/an-nam-hoc/{course_id}', 'CourseController@course_unactive');
 Route::get('/hien-thi-nam-hoc/{course_id}', 'CourseController@course_active');
+
+//ADMIN POST
+Route::get('/danh-sach-cau-hoi', 'PostController@postadmin_list');

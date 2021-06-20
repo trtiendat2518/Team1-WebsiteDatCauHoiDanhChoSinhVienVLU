@@ -133,6 +133,13 @@
             </div>
           </li>
 
+          <li class="nav-item header"><span class="menu-title">Câu hỏi sinh viên</span></li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('danh-sach-cau-hoi')}}">
+              <i class="fa fa-question-circle"></i> <span class="menu-title">Quản lý câu hỏi</span>
+            </a>
+          </li>
+
         </ul>
       </nav>
     </aside><!-- /.left-panel -->
