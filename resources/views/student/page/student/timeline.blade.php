@@ -207,6 +207,56 @@
 						<!-- INFORMATION LINE TITLE -->
 						<p class="information-line-title">Chuyên ngành</p>
 						<!-- /INFORMATION LINE TITLE -->
+						@if ($Sinfo->info->student_info_gender == 1)
+						<p class="information-line-text">Nam</p>
+						@elseif ($Sinfo->info->student_info_gender == 2)
+						<p class="information-line-text">Nữ</p>
+						@endif
+					</div>
+					<!-- /INFORMATION LINE -->
+				</div>
+				<!-- /INFORMATION LINE LIST -->
+			</div>
+			<!-- /WIDGET BOX CONTENT -->
+		</div>
+		<!-- /WIDGET BOX -->
+	</div>
+	<!-- /GRID COLUMN -->
+	@else
+	<!-- GRID COLUMN -->
+	<div class="grid-column">
+		<!-- WIDGET BOX -->
+		<div class="widget-box">
+
+			<!-- WIDGET BOX TITLE -->
+			<p class="widget-box-title">Thông tin của tôi</p>
+			<!-- /WIDGET BOX TITLE -->
+
+			<!-- WIDGET BOX CONTENT -->
+			<div class="widget-box-content">
+				<!-- PARAGRAPH -->
+				<p class="paragraph"></p>
+				<!-- /PARAGRAPH -->
+
+				<!-- INFORMATION LINE LIST -->
+				<div class="information-line-list">
+					<!-- INFORMATION LINE -->
+					<div class="information-line">
+						<!-- INFORMATION LINE TITLE -->
+						<p class="information-line-title">Địa chỉ</p>
+						<!-- /INFORMATION LINE TITLE -->
+
+						<!-- INFORMATION LINE TEXT -->
+						<p class="information-line-text">-</p>
+						<!-- /INFORMATION LINE TEXT -->
+					</div>
+					<!-- /INFORMATION LINE -->
+
+					<!-- INFORMATION LINE -->
+					<div class="information-line">
+						<!-- INFORMATION LINE TITLE -->
+						<p class="information-line-title">Ngày sinh</p>
+						<!-- /INFORMATION LINE TITLE -->
 
 						<!-- INFORMATION LINE TEXT -->
 						@if($Sinfo->info->specialized_id==0)
@@ -215,6 +265,15 @@
 						<p class="information-line-text">{{$Sinfo->info->specialized->specialized_name}}</p>
 						@endif
 						<!-- /INFORMATION LINE TEXT -->
+					</div>
+					<!-- /INFORMATION LINE -->
+
+					<!-- INFORMATION LINE -->
+					<div class="information-line">
+						<!-- INFORMATION LINE TITLE -->
+						<p class="information-line-title">Giới tính</p>
+						<!-- /INFORMATION LINE TITLE -->
+						<p class="information-line-text">-</p>
 					</div>
 					<!-- /INFORMATION LINE -->
 				</div>

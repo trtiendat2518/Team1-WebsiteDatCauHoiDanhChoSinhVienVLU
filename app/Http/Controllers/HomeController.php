@@ -48,7 +48,7 @@ class HomeController extends Controller
 		$keywords = $request->keywords_submit;
 		$search_product = Post::where('post_title','like','%'.$keywords.'%')
 		->with('category','student','likes','comments')
-		->orderBy('tbl_post.created_at','DESC')->paginate(5);
+		->orderBy('tbl_post.created_at','DESC')->get();
 		$posthot = Post::with('category','student','likes','comments')
 		->orderBy('tbl_post.post_like','DESC')->limit(5)->get();
 		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
