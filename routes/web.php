@@ -114,6 +114,7 @@ Route::get('/huy-ghim-cau-hoi/{post_id}', 'PostController@postadmin_unpin');
 Route::get('/cau-hoi-dang-chu-y', 'PostController@postadmin_listhot');
 Route::post('/tim-kiem-cau-hoi-dang-chu-y','PostController@postadmin_searchhot');
 Route::get('/xem-cau-hoi-dang-chu-y/{post_id}', 'PostController@postadmin_detailhot');
+Route::get('/xoa-cau-hoi-dang-chu-y/{post_id}', 'PostController@postadmin_deletehot');
 
 //ADMIN REPLY
 Route::post('/tra-loi-cau-hoi/{post_id}', 'ReplyController@reply_post');
