@@ -103,3 +103,16 @@ Route::post('/tim-kiem-nam-hoc','CourseController@course_search');
 //ADMIN POST
 Route::get('/danh-sach-cau-hoi', 'PostController@postadmin_list');
 Route::post('/tim-kiem-cau-hoi','PostController@postadmin_search');
+Route::get('/xem-cau-hoi/{post_id}', 'PostController@postadmin_detail');
+Route::get('/xoa-cau-hoi/{post_id}', 'PostController@postadmin_delete');
+Route::post('/import-cau-hoi', 'PostController@postadmin_import');
+Route::post('/export-cau-hoi', 'PostController@postadmin_export');
+Route::get('/ghim-cau-hoi/{post_id}', 'PostController@postadmin_pin');
+Route::get('/huy-ghim-cau-hoi/{post_id}', 'PostController@postadmin_unpin');
+
+//ADMIN HOT POST
+Route::get('/cau-hoi-dang-chu-y', 'PostController@postadmin_listhot');
+Route::post('/tim-kiem-cau-hoi-dang-chu-y','PostController@postadmin_searchhot');
+
+//ADMIN REPLY
+Route::post('/tra-loi-cau-hoi/{post_id}', 'ReplyController@reply_post');
