@@ -226,7 +226,11 @@ foreach($student2 as $key => $st){
 										<div class="form-select">
 											<label for="profile-country">Khoa</label>
 											<select id="profile-country" name="faculty_id" class="Sfaculty">
+												@if($st->info->faculty_id==0)
+												<option value="0">-</option>
+												@else
 												<option value="{{$st->info->faculty->faculty_id}}">{{$st->info->faculty->faculty_name}}</option>
+												@endif
 												<option value="0" disabled>----------------------------------</option>
 												<option value="0" disabled>Lựa chọn khác của bạn:</option>
 												@foreach ($faculty as $key => $fcl)
@@ -246,7 +250,11 @@ foreach($student2 as $key => $st){
 										<div class="form-select">
 											<label for="profile-country">Chuyên ngành</label>
 											<select id="profile-country" name="specialized_id" class="Sspecialized">
+												@if($st->info->specialized_id==0)
+												<option value="0">-</option>
+												@else
 												<option value="{{$st->info->specialized->specialized_id}}">{{$st->info->specialized->specialized_name}}</option>
+												@endif
 												<option value="0" disabled>----------------------------------</option>
 												<option value="0" disabled>Lựa chọn khác của bạn:</option>
 												@foreach ($specialized as $key => $spl)
@@ -266,7 +274,11 @@ foreach($student2 as $key => $st){
 										<div class="form-select">
 											<label for="profile-country">Khóa hiện tại</label>
 											<select id="profile-country" name="course_id" class="Scourse">
+												@if($st->info->course_id==0)
+												<option value="0">-</option>
+												@else
 												<option value="{{$st->info->course->course_id}}">{{$st->info->course->course_name}}</option>
+												@endif
 												<option value="0" disabled>----------------------------------</option>
 												<option value="0" disabled>Lựa chọn khác của bạn:</option>
 												@foreach ($course as $key => $crs)

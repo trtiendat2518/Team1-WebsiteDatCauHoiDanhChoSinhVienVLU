@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Specialized;
 use App\Models\Faculty;
+use App\Models\StudentInfo;
 use Session;
 session_start();
 
@@ -22,10 +23,15 @@ class SpecializedController extends Controller
         }
     }
 
-    public function specialized_open(){
+    public function specialized_open(Request $request){
         $this->AuthLogin();
+        //SEO
+        $meta_desc = "Thêm mới chuyên ngành";
+        $meta_title = "Thêm mới chuyên ngành";
+        $url_canonical = $request->url();
+        //---------------
         $faculty = Faculty::orderBy('faculty_code','ASC')->get();
-        return view('admin.pages.specialized.add')->with(compact('faculty'));
+        return view('admin.pages.specialized.add')->with(compact('faculty','meta_desc','meta_title','url_canonical'));
     }
 
     public function specialized_add(Request $request){
@@ -51,13 +57,20 @@ class SpecializedController extends Controller
         }
     }
 
-    public function specialized_openupdate($specialized_id){
+    public function specialized_openupdate(Request $request, $specialized_id){
         $this->AuthLogin();
+        $specializedId = Specialized::where('specialized_id',$specialized_id)->get();
+        foreach ($specializedId as $key => $value){
+            //SEO
+            $meta_desc = "Cập nhật chuyên ngành ".$value->specialized_name;
+            $meta_title = "Cập nhật chuyên ngành ".$value->specialized_name;
+            $url_canonical = $request->url();
+            //---------------
+        }
         $specialized_update = Specialized::find($specialized_id);
         $faculty = Faculty::whereNotIn('faculty_id', [$specialized_update->faculty_id])
         ->orderBy('faculty_code','ASC')->get();
-        $manage = view('admin.pages.specialized.update')->with(compact('specialized_update', 'faculty'));
-        return view('admin.admin_layout')->with('admin.pages.specialized.update', $manage)->with('faculty',$faculty);
+        return view('admin.pages.specialized.update')->with(compact('specialized_update', 'faculty', 'meta_desc','meta_title','url_canonical'));
     }
 
     public function specialized_update(Request $request, $specialized_id)
@@ -86,16 +99,26 @@ class SpecializedController extends Controller
 
     public function specialized_delete($specialized_id){
         $this->AuthLogin(); 
-        Specialized::find($specialized_id)->delete();
+        $del = Specialized::find($specialized_id);
+        $info = StudentInfo::where('specialized_id', $specialized_id)->get();
+        foreach ($info as $key => $value) {
+            $value->specialized_id=0;
+            $value->save();
+        }
+        $del->delete();
         Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
         return Redirect::to('danh-sach-chuyen-nganh');
     }
 
-    public function specialized_list(){
+    public function specialized_list(Request $request){
         $this->AuthLogin();
+        //SEO
+        $meta_desc = "Danh sách chuyên ngành";
+        $meta_title = "Danh sách chuyên ngành";
+        $url_canonical = $request->url();
+        //---------------
         $list = Specialized::orderBy('specialized_id', 'DESC')->paginate(5);
-        $manage = view('admin.pages.specialized.list')->with('list', $list);
-        return view('admin.admin_layout')->with('admin.pages.specialized.list', $manage);
+        return view('admin.pages.specialized.list')->with(compact('list','meta_desc','meta_title','url_canonical'));
     }
 
     public function specialized_active($specialized_id){
@@ -116,5 +139,18 @@ class SpecializedController extends Controller
 
         Session::put('message','<div class="alert alert-warning">Đã hiển thị trạng thái!</div>');
         return Redirect::to('danh-sach-chuyen-nganh'); 
+    }
+
+    public function specialized_search(Request $request){
+        $this->AuthLogin();
+        //SEO
+        $meta_desc = "Tìm kiếm";
+        $meta_title = "Tìm kiếm";
+        $url_canonical = $request->url();
+        //---------------
+        $keywords = $request->keywords_submit;
+        $search = Specialized::where('specialized_name','like','%'.$keywords.'%')
+        ->orderBy('specialized_id','DESC')->get();
+        return view('admin.pages.specialized.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
     }
 }
