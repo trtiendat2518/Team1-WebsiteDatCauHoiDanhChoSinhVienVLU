@@ -144,6 +144,12 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('cau-hoi-dang-chu-y')}}">
+              <i class="fa fa-warning"></i> <span class="menu-title">Câu hỏi đáng chú ý</span>
+            </a>
+          </li>
+
         </ul>
       </nav>
     </aside><!-- /.left-panel -->
