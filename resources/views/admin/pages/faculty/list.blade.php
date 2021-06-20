@@ -14,14 +14,13 @@
 		@endphp
 		<div class="row w3-res-tb">
 			<div class="col-sm-5">
-				<form>
+				<form action="{{url('/tim-kiem-khoa')}}" method="post">
+					@csrf
 					<div class="input-group">
-
-						<input type="text" class="input-sm form-control" placeholder="Từ khóa, nội dung muốn tìm">
+						<input type="text" class="input-sm form-control" name="keywords_submit" placeholder="Từ khóa, nội dung muốn tìm">
 						<span class="input-group-btn">
-							<button style="background-color: #b6b7b9;" class="btn btn-sm btn-default" type="button">Tìm kiếm</button>
+							<button style="background-color: #b6b7b9;" class="btn btn-sm btn-default" type="submit">Tìm kiếm</button>
 						</span>
-
 					</div>
 				</form>
 			</div>

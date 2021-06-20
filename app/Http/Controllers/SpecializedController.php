@@ -140,4 +140,17 @@ class SpecializedController extends Controller
         Session::put('message','<div class="alert alert-warning">Đã hiển thị trạng thái!</div>');
         return Redirect::to('danh-sach-chuyen-nganh'); 
     }
+
+    public function specialized_search(Request $request){
+        $this->AuthLogin();
+        //SEO
+        $meta_desc = "Tìm kiếm";
+        $meta_title = "Tìm kiếm";
+        $url_canonical = $request->url();
+        //---------------
+        $keywords = $request->keywords_submit;
+        $search = Specialized::where('specialized_name','like','%'.$keywords.'%')
+        ->orderBy('specialized_id','DESC')->get();
+        return view('admin.pages.specialized.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+    }
 }

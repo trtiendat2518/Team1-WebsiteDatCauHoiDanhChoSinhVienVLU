@@ -3,7 +3,7 @@
 <div class="table-agile-info">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Danh sách chuyên ngành
+			Danh sách câu hỏi
 		</div>
 		@php
 		$message = Session::get('message');
@@ -36,7 +36,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach ($list as $key => $listspecialized) 
+					@foreach ($search as $key => $listspecialized) 
 					<tr>
 						<td style="text-align: center; color: black">{{$listspecialized->faculty->faculty_name}}</td>
 						<td style="text-align: center; color: black">{{$listspecialized->specialized_name}}</td>
@@ -72,17 +72,6 @@
 				</tbody>
 			</table>
 		</div>
-		<footer class="panel-footer">
-			<center>
-				<div>
-					<div class="text-right text-center-xs">                
-						<ul class="pagination pagination-sm m-t-none m-b-none">
-							<span>{!! $list->render("pagination::bootstrap-4") !!}</span>
-						</ul>
-					</div>
-				</div>
-			</center>
-		</footer>
 	</div>
 </div>
 @endsection

@@ -75,4 +75,18 @@ class PostController extends Controller
 		$list = Post::orderBy('created_at', 'DESC')->paginate(5);
 		return view('admin.pages.post.list')->with(compact('meta_desc','meta_title','url_canonical','list'));
 	}
+
+	public function postadmin_search(Request $request){
+		$this->AuthLogin();
+      	//SEO
+		$meta_desc = "Tìm kiếm";
+		$meta_title = "Tìm kiếm";
+		$url_canonical = $request->url();
+      	//---------------
+      	
+      	$keywords = $request->keywords_submit;
+		$search = Post::where('post_title','like','%'.$keywords.'%')->with('category','student')
+		->orderBy('tbl_post.created_at','DESC')->get();
+		return view('admin.pages.post.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+	}
 }
