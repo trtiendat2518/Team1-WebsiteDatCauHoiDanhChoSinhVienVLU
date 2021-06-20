@@ -37,7 +37,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach ($list as $key => $listpost) 
+					@foreach ($search as $key => $listpost) 
 					<tr>
 						<td style="text-align: center; color: black">{{$listpost->post_title}}</td>
 						<td style="text-align: center; color: black">{{$listpost->category->category_name}}</td>
@@ -62,17 +62,6 @@
 				</tbody>
 			</table>
 		</div>
-		<footer class="panel-footer">
-			<center>
-				<div>
-					<div class="text-right text-center-xs">                
-						<ul class="pagination pagination-sm m-t-none m-b-none">
-							<span>{!! $list->render("pagination::bootstrap-4") !!}</span>
-						</ul>
-					</div>
-				</div>
-			</center>
-		</footer>
 	</div>
 </div>
 @endsection
