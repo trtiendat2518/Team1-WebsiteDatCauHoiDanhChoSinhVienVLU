@@ -12,7 +12,11 @@ use App\Models\Category;
 use App\Models\Like;
 use App\Models\Comment;
 use App\Models\Nofication;
+use App\Models\Reply;
 use App\Models\Student;
+use App\Imports\PostImport;
+use App\Exports\PostExport;
+use Excel;
 use DB;
 use Session;
 session_start();
@@ -36,6 +40,7 @@ class PostController extends Controller
 		$like_del = Like::where('post_id',$request->input('id'))->delete();
 		$cmt_del = Comment::where('post_id',$request->input('id'))->delete();
 		$del_nofi = Nofication::where('post_id',$request->input('id'))->delete();
+		$del_reply = Reply::where('post_id',$request->input('id'))->delete();
 		$pst->delete();
 	}
 
@@ -109,8 +114,43 @@ class PostController extends Controller
 		$like_del = Like::where('post_id',$post_id)->delete();
 		$cmt_del = Comment::where('post_id',$post_id)->delete();
 		$del_nofi = Nofication::where('post_id',$post_id)->delete();
+		$del_reply = Reply::where('post_id',$post_id)->delete();
 		$pst->delete();
 		Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
         return Redirect::to('danh-sach-cau-hoi');
+	}
+
+	public function postadmin_import(Request $request){
+		$path = $request->file('file')->getRealPath();
+        Excel::import(new PostImport, $path);
+        return back();
+	}
+
+	public function postadmin_export(Request $request){
+		return Excel::download(new PostExport , 'post_vlu.xlsx');
+	}
+
+	public function postadmin_pin($post_id){
+		$this->AuthLogin();
+		$all = Post::where('post_pin',1)->get();
+		foreach ($all as $key => $value) {
+			$value->post_pin=0;
+			$value->save();
+		}
+		$post = Post::find($post_id);
+		$post->post_pin=1;
+		$post->save();
+		Session::put('message','<div class="alert alert-warning">Đã ghim câu hỏi!</div>');
+		return Redirect::to('danh-sach-cau-hoi');
+	}
+
+	public function postadmin_unpin($post_id){
+		$this->AuthLogin();
+		$post = Post::find($post_id);
+		$post->post_pin=0;
+		$post->save();
+
+		Session::put('message','<div class="alert alert-warning">Bỏ ghim câu hỏi!</div>');
+		return Redirect::to('danh-sach-cau-hoi'); 
 	}
 }

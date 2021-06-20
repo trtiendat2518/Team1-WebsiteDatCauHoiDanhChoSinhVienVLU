@@ -13,6 +13,23 @@
 		}     
 		@endphp
 		<div class="row w3-res-tb">
+			<div class="col-sm-7 m-b-xs">
+				<table>
+					<tbody>
+						<tr>
+							<form action="{{url('import-cau-hoi')}}" method="POST" enctype="multipart/form-data">
+								@csrf
+								<td><input type="file" name="file" accept=".xlsx" required=""></td>
+								<td><input type="submit" value="Import file Excel " name="import_csv" class="btn btn-warning"></td>
+							</form>
+							<form action="{{url('export-cau-hoi')}}" method="POST">
+								@csrf
+								<td><input type="submit" value="Export file Excel" name="export_csv" class="btn btn-success"></td>
+							</form>
+						</tr>
+					</tbody>
+				</table>                
+			</div>
 			<div class="col-sm-5">
 				<form action="{{url('/tim-kiem-cau-hoi')}}" method="post">
 					@csrf
@@ -31,8 +48,9 @@
 					<tr>
 						<th style="text-align: center">Tiêu đề</th>
 						<th style="text-align: center">Loại câu hỏi</th>
-						<th style="text-align: center">Lượt thích</th>
+						<th style="text-align: center">Trạng thái</th>
 						<th style="text-align: center">Ngày đăng</th>
+						<th style="text-align: center">Ghim đầu</th>
 						<th style="width:30px;"></th>
 					</tr>
 				</thead>
@@ -41,8 +59,33 @@
 					<tr>
 						<td style="text-align: center; color: black"><a href="#">{{$listpost->post_title}}</a></td>
 						<td style="text-align: center; color: black">{{$listpost->category->category_name}}</td>
-						<td style="text-align: center; color: black">{{$listpost->post_like}}</td>
+						<td style="text-align: center; color: black">
+							@if ($listpost->post_reply=='')
+							Chưa trả lời
+							@else
+							Đã trả lời
+							@endif
+						</td>
 						<td style="text-align: center; color: black">{{$listpost->created_at}}</td>
+						<td style="text-align: center">
+							<span  class="text-ellipsis">
+								@php
+								if ($listpost->post_pin==0){
+									@endphp
+									<a href="{{URL::to('/ghim-cau-hoi/'.$listpost->post_id)}}">
+										<span class="fa-eye-styling fa fa-circle-thin"></span>
+									</a>
+									@php
+								}else{
+									@endphp
+									<a href="{{URL::to('/huy-ghim-cau-hoi/'.$listpost->post_id)}}">
+										<span class="fa-eye-styling fa fa-thumb-tack"></span>
+									</a>
+									@php
+								}
+								@endphp
+							</span>
+						</td>
 						<td style="text-align: center">
 							<a href="{{URL::to('/xem-cau-hoi/'.$listpost->post_id)}}" class="active styling-edit" ui-toggle-class="">
 								<i class="fa fa-reply text-success text-active"></i>
