@@ -117,3 +117,4 @@ Route::get('/xem-cau-hoi-dang-chu-y/{post_id}', 'PostController@postadmin_detail
 
 //ADMIN REPLY
 Route::post('/tra-loi-cau-hoi/{post_id}', 'ReplyController@reply_post');
+Route::post('/tra-loi-cau-hoi-dang-chu-y/{post_id}', 'ReplyController@reply_posthot');
