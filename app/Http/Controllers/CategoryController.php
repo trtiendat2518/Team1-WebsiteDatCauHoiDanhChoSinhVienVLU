@@ -164,4 +164,17 @@ class CategoryController extends Controller
 		Session::put('message','<div class="alert alert-warning">Đã hiển thị trạng thái!</div>');
 		return Redirect::to('danh-sach-danh-muc'); 
 	}
+
+	public function category_delete($category_id){
+		$this->AuthLogin(); 
+		$del = Category::find($category_id);
+		$post = Post::where('category_id', $category_id)->get();
+		foreach($post as $key => $value){
+			$value->category_id=0;
+			$value->save();
+		}
+		$del->delete();
+		Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
+		return Redirect::to('danh-sach-danh-muc');
+	}
 }

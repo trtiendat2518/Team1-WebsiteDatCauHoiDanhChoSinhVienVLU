@@ -129,3 +129,4 @@ Route::get('/cap-nhat-danh-muc/{category_id}', 'CategoryController@category_open
 Route::post('/cap-nhat-danh-muc-thanh-cong/{category_id}', 'CategoryController@category_update');
 Route::get('/an-danh-muc/{category_id}', 'CategoryController@category_unactive');
 Route::get('/hien-thi-danh-muc/{category_id}', 'CategoryController@category_active');
+Route::get('/xoa-danh-muc/{category_id}', 'CategoryController@category_delete');

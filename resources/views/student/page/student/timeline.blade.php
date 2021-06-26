@@ -398,7 +398,11 @@
 					<p style="white-space: pre-line;" class="widget-box-status-text">{{$post_info->post_content}}</p>
 
 					<div class="tag-list">
+						@if ($post_info->category_id==0)
+						<a class="tag-item secondary" style="font-size: 16px" href="javascript:void(0)">Loại câu hỏi đã bị xóa</a>
+						@else
 						<a class="tag-item secondary" style="font-size: 16px" href="{{url('/cau-hoi-theo-loai/'.$post_info->category_id)}}">{{$post_info->category->category_name}}</a>
+						@endif
 					</div>
 
 					<div class="content-actions">
