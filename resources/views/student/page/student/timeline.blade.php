@@ -97,7 +97,7 @@
 				<p class="user-stat-text">Câu hỏi</p>
 			</div>
 			<div class="user-stat big">
-				<p class="user-stat-title">{{$Sinfo->info->student_info_course}}</p>
+				<p class="user-stat-title">{{$Sinfo->info->course->course_name}}</p>
 				<p class="user-stat-text">Khóa</p>
 			</div>
 			<div class="user-stat big">
@@ -284,73 +284,6 @@
 		<!-- /WIDGET BOX -->
 	</div>
 	<!-- /GRID COLUMN -->
-	@else
-	<!-- GRID COLUMN -->
-	<div class="grid-column">
-		<!-- WIDGET BOX -->
-		<div class="widget-box">
-
-			<!-- WIDGET BOX TITLE -->
-			<p class="widget-box-title">Thông tin của tôi</p>
-			<!-- /WIDGET BOX TITLE -->
-
-			<!-- WIDGET BOX CONTENT -->
-			<div class="widget-box-content">
-				<!-- PARAGRAPH -->
-				<p class="paragraph"></p>
-				<!-- /PARAGRAPH -->
-
-				<!-- INFORMATION LINE LIST -->
-				<div class="information-line-list">
-					<!-- INFORMATION LINE -->
-					<div class="information-line">
-						<!-- INFORMATION LINE TITLE -->
-						<p class="information-line-title">Địa chỉ</p>
-						<!-- /INFORMATION LINE TITLE -->
-
-						<!-- INFORMATION LINE TEXT -->
-						<p class="information-line-text">-</p>
-						<!-- /INFORMATION LINE TEXT -->
-					</div>
-					<!-- /INFORMATION LINE -->
-
-					<!-- INFORMATION LINE -->
-					<div class="information-line">
-						<!-- INFORMATION LINE TITLE -->
-						<p class="information-line-title">Ngày sinh</p>
-						<!-- /INFORMATION LINE TITLE -->
-
-						<!-- INFORMATION LINE TEXT -->
-						<p class="information-line-text">-</p>
-						<!-- /INFORMATION LINE TEXT -->
-					</div>
-					<!-- /INFORMATION LINE -->
-
-					<!-- INFORMATION LINE -->
-					<div class="information-line">
-						<!-- INFORMATION LINE TITLE -->
-						<p class="information-line-title">Khoa</p>
-						<!-- /INFORMATION LINE TITLE -->
-						<p class="information-line-text">-</p>
-					</div>
-					<!-- /INFORMATION LINE -->
-
-					<!-- INFORMATION LINE -->
-					<div class="information-line">
-						<!-- INFORMATION LINE TITLE -->
-						<p class="information-line-title">Chuyên ngành</p>
-						<!-- /INFORMATION LINE TITLE -->
-						<p class="information-line-text">-</p>
-					</div>
-					<!-- /INFORMATION LINE -->
-				</div>
-				<!-- /INFORMATION LINE LIST -->
-			</div>
-			<!-- /WIDGET BOX CONTENT -->
-		</div>
-		<!-- /WIDGET BOX -->
-	</div>
-	<!-- /GRID COLUMN -->
 	@endif
 	<!-- GRID COLUMN -->
 	<div class="grid-column">
@@ -387,7 +320,9 @@
 											<select style="background-color: #21283b; border-radius: 0px;" id="category" class="category" name="category">
 												<option value="0" selected>Loại câu hỏi</option>
 												@foreach ($category_post as $key => $cate)
+												@if ($cate->category_status==0)
 												<option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
+												@endif
 												@endforeach
 											</select>
 											<svg class="form-select-icon icon-small-arrow">

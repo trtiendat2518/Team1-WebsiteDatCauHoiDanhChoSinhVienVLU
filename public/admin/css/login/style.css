@@ -2424,7 +2424,6 @@ select {
 	top: 50%;
 	left: 15px;
 	color: #666666;
-	font-size: 16px;
 	-webkit-transform: translateY(-50%);
 	-moz-transform: translateY(-50%);
 	-ms-transform: translateY(-50%);

@@ -113,6 +113,19 @@ Route::get('/huy-ghim-cau-hoi/{post_id}', 'PostController@postadmin_unpin');
 //ADMIN HOT POST
 Route::get('/cau-hoi-dang-chu-y', 'PostController@postadmin_listhot');
 Route::post('/tim-kiem-cau-hoi-dang-chu-y','PostController@postadmin_searchhot');
+Route::get('/xem-cau-hoi-dang-chu-y/{post_id}', 'PostController@postadmin_detailhot');
+Route::get('/xoa-cau-hoi-dang-chu-y/{post_id}', 'PostController@postadmin_deletehot');
 
 //ADMIN REPLY
 Route::post('/tra-loi-cau-hoi/{post_id}', 'ReplyController@reply_post');
+Route::post('/tra-loi-cau-hoi-dang-chu-y/{post_id}', 'ReplyController@reply_posthot');
+
+//ADMIN CATEGORY
+Route::get('/danh-sach-danh-muc', 'CategoryController@category_list');
+Route::post('/tim-kiem-danh-muc','CategoryController@category_search');
+Route::get('/them-moi-danh-muc', 'CategoryController@category_open');
+Route::post('/them-moi-danh-muc-thanh-cong', 'CategoryController@category_add');
+Route::get('/cap-nhat-danh-muc/{category_id}', 'CategoryController@category_openupdate');
+Route::post('/cap-nhat-danh-muc-thanh-cong/{category_id}', 'CategoryController@category_update');
+Route::get('/an-danh-muc/{category_id}', 'CategoryController@category_unactive');
+Route::get('/hien-thi-danh-muc/{category_id}', 'CategoryController@category_active');
