@@ -145,4 +145,23 @@ class CategoryController extends Controller
 			} 
 		}
 	}
+
+	public function category_active($category_id){
+		$this->AuthLogin();
+		$category = Category::find($category_id);
+		$category->category_status=1;
+		$category->save();
+
+		Session::put('message','<div class="alert alert-warning">Đã ẩn trạng thái!</div>');
+		return Redirect::to('danh-sach-danh-muc');
+	}
+	public function category_unactive($category_id){
+		$this->AuthLogin();
+		$category = Category::find($category_id);
+		$category->category_status=0;
+		$category->save();
+
+		Session::put('message','<div class="alert alert-warning">Đã hiển thị trạng thái!</div>');
+		return Redirect::to('danh-sach-danh-muc'); 
+	}
 }
