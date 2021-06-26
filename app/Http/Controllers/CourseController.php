@@ -46,7 +46,7 @@ class CourseController extends Controller
          $result = $course->save(); 
          if($result){
             Session::put('message','<div class="alert alert-success">Thêm mới khóa học thành công!</div>');
-            return Redirect::to('them-moi-nam-hoc');
+            return Redirect::to('danh-sach-nam-hoc');
          }else{
             Session::put('message','<div class="alert alert-danger">Không thể thêm mới khóa học!</div>');
             return Redirect::to('them-moi-nam-hoc');
