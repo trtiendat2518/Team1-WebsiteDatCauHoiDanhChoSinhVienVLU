@@ -153,4 +153,57 @@ class PostController extends Controller
 		Session::put('message','<div class="alert alert-warning">Bỏ ghim câu hỏi!</div>');
 		return Redirect::to('danh-sach-cau-hoi'); 
 	}
+
+	public function postadmin_listhot(Request $request){
+		$this->AuthLogin();
+      	//SEO
+		$meta_desc = "Danh sách câu hỏi HOT";
+		$meta_title = "Danh sách câu hỏi HOT";
+		$url_canonical = $request->url();
+      	//---------------
+
+		$list = Post::with('category','student')->where('post_like','>',99)
+		->orderBy('created_at','DESC')->paginate(5);
+
+		return view('admin.pages.hotpost.list')->with(compact('meta_desc','meta_title','url_canonical','list'));
+	}
+
+	public function postadmin_searchhot(Request $request){
+		$this->AuthLogin();
+      	//SEO
+		$meta_desc = "Tìm kiếm câu hỏi HOT";
+		$meta_title = "Tìm kiếm câu hỏi HOT";
+		$url_canonical = $request->url();
+      	//---------------
+      	
+		$keywords = $request->keywords_submit;
+		$search = Post::where('post_title','like','%'.$keywords.'%')->where('post_like','>',99)
+		->with('category','student')->orderBy('tbl_post.created_at','DESC')->get();
+		return view('admin.pages.hotpost.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+	}
+
+	public function postadmin_detailhot(Request $request, $post_id){
+		$this->AuthLogin();
+      	//SEO
+		$meta_desc = "Chi tiết câu hỏi";
+		$meta_title = "Chi tiết câu hỏi";
+		$url_canonical = $request->url();
+      	//---------------
+
+		$post_detail = Post::find($post_id);
+		return view('admin.pages.hotpost.reply')->with(compact('meta_desc','meta_title','url_canonical','post_detail'));
+	}
+
+	public function postadmin_deletehot(Request $request, $post_id){
+		$this->AuthLogin();
+
+		$pst = Post::find($post_id);
+		$like_del = Like::where('post_id',$post_id)->delete();
+		$cmt_del = Comment::where('post_id',$post_id)->delete();
+		$del_nofi = Nofication::where('post_id',$post_id)->delete();
+		$del_reply = Reply::where('post_id',$post_id)->delete();
+		$pst->delete();
+		Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
+		return Redirect::to('cau-hoi-dang-chu-y');
+	}
 }
