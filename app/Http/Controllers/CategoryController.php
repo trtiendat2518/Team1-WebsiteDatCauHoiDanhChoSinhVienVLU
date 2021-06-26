@@ -19,8 +19,7 @@ session_start();
 class CategoryController extends Controller
 {
 	//STUDENT
-	public function show_category_post(Request $request, $category_id)
-	{
+	public function show_category_post(Request $request, $category_id){
 		$category_post = Category::orderBy('category_id', 'DESC')->get();
 		$category_by_id = Post::with('category','student','likes','comments')
 		->where('tbl_post.category_id', $category_id)
@@ -45,6 +44,15 @@ class CategoryController extends Controller
 	}
 
     //ADMIN
+	public function AuthLogin(){
+		$admin_id=Session::get('admin_id');
+		if($admin_id){
+			return Redirect::to('admin-home');
+		}else{
+			return Redirect::to('admin-login')->send();
+		}
+	}
+	
 	public function category_list(Request $request){
     	//SEO
 		$meta_desc = "Danh sách danh mục";
@@ -54,5 +62,19 @@ class CategoryController extends Controller
 
 		$list = Category::orderBy('category_id', 'DESC')->paginate(5);
 		return view('admin.pages.category.list')->with(compact('meta_desc','meta_title','url_canonical','list'));
+	}
+
+	public function category_search(Request $request){
+		$this->AuthLogin();
+      //SEO
+		$meta_desc = "Tìm kiếm";
+		$meta_title = "Tìm kiếm";
+		$url_canonical = $request->url();
+      //---------------
+		
+		$keywords = $request->keywords_submit;
+		$search = Category::where('category_name','like','%'.$keywords.'%')
+		->orderBy('category_id','DESC')->get();
+		return view('admin.pages.category.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
 	}
 }
