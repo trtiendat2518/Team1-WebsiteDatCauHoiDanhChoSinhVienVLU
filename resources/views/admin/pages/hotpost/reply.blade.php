@@ -55,7 +55,7 @@
 			@endforeach
 			<div class="panel-body">
 				<div class="position-center">
-					<form role="form" action="{{url('/tra-loi-cau-hoi/'.$post_detail->post_id)}}" method="POST" style="margin-bottom: 20px" >
+					<form role="form" action="{{url('/tra-loi-cau-hoi-dang-chu-y/'.$post_detail->post_id)}}" method="POST" style="margin-bottom: 20px" >
 						{{csrf_field()}}
 						<div class="form-group">
 							<label>Nội dung</label>
