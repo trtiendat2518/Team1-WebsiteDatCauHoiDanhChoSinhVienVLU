@@ -78,6 +78,8 @@
 												@foreach ($category_by_name as $key => $cate)
 												@if ($cate->category_status==0)
 												<option value="{{$cate->category_id}}" selected>{{$cate->category_name}}</option>
+												@else
+												<option value="0" selected>Loại câu hỏi này đã bị ẩn</option>
 												@endif
 												@endforeach
 											</select>
