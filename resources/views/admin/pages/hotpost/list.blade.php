@@ -14,7 +14,7 @@
 		@endphp
 		<div class="row w3-res-tb">
 			<div class="col-sm-5">
-				<form action="{{url('/admin-tim-kiem-cau-hoi-hot')}}" method="post">
+				<form action="{{url('/tim-kiem-cau-hoi-dang-chu-y')}}" method="post">
 					@csrf
 					<div class="input-group">
 						<input type="text" class="input-sm form-control" name="keywords_submit" placeholder="Từ khóa, nội dung muốn tìm">
@@ -50,10 +50,10 @@
 						</td>
 						<td style="text-align: center; color: black">{{$listpost->created_at}}</td>
 						<td style="text-align: center">
-							<a href="{{URL::to('/xem-cau-hoi-hot/'.$listpost->post_id)}}" class="active styling-edit" ui-toggle-class="">
+							<a href="{{URL::to('/xem-cau-hoi-dang-chu-y/'.$listpost->post_id)}}" class="active styling-edit" ui-toggle-class="">
 								<i class="fa fa-reply text-success text-active"></i>
 							</a>
-							<a href="{{URL::to('/xoa-cau-hoi-hot/'.$listpost->post_id)}}" class="active styling-edit" ui-toggle-class="" onclick="return confirm('Bạn có chắc chắn muốn xóa {{$listpost->post_name}} không?')">
+							<a href="{{URL::to('/xoa-cau-hoi-dang-chu-y/'.$listpost->post_id)}}" class="active styling-edit" ui-toggle-class="" onclick="return confirm('Bạn có chắc chắn muốn xóa {{$listpost->post_name}} không?')">
 								<i class="fa fa-trash text-danger text"></i>
 							</a>
 						</td>

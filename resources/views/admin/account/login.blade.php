@@ -8,15 +8,16 @@
   <meta name="keywords" content="">
   <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/login/animate.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/login/bootstrap.min.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/login/line-awesome.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/login/line-awesome-font-awesome.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/line-awesome.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/line-awesome-font-awesome.min.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/login/all.min.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/login/font-awesome.css')}}"> 
+  <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/font-awesome.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/font-awesome.min.css')}}"> 
   <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/login/slick.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/login/slick-theme.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/login/style.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/login/responsive.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/login/font.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('public/admin/css/font.css')}}">
 </head>
 <body class="sign-in" oncontextmenu="return false;">
   <div class="wrapper">
