@@ -122,3 +122,4 @@ Route::post('/tra-loi-cau-hoi-dang-chu-y/{post_id}', 'ReplyController@reply_post
 
 //ADMIN CATEGORY
 Route::get('/danh-sach-danh-muc', 'CategoryController@category_list');
+Route::post('/tim-kiem-danh-muc','CategoryController@category_search');
