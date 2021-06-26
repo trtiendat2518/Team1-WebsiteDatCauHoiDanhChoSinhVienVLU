@@ -99,16 +99,6 @@
           <li class="nav-item header"><span class="menu-title">Sinh viên</span></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-id-card-o"></i> <span class="menu-title">Tài khoản sinh viên</span>
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="index.html">Thêm mới tài khoản</a>
-              <a class="dropdown-item" href="index-02.html">Danh sách tài khoản</a>
-            </div>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-university"></i> <span class="menu-title">Quản lý khoa</span>
             </a>
             <div class="dropdown-menu">
@@ -138,6 +128,16 @@
           </li>
 
           <li class="nav-item header"><span class="menu-title">Câu hỏi sinh viên</span></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-list"></i> <span class="menu-title">Quản lý danh mục</span>
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{{url('/them-moi-danh-muc')}}">Thêm mới danh mục</a>
+              <a class="dropdown-item" href="{{url('/danh-sach-danh-muc')}}">Danh sách danh mục</a>
+            </div>
+          </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="{{url('danh-sach-cau-hoi')}}">
               <i class="fa fa-question-circle"></i> <span class="menu-title">Quản lý câu hỏi</span>
