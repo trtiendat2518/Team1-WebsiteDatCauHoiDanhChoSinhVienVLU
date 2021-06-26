@@ -77,4 +77,36 @@ class CategoryController extends Controller
 		->orderBy('category_id','DESC')->get();
 		return view('admin.pages.category.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
 	}
+
+	public function category_open(Request $request){
+		$this->AuthLogin();
+      //SEO
+		$meta_desc = "Thêm mới danh mục";
+		$meta_title = "Thêm mới danh mục";
+		$url_canonical = $request->url();
+      //---------------
+		return view('admin.pages.category.add')->with(compact('meta_desc','meta_title','url_canonical'));
+	}
+
+	public function category_add(Request $request){
+		$data = $request->all();
+		$category = new Category();
+
+		$category->category_name = $data['category_name'];
+		$category->category_status = $data['category_status'];
+
+		if ($data['category_name']=='') {
+			Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+			return Redirect::to('them-moi-danh-muc');
+		}else{
+			$result = $category->save(); 
+			if($result){
+				Session::put('message','<div class="alert alert-success">Thêm mới danh mục thành công!</div>');
+				return Redirect::to('danh-sach-danh-muc');
+			}else{
+				Session::put('message','<div class="alert alert-danger">Không thể thêm mới khóa học!</div>');
+				return Redirect::to('them-moi-danh-muc');
+			}
+		}
+	}
 }
