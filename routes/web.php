@@ -119,3 +119,6 @@ Route::get('/xoa-cau-hoi-dang-chu-y/{post_id}', 'PostController@postadmin_delete
 //ADMIN REPLY
 Route::post('/tra-loi-cau-hoi/{post_id}', 'ReplyController@reply_post');
 Route::post('/tra-loi-cau-hoi-dang-chu-y/{post_id}', 'ReplyController@reply_posthot');
+
+//ADMIN CATEGORY
+Route::get('/danh-sach-danh-muc', 'CategoryController@category_list');
