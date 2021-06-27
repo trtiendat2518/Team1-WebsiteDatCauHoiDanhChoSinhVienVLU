@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Student;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests;
@@ -11,7 +12,6 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Rules\Captcha;
 use App\Models\Nofication;
-use DB;
 use Mail;
 use Session;
 use Validator;
@@ -19,7 +19,6 @@ session_start();
 
 class StudentController extends Controller
 {
-	//STUDENT
 	public function AuthLogin(){
 		$student_id=Session::get('student_id');
 		if($student_id){
@@ -284,26 +283,5 @@ class StudentController extends Controller
 			Session::put('message','<div class="alert alert-danger">Mật khẩu hiện tại không đúng!</div>');
 			return Redirect::to('thay-doi-mat-khau/'.Session::get('student_id'));
 		}
-	}
-
-	//ADMIN
-	public function AuthLogin_admin(){
-		$admin_id=Session::get('admin_id');
-		if($admin_id){
-			return Redirect::to('admin-home');
-		}else{
-			return Redirect::to('admin-login')->send();
-		}
-	}
-
-	public function student_list(Request $request){
-		$this->AuthLogin_admin();
-      	//SEO
-		$meta_desc = "Danh sách sinh viên";
-		$meta_title = "Danh sách sinh viên";
-		$url_canonical = $request->url();
-     	//---------------
-		$list = Student::orderBy('student_id', 'DESC')->paginate(5);
-		return view('admin.pages.alumnus.list')->with(compact('meta_desc','meta_title','url_canonical','list'));
 	}
 }

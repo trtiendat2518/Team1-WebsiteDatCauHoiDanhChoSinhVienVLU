@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB;
 use App\Models\Admin;
 use App\Http\Requests;
 use App\Rules\Captcha;
