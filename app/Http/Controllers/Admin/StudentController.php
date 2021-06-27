@@ -13,6 +13,9 @@ use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Post;
 use App\Models\Reply;
+use App\Imports\StudentImport;
+use App\Exports\StudentExport;
+use Excel;
 use Validator;
 use Session;
 session_start();
@@ -170,5 +173,15 @@ class StudentController extends Controller
 		$student->delete();
 		Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
 		return Redirect::to('danh-sach-sinh-vien');
+	}
+
+	public function student_import(Request $request){
+		$path = $request->file('file')->getRealPath();
+        Excel::import(new StudentImport, $path);
+        return back();
+	}
+
+	public function student_export(Request $request){
+		return Excel::download(new StudentExport , 'student_vlu.xlsx');
 	}
 }
