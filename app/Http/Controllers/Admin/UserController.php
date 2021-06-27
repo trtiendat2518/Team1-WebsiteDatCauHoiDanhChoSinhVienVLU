@@ -8,6 +8,11 @@ use Illuminate\Http\Response;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Admin;
+use App\Models\Reply;
+use App\Models\Post;
+use App\Imports\UserImport;
+use App\Exports\UserExport;
+use Excel;
 use Validator;
 use Session;
 session_start();
@@ -166,5 +171,25 @@ class UserController extends Controller
         ->orWhere('admin_email','like','%'.$keywords.'%')
         ->orderBy('admin_id','DESC')->get();
         return view('admin.pages.user.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+    }
+
+    public function user_import(Request $request){
+        $path = $request->file('file')->getRealPath();
+        Excel::import(new UserImport, $path);
+        return back();
+    }
+
+    public function user_export(Request $request){
+        return Excel::download(new UserExport , 'user_vlu.xlsx');
+    }
+
+    public function user_delete(Request $request, $admin_id){
+        $this->AuthLogin();
+
+        $admin = Admin::find($admin_id);
+        $reply_del = Reply::where('admin_id',$admin_id)->delete();
+        $admin->delete();
+        Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
+        return Redirect::to('danh-sach-user');
     }
 }
