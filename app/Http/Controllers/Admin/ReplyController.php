@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests;
@@ -9,18 +10,11 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Reply;
 use App\Models\Post;
 use Validator;
-use DB;
 use Session;
 session_start();
 
 class ReplyController extends Controller
 {
-    //STUDENT
-    public function post_reply($post_id){
-        return $post_d = Post::find($post_id);
-    }
-
-    //ADMIN
     public function reply_post(Request $request, $post_id){
         $data = $request->validate([
             'reply_content'=>'bail|required|min:50|max:600',
