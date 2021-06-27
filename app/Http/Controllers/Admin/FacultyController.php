@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Faculty;
 use App\Models\Specialized;
 use App\Models\StudentInfo;
+use Validator;
 use Session;
 session_start();
 
@@ -35,7 +36,18 @@ class FacultyController extends Controller
     }
 
     public function faculty_add(Request $request){
-        $data = $request->all();
+        $data = $request->validate([
+           'faculty_name'=>'bail|required|max:50|min:5',
+           'faculty_code'=>'bail|required|max:10|min:2',
+           'faculty_status'=>'bail|required',
+        ],[
+           'faculty_name.required'=>'Tên khoa không được để trống',
+           'faculty_name.min'=>'Tên khoa ít nhất có 5 ký tự',
+           'faculty_name.max'=>'Tên khoa không quá 50 ký tự',
+           'faculty_code.required'=>'Mã khoa không được để trống',
+           'faculty_code.min'=>'Mã khoa ít nhất có 5 ký tự',
+           'faculty_code.max'=>'Mã khoa không quá 50 ký tự',
+        ]);
         $faculty = new Faculty();
 
         $faculty->faculty_name = $data['faculty_name'];
@@ -74,7 +86,17 @@ class FacultyController extends Controller
     public function faculty_update(Request $request, $faculty_id)
     {
         $this->AuthLogin();
-        $data = $request->all();
+        $data = $request->validate([
+           'faculty_name'=>'bail|required|max:50|min:5',
+           'faculty_code'=>'bail|required|max:10|min:2',
+        ],[
+           'faculty_name.required'=>'Tên khoa không được để trống',
+           'faculty_name.min'=>'Tên khoa ít nhất có 5 ký tự',
+           'faculty_name.max'=>'Tên khoa không quá 50 ký tự',
+           'faculty_code.required'=>'Mã khoa không được để trống',
+           'faculty_code.min'=>'Mã khoa ít nhất có 5 ký tự',
+           'faculty_code.max'=>'Mã khoa không quá 50 ký tự',
+        ]);
         $faculty = Faculty::find($faculty_id);
 
         $faculty->faculty_name = $data['faculty_name'];

@@ -59,12 +59,14 @@
       <div class="right-content float-right">
         <div class="dropdown user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img src="https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg" class="rounded-circle float-left mr-2" alt="User Image">
             <h4 class="name">@php
             echo Session::get('admin_name')
           @endphp</h4>
         </a>
         <ul class="dropdown-menu">
           <li><a href="#"><i class="fa fa-user"></i> Thông tin cá nhân</a></li>
+          <li><a href="{{url('/doi-mat-khau-moi')}}"><i class="fa fa-unlock-alt"></i> Đổi mật khẩu</a></li>
           <li><a href="{{url('/logout-admin')}}"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
         </ul>
       </div>
@@ -77,12 +79,18 @@
   <aside class="left-panel">
     <div class="user-card background-bg">
       <a href="#">
-        <div class="avatar mr-3 float-left"><img class="rounded-circle" src="images/avatar/4.jpg" alt="Avatar"></div><!-- /.avatar -->
+       <div class="avatar mr-3 float-left"><img class="rounded-circle" src="https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg" alt="Avatar" style="height: 50px;"></div>
         <div class="details">
           <h4 class="name">@php
           echo Session::get('admin_name')
         @endphp</h4><!-- /.name -->
-        <span class="designation">Designer</span><!-- /.designation -->
+        @if(Session::get('admin_role')==0)
+        <span class="designation">Quản trị viên</span>
+        @elseif(Session::get('admin_role')==1)
+        <span class="designation">BCN khoa</span>
+        @else
+        <span class="designation">Trợ lý</span>
+        @endif
       </div><!-- /.details -->
     </a>
   </div>
@@ -93,8 +101,10 @@
           <i class="fa fa-dashboard"></i> <span class="menu-title">Trang chủ</span>
         </a>
       </li>
-
+      @if(Session::get('admin_role')==0)
       <li class="nav-item header"><span class="menu-title">Sinh viên</span></li>
+      @endif
+      @if(Session::get('admin_role')==0)
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-university"></i> <span class="menu-title">Quản lý khoa</span>
@@ -124,8 +134,12 @@
           <a class="dropdown-item" href="{{url('/danh-sach-nam-hoc')}}">Danh sách khóa học</a>
         </div>
       </li>
+      @endif
 
+      @if (Session::get('admin_role')==1 || Session::get('admin_role')==2)
       <li class="nav-item header"><span class="menu-title">Câu hỏi sinh viên</span></li>
+      @endif
+      @if (Session::get('admin_role')==1 || Session::get('admin_role')==2)
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-list"></i> <span class="menu-title">Quản lý danh mục</span>
@@ -147,8 +161,12 @@
           <i class="fa fa-warning"></i> <span class="menu-title">Câu hỏi đáng chú ý</span>
         </a>
       </li>
+      @endif
 
+      @if(Session::get('admin_role')==0 || Session::get('admin_role')==1)
       <li class="nav-item header"><span class="menu-title">Tài khoản</span></li>
+      @endif
+      @if (Session::get('admin_role')==0)
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-users"></i> <span class="menu-title">Quản lý User</span>
@@ -158,7 +176,8 @@
           <a class="dropdown-item" href="{{url('/danh-sach-user')}}">Danh sách các User</a>
         </div>
       </li>
-      
+      @endif
+      @if (Session::get('admin_role')==0 || Session::get('admin_role')==1)
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-graduation-cap"></i> <span class="menu-title">Quản lý sinh viên</span>
@@ -168,6 +187,7 @@
           <a class="dropdown-item" href="{{url('/danh-sach-sinh-vien')}}">Danh sách sinh viên</a>
         </div>
       </li>
+      @endif
     </ul>
   </nav>
 </aside><!-- /.left-panel -->
@@ -182,7 +202,6 @@
       <div class="float-left">
         Copyright © 2018 <a href="https://demos.jeweltheme.com/hi5dash" target="_blank">hi5dash</a>
       </div>
-
       <div class="float-right">
         Developed with Love by <a href="https://jeweltheme.com" rel="nofollow">Jewel Theme</a>
       </div>
