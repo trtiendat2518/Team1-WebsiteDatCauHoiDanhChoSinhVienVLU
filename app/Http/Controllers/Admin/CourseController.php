@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests;
@@ -46,7 +47,7 @@ class CourseController extends Controller
          $result = $course->save(); 
          if($result){
             Session::put('message','<div class="alert alert-success">Thêm mới khóa học thành công!</div>');
-            return Redirect::to('them-moi-nam-hoc');
+            return Redirect::to('danh-sach-nam-hoc');
          }else{
             Session::put('message','<div class="alert alert-danger">Không thể thêm mới khóa học!</div>');
             return Redirect::to('them-moi-nam-hoc');

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Student;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests;
@@ -11,7 +12,6 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Rules\Captcha;
 use App\Models\Nofication;
-use DB;
 use Mail;
 use Session;
 use Validator;
