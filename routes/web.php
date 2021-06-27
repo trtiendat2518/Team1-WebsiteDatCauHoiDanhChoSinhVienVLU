@@ -138,3 +138,7 @@ Route::get('/them-moi-sinh-vien', 'Admin\StudentController@student_open');
 Route::post('/them-moi-sinh-vien-thanh-cong', 'Admin\StudentController@student_add');
 Route::get('/cap-nhat-sinh-vien/{student_id}', 'Admin\StudentController@student_openupdate');
 Route::post('/cap-nhat-sinh-vien-thanh-cong/{student_id}', 'Admin\StudentController@student_update');
+Route::get('/xoa-sinh-vien/{student_id}', 'Admin\StudentController@student_delete');
+Route::post('/import-sinh-vien', 'Admin\StudentController@student_import');
+Route::post('/export-sinh-vien', 'Admin\StudentController@student_export');
+

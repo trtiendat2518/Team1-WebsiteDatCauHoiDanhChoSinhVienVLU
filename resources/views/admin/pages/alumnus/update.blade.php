@@ -30,7 +30,7 @@
 						</div>
 						<div class="form-group">
 							<label>Mật khẩu của sinh viên</label>
-							<input type="password" name="student_password" class="form-control" value="******">
+							<input type="password" name="student_password" class="form-control" placeholder="******">
 						</div>
 						<button type="submit" name="updating_student" class="btn btn-primary btn-block">Cập nhật</button>
 					</form>

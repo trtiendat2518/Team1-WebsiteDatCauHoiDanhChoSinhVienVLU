@@ -8,6 +8,14 @@ use Illuminate\Http\Response;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Student;
+use App\Models\Nofication;
+use App\Models\Comment;
+use App\Models\Like;
+use App\Models\Post;
+use App\Models\Reply;
+use App\Imports\StudentImport;
+use App\Exports\StudentExport;
+use Excel;
 use Validator;
 use Session;
 session_start();
@@ -144,5 +152,36 @@ class StudentController extends Controller
 				return Redirect::to('cap-nhat-sinh-vien/'.$student_id);
 			} 
 		}
+	}
+
+	public function student_delete(Request $request, $student_id){
+		$this->AuthLogin();
+
+		$student = Student::find($student_id);
+
+		$like_del = Like::where('student_id',$student_id)->delete();
+		$cmt_del = Comment::where('student_id',$student_id)->delete();
+		$del_nofi = Nofication::where('student_id',$student_id)->delete();
+		$post = Post::where('student_id',$student_id)->get();
+		foreach ($post as $key => $value) {
+		 	$like_del = Like::where('post_id',$value->post_id)->delete();
+		 	$cmt_del = Comment::where('post_id',$value->post_id)->delete();
+		 	$del_nofi = Nofication::where('post_id',$value->post_id)->delete();
+		 	$del_reply = Reply::where('post_id',$value->post_id)->delete();
+		}
+		$post_del = Post::where('student_id',$student_id)->delete();
+		$student->delete();
+		Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
+		return Redirect::to('danh-sach-sinh-vien');
+	}
+
+	public function student_import(Request $request){
+		$path = $request->file('file')->getRealPath();
+        Excel::import(new StudentImport, $path);
+        return back();
+	}
+
+	public function student_export(Request $request){
+		return Excel::download(new StudentExport , 'student_vlu.xlsx');
 	}
 }
