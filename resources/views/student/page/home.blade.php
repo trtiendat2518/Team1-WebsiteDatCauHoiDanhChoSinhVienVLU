@@ -27,6 +27,7 @@
 			<div class="widget-box-content">
 				<div class="user-status-list">
 					@foreach ($category_post as $key => $val)
+					@if ($val->category_status==0)
 					<div class="user-status request-small">
 						<a class="user-status-avatar" href="profile-timeline.html">
 							<div class="user-avatar small no-outline">
@@ -38,6 +39,7 @@
 						<p class="user-status-title"><a class="bold" href="{{url('/cau-hoi-theo-loai/'.$val->category_id)}}">{{$val->category_name}}</a></p>
 						<p class="user-status-text small">Có {{$val->posts()->count()}} câu hỏi</p>
 					</div>
+					@endif
 					@endforeach
 				</div>
 			</div>
@@ -84,7 +86,9 @@
 											<select style="background-color: #21283b; border-radius: 0px;" id="category" class="category" name="category">
 												<option value="0">---Loại câu hỏi---</option>
 												@foreach ($category_post as $key => $cate)
+												@if ($cate->category_status==0)
 												<option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
+												@endif
 												@endforeach
 											</select>
 											<svg class="form-select-icon icon-small-arrow">
@@ -168,7 +172,11 @@
 					<p style="white-space: pre-line;" class="widget-box-status-text">{{$pin->post_content}}</p>
 
 					<div class="tag-list">
+						@if ($pin->category_id==0)
+						<a class="tag-item secondary" style="font-size: 16px" href="javascript:void(0)">Loại câu hỏi đã bị xóa</a>
+						@else
 						<a class="tag-item secondary" style="font-size: 16px" href="{{url('/cau-hoi-theo-loai/'.$pin->category_id)}}">{{$pin->category->category_name}}</a>
+						@endif
 					</div>
 
 					<div class="content-actions">
@@ -389,7 +397,11 @@
 					<p style="white-space: pre-line;" class="widget-box-status-text">{{$post_info->post_content}}</p>
 
 					<div class="tag-list">
+						@if ($post_info->category_id==0)
+						<a class="tag-item secondary" style="font-size: 16px" href="javascript:void(0)">Loại câu hỏi đã bị xóa</a>
+						@else
 						<a class="tag-item secondary" style="font-size: 16px" href="{{url('/cau-hoi-theo-loai/'.$post_info->category_id)}}">{{$post_info->category->category_name}}</a>
+						@endif
 					</div>
 
 					<div class="content-actions">
