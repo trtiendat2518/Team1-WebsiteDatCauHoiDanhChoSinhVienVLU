@@ -104,9 +104,78 @@ class CategoryController extends Controller
 				Session::put('message','<div class="alert alert-success">Thêm mới danh mục thành công!</div>');
 				return Redirect::to('danh-sach-danh-muc');
 			}else{
-				Session::put('message','<div class="alert alert-danger">Không thể thêm mới khóa học!</div>');
+				Session::put('message','<div class="alert alert-danger">Không thể thêm mới danh mục học!</div>');
 				return Redirect::to('them-moi-danh-muc');
 			}
 		}
+	}
+
+	public function category_openupdate(Request $request,$category_id){
+		$this->AuthLogin();
+		$category_update = Category::find($category_id);
+		$categoryId = Category::where('category_id',$category_id)->get();
+		foreach ($categoryId as $key => $value){
+         //SEO
+			$meta_desc = "Cập nhật danh mục ".$value->category_name;
+			$meta_title = "Cập nhật danh mục ".$value->category_name;
+			$url_canonical = $request->url();
+         //---------------
+		}
+		return view('admin.pages.category.update')->with(compact('category_update','meta_desc','meta_title','url_canonical'));
+	}
+
+	public function category_update(Request $request, $category_id){
+		$this->AuthLogin();
+		$data = $request->all();
+		$category = Category::find($category_id);
+
+		$category->category_name = $data['category_name'];
+
+		if ($data['category_name']=='') {
+			Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+			return Redirect::to('cap-nhat-danh-muc/'.$category_id);
+		}else{
+			$result = $category->save();
+			if($result){
+				Session::put('message','<div class="alert alert-success">Cập nhật danh mục thành công!</div>');
+				return Redirect::to('danh-sach-danh-muc');
+			}else{
+				Session::put('message','<div class="alert alert-danger">Không thể cập nhật danh mục!</div>');
+				return Redirect::to('cap-nhat-danh-muc/'.$category_id);
+			} 
+		}
+	}
+
+	public function category_active($category_id){
+		$this->AuthLogin();
+		$category = Category::find($category_id);
+		$category->category_status=1;
+		$category->save();
+
+		Session::put('message','<div class="alert alert-warning">Đã ẩn trạng thái!</div>');
+		return Redirect::to('danh-sach-danh-muc');
+	}
+	
+	public function category_unactive($category_id){
+		$this->AuthLogin();
+		$category = Category::find($category_id);
+		$category->category_status=0;
+		$category->save();
+
+		Session::put('message','<div class="alert alert-warning">Đã hiển thị trạng thái!</div>');
+		return Redirect::to('danh-sach-danh-muc'); 
+	}
+
+	public function category_delete($category_id){
+		$this->AuthLogin(); 
+		$del = Category::find($category_id);
+		$post = Post::where('category_id', $category_id)->get();
+		foreach($post as $key => $value){
+			$value->category_id=0;
+			$value->save();
+		}
+		$del->delete();
+		Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
+		return Redirect::to('danh-sach-danh-muc');
 	}
 }
