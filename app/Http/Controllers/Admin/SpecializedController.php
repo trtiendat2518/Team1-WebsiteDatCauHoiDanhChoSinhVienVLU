@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Specialized;
 use App\Models\Faculty;
 use App\Models\StudentInfo;
+use Validator;
 use Session;
 session_start();
 
@@ -36,7 +37,16 @@ class SpecializedController extends Controller
     }
 
     public function specialized_add(Request $request){
-        $data = $request->all();
+        $data = $request->validate([
+           'specialized_name'=>'bail|required|max:50|min:5',
+           'faculty_id'=>'bail|required',
+           'specialized_status'=>'bail|required',
+        ],[
+           'specialized_name.required'=>'Tên chuyên ngành không được để trống',
+           'specialized_name.min'=>'Tên chuyên ngành ít nhất có 5 ký tự',
+           'specialized_name.max'=>'Tên chuyên ngành không quá 50 ký tự',
+           'faculty_id.required'=>'Mã chuyên ngành không được để trống',
+        ]);
         $specialized = new Specialized();
 
         $specialized->specialized_name = $data['specialized_name'];
@@ -77,7 +87,15 @@ class SpecializedController extends Controller
     public function specialized_update(Request $request, $specialized_id)
     {
         $this->AuthLogin();
-        $data = $request->all();
+        $data = $request->validate([
+           'specialized_name'=>'bail|required|max:50|min:5',
+           'faculty_id'=>'bail|required',
+        ],[
+           'specialized_name.required'=>'Tên chuyên ngành không được để trống',
+           'specialized_name.min'=>'Tên chuyên ngành ít nhất có 5 ký tự',
+           'specialized_name.max'=>'Tên chuyên ngành không quá 50 ký tự',
+           'faculty_id.required'=>'Mã chuyên ngành không được để trống',
+        ]);
         $specialized = Specialized::find($specialized_id);
 
         $specialized->specialized_name = $data['specialized_name'];

@@ -59,12 +59,14 @@
       <div class="right-content float-right">
         <div class="dropdown user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img src="https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg" class="rounded-circle float-left mr-2" alt="User Image">
             <h4 class="name">@php
             echo Session::get('admin_name')
           @endphp</h4>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="#"><i class="fa fa-user"></i> Thông tin cá nhân</a></li>
+          <li><a href="{{url('/thong-tin-tai-khoan-admin/'.Session::get('admin_id'))}}"><i class="fa fa-user"></i> Thông tin cá nhân</a></li>
+          <li><a href="{{url('/doi-mat-khau-moi')}}"><i class="fa fa-unlock-alt"></i> Đổi mật khẩu</a></li>
           <li><a href="{{url('/logout-admin')}}"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
         </ul>
       </div>
@@ -77,7 +79,7 @@
   <aside class="left-panel">
     <div class="user-card background-bg">
       <a href="#">
-        <div class="avatar mr-3 float-left"><img class="rounded-circle" src="images/avatar/4.jpg" alt="Avatar"></div><!-- /.avatar -->
+       <div class="avatar mr-3 float-left"><img class="rounded-circle" src="https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg" alt="Avatar" style="height: 50px;"></div>
         <div class="details">
           <h4 class="name">@php
           echo Session::get('admin_name')
@@ -200,7 +202,6 @@
       <div class="float-left">
         Copyright © 2018 <a href="https://demos.jeweltheme.com/hi5dash" target="_blank">hi5dash</a>
       </div>
-
       <div class="float-right">
         Developed with Love by <a href="https://jeweltheme.com" rel="nofollow">Jewel Theme</a>
       </div>

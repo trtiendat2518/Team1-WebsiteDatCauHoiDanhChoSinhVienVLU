@@ -8,6 +8,11 @@ use Illuminate\Http\Response;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Admin;
+use App\Models\Reply;
+use App\Models\Post;
+use App\Imports\UserImport;
+use App\Exports\UserExport;
+use Excel;
 use Validator;
 use Session;
 session_start();
@@ -35,15 +40,18 @@ class UserController extends Controller
 
     public function user_add(Request $request){
         $data = $request->validate([
-            'admin_name'=>'bail|required|alpha_spaces|max:100',
-            'admin_email'=>'bail|required',
+            'admin_name'=>'bail|required|alpha_spaces|max:50|min:2',
+            'admin_email'=>'bail|required|max:255',
             'admin_password'=>'bail|required|min:6|max:32',
             'admin_role'=>'required',
         ],[
             'admin_name.required'=>'Tên không được để trống',
             'admin_name.alpha_spaces'=>'Tên không được chứa ký tự số',
+            'admin_name.max'=>'Tên ít nhất có 2 ký tự',
+            'admin_name.min'=>'Tên không quá 50 ký tự',
             'admin_email.required'=>'Mail không được để trống',
             'admin_email.email'=>'Mail nhập sai định dạng',
+            'admin_email.max'=>'Email không quá 255 ký tự',
             'admin_password.required'=>'Mật khẩu không được để trống',
             'admin_password.min'=>'Mật khẩu ít nhất có 6 ký tự',
             'admin_password.max'=>'Mật khẩu không quá 32 ký tự',
@@ -99,15 +107,19 @@ class UserController extends Controller
     public function user_update(Request $request, $admin_id){
         $this->AuthLogin();
         $data = $request->validate([
-            'admin_name'=>'bail|required|alpha_spaces|max:100',
-            'admin_email'=>'bail|required',
+            'admin_name'=>'bail|required|alpha_spaces|max:50|min:2',
+            'admin_email'=>'bail|required|max:255',
             'admin_password'=>'bail|required|min:6|max:32',
             'admin_role'=>'required',
         ],[
             'admin_name.required'=>'Tên không được để trống',
             'admin_name.alpha_spaces'=>'Tên không được chứa ký tự số',
+            'admin_name.max'=>'Tên ít nhất có 2 ký tự',
+            'admin_name.min'=>'Tên không quá 50 ký tự',
             'admin_email.required'=>'Mail không được để trống',
             'admin_email.email'=>'Mail nhập sai định dạng',
+            'admin_email.max'=>'Email không quá 255 ký tự',
+            'admin_password.required'=>'Mật khẩu không được để trống',
             'admin_password.min'=>'Mật khẩu ít nhất có 6 ký tự',
             'admin_password.max'=>'Mật khẩu không quá 32 ký tự',
         ]);
@@ -134,22 +146,57 @@ class UserController extends Controller
     }
 
     public function user_active($admin_id){
-      $this->AuthLogin();
-      $admin = Admin::find($admin_id);
-      $admin->admin_status=1;
-      $admin->save();
+        $this->AuthLogin();
+        $admin = Admin::find($admin_id);
+        $admin->admin_status=1;
+        $admin->save();
 
-      Session::put('message','<div class="alert alert-warning">Đã vô hiệu hóa tài khoản!</div>');
-      return Redirect::to('danh-sach-user');
-   }
+        Session::put('message','<div class="alert alert-warning">Đã vô hiệu hóa tài khoản!</div>');
+        return Redirect::to('danh-sach-user');
+    }
 
-   public function user_unactive($admin_id){
-      $this->AuthLogin();
-      $admin = Admin::find($admin_id);
-      $admin->admin_status=0;
-      $admin->save();
+    public function user_unactive($admin_id){
+        $this->AuthLogin();
+        $admin = Admin::find($admin_id);
+        $admin->admin_status=0;
+        $admin->save();
 
-      Session::put('message','<div class="alert alert-warning">Đã kích hoạt tài khoản!</div>');
-      return Redirect::to('danh-sach-user'); 
-   }
+        Session::put('message','<div class="alert alert-warning">Đã kích hoạt tài khoản!</div>');
+        return Redirect::to('danh-sach-user'); 
+    } 
+
+    public function user_search(Request $request){
+        $this->AuthLogin();
+        //SEO
+        $meta_desc = "Tìm kiếm";
+        $meta_title = "Tìm kiếm";
+        $url_canonical = $request->url();
+        //---------------
+
+        $keywords = $request->keywords_submit;
+        $search = Admin::where('admin_name','like','%'.$keywords.'%')
+        ->orWhere('admin_email','like','%'.$keywords.'%')
+        ->orderBy('admin_id','DESC')->get();
+        return view('admin.pages.user.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+    }
+
+    public function user_import(Request $request){
+        $path = $request->file('file')->getRealPath();
+        Excel::import(new UserImport, $path);
+        return back();
+    }
+
+    public function user_export(Request $request){
+        return Excel::download(new UserExport , 'user_vlu.xlsx');
+    }
+
+    public function user_delete(Request $request, $admin_id){
+        $this->AuthLogin();
+
+        $admin = Admin::find($admin_id);
+        $reply_del = Reply::where('admin_id',$admin_id)->delete();
+        $admin->delete();
+        Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
+        return Redirect::to('danh-sach-user');
+    }
 }

@@ -9,6 +9,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Category;
 use App\Models\Post;
+use Validator;
 use Session;
 session_start();
 
@@ -59,7 +60,14 @@ class CategoryController extends Controller
 	}
 
 	public function category_add(Request $request){
-		$data = $request->all();
+		$data = $request->validate([
+            'category_name'=>'bail|required|max:50|min:5',
+            'category_status'=>'bail|required',
+        ],[
+            'category_name.required'=>'Tên danh mục không được để trống',
+            'category_name.min'=>'Tên danh mục ít nhất có 5 ký tự',
+            'category_name.max'=>'Tên danh mục không quá 50 ký tự',
+        ]);
 		$category = new Category();
 
 		$category->category_name = $data['category_name'];
@@ -96,7 +104,13 @@ class CategoryController extends Controller
 
 	public function category_update(Request $request, $category_id){
 		$this->AuthLogin();
-		$data = $request->all();
+		$data = $request->validate([
+            'category_name'=>'bail|required|max:50|min:5',
+        ],[
+            'category_name.required'=>'Tên danh mục không được để trống',
+            'category_name.min'=>'Tên danh mục ít nhất có 5 ký tự',
+            'category_name.max'=>'Tên danh mục không quá 50 ký tự',
+        ]);
 		$category = Category::find($category_id);
 
 		$category->category_name = $data['category_name'];

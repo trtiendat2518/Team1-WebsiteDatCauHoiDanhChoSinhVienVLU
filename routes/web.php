@@ -150,4 +150,15 @@ Route::get('/cap-nhat-user/{admin_id}', 'Admin\UserController@user_openupdate');
 Route::post('/cap-nhat-user-thanh-cong/{admin_id}', 'Admin\UserController@user_update');
 Route::get('/an-user/{admin_id}', 'Admin\UserController@user_unactive');
 Route::get('/hien-thi-user/{admin_id}', 'Admin\UserController@user_active');
+Route::post('/tim-kiem-user','Admin\UserController@user_search');
+Route::post('/import-user', 'Admin\UserController@user_import');
+Route::post('/export-user', 'Admin\UserController@user_export');
+Route::get('/xoa-user/{admin_id}', 'Admin\UserController@user_delete');
+
+//ADMIN INFO
+Route::get('/doi-mat-khau-moi', 'Admin\AdminController@admin_openchangepass');
+Route::post('/doi-mat-khau-moi-thanh-cong/{admin_id}', 'Admin\AdminController@admin_changepass');
+Route::get('/thong-tin-tai-khoan-admin/{admin_id}', 'Admin\AdminInfoController@admininfo_profile');
+Route::post('/them-thong-tin-admin/{admin_id}', 'Admin\AdminInfoController@admininfo_create');
+
 
