@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB;
 use App\Models\Admin;
 use App\Http\Requests;
 use App\Rules\Captcha;
@@ -59,10 +59,18 @@ class AdminController extends Controller
         $admin_password = md5($data['admin_password']);
         $check_login_admin = Admin::where('admin_email', $admin_email)
         ->where('admin_password', $admin_password)->first();
+
         if($check_login_admin){
-            Session::put('admin_name', $check_login_admin->admin_name);
-            Session::put('admin_id', $check_login_admin->admin_id);
-            return Redirect::to('/admin-home');
+            $check_status = Admin::where('admin_email', $admin_email)->where('admin_status',0)->first();
+            if($check_status){
+                Session::put('admin_name', $check_login_admin->admin_name);
+                Session::put('admin_id', $check_login_admin->admin_id);
+                Session::put('admin_role', $check_login_admin->admin_role);
+                return Redirect::to('/admin-home');
+            }else{
+                Session::put('message', '<div class="alert alert-danger">Tài khoản đã bị vô hiệu hóa!</div>');
+                return Redirect::to('/admin-login');
+            }
         }else{
             Session::put('message', '<div class="alert alert-danger">Email hoặc mật khẩu không đúng!</div>');
             return Redirect::to('/admin-login');

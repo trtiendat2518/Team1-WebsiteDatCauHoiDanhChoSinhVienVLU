@@ -24,7 +24,11 @@
 						</div>
 						<div class="form-group">
 							<label>Loại câu hỏi</label>
+							@if ($post_detail->category_id==0)
+								<input type="text" name="post_name" class="form-control" value="Loại câu hỏi đã bị xóa" disabled>
+							@else
 							<input type="text" name="post_name" class="form-control" value="{{$post_detail->category->category_name}}" disabled>
+							@endif
 						</div>
 						<div class="form-group">
 							<label>Nội dung</label>
