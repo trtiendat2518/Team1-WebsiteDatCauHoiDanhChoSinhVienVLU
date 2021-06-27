@@ -9,7 +9,7 @@ class Admin extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'admin_info_id', 'admin_name', 'admin_email', 'admin_password', 'admin_role', 'admin_status'
+        'admin_info_id', 'admin_avatar', 'admin_name', 'admin_email', 'admin_password', 'admin_role', 'admin_status'
     ];
     protected $primaryKey = 'admin_id';
     protected $table = 'tbl_admin';
