@@ -155,4 +155,8 @@ Route::post('/import-user', 'Admin\UserController@user_import');
 Route::post('/export-user', 'Admin\UserController@user_export');
 Route::get('/xoa-user/{admin_id}', 'Admin\UserController@user_delete');
 
+//ADMIN INFO
+Route::get('/doi-mat-khau-moi', 'Admin\AdminController@admin_openchangepass');
+Route::post('/doi-mat-khau-moi-thanh-cong/{admin_id}', 'Admin\AdminController@admin_changepass');
+
 
