@@ -134,3 +134,5 @@ Route::get('/xoa-danh-muc/{category_id}', 'Admin\CategoryController@category_del
 //ADMIN ALUMNUS
 Route::get('/danh-sach-sinh-vien', 'Admin\StudentController@student_list');
 Route::post('/tim-kiem-sinh-vien','Admin\StudentController@student_search');
+Route::get('/them-moi-sinh-vien', 'Admin\StudentController@student_open');
+Route::post('/them-moi-sinh-vien-thanh-cong', 'Admin\StudentController@student_add');
