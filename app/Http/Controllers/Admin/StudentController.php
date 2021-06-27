@@ -95,4 +95,54 @@ class StudentController extends Controller
 			}
 		}
 	}
+
+	public function student_openupdate(Request $request,$student_id){
+		$this->AuthLogin();
+		$student_update = Student::find($student_id);
+		$studentId = Student::where('student_id',$student_id)->get();
+		foreach ($studentId as $key => $value){
+         //SEO
+			$meta_desc = "Cập nhật sinh viên ".$value->student_name;
+			$meta_title = "Cập nhật sinh viên ".$value->student_name;
+			$url_canonical = $request->url();
+         //---------------
+		}
+		return view('admin.pages.alumnus.update')->with(compact('student_update','meta_desc','meta_title','url_canonical'));
+	}
+
+	public function student_update(Request $request, $student_id){
+		$this->AuthLogin();
+		$data = $request->validate([
+			'student_name'=>'bail|required|alpha_spaces|max:100',
+			'student_email'=>'bail|required',
+			'student_password'=>'bail|required|min:6|max:32',
+		],[
+			'student_name.required'=>'Tên không được để trống',
+			'student_name.alpha_spaces'=>'Tên không được chứa ký tự số',
+			'student_email.required'=>'Mail không được để trống',
+			'student_email.email'=>'Mail nhập sai định dạng',
+			'student_password.required'=>'Mật khẩu không được để trống',
+			'student_password.min'=>'Mật khẩu ít nhất có 6 ký tự',
+			'student_password.max'=>'Mật khẩu không quá 32 ký tự',
+		]);
+		$student = Student::find($student_id);
+
+		$student->student_name = $data['student_name'];
+		$student->student_email = $data['student_email'];
+		$student->student_password = md5($data['student_password']);
+
+		if ($data['student_name']=='' || $data['student_email']=='' || $data['student_password']=='') {
+			Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+			return Redirect::to('cap-nhat-sinh-vien/'.$student_id);
+		}else{
+			$result = $student->save();
+			if($result){
+				Session::put('message','<div class="alert alert-success">Cập nhật sinh viên thành công!</div>');
+				return Redirect::to('danh-sach-sinh-vien');
+			}else{
+				Session::put('message','<div class="alert alert-danger">Không thể cập nhật sinh viên!</div>');
+				return Redirect::to('cap-nhat-sinh-vien/'.$student_id);
+			} 
+		}
+	}
 }
