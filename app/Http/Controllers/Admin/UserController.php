@@ -70,4 +70,15 @@ class UserController extends Controller
             }
         }
     }
+
+    public function user_list(Request $request){
+        $this->AuthLogin();
+        //SEO
+        $meta_desc = "Danh sách User";
+        $meta_title = "Danh sách User";
+        $url_canonical = $request->url();
+        //---------------
+        $list = Admin::orderBy('admin_id', 'DESC')->paginate(5);
+        return view('admin.pages.user.list')->with(compact('meta_desc','meta_title','url_canonical','list'));
+    }
 }

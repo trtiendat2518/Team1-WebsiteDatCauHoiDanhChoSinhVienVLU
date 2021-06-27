@@ -145,4 +145,5 @@ Route::post('/export-sinh-vien', 'Admin\StudentController@student_export');
 //ADMIN USER
 Route::get('/them-moi-user', 'Admin\UserController@user_open');
 Route::post('/them-moi-user-thanh-cong', 'Admin\UserController@user_add');
+Route::get('/danh-sach-user', 'Admin\UserController@user_list');
 
