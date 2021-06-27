@@ -142,3 +142,7 @@ Route::get('/xoa-sinh-vien/{student_id}', 'Admin\StudentController@student_delet
 Route::post('/import-sinh-vien', 'Admin\StudentController@student_import');
 Route::post('/export-sinh-vien', 'Admin\StudentController@student_export');
 
+//ADMIN USER
+Route::get('/them-moi-user', 'Admin\UserController@user_open');
+Route::post('/them-moi-user-thanh-cong', 'Admin\UserController@user_add');
+
