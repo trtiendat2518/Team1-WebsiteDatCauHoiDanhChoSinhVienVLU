@@ -9,6 +9,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Course;
 use App\Models\StudentInfo;
+use App\Models\Admin;
 use Validator;
 use Session;
 session_start();
@@ -31,7 +32,9 @@ class CourseController extends Controller
       $meta_title = "Thêm mới khóa học";
       $url_canonical = $request->url();
       //---------------
-      return view('admin.pages.course.add')->with(compact('meta_desc','meta_title','url_canonical'));
+      
+      $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+      return view('admin.pages.course.add')->with(compact('meta_desc','meta_title','url_canonical','info'));
    }
 
    public function course_add(Request $request){
@@ -65,6 +68,7 @@ class CourseController extends Controller
 
    public function course_openupdate(Request $request,$course_id){
       $this->AuthLogin();
+      $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
       $course_update = Course::find($course_id);
       $courseId = Course::where('course_id',$course_id)->get();
       foreach ($courseId as $key => $value){
@@ -74,7 +78,7 @@ class CourseController extends Controller
          $url_canonical = $request->url();
          //---------------
       }
-      return view('admin.pages.course.update')->with(compact('course_update','meta_desc','meta_title','url_canonical'));
+      return view('admin.pages.course.update')->with(compact('course_update','meta_desc','meta_title','url_canonical','info'));
    }
 
    public function course_update(Request $request, $course_id){
@@ -125,8 +129,10 @@ public function course_list(Request $request){
    $meta_title = "Danh sách khóa học";
    $url_canonical = $request->url();
       //---------------
+   
+   $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
    $list = Course::orderBy('course_id', 'DESC')->paginate(5);
-   return view('admin.pages.course.list')->with(compact('meta_desc','meta_title','url_canonical','list'));
+   return view('admin.pages.course.list')->with(compact('meta_desc','meta_title','url_canonical','list','info'));
 }
 
 public function course_active($course_id){
@@ -156,9 +162,10 @@ public function course_search(Request $request){
    $url_canonical = $request->url();
       //---------------
 
+   $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
    $keywords = $request->keywords_submit;
    $search = Course::where('course_name','like','%'.$keywords.'%')
    ->orderBy('course_id','DESC')->get();
-   return view('admin.pages.course.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+   return view('admin.pages.course.search')->with(compact('meta_desc','meta_title','url_canonical','search','info'));
 }
 }

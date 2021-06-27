@@ -1,6 +1,6 @@
 @extends('admin.admin_layout')
 @section('admin_content')
-@foreach ($admin as $key => $info)
+@foreach ($admin as $key => $infoma)
 <div class="row">
 	<div class="col-md-12">
 		@php
@@ -17,21 +17,26 @@
 			<div class="content-head">
 				<h4 class="content-title">Cập nhật hồ sơ tài khoản</h4>
 			</div>
-			@if($info->admin_info_id)
+			@if($infoma->admin_info_id)
 			<div class="content-details show">
 				<div class="card company-form">
 					<div class="card-body card-block">
-						<form action="{{url('/sua-thong-tin-admin/')}}" method="post" enctype="multipart/form-data">
+						<form action="{{url('/sua-thong-tin-admin/'.$infoma->admin_info_id)}}" method="post" enctype="multipart/form-data">
+							@csrf
 							<div class="form-group basic-card text-center">
 								<div class="row">
 									<div class="col-lg-12 col-md-12">
 										<div class="social-box">
 											<a href="javascript:void(0)">
-												<div class="avatar"><img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/4/43/Copa_Am%C3%A9rica_2021.png" alt="Avatar"></div>
+												<div class="avatar"><img class="rounded-circle" src="{{asset('public/admin/images/avatar/'.$infoma->admin_avatar)}}" alt="Avatar"></div>
 											</div><!-- /.details -->
 										</a>
 									</div><!-- /.social-box -->
 								</div>
+							</div>
+							<div class="form-group">
+								<label class=" form-control-label">Ảnh đại diện mới</label>
+								<input type="file" name="admin_info_avatar" class="form-control">
 							</div>
 							<div class="row">
 								<div class="col-6">
@@ -61,15 +66,20 @@
 								<div class="col-6">
 									<div class="form-group">
 										<label for="city" class=" form-control-label">Ngày sinh</label>
-										<input type="date" name="admin_info_date" class="form-control">
+										<input type="date" name="admin_info_date" class="form-control" value="{{$infoma->info->admin_info_date}}">
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label for="postal-code" class=" form-control-label">Giới tính</label>
 										<select class="form-control select2" name="admin_info_gender">
-											<option value="0">Nam</option>
+											@if($infoma->info->admin_info_gender==0)
+											<option value="0" selected>Nam</option>
 											<option value="1">Nữ</option>
+											@else
+											<option value="0">Nam</option>
+											<option value="1" selected>Nữ</option>
+											@endif\
 										</select>
 									</div>
 								</div>
@@ -78,14 +88,14 @@
 								<div class="col-6">
 									<div class="form-group">
 										<label for="city" class=" form-control-label">Số điện thoại</label>
-										<input type="number" name="admin_info_phone" class="form-control">
+										<input type="number" name="admin_info_phone" class="form-control" value="{{$infoma->info->admin_info_phone}}">
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label for="postal-code" class=" form-control-label">Khoa</label>
-										<select class="form-control select2">
-											<option value="0">---Chọn khoa---</option>
+										<select class="form-control select2" name="faculty_id">
+											<option value="{{$infoma->info->faculty_id}}">{{$infoma->info->faculty->faculty_name}}</option>
 											@foreach ($faculty as $key => $fct)
 											<option value="{{$fct->faculty_id}}">{{$fct->faculty_name}}</option>
 											@endforeach
@@ -95,7 +105,7 @@
 							</div>
 							<div class="form-group">
 								<label class=" form-control-label">Địa chỉ</label>
-								<textarea class="form-control" name="admin_info_address" style="resize: none;" rows="3"></textarea>
+								<textarea class="form-control" name="admin_info_address" style="resize: none;" rows="3">{{$infoma->info->admin_info_address}}</textarea>
 							</div>
 							<button type="submit" name="adding_profile" class="btn btn-primary btn-block">Cập nhật</button>
 						</form>

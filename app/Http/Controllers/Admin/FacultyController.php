@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Faculty;
 use App\Models\Specialized;
 use App\Models\StudentInfo;
+use App\Models\Admin;
 use Validator;
 use Session;
 session_start();
@@ -32,7 +33,8 @@ class FacultyController extends Controller
         $meta_title = "Thêm mới khoa";
         $url_canonical = $request->url();
         //---------------
-        return view('admin.pages.faculty.add')->with(compact('meta_desc','meta_title','url_canonical'));
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+        return view('admin.pages.faculty.add')->with(compact('meta_desc','meta_title','url_canonical','info'));
     }
 
     public function faculty_add(Request $request){
@@ -71,6 +73,7 @@ class FacultyController extends Controller
 
     public function faculty_openupdate(Request $request, $faculty_id){
         $this->AuthLogin();
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $faculty_update = Faculty::find($faculty_id);
         $facultyId = Faculty::where('faculty_id',$faculty_id)->get();
         foreach ($facultyId as $key => $value){
@@ -80,7 +83,7 @@ class FacultyController extends Controller
             $url_canonical = $request->url();
             //---------------
         }
-        return view('admin.pages.faculty.update')->with(compact('faculty_update','meta_desc','meta_title','url_canonical'));
+        return view('admin.pages.faculty.update')->with(compact('faculty_update','meta_desc','meta_title','url_canonical','info'));
     }
 
     public function faculty_update(Request $request, $faculty_id)
@@ -141,8 +144,9 @@ class FacultyController extends Controller
         $meta_title = "Danh sách khoa";
         $url_canonical = $request->url();
         //---------------
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $list = Faculty::orderBy('faculty_id', 'DESC')->paginate(5);
-        return view('admin.pages.faculty.list')->with(compact('list','meta_desc','meta_title','url_canonical'));
+        return view('admin.pages.faculty.list')->with(compact('list','meta_desc','meta_title','url_canonical','info'));
     }
 
     public function faculty_active($faculty_id){
@@ -187,9 +191,10 @@ class FacultyController extends Controller
         $url_canonical = $request->url();
         //---------------
         
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $keywords = $request->keywords_submit;
         $search = Faculty::where('faculty_name','like','%'.$keywords.'%')
         ->orderBy('faculty_id','DESC')->get();
-        return view('admin.pages.faculty.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+        return view('admin.pages.faculty.search')->with(compact('meta_desc','meta_title','url_canonical','search','info'));
     }
 }

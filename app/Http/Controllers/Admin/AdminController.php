@@ -30,7 +30,9 @@ class AdminController extends Controller
         $meta_title = "Dashboard";
         $url_canonical = $request->url();
         //---------------
-        return view('admin.pages.admin_home')->with(compact('meta_desc','meta_title','url_canonical'));
+        
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+        return view('admin.pages.admin_home')->with(compact('meta_desc','meta_title','url_canonical','info'));
     }
 
     public function index_login(){
@@ -93,7 +95,9 @@ class AdminController extends Controller
         $meta_title = "Thay đổi mật khẩu";
         $url_canonical = $request->url();
         //---------------
-        return view('admin.pages.profile.changepass')->with(compact('meta_desc','meta_title','url_canonical'));;
+        
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+        return view('admin.pages.profile.changepass')->with(compact('meta_desc','meta_title','url_canonical','info'));;
     }
 
     public function admin_changepass(Request $request, $admin_id){

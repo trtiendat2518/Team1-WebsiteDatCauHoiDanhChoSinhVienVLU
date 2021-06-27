@@ -35,7 +35,8 @@ class UserController extends Controller
         $meta_title = "Thêm mới User";
         $url_canonical = $request->url();
       //---------------
-        return view('admin.pages.user.add')->with(compact('meta_desc','meta_title','url_canonical'));
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+        return view('admin.pages.user.add')->with(compact('meta_desc','meta_title','url_canonical','info'));
     }
 
     public function user_add(Request $request){
@@ -86,12 +87,14 @@ class UserController extends Controller
         $meta_title = "Danh sách User";
         $url_canonical = $request->url();
         //---------------
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $list = Admin::orderBy('admin_id', 'DESC')->paginate(5);
-        return view('admin.pages.user.list')->with(compact('meta_desc','meta_title','url_canonical','list'));
+        return view('admin.pages.user.list')->with(compact('meta_desc','meta_title','url_canonical','list','info'));
     }
 
     public function user_openupdate(Request $request,$admin_id){
         $this->AuthLogin();
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $admin_update = Admin::find($admin_id);
         $adminId = Admin::where('admin_id',$admin_id)->get();
         foreach ($adminId as $key => $value){
@@ -101,7 +104,7 @@ class UserController extends Controller
             $url_canonical = $request->url();
          //---------------
         }
-        return view('admin.pages.user.update')->with(compact('admin_update','meta_desc','meta_title','url_canonical'));
+        return view('admin.pages.user.update')->with(compact('admin_update','meta_desc','meta_title','url_canonical','info'));
     }
 
     public function user_update(Request $request, $admin_id){
@@ -172,12 +175,12 @@ class UserController extends Controller
         $meta_title = "Tìm kiếm";
         $url_canonical = $request->url();
         //---------------
-
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $keywords = $request->keywords_submit;
         $search = Admin::where('admin_name','like','%'.$keywords.'%')
         ->orWhere('admin_email','like','%'.$keywords.'%')
         ->orderBy('admin_id','DESC')->get();
-        return view('admin.pages.user.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+        return view('admin.pages.user.search')->with(compact('meta_desc','meta_title','url_canonical','search','info'));
     }
 
     public function user_import(Request $request){
