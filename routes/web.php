@@ -150,4 +150,5 @@ Route::get('/cap-nhat-user/{admin_id}', 'Admin\UserController@user_openupdate');
 Route::post('/cap-nhat-user-thanh-cong/{admin_id}', 'Admin\UserController@user_update');
 Route::get('/an-user/{admin_id}', 'Admin\UserController@user_unactive');
 Route::get('/hien-thi-user/{admin_id}', 'Admin\UserController@user_active');
+Route::post('/tim-kiem-user','Admin\UserController@user_search');
 

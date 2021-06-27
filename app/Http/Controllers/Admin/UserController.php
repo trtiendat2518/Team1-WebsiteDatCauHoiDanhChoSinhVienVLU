@@ -134,22 +134,37 @@ class UserController extends Controller
     }
 
     public function user_active($admin_id){
-      $this->AuthLogin();
-      $admin = Admin::find($admin_id);
-      $admin->admin_status=1;
-      $admin->save();
+        $this->AuthLogin();
+        $admin = Admin::find($admin_id);
+        $admin->admin_status=1;
+        $admin->save();
 
-      Session::put('message','<div class="alert alert-warning">Đã vô hiệu hóa tài khoản!</div>');
-      return Redirect::to('danh-sach-user');
-   }
+        Session::put('message','<div class="alert alert-warning">Đã vô hiệu hóa tài khoản!</div>');
+        return Redirect::to('danh-sach-user');
+    }
 
-   public function user_unactive($admin_id){
-      $this->AuthLogin();
-      $admin = Admin::find($admin_id);
-      $admin->admin_status=0;
-      $admin->save();
+    public function user_unactive($admin_id){
+        $this->AuthLogin();
+        $admin = Admin::find($admin_id);
+        $admin->admin_status=0;
+        $admin->save();
 
-      Session::put('message','<div class="alert alert-warning">Đã kích hoạt tài khoản!</div>');
-      return Redirect::to('danh-sach-user'); 
-   }
+        Session::put('message','<div class="alert alert-warning">Đã kích hoạt tài khoản!</div>');
+        return Redirect::to('danh-sach-user'); 
+    } 
+
+    public function user_search(Request $request){
+        $this->AuthLogin();
+        //SEO
+        $meta_desc = "Tìm kiếm";
+        $meta_title = "Tìm kiếm";
+        $url_canonical = $request->url();
+        //---------------
+
+        $keywords = $request->keywords_submit;
+        $search = Admin::where('admin_name','like','%'.$keywords.'%')
+        ->orWhere('admin_email','like','%'.$keywords.'%')
+        ->orderBy('admin_id','DESC')->get();
+        return view('admin.pages.user.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+    }
 }
