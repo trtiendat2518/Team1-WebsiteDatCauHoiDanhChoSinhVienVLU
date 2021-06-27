@@ -130,3 +130,6 @@ Route::post('/cap-nhat-danh-muc-thanh-cong/{category_id}', 'CategoryController@c
 Route::get('/an-danh-muc/{category_id}', 'CategoryController@category_unactive');
 Route::get('/hien-thi-danh-muc/{category_id}', 'CategoryController@category_active');
 Route::get('/xoa-danh-muc/{category_id}', 'CategoryController@category_delete');
+
+//ADMIN ALUMNUS
+Route::get('/danh-sach-sinh-vien', 'StudentController@student_list');
