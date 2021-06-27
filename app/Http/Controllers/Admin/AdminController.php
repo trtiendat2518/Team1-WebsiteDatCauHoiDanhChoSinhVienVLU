@@ -63,6 +63,7 @@ class AdminController extends Controller
         if($check_login_admin){
             $check_status = Admin::where('admin_email', $admin_email)->where('admin_status',0)->first();
             if($check_status){
+                Session::put('admin_email',$check_login_admin->admin_email);
                 Session::put('admin_name', $check_login_admin->admin_name);
                 Session::put('admin_id', $check_login_admin->admin_id);
                 Session::put('admin_role', $check_login_admin->admin_role);
@@ -81,7 +82,8 @@ class AdminController extends Controller
         Session::put('admin_id', null);
         Session::put('admin_name', null);
         Session::put('admin_email', null);
-        Session::put('admin_password', null);     
+        Session::put('admin_password', null);
+        Session::put('admin_role', null);     
         return Redirect::to('/admin-login');
     }
 
