@@ -49,6 +49,7 @@
 						<th style="text-align: center">Họ và tên</th>
 						<th style="text-align: center">Email</th>
 						<th style="text-align: center">Vai trò</th>
+						<th style="text-align: center">Trạng thái</th>
 						<th style="width:30px;"></th>
 					</tr>
 				</thead>
@@ -66,6 +67,25 @@
 								@else
 								Trợ lý
 								@endif
+							</span>
+						</td>
+						<td style="text-align: center">
+							<span  class="text-ellipsis">
+								@php
+								if ($listadmin->admin_status==0){
+									@endphp
+									<a href="{{URL::to('/hien-thi-user/'.$listadmin->admin_id)}}">
+										<span class="fa-eye-styling fa fa-eye"></span>
+									</a>
+									@php
+								}else{
+									@endphp
+									<a href="{{URL::to('/an-user/'.$listadmin->admin_id)}}">
+										<span class="fa-eye-styling fa fa-eye-slash"></span>
+									</a>
+									@php
+								}
+								@endphp
 							</span>
 						</td>
 						<td style="text-align: center">

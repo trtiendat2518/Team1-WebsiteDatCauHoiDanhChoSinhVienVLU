@@ -132,4 +132,24 @@ class UserController extends Controller
             } 
         }
     }
+
+    public function user_active($admin_id){
+      $this->AuthLogin();
+      $admin = Admin::find($admin_id);
+      $admin->admin_status=1;
+      $admin->save();
+
+      Session::put('message','<div class="alert alert-warning">Đã vô hiệu hóa tài khoản!</div>');
+      return Redirect::to('danh-sach-user');
+   }
+
+   public function user_unactive($admin_id){
+      $this->AuthLogin();
+      $admin = Admin::find($admin_id);
+      $admin->admin_status=0;
+      $admin->save();
+
+      Session::put('message','<div class="alert alert-warning">Đã kích hoạt tài khoản!</div>');
+      return Redirect::to('danh-sach-user'); 
+   }
 }
