@@ -40,7 +40,11 @@
 					@foreach ($search as $key => $listpost) 
 					<tr>
 						<td style="text-align: center; color: black">{{$listpost->post_title}}</td>
+						@if ($listpost->category_id==0)
+						<td style="text-align: center; color: black">Danh mục đã bị xóa</td>
+						@else
 						<td style="text-align: center; color: black">{{$listpost->category->category_name}}</td>
+						@endif
 						<td style="text-align: center; color: black">
 							@if ($listpost->post_reply=='')
 							Chưa trả lời

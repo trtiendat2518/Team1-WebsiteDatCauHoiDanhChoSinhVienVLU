@@ -65,8 +65,6 @@
           </a>
           <ul class="dropdown-menu">
             <li><a href="#"><i class="fa fa-user"></i> Thông tin cá nhân</a></li>
-            <li><a href="#"><i class="fa fa-envelope"></i> Inbox</a></li>
-            <li><a href="#"><i class="fa fa-gears"></i> Account Setting</a></li>
             <li><a href="{{url('/logout-admin')}}"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
           </ul>
         </div>
@@ -119,7 +117,7 @@
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-graduation-cap"></i> <span class="menu-title">Quản lý khóa học</span>
+              <i class="fa fa-puzzle-piece"></i> <span class="menu-title">Quản lý khóa học</span>
             </a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="{{url('/them-moi-nam-hoc')}}">Thêm mới khóa học</a>
@@ -150,6 +148,16 @@
             </a>
           </li>
 
+          <li class="nav-item header"><span class="menu-title">Tài khoản</span></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-graduation-cap"></i> <span class="menu-title">Quản lý sinh viên</span>
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{{url('/them-moi-sinh-vien')}}">Thêm mới sinh viên</a>
+              <a class="dropdown-item" href="{{url('/danh-sach-sinh-vien')}}">Danh sách sinh viên</a>
+            </div>
+          </li>
         </ul>
       </nav>
     </aside><!-- /.left-panel -->
