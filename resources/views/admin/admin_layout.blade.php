@@ -65,7 +65,7 @@
           @endphp</h4>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="#"><i class="fa fa-user"></i> Thông tin cá nhân</a></li>
+          <li><a href="{{url('/thong-tin-tai-khoan-admin/'.Session::get('admin_id'))}}"><i class="fa fa-user"></i> Thông tin cá nhân</a></li>
           <li><a href="{{url('/doi-mat-khau-moi')}}"><i class="fa fa-unlock-alt"></i> Đổi mật khẩu</a></li>
           <li><a href="{{url('/logout-admin')}}"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
         </ul>
