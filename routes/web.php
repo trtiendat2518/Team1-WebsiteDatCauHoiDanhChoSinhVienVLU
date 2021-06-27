@@ -134,3 +134,20 @@ Route::get('/xoa-danh-muc/{category_id}', 'Admin\CategoryController@category_del
 //ADMIN ALUMNUS
 Route::get('/danh-sach-sinh-vien', 'Admin\StudentController@student_list');
 Route::post('/tim-kiem-sinh-vien','Admin\StudentController@student_search');
+Route::get('/them-moi-sinh-vien', 'Admin\StudentController@student_open');
+Route::post('/them-moi-sinh-vien-thanh-cong', 'Admin\StudentController@student_add');
+Route::get('/cap-nhat-sinh-vien/{student_id}', 'Admin\StudentController@student_openupdate');
+Route::post('/cap-nhat-sinh-vien-thanh-cong/{student_id}', 'Admin\StudentController@student_update');
+Route::get('/xoa-sinh-vien/{student_id}', 'Admin\StudentController@student_delete');
+Route::post('/import-sinh-vien', 'Admin\StudentController@student_import');
+Route::post('/export-sinh-vien', 'Admin\StudentController@student_export');
+
+//ADMIN USER
+Route::get('/them-moi-user', 'Admin\UserController@user_open');
+Route::post('/them-moi-user-thanh-cong', 'Admin\UserController@user_add');
+Route::get('/danh-sach-user', 'Admin\UserController@user_list');
+Route::get('/cap-nhat-user/{admin_id}', 'Admin\UserController@user_openupdate');
+Route::post('/cap-nhat-user-thanh-cong/{admin_id}', 'Admin\UserController@user_update');
+Route::get('/an-user/{admin_id}', 'Admin\UserController@user_unactive');
+Route::get('/hien-thi-user/{admin_id}', 'Admin\UserController@user_active');
+
