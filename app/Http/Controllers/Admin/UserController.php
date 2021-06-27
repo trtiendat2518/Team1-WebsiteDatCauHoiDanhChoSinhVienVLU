@@ -40,15 +40,18 @@ class UserController extends Controller
 
     public function user_add(Request $request){
         $data = $request->validate([
-            'admin_name'=>'bail|required|alpha_spaces|max:100',
-            'admin_email'=>'bail|required',
+            'admin_name'=>'bail|required|alpha_spaces|max:50|min:2',
+            'admin_email'=>'bail|required|max:255',
             'admin_password'=>'bail|required|min:6|max:32',
             'admin_role'=>'required',
         ],[
             'admin_name.required'=>'Tên không được để trống',
             'admin_name.alpha_spaces'=>'Tên không được chứa ký tự số',
+            'admin_name.max'=>'Tên ít nhất có 2 ký tự',
+            'admin_name.min'=>'Tên không quá 50 ký tự',
             'admin_email.required'=>'Mail không được để trống',
             'admin_email.email'=>'Mail nhập sai định dạng',
+            'admin_email.max'=>'Email không quá 255 ký tự',
             'admin_password.required'=>'Mật khẩu không được để trống',
             'admin_password.min'=>'Mật khẩu ít nhất có 6 ký tự',
             'admin_password.max'=>'Mật khẩu không quá 32 ký tự',
@@ -104,15 +107,19 @@ class UserController extends Controller
     public function user_update(Request $request, $admin_id){
         $this->AuthLogin();
         $data = $request->validate([
-            'admin_name'=>'bail|required|alpha_spaces|max:100',
-            'admin_email'=>'bail|required',
+            'admin_name'=>'bail|required|alpha_spaces|max:50|min:2',
+            'admin_email'=>'bail|required|max:255',
             'admin_password'=>'bail|required|min:6|max:32',
             'admin_role'=>'required',
         ],[
             'admin_name.required'=>'Tên không được để trống',
             'admin_name.alpha_spaces'=>'Tên không được chứa ký tự số',
+            'admin_name.max'=>'Tên ít nhất có 2 ký tự',
+            'admin_name.min'=>'Tên không quá 50 ký tự',
             'admin_email.required'=>'Mail không được để trống',
             'admin_email.email'=>'Mail nhập sai định dạng',
+            'admin_email.max'=>'Email không quá 255 ký tự',
+            'admin_password.required'=>'Mật khẩu không được để trống',
             'admin_password.min'=>'Mật khẩu ít nhất có 6 ký tự',
             'admin_password.max'=>'Mật khẩu không quá 32 ký tự',
         ]);
