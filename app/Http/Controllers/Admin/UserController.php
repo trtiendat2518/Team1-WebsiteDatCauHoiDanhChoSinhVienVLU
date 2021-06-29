@@ -35,20 +35,24 @@ class UserController extends Controller
         $meta_title = "Thêm mới User";
         $url_canonical = $request->url();
       //---------------
-        return view('admin.pages.user.add')->with(compact('meta_desc','meta_title','url_canonical'));
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+        return view('admin.pages.user.add')->with(compact('meta_desc','meta_title','url_canonical','info'));
     }
 
     public function user_add(Request $request){
         $data = $request->validate([
-            'admin_name'=>'bail|required|alpha_spaces|max:100',
-            'admin_email'=>'bail|required',
+            'admin_name'=>'bail|required|alpha_spaces|max:50|min:2',
+            'admin_email'=>'bail|required|max:255',
             'admin_password'=>'bail|required|min:6|max:32',
             'admin_role'=>'required',
         ],[
             'admin_name.required'=>'Tên không được để trống',
             'admin_name.alpha_spaces'=>'Tên không được chứa ký tự số',
+            'admin_name.max'=>'Tên ít nhất có 2 ký tự',
+            'admin_name.min'=>'Tên không quá 50 ký tự',
             'admin_email.required'=>'Mail không được để trống',
             'admin_email.email'=>'Mail nhập sai định dạng',
+            'admin_email.max'=>'Email không quá 255 ký tự',
             'admin_password.required'=>'Mật khẩu không được để trống',
             'admin_password.min'=>'Mật khẩu ít nhất có 6 ký tự',
             'admin_password.max'=>'Mật khẩu không quá 32 ký tự',
@@ -83,12 +87,14 @@ class UserController extends Controller
         $meta_title = "Danh sách User";
         $url_canonical = $request->url();
         //---------------
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $list = Admin::orderBy('admin_id', 'DESC')->paginate(5);
-        return view('admin.pages.user.list')->with(compact('meta_desc','meta_title','url_canonical','list'));
+        return view('admin.pages.user.list')->with(compact('meta_desc','meta_title','url_canonical','list','info'));
     }
 
     public function user_openupdate(Request $request,$admin_id){
         $this->AuthLogin();
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $admin_update = Admin::find($admin_id);
         $adminId = Admin::where('admin_id',$admin_id)->get();
         foreach ($adminId as $key => $value){
@@ -98,21 +104,25 @@ class UserController extends Controller
             $url_canonical = $request->url();
          //---------------
         }
-        return view('admin.pages.user.update')->with(compact('admin_update','meta_desc','meta_title','url_canonical'));
+        return view('admin.pages.user.update')->with(compact('admin_update','meta_desc','meta_title','url_canonical','info'));
     }
 
     public function user_update(Request $request, $admin_id){
         $this->AuthLogin();
         $data = $request->validate([
-            'admin_name'=>'bail|required|alpha_spaces|max:100',
-            'admin_email'=>'bail|required',
+            'admin_name'=>'bail|required|alpha_spaces|max:50|min:2',
+            'admin_email'=>'bail|required|max:255',
             'admin_password'=>'bail|required|min:6|max:32',
             'admin_role'=>'required',
         ],[
             'admin_name.required'=>'Tên không được để trống',
             'admin_name.alpha_spaces'=>'Tên không được chứa ký tự số',
+            'admin_name.max'=>'Tên ít nhất có 2 ký tự',
+            'admin_name.min'=>'Tên không quá 50 ký tự',
             'admin_email.required'=>'Mail không được để trống',
             'admin_email.email'=>'Mail nhập sai định dạng',
+            'admin_email.max'=>'Email không quá 255 ký tự',
+            'admin_password.required'=>'Mật khẩu không được để trống',
             'admin_password.min'=>'Mật khẩu ít nhất có 6 ký tự',
             'admin_password.max'=>'Mật khẩu không quá 32 ký tự',
         ]);
@@ -165,12 +175,12 @@ class UserController extends Controller
         $meta_title = "Tìm kiếm";
         $url_canonical = $request->url();
         //---------------
-
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $keywords = $request->keywords_submit;
         $search = Admin::where('admin_name','like','%'.$keywords.'%')
         ->orWhere('admin_email','like','%'.$keywords.'%')
         ->orderBy('admin_id','DESC')->get();
-        return view('admin.pages.user.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+        return view('admin.pages.user.search')->with(compact('meta_desc','meta_title','url_canonical','search','info'));
     }
 
     public function user_import(Request $request){

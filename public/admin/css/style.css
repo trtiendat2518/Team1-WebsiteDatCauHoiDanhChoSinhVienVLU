@@ -55,6 +55,10 @@ a:focus {
   outline: 0;
   text-decoration: none; }
 
+.table-responsive.table-admin{
+  margin-top: 30px;
+}
+
 p {
   color: #6a7074;
   font-family: "Open Sans", sans-serif;

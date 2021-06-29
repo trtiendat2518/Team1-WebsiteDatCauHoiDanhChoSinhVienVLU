@@ -15,6 +15,7 @@ use App\Models\Post;
 use App\Models\Reply;
 use App\Imports\StudentImport;
 use App\Exports\StudentExport;
+use App\Models\Admin;
 use Excel;
 use Validator;
 use Session;
@@ -38,8 +39,9 @@ class StudentController extends Controller
 		$meta_title = "Danh sách sinh viên";
 		$url_canonical = $request->url();
      	//---------------
+     	$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
 		$list = Student::orderBy('student_id', 'DESC')->paginate(5);
-		return view('admin.pages.alumnus.list')->with(compact('meta_desc','meta_title','url_canonical','list'));
+		return view('admin.pages.alumnus.list')->with(compact('meta_desc','meta_title','url_canonical','list','info'));
 	}
 
 	public function student_search(Request $request){
@@ -49,12 +51,12 @@ class StudentController extends Controller
 		$meta_title = "Tìm kiếm";
 		$url_canonical = $request->url();
       	//---------------
-
+		$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
 		$keywords = $request->keywords_submit;
 		$search = Student::where('student_name','like','%'.$keywords.'%')
 		->orWhere('student_email','like','%'.$keywords.'%')
 		->orderBy('student_id','DESC')->get();
-		return view('admin.pages.alumnus.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+		return view('admin.pages.alumnus.search')->with(compact('meta_desc','meta_title','url_canonical','search','info'));
 	}
 
 	public function student_open(Request $request){
@@ -64,7 +66,8 @@ class StudentController extends Controller
 		$meta_title = "Thêm mới sinh viên";
 		$url_canonical = $request->url();
       //---------------
-		return view('admin.pages.alumnus.add')->with(compact('meta_desc','meta_title','url_canonical'));
+      	$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+		return view('admin.pages.alumnus.add')->with(compact('meta_desc','meta_title','url_canonical','info'));
 	}
 
 	public function student_add(Request $request){
@@ -106,6 +109,7 @@ class StudentController extends Controller
 
 	public function student_openupdate(Request $request,$student_id){
 		$this->AuthLogin();
+		$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
 		$student_update = Student::find($student_id);
 		$studentId = Student::where('student_id',$student_id)->get();
 		foreach ($studentId as $key => $value){
@@ -115,7 +119,7 @@ class StudentController extends Controller
 			$url_canonical = $request->url();
          //---------------
 		}
-		return view('admin.pages.alumnus.update')->with(compact('student_update','meta_desc','meta_title','url_canonical'));
+		return view('admin.pages.alumnus.update')->with(compact('student_update','meta_desc','meta_title','url_canonical','info'));
 	}
 
 	public function student_update(Request $request, $student_id){
