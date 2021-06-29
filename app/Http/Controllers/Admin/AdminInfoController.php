@@ -114,7 +114,7 @@ class AdminInfoController extends Controller
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.',$get_name_image));
             $new_image = $name_image.rand(0, 9999).time().'.'.$get_image->getClientOriginalExtension();
-            $get_image->move('public/admin/img/avatar', $new_image);
+            $get_image->move('public/admin/images/avatar', $new_image);
             $info->admin_info_avatar = $new_image;
             $info->save();
 

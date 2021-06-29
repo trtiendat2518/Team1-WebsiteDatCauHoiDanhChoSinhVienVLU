@@ -11,6 +11,7 @@ use App\Models\Faculty;
 use App\Models\Specialized;
 use App\Models\StudentInfo;
 use App\Models\Admin;
+use App\Models\AdminInfo;
 use Validator;
 use Session;
 session_start();
@@ -129,6 +130,11 @@ class FacultyController extends Controller
                 $value->faculty_id=0;
                 $value->specialized_id=0;
                 $value->save();
+            }
+            $infoAdmin = AdminInfo::where('faculty_id', $faculty_id)->get();
+            foreach ($infoAdmin as $key => $val) {
+                $val->faculty_id=0;
+                $val->save();
             }
             Specialized::where('faculty_id', $faculty_id)->delete();
         }
