@@ -15,24 +15,57 @@ use App\Models\Comment;
 use App\Models\Nofication;
 use App\Models\Reply;
 use App\Models\Student;
+use App\Models\Statistic;
 use Session;
 session_start();
 
 class PostController extends Controller
 {
-	//STUDENT
-    public function post_new(Request $request){
+	public function post_new(Request $request){
 		$data = $request->all();
 		$post = new Post();
 		$post->student_id = Session::get('student_id');
-    	$post->post_title = $data['post_title'];
-    	$post->category_id = $data['category_id'];
+		$post->post_title = $data['post_title'];
+		$post->category_id = $data['category_id'];
 		$post->post_content = $data['post_content'];
 		date_default_timezone_set('Asia/Ho_Chi_Minh');
 		$post->created_at = now();
 		$post->save();
-    }
-    public function post_delete(Request $request){
+
+		$time = date('Y-m-d', strtotime($post->created_at));
+		$sumlike = Post::where('created_at','like','%'.$time.'%')->sum('post_like');
+
+		$statistic = Statistic::where('statistic_date', $time)->first();
+		if($statistic){
+			$statisticGet = Statistic::where('statistic_date', $time)->get();
+			foreach($statisticGet as $key => $val) {
+				$val->statistic_post+=1;
+				$val->statistic_like = $sumlike;
+				$val->save();
+			}
+		}else{
+			$newS = new Statistic();
+			$newS->statistic_date = $time;
+			$newS->statistic_post = 1;
+			$newS->statistic_like = $sumlike;
+			$newS->save();
+		}
+	}
+
+	public function post_delete(Request $request){
+		date_default_timezone_set('Asia/Ho_Chi_Minh');
+		$now = now();
+		$time = date('Y-m-d', strtotime($now));
+		$sumlike = Post::where('created_at','like','%'.$time.'%')->sum('post_like');
+		$likepost = Post::where('post_id',$request->input('id'))->sum('post_like');
+		$statistic = Statistic::where('statistic_date', $time)->get();
+		if($statistic){
+			foreach($statistic as $key => $val) {
+				$del_sta = $val->statistic_post-=1;
+				$val->statistic_like = $sumlike-$likepost;
+				$val->save();
+			}
+		}
 		$pst = Post::find($request->input('id'));
 		$like_del = Like::where('post_id',$request->input('id'))->delete();
 		$cmt_del = Comment::where('post_id',$request->input('id'))->delete();
@@ -44,8 +77,8 @@ class PostController extends Controller
 	public function post_detail($post_id, Request $request){
 		//SEO
 		$meta_desc = "Chi tiết câu hỏi";
-        $meta_title = "Chi tiết câu hỏi";
-        $url_canonical = $request->url();
+		$meta_title = "Chi tiết câu hỏi";
+		$url_canonical = $request->url();
 		//---------------
 		
 		$post_detail = Post::where('post_id',$post_id)->with('category','student','likes','comments')->get();

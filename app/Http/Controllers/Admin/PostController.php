@@ -18,6 +18,7 @@ use App\Models\Student;
 use App\Imports\PostImport;
 use App\Exports\PostExport;
 use App\Models\Admin;
+use App\Models\Statistic;
 use Excel;
 use Validator;
 use Session;
@@ -76,7 +77,19 @@ class PostController extends Controller
 
 	public function postadmin_delete(Request $request, $post_id){
 		$this->AuthLogin();
-      	
+      	date_default_timezone_set('Asia/Ho_Chi_Minh');
+		$now = now();
+		$time = date('Y-m-d', strtotime($now));
+		$sumlike = Post::where('created_at','like','%'.$time.'%')->sum('post_like');
+		$likepost = Post::where('post_id',$post_id)->sum('post_like');
+		$statistic = Statistic::where('statistic_date', $time)->get();
+		if($statistic){
+			foreach($statistic as $key => $val) {
+				$del_sta = $val->statistic_post-=1;
+				$val->statistic_like = $sumlike-$likepost;
+				$val->save();
+			}
+		}
       	$pst = Post::find($post_id);
 		$like_del = Like::where('post_id',$post_id)->delete();
 		$cmt_del = Comment::where('post_id',$post_id)->delete();
