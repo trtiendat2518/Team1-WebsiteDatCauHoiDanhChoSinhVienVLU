@@ -85,7 +85,8 @@ class AdminController extends Controller
         Session::put('admin_name', null);
         Session::put('admin_email', null);
         Session::put('admin_password', null);
-        Session::put('admin_role', null);     
+        Session::put('admin_role', null);
+        Session::put('admin_info', null);     
         return Redirect::to('/admin-login');
     }
 

@@ -24,7 +24,7 @@ class AdminInfoController extends Controller
         //--------------------------
         $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $admin = Admin::find($admin_id)->limit(1)->get();
-        foreach ($admin as $key => $value) {
+        foreach ($info as $key => $value) {
             if($value->admin_info_id){
                 if($value->info->faculty_id==0){
                     $faculty = Faculty::where('faculty_status',0)->orderBy('faculty_name','ASC')->get();
@@ -37,6 +37,7 @@ class AdminInfoController extends Controller
                 $faculty = Faculty::where('faculty_status',0)->orderBy('faculty_name','ASC')->get();
             }
         }
+
         return view('admin.pages.profile.add')->with(compact('meta_desc','meta_title','url_canonical','admin','faculty','info'));
     }
 
@@ -80,6 +81,7 @@ class AdminInfoController extends Controller
             $admin->save(); 
 
             Session::put('message','<div class="alert alert-success">Cập nhật hồ sơ thành công!</div>');
+            Session::put('admin_info', null);
             return Redirect::to('/thong-tin-tai-khoan-admin'.'/'.Session::get('admin_id'));
         }else{
             Session::put('message','<div class="alert alert-danger">Hình ảnh không được để trống!</div>');

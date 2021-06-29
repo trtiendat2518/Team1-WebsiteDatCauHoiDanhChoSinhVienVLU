@@ -1,6 +1,6 @@
 @extends('admin.admin_layout')
 @section('admin_content')
-@foreach ($admin as $key => $infoma)
+@foreach ($info as $key => $infoma)
 <div class="row">
 	<div class="col-md-12">
 		@php
