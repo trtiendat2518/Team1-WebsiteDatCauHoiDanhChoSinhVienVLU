@@ -353,6 +353,8 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
+
+    var colorDanger = "#FF1744";
     Morris.Donut({
       element: 'donut',
       resize: true,
@@ -369,11 +371,11 @@
       '#006064'
       ],
       data: [
-      {label:"Dato Ej.1", value:123},
-      {label:"Dato Ej.2", value:369},
-      {label:"Dato Ej.3", value:246},
-      {label:"Dato Ej.4", value:159},
-      {label:"Dato Ej.5", value:357}
+      {label:"Đang Online", value:<?php echo $visitor_count ?>, color:colorDanger},
+      {label:"Tổng tháng trước", value:<?php echo $visitor_lastmonth_count ?>},
+      {label:"Tổng tháng này", value:<?php echo $visitor_thismonth_count ?>},
+      {label:"Tổng cả năm", value:<?php echo $visitor_oneyear_count ?>},
+      {label:"Tổng truy cập", value:<?php echo $visitor_total_count ?>}
       ]
     });
   });

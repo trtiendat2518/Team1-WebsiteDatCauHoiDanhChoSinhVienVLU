@@ -145,7 +145,7 @@
 		</div>
 	</div>
 	<div class="col-md-6">
-		<h4 style="text-align: center; font-weight: bold; margin-top: 60px;">Số lượng truy cập</h4>
+		<h4 style="text-align: center; font-weight: bold; margin-top: 60px;">Thống kê truy cập</h4>
 		<div id="donut" class="morris-donut-inverse"></div>
 	</div>
 	

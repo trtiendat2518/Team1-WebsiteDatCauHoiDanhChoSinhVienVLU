@@ -10,8 +10,10 @@ use App\Models\Post;
 use App\Models\Course;
 use App\Models\Faculty;
 use App\Models\Specialized;
+use App\Models\Visitor;
 use App\Http\Requests;
 use App\Rules\Captcha;
+use Carbon\Carbon;
 use Session;
 use Validator;
 use Illuminate\Support\Facades\Redirect;
@@ -35,14 +37,38 @@ class AdminController extends Controller
         $meta_title = "Dashboard";
         $url_canonical = $request->url();
         //---------------
-        
+        $user_ip_address = $request->ip();
+        $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+        $visitor_count = $visitor_current->count();
+        if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
+
+        $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+        $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+        $visitor_lastmonth_count = $visitor_lastmonth->count();
+        $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+        $visitor_thismonth_count = $visitor_thismonth->count();
+        $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+        $visitor_oneyear_count = $visitor_oneyear->count();
+        $visitors = Visitor::all();
+        $visitor_total_count = $visitors->count();
+
         $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $student = Student::orderBy('student_id')->limit(1)->get();
         $post = Post::orderBy('post_id')->limit(1)->get();
         $faculty = Faculty::orderBy('faculty_id')->limit(1)->get();
         $specialized = Specialized::orderby('specialized_id')->limit(1)->get();
         $course = Course::orderBy('course_id')->limit(1)->get();
-        return view('admin.pages.admin_home')->with(compact('meta_desc','meta_title','url_canonical','info','student','post','faculty','specialized','course'));
+        return view('admin.pages.admin_home')->with(compact('meta_desc','meta_title','url_canonical','info','student','post','faculty','specialized','course','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
     }
 
     public function index_login(){
