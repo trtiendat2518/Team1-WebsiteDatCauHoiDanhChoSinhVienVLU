@@ -16,6 +16,7 @@ use App\Models\Nofication;
 use App\Models\Reply;
 use App\Models\Student;
 use App\Models\Statistic;
+use Carbon\Carbon;
 use Session;
 session_start();
 
@@ -53,17 +54,18 @@ class PostController extends Controller
 	}
 
 	public function post_delete(Request $request){
-		date_default_timezone_set('Asia/Ho_Chi_Minh');
-		$now = now();
-		$time = date('Y-m-d', strtotime($now));
-		$sumlike = Post::where('created_at','like','%'.$time.'%')->sum('post_like');
-		$likepost = Post::where('post_id',$request->input('id'))->sum('post_like');
-		$statistic = Statistic::where('statistic_date', $time)->get();
-		if($statistic){
-			foreach($statistic as $key => $val) {
-				$del_sta = $val->statistic_post-=1;
-				$val->statistic_like = $sumlike-$likepost;
-				$val->save();
+		$postG = Post::where('post_id',$request->input('id'))->get();
+		foreach($postG as $key => $val2){
+			$date = date('Y-m-d', strtotime($val2->created_at));
+			$sumlike = Post::where('created_at','like','%'.$date.'%')->sum('post_like');
+			$likepost = Post::where('post_id',$request->input('id'))->sum('post_like');
+			$statistic = Statistic::where('statistic_date', $date)->get();
+			if($statistic){
+				foreach($statistic as $key => $val){
+					$del_sta = $val->statistic_post-=1;
+					$val->statistic_like = $sumlike-$likepost;
+					$val->save();
+				}
 			}
 		}
 		$pst = Post::find($request->input('id'));
