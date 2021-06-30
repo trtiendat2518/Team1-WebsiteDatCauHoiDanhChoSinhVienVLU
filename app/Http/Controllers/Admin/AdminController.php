@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Student;
+use App\Models\Post;
 use App\Http\Requests;
 use App\Rules\Captcha;
 use Session;
@@ -32,7 +34,9 @@ class AdminController extends Controller
         //---------------
         
         $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-        return view('admin.pages.admin_home')->with(compact('meta_desc','meta_title','url_canonical','info'));
+        $student = Student::orderBy('student_id')->limit(1)->get();
+        $post = Post::orderBy('post_id')->limit(1)->get();
+        return view('admin.pages.admin_home')->with(compact('meta_desc','meta_title','url_canonical','info','student','post'));
     }
 
     public function index_login(){

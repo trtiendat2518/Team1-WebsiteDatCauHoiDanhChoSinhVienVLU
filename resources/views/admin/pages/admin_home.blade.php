@@ -31,7 +31,13 @@
 								<div class="col-4">
 									<div class="form-group">
 										<label for="todate" class="form-control-label">Lọc Ngày/Tháng/Năm</label>
-										<input type="date" class="form-control">
+										<select class="dashboard-filter form-control">
+											<option>---Chọn---</option>
+											<option value="ngay">7 ngày qua</option>
+											<option value="thangtruoc">Tháng này</option>
+											<option value="thangnay">Tháng trước</option>
+											<option value="nam">1 năm</option>
+										</select>
 									</div>
 								</div>
 							</div>
@@ -44,7 +50,7 @@
 			</div>
 		</div>
 		<div class="col-md-12">
-			<div id="chart_statistic_post" style="height: 300px;"></div>
+			<div id="chart_statistic_post" style="height: 300px; background: #212529;"></div>
 		</div>
 	</form>
 </div>
@@ -56,7 +62,9 @@
 					<div class="statistic-box m-0">
 						<h4 class="statistic-title float-left">User</h4>
 						<div class="statistic-details">
-							<span class="count float-left">5</span><!-- /.count -->
+							@foreach ($info as $val)
+							<span class="count float-left">{{$val->count()}}</span>
+							@endforeach
 							<span class="statistic-icon color-success float-right"><i class="pe-7s-users"></i></span><!-- /.statistic-icon -->
 						</div><!-- /.statistic-details -->
 					</div><!-- /.statistic-box -->
@@ -66,8 +74,10 @@
 					<div class="statistic-box m-0">
 						<h4 class="statistic-title float-left">Sinh viên</h4>
 						<div class="statistic-details">
-							<span class="count float-left">1300</span><!-- /.count -->
-							<span class="statistic-icon color-primary float-right"><i class="pe-7s-ticket"></i></span><!-- /.statistic-icon -->
+							@foreach ($student as $val2)
+							<span class="count float-left">{{$val2->count()}}</span>
+							@endforeach
+							<span class="statistic-icon color-primary float-right"><i class="pe-7s-study"></i></span><!-- /.statistic-icon -->
 						</div><!-- /.statistic-details -->
 					</div><!-- /.statistic-box -->
 				</div>
@@ -76,7 +86,9 @@
 					<div class="statistic-box m-0">
 						<h4 class="statistic-title float-left">Câu hỏi</h4>
 						<div class="statistic-details">
-							<span class="count float-left">1225</span><!-- /.count -->
+							@foreach ($post as $val3)
+							<span class="count float-left">{{$val3->count()}}</span>
+							@endforeach
 							<span class="statistic-icon color-purple float-right"><i class="pe-7s-albums"></i></span><!-- /.statistic-icon -->
 						</div><!-- /.statistic-details -->
 					</div><!-- /.statistic-box -->

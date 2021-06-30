@@ -164,5 +164,7 @@ Route::post('/sua-thong-tin-admin/{admin_info_id}', 'Admin\AdminInfoController@a
 
 //ADMIN STATISTIC
 Route::post('/loc-ngay-thang', 'Admin\StatisticController@statistic_filter');
+Route::post('/loc-theo-ngay-thang-nam', 'Admin\StatisticController@statistic_select');
+Route::post('/hien-thi-thong-ke', 'Admin\StatisticController@statistic_show');
 
 

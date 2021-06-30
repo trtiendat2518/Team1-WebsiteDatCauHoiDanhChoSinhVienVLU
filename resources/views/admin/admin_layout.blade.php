@@ -277,7 +277,6 @@
   $(function() {
     $( "#datepicker" ).datepicker({
       dateFormat: "yy-mm-dd",
-      duration: "slow"
     });
     $( "#datepicker2" ).datepicker({
       dateFormat: "yy-mm-dd",
@@ -287,9 +286,11 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    var chart = new Morris.Line({
+    chartshow();
+
+    var chart = new Morris.Bar({
       element: 'chart_statistic_post',
-      lineColors: ['red', 'blue'],
+      barColors: ['#7e57c2', '#e22424'],
       pointStrokeColors:['black'],
       fillOpacity: 0.3,
       hideHover: 'auto',
@@ -305,6 +306,8 @@
       var to_date = $('#datepicker2').val();
       if(from_date=='' || to_date==''){
         swal("Vui lòng không để trống!", "", "warning");
+      }else if(from_date>to_date){
+        swal("Ngày không hợp lệ!", "", "error");
       }else{
         $.ajax({
           url:"{{url('/loc-ngay-thang')}}",
@@ -317,6 +320,33 @@
         });
       }
     });
+
+    $('.dashboard-filter').change(function(){
+      var dashboard_value = $(this).val();
+      var _token = $('input[name="_token"]').val();
+      $.ajax({
+        url:"{{url('/loc-theo-ngay-thang-nam')}}",
+        method: "POST",
+        dataType: "JSON",
+        data: {dashboard_value:dashboard_value, _token:_token},
+        success:function(data){
+          chart.setData(data);
+        }
+      });
+    });
+
+    function chartshow(){
+      var _token = $('input[name="_token"]').val();
+      $.ajax({
+        url:"{{url('/hien-thi-thong-ke')}}",
+          method: "POST",
+          dataType: "JSON",
+          data: {_token:_token},
+          success:function(data){
+            chart.setData(data);
+          }
+      });
+    }
   });
 </script>
 
