@@ -92,10 +92,15 @@ class StudentController extends Controller
 		$student->student_password = md5($data['student_password']);
 		$student->student_status = 'Verified';
 
+		$check_email = Student::where('student_email','=',$student->student_email)->first();
+
 		if ($data['student_name']=='' || $data['student_email']=='' || $data['student_password']=='') {
 			Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
 			return Redirect::to('them-moi-sinh-vien');
-		}else{
+		}else if($check_email){
+            Session::put('message','<div class="alert alert-danger">Email sinh viên đã tồn tại!</div>');
+            return Redirect::to('them-moi-sinh-vien');
+        }else{
 			$result = $student->save(); 
 			if($result){
 				Session::put('message','<div class="alert alert-success">Thêm mới sinh viên thành công!</div>');
@@ -142,11 +147,15 @@ class StudentController extends Controller
 		$student->student_name = $data['student_name'];
 		$student->student_email = $data['student_email'];
 		$student->student_password = md5($data['student_password']);
+		$check_email = Student::where('student_email','=',$student->student_email)->first();
 
 		if ($data['student_name']=='' || $data['student_email']=='' || $data['student_password']=='') {
 			Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
 			return Redirect::to('cap-nhat-sinh-vien/'.$student_id);
-		}else{
+		}else if($check_email){
+            Session::put('message','<div class="alert alert-danger">Email sinh viên đã tồn tại!</div>');
+            return Redirect::to('cap-nhat-sinh-vien/'.$student_id);
+        }else{
 			$result = $student->save();
 			if($result){
 				Session::put('message','<div class="alert alert-success">Cập nhật sinh viên thành công!</div>');

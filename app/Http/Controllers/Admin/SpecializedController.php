@@ -56,8 +56,13 @@ class SpecializedController extends Controller
         $specialized->faculty_id = $data['faculty_id'];
         $specialized->specialized_status = $data['specialized_status'];
 
+        $check_name = Specialized::where('specialized_name','=',$specialized->specialized_name)->first();
+
         if ($data['specialized_name']=='' || $data['faculty_id']==0) {
             Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+            return Redirect::to('them-moi-chuyen-nganh');
+        }else if($check_name){
+            Session::put('message','<div class="alert alert-danger">Tên chuyên ngành đã tồn tại!</div>');
             return Redirect::to('them-moi-chuyen-nganh');
         }else{
             $result = $specialized->save(); 
@@ -104,9 +109,13 @@ class SpecializedController extends Controller
 
         $specialized->specialized_name = $data['specialized_name'];
         $specialized->faculty_id = $data['faculty_id'];
+        $check_name = Specialized::where('specialized_name','=',$specialized->specialized_name)->first();
 
         if ($data['specialized_name']=='' || $data['faculty_id']==0) {
             Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+            return Redirect::to('cap-nhat-chuyen-nganh/'.$specialized_id);
+        }else if($check_name){
+            Session::put('message','<div class="alert alert-danger">Tên chuyên ngành đã tồn tại!</div>');
             return Redirect::to('cap-nhat-chuyen-nganh/'.$specialized_id);
         }else{
             $result = $specialized->save();

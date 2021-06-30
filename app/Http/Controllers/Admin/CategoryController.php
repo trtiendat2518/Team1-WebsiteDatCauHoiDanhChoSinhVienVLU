@@ -59,27 +59,33 @@ class CategoryController extends Controller
 		$meta_title = "Thêm mới danh mục";
 		$url_canonical = $request->url();
       	//---------------
-      	
-      	$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+
+		$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
 		return view('admin.pages.category.add')->with(compact('meta_desc','meta_title','url_canonical','info'));
 	}
 
 	public function category_add(Request $request){
 		$data = $request->validate([
-            'category_name'=>'bail|required|max:50|min:5',
-            'category_status'=>'bail|required',
-        ],[
-            'category_name.required'=>'Tên danh mục không được để trống',
-            'category_name.min'=>'Tên danh mục ít nhất có 5 ký tự',
-            'category_name.max'=>'Tên danh mục không quá 50 ký tự',
-        ]);
+			'category_name'=>'bail|required|max:50|min:5',
+			'category_status'=>'bail|required',
+		],[
+			'category_name.required'=>'Tên danh mục không được để trống',
+			'category_name.min'=>'Tên danh mục ít nhất có 5 ký tự',
+			'category_name.max'=>'Tên danh mục không quá 50 ký tự',
+		]);
 		$category = new Category();
 
 		$category->category_name = $data['category_name'];
 		$category->category_status = $data['category_status'];
 
+		$check_name = Category::where('category_name','=',$category->category_name)->first();
+
+
 		if ($data['category_name']=='') {
 			Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+			return Redirect::to('them-moi-danh-muc');
+		}else if($check_name){
+			Session::put('message','<div class="alert alert-danger">Tên danh mục đã tồn tại!</div>');
 			return Redirect::to('them-moi-danh-muc');
 		}else{
 			$result = $category->save(); 
@@ -111,18 +117,23 @@ class CategoryController extends Controller
 	public function category_update(Request $request, $category_id){
 		$this->AuthLogin();
 		$data = $request->validate([
-            'category_name'=>'bail|required|max:50|min:5',
-        ],[
-            'category_name.required'=>'Tên danh mục không được để trống',
-            'category_name.min'=>'Tên danh mục ít nhất có 5 ký tự',
-            'category_name.max'=>'Tên danh mục không quá 50 ký tự',
-        ]);
+			'category_name'=>'bail|required|max:50|min:5',
+		],[
+			'category_name.required'=>'Tên danh mục không được để trống',
+			'category_name.min'=>'Tên danh mục ít nhất có 5 ký tự',
+			'category_name.max'=>'Tên danh mục không quá 50 ký tự',
+		]);
 		$category = Category::find($category_id);
 
 		$category->category_name = $data['category_name'];
 
+		$check_name = Category::where('category_name','=',$category->category_name)->first();
+
 		if ($data['category_name']=='') {
 			Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+			return Redirect::to('cap-nhat-danh-muc/'.$category_id);
+		}else if($check_name){
+			Session::put('message','<div class="alert alert-danger">Tên danh mục đã tồn tại!</div>');
 			return Redirect::to('cap-nhat-danh-muc/'.$category_id);
 		}else{
 			$result = $category->save();

@@ -64,9 +64,13 @@ class UserController extends Controller
         $admin->admin_email = $data['admin_email'];
         $admin->admin_password = md5($data['admin_password']);
         $admin->admin_role = $data['admin_role'];
+        $check_email = Admin::where('admin_email','=',$admin->admin_email)->first();
 
         if ($data['admin_name']=='' || $data['admin_email']=='' || $data['admin_password']=='') {
             Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+            return Redirect::to('them-moi-user');
+        }else if($check_email){
+            Session::put('message','<div class="alert alert-danger">Email user đã tồn tại!</div>');
             return Redirect::to('them-moi-user');
         }else{
             $result = $admin->save(); 
@@ -132,9 +136,13 @@ class UserController extends Controller
         $admin->admin_email = $data['admin_email'];
         $admin->admin_password = md5($data['admin_password']);
         $admin->admin_role = $data['admin_role'];
+        $check_email = Admin::where('admin_email','=',$admin->admin_email)->first();
 
         if ($data['admin_name']=='' || $data['admin_email']=='' || $data['admin_password']=='') {
             Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+            return Redirect::to('cap-nhat-user/'.$admin_id);
+        }else if($check_email){
+            Session::put('message','<div class="alert alert-danger">Email user đã tồn tại!</div>');
             return Redirect::to('cap-nhat-user/'.$admin_id);
         }else{
             $result = $admin->save();

@@ -55,56 +55,99 @@
 	</form>
 </div>
 <div class="row">
-	<div class="col-12">
-		<div class="section-content">
-			<div class="row">
-				<div class="col-lg-3 col-md-6">
-					<div class="statistic-box m-0">
-						<h4 class="statistic-title float-left">User</h4>
-						<div class="statistic-details">
-							@foreach ($info as $val)
-							<span class="count float-left">{{$val->count()}}</span>
-							@endforeach
-							<span class="statistic-icon color-success float-right"><i class="pe-7s-users"></i></span><!-- /.statistic-icon -->
-						</div><!-- /.statistic-details -->
-					</div><!-- /.statistic-box -->
-				</div>
+	<div class="col-md-6">
+		<div class="col-md-12">
+			<div class="section-content">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="statistic-box m-0">
+							<h4 class="statistic-title float-left">User</h4>
+							<div class="statistic-details">
+								@foreach ($info as $val)
+								<span class="count float-left">{{$val->count()}}</span>
+								@endforeach
+								<span class="statistic-icon color-success float-right"><i class="pe-7s-users"></i></span><!-- /.statistic-icon -->
+							</div><!-- /.statistic-details -->
+						</div><!-- /.statistic-box -->
+					</div>
 
-				<div class="col-lg-3 col-md-6">
-					<div class="statistic-box m-0">
-						<h4 class="statistic-title float-left">Sinh viên</h4>
-						<div class="statistic-details">
-							@foreach ($student as $val2)
-							<span class="count float-left">{{$val2->count()}}</span>
-							@endforeach
-							<span class="statistic-icon color-primary float-right"><i class="pe-7s-study"></i></span><!-- /.statistic-icon -->
-						</div><!-- /.statistic-details -->
-					</div><!-- /.statistic-box -->
+					<div class="col-md-6">
+						<div class="statistic-box m-0">
+							<h4 class="statistic-title float-left">Sinh viên</h4>
+							<div class="statistic-details">
+								@foreach ($student as $val2)
+								<span class="count float-left">{{$val2->count()}}</span>
+								@endforeach
+								<span class="statistic-icon color-primary float-right"><i class="pe-7s-study"></i></span><!-- /.statistic-icon -->
+							</div><!-- /.statistic-details -->
+						</div><!-- /.statistic-box -->
+					</div>
 				</div>
+			</div><!-- /.section-content -->
+		</div>
+		<div class="col-md-12">
+			<div class="section-content">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="statistic-box m-0">
+							<h4 class="statistic-title float-left">Câu hỏi</h4>
+							<div class="statistic-details">
+								@foreach ($post as $val3)
+								<span class="count float-left">{{$val3->count()}}</span>
+								@endforeach
+								<span class="statistic-icon color-purple float-right"><i class="pe-7s-albums"></i></span><!-- /.statistic-icon -->
+							</div><!-- /.statistic-details -->
+						</div><!-- /.statistic-box -->
+					</div>
 
-				<div class="col-lg-3 col-md-6">
-					<div class="statistic-box m-0">
-						<h4 class="statistic-title float-left">Câu hỏi</h4>
-						<div class="statistic-details">
-							@foreach ($post as $val3)
-							<span class="count float-left">{{$val3->count()}}</span>
-							@endforeach
-							<span class="statistic-icon color-purple float-right"><i class="pe-7s-albums"></i></span><!-- /.statistic-icon -->
-						</div><!-- /.statistic-details -->
-					</div><!-- /.statistic-box -->
+					<div class="col-md-6">
+						<div class="statistic-box m-0">
+							<h4 class="statistic-title float-left">Khóa học</h4>
+							<div class="statistic-details">
+								@foreach ($course as $val4)
+								<span class="count float-left">{{$val4->count()}}</span>
+								@endforeach
+								<span class="statistic-icon color-danger float-right"><i class="pe-7s-medal"></i></span><!-- /.statistic-icon -->
+							</div><!-- /.statistic-details -->
+						</div><!-- /.statistic-box -->
+					</div>
 				</div>
+			</div><!-- /.section-content -->
+		</div>
+		<div class="col-md-12">
+			<div class="section-content">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="statistic-box m-0">
+							<h4 class="statistic-title float-left">Khoa</h4>
+							<div class="statistic-details">
+								@foreach ($faculty as $va5)
+								<span class="count float-left">{{$va5->count()}}</span>
+								@endforeach
+								<span class="statistic-icon color-success float-right"><i class="pe-7s-portfolio"></i></span><!-- /.statistic-icon -->
+							</div><!-- /.statistic-details -->
+						</div><!-- /.statistic-box -->
+					</div>
 
-				<div class="col-lg-3 col-md-6">
-					<div class="statistic-box m-0">
-						<h4 class="statistic-title float-left">Lượt truy cập</h4>
-						<div class="statistic-details">
-							<span class="count float-left">1095</span><!-- /.count -->
-							<span class="statistic-icon color-danger float-right"><i class="pe-7s-credit"></i></span><!-- /.statistic-icon -->
-						</div><!-- /.statistic-details -->
-					</div><!-- /.statistic-box -->
+					<div class="col-md-6">
+						<div class="statistic-box m-0">
+							<h4 class="statistic-title float-left">Chuyên ngành</h4>
+							<div class="statistic-details">
+								@foreach ($specialized as $val6)
+								<span class="count float-left">{{$val6->count()}}</span>
+								@endforeach
+								<span class="statistic-icon color-primary float-right"><i class="pe-7s-plugin"></i></span><!-- /.statistic-icon -->
+							</div><!-- /.statistic-details -->
+						</div><!-- /.statistic-box -->
+					</div>
 				</div>
-			</div>
-		</div><!-- /.section-content -->
+			</div><!-- /.section-content -->
+		</div>
 	</div>
+	<div class="col-md-6">
+		<h4 style="text-align: center; font-weight: bold; margin-top: 60px;">Số lượng truy cập</h4>
+		<div id="donut" class="morris-donut-inverse"></div>
+	</div>
+	
 </div>
 @endsection

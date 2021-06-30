@@ -57,8 +57,14 @@ class FacultyController extends Controller
         $faculty->faculty_code = $data['faculty_code'];
         $faculty->faculty_status = $data['faculty_status'];
 
+        $check_name = Faculty::where('faculty_name','=',$faculty->faculty_name)->first();
+        $check_code = Faculty::where('faculty_code','=',$faculty->faculty_code)->first();
+
         if ($data['faculty_name']=='' || $data['faculty_code']=='') {
             Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+            return Redirect::to('them-moi-khoa');
+        }else if($check_name || $check_code){
+            Session::put('message','<div class="alert alert-danger">Tên khoa hoặc mã khoa đã tồn tại!</div>');
             return Redirect::to('them-moi-khoa');
         }else{
             $result = $faculty->save(); 
@@ -105,9 +111,14 @@ class FacultyController extends Controller
 
         $faculty->faculty_name = $data['faculty_name'];
         $faculty->faculty_code = $data['faculty_code'];
+        $check_name = Faculty::where('faculty_name','=',$faculty->faculty_name)->first();
+        $check_code = Faculty::where('faculty_code','=',$faculty->faculty_code)->first();
 
         if ($data['faculty_name']=='' || $data['faculty_code']=='') {
             Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+            return Redirect::to('cap-nhat-khoa/'.$faculty_id);
+        }else if($check_name || $check_code){
+            Session::put('message','<div class="alert alert-danger">Tên khoa hoặc mã khoa đã tồn tại!</div>');
             return Redirect::to('cap-nhat-khoa/'.$faculty_id);
         }else{
             $result = $faculty->save();

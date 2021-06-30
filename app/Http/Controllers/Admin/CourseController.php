@@ -51,8 +51,13 @@ class CourseController extends Controller
       $course->course_name = $data['course_name'];
       $course->course_status = $data['course_status'];
 
+      $check_name = Course::where('course_name','=',$course->course_name)->first();
+
       if ($data['course_name']=='') {
          Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+         return Redirect::to('them-moi-nam-hoc');
+      }else if($check_name){
+         Session::put('message','<div class="alert alert-danger">Tên khóa học đã tồn tại!</div>');
          return Redirect::to('them-moi-nam-hoc');
       }else{
          $result = $course->save(); 
@@ -93,16 +98,20 @@ class CourseController extends Controller
       $course = Course::find($course_id);
 
       $course->course_name = $data['course_name'];
+      $check_name = Course::where('course_name','=',$course->course_name)->first();
 
       if ($data['course_name']=='') {
          Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
          return Redirect::to('cap-nhat-nam-hoc/'.$course_id);
+      }else if($check_name){
+         Session::put('message','<div class="alert alert-danger">Tên khóa học đã tồn tại!</div>');
+         return Redirect::to('cap-nhat-nam-hoc/'.$course_id);
       }else{
          $result = $course->save();
          if($result){
-           Session::put('message','<div class="alert alert-success">Cập nhật khóa thành công!</div>');
-           return Redirect::to('danh-sach-nam-hoc');
-        }else{
+          Session::put('message','<div class="alert alert-success">Cập nhật khóa thành công!</div>');
+          return Redirect::to('danh-sach-nam-hoc');
+       }else{
          Session::put('message','<div class="alert alert-danger">Không thể cập nhật khóa!</div>');
          return Redirect::to('cap-nhat-nam-hoc/'.$course_id);
       } 

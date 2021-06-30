@@ -288,9 +288,9 @@
   $(document).ready(function(){
     chartshow();
 
-    var chart = new Morris.Bar({
+    var chart = new Morris.Line({
       element: 'chart_statistic_post',
-      barColors: ['#7e57c2', '#e22424'],
+      lineColors: ['#7e57c2', '#e22424'],
       pointStrokeColors:['black'],
       fillOpacity: 0.3,
       hideHover: 'auto',
@@ -339,15 +339,45 @@
       var _token = $('input[name="_token"]').val();
       $.ajax({
         url:"{{url('/hien-thi-thong-ke')}}",
-          method: "POST",
-          dataType: "JSON",
-          data: {_token:_token},
-          success:function(data){
-            chart.setData(data);
-          }
+        method: "POST",
+        dataType: "JSON",
+        data: {_token:_token},
+        success:function(data){
+          chart.setData(data);
+        }
       });
     }
   });
+</script>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    Morris.Donut({
+      element: 'donut',
+      resize: true,
+      colors: [
+      '#E0F7FA',
+      '#B2EBF2',
+      '#80DEEA',
+      '#4DD0E1',
+      '#26C6DA',
+      '#00BCD4',
+      '#00ACC1',
+      '#0097A7',
+      '#00838F',
+      '#006064'
+      ],
+      data: [
+      {label:"Dato Ej.1", value:123},
+      {label:"Dato Ej.2", value:369},
+      {label:"Dato Ej.3", value:246},
+      {label:"Dato Ej.4", value:159},
+      {label:"Dato Ej.5", value:357}
+      ]
+    });
+  });
+
 </script>
 
 </body>
