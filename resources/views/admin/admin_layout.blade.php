@@ -153,7 +153,7 @@
     @if (Session::get('admin_role')==1 || Session::get('admin_role')==2)
     <li class="nav-item header"><span class="menu-title">Câu hỏi sinh viên</span></li>
     @endif
-    @if (Session::get('admin_role')==1 || Session::get('admin_role')==2)
+    @if (Session::get('admin_role')==1)
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fa fa-list"></i> <span class="menu-title">Quản lý danh mục</span>
@@ -163,7 +163,8 @@
         <a class="dropdown-item" href="{{url('/danh-sach-danh-muc')}}">Danh sách danh mục</a>
       </div>
     </li>
-
+    @endif
+    @if(Session::get('admin_role')==1 || Session::get('admin_role')==2)
     <li class="nav-item">
       <a class="nav-link" href="{{url('danh-sach-cau-hoi')}}">
         <i class="fa fa-question-circle"></i> <span class="menu-title">Quản lý câu hỏi</span>
