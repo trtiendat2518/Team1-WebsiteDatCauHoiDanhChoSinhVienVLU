@@ -37,8 +37,9 @@
   <link rel="stylesheet" href="{{asset('public/admin/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('public/admin/css/index-01.css')}}">
   <link rel="stylesheet" href="{{asset('public/admin/css/responsive.css')}}">
-
-
+  <link rel="stylesheet" href="{{asset('public/admin/css/jquery-ui.css')}}">
+  <link rel="stylesheet" href="{{asset('public/admin/css/morris.css')}}">
+  <link rel="stylesheet" href="{{asset('public/student/css/sweetalert.css')}}">
 </head>
 
 
@@ -258,6 +259,10 @@
 
 <script src="{{asset('public/admin/js/index/index-01.js')}}"></script>
 <script src="{{asset('public/admin/js/main.js')}}"></script>
+<script src="{{asset('public/admin/js/jquery-ui.js')}}"></script>
+<script src="{{asset('public/admin/js/morris.min.js')}}"></script>
+<script src="{{asset('public/admin/js/raphael-min.js')}}"></script>
+<script src="{{asset('public/student/js/sweetalert.min.js')}}"></script>
 
 <script>
   $(function() {
@@ -265,6 +270,53 @@
 
     $('#calendar').fullCalendar();
 
+  });
+</script>
+
+<script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+      dateFormat: "yy-mm-dd",
+      duration: "slow"
+    });
+    $( "#datepicker2" ).datepicker({
+      dateFormat: "yy-mm-dd",
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var chart = new Morris.Line({
+      element: 'chart_statistic_post',
+      lineColors: ['red', 'blue'],
+      pointStrokeColors:['black'],
+      fillOpacity: 0.3,
+      hideHover: 'auto',
+      parseTime: false,
+      xkey: 'period',
+      ykeys: ['post','like'],
+      labels: ['Câu hỏi','Lượt thích']
+    });
+
+    $('#btn-dashboard-filter').click(function(){
+      var _token = $('input[name="_token"]').val();
+      var from_date = $('#datepicker').val();
+      var to_date = $('#datepicker2').val();
+      if(from_date=='' || to_date==''){
+        swal("Vui lòng không để trống!", "", "warning");
+      }else{
+        $.ajax({
+          url:"{{url('/loc-ngay-thang')}}",
+          method: "POST",
+          dataType: "JSON",
+          data: {from_date:from_date, to_date:to_date, _token:_token},
+          success:function(data){
+            chart.setData(data);
+          }
+        });
+      }
+    });
   });
 </script>
 
