@@ -752,9 +752,16 @@
 			<!-- ACTION ITEM -->
 			<div class="action-item dark header-settings-dropdown-trigger">
 				<!-- ACTION ITEM ICON -->
+				@if (Session::get('student_id'))
 				<svg class="action-item-icon icon-settings">
 					<use xlink:href="#svg-settings"></use>
 				</svg>
+				@else
+				<svg class="action-item-icon icon-login">
+					<use xlink:href="#svg-login"></use>
+				</svg>
+				@endif
+				
 				<!-- /ACTION ITEM ICON -->
 			</div>
 			<!-- /ACTION ITEM -->

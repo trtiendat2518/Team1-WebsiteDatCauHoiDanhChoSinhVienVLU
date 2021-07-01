@@ -349,14 +349,14 @@
 		<!-- /SECTION PAGER -->
 	</div>
 	<!-- /GRID COLUMN -->
-	<!-- GRID COLUMN -->
+	<!-- /GRID COLUMN -->
 	<div class="grid-column">
 		<!-- STATS BOX SLIDER -->
 		<div class="stats-box-slider">
 			<!-- STATS BOX SLIDER CONTROLS -->
 			<div class="stats-box-slider-controls">
 				<!-- STATS BOX SLIDER CONTROLS TITLE -->
-				<p class="stats-box-slider-controls-title">Stats Box</p>
+				<p class="stats-box-slider-controls-title">Thống kê</p>
 				<!-- /STATS BOX SLIDER CONTROLS TITLE -->
 
 				<!-- SLIDER CONTROLS -->
@@ -392,7 +392,7 @@
 					<!-- STATS BOX VALUE WRAP -->
 					<div class="stats-box-value-wrap">
 						<!-- STATS BOX VALUE -->
-						<p class="stats-box-value">87.365</p>
+						<p class="stats-box-value"><?php echo $mypost_count; ?></p>
 						<!-- /STATS BOX VALUE -->
 
 						<!-- STATS BOX DIFF -->
@@ -408,7 +408,7 @@
 							<!-- /STATS BOX DIFF ICON -->
 
 							<!-- STATS BOX DIFF VALUE -->
-							<p class="stats-box-diff-value">3.2%</p>
+							<p class="stats-box-diff-value">0.0%</p>
 							<!-- /STATS BOX DIFF VALUE -->
 						</div>
 						<!-- /STATS BOX DIFF -->
@@ -416,11 +416,11 @@
 					<!-- /STATS BOX VALUE WRAP -->
 
 					<!-- STATS BOX TITLE -->
-					<p class="stats-box-title">Profile Views</p>
+					<p class="stats-box-title">Tổng tất cả</p>
 					<!-- /STATS BOX TITLE -->
 
 					<!-- STATS BOX TEXT -->
-					<p class="stats-box-text">In the last month</p>
+					<p class="stats-box-text">Số lượng câu hỏi của tôi</p>
 					<!-- /STATS BOX TEXT -->
 				</div>
 				<!-- /STATS BOX -->
@@ -430,7 +430,7 @@
 					<!-- STATS BOX VALUE WRAP -->
 					<div class="stats-box-value-wrap">
 						<!-- STATS BOX VALUE -->
-						<p class="stats-box-value">294</p>
+						<p class="stats-box-value"><?php echo $mylike_count; ?></p>
 						<!-- /STATS BOX VALUE -->
 
 						<!-- STATS BOX DIFF -->
@@ -446,7 +446,7 @@
 							<!-- /STATS BOX DIFF ICON -->
 
 							<!-- STATS BOX DIFF VALUE -->
-							<p class="stats-box-diff-value">0.4%</p>
+							<p class="stats-box-diff-value">0.0%</p>
 							<!-- /STATS BOX DIFF VALUE -->
 						</div>
 						<!-- /STATS BOX DIFF -->
@@ -454,11 +454,11 @@
 					<!-- /STATS BOX VALUE WRAP -->
 
 					<!-- STATS BOX TITLE -->
-					<p class="stats-box-title">Posts Created</p>
+					<p class="stats-box-title">Tổng tất cả</p>
 					<!-- /STATS BOX TITLE -->
 
 					<!-- STATS BOX TEXT -->
-					<p class="stats-box-text">In the last month</p>
+					<p class="stats-box-text">Số lượng đã thích</p>
 					<!-- /STATS BOX TEXT -->
 				</div>
 				<!-- /STATS BOX -->
@@ -468,7 +468,7 @@
 					<!-- STATS BOX VALUE WRAP -->
 					<div class="stats-box-value-wrap">
 						<!-- STATS BOX VALUE -->
-						<p class="stats-box-value">2560</p>
+						<p class="stats-box-value"><?php echo $mycmt_count; ?></p>
 						<!-- /STATS BOX VALUE -->
 
 						<!-- STATS BOX DIFF -->
@@ -476,15 +476,15 @@
 							<!-- STATS BOX DIFF ICON -->
 							<div class="stats-box-diff-icon negative">
 								<!-- ICON MINUS SMALL -->
-								<svg class="icon-minus-small">
-									<use xlink:href="#svg-minus-small"></use>
+								<svg class="icon-plus-small">
+									<use xlink:href="#svg-plus-small"></use>
 								</svg>
 								<!-- /ICON MINUS SMALL -->
 							</div>
 							<!-- /STATS BOX DIFF ICON -->
 
 							<!-- STATS BOX DIFF VALUE -->
-							<p class="stats-box-diff-value">1.8%</p>
+							<p class="stats-box-diff-value">0.0%</p>
 							<!-- /STATS BOX DIFF VALUE -->
 						</div>
 						<!-- /STATS BOX DIFF -->
@@ -492,49 +492,11 @@
 					<!-- /STATS BOX VALUE WRAP -->
 
 					<!-- STATS BOX TITLE -->
-					<p class="stats-box-title">Reactions Received</p>
+					<p class="stats-box-title">Tổng tất cả</p>
 					<!-- /STATS BOX TITLE -->
 
 					<!-- STATS BOX TEXT -->
-					<p class="stats-box-text">In the last month</p>
-					<!-- /STATS BOX TEXT -->
-				</div>
-				<!-- /STATS BOX -->
-
-				<!-- STATS BOX -->
-				<div class="stats-box stat-comments-received">
-					<!-- STATS BOX VALUE WRAP -->
-					<div class="stats-box-value-wrap">
-						<!-- STATS BOX VALUE -->
-						<p class="stats-box-value">947</p>
-						<!-- /STATS BOX VALUE -->
-
-						<!-- STATS BOX DIFF -->
-						<div class="stats-box-diff">
-							<!-- STATS BOX DIFF ICON -->
-							<div class="stats-box-diff-icon positive">
-								<!-- ICON PLUS SMALL -->
-								<svg class="icon-plus-small">
-									<use xlink:href="#svg-plus-small"></use>
-								</svg>
-								<!-- /ICON PLUS SMALL -->
-							</div>
-							<!-- /STATS BOX DIFF ICON -->
-
-							<!-- STATS BOX DIFF VALUE -->
-							<p class="stats-box-diff-value">4.5%</p>
-							<!-- /STATS BOX DIFF VALUE -->
-						</div>
-						<!-- /STATS BOX DIFF -->
-					</div>
-					<!-- /STATS BOX VALUE WRAP -->
-
-					<!-- STATS BOX TITLE -->
-					<p class="stats-box-title">Comments Received</p>
-					<!-- /STATS BOX TITLE -->
-
-					<!-- STATS BOX TEXT -->
-					<p class="stats-box-text">In the last month</p>
+					<p class="stats-box-text">Số lượng đã bình luận</p>
 					<!-- /STATS BOX TEXT -->
 				</div>
 				<!-- /STATS BOX -->
