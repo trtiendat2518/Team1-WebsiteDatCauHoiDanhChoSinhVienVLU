@@ -34,8 +34,8 @@
 										<select class="dashboard-filter form-control">
 											<option>---Chọn---</option>
 											<option value="ngay">7 ngày qua</option>
-											<option value="thangtruoc">Tháng này</option>
-											<option value="thangnay">Tháng trước</option>
+											<option value="thangnay">Tháng này</option>
+											<option value="thangtruoc">Tháng trước</option>
 											<option value="nam">1 năm</option>
 										</select>
 									</div>
