@@ -25,9 +25,9 @@
 				</form>
 			</div>
 		</div>
-		<div class="table-responsive">
+		<div class="table-responsive table-admin">
 			<table class="table table-striped b-t b-light">
-				<thead>
+				<thead class="thead-dark">
 					<tr>
 						<th style="text-align: center">Tên danh mục</th>
 						<th style="text-align: center">Số lượng câu hỏi</th>

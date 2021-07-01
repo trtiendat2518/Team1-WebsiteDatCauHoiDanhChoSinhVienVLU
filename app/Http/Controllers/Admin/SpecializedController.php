@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Specialized;
 use App\Models\Faculty;
 use App\Models\StudentInfo;
+use App\Models\Admin;
+use App\Models\Visitor;
+use Carbon\Carbon;
+use Validator;
 use Session;
 session_start();
 
@@ -31,20 +35,60 @@ class SpecializedController extends Controller
         $meta_title = "Thêm mới chuyên ngành";
         $url_canonical = $request->url();
         //---------------
+        $user_ip_address = $request->ip();
+        $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+        $visitor_count = $visitor_current->count();
+        if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
+
+        $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+        $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+        $visitor_lastmonth_count = $visitor_lastmonth->count();
+        $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+        $visitor_thismonth_count = $visitor_thismonth->count();
+        $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+        $visitor_oneyear_count = $visitor_oneyear->count();
+        $visitors = Visitor::all();
+        $visitor_total_count = $visitors->count();
+
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $faculty = Faculty::orderBy('faculty_code','ASC')->get();
-        return view('admin.pages.specialized.add')->with(compact('faculty','meta_desc','meta_title','url_canonical'));
+        return view('admin.pages.specialized.add')->with(compact('faculty','meta_desc','meta_title','url_canonical','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
     }
 
     public function specialized_add(Request $request){
-        $data = $request->all();
+        $data = $request->validate([
+           'specialized_name'=>'bail|required|max:50|min:5',
+           'faculty_id'=>'bail|required',
+           'specialized_status'=>'bail|required',
+        ],[
+           'specialized_name.required'=>'Tên chuyên ngành không được để trống',
+           'specialized_name.min'=>'Tên chuyên ngành ít nhất có 5 ký tự',
+           'specialized_name.max'=>'Tên chuyên ngành không quá 50 ký tự',
+           'faculty_id.required'=>'Mã chuyên ngành không được để trống',
+        ]);
         $specialized = new Specialized();
 
         $specialized->specialized_name = $data['specialized_name'];
         $specialized->faculty_id = $data['faculty_id'];
         $specialized->specialized_status = $data['specialized_status'];
 
+        $check_name = Specialized::where('specialized_name','=',$specialized->specialized_name)->first();
+
         if ($data['specialized_name']=='' || $data['faculty_id']==0) {
             Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+            return Redirect::to('them-moi-chuyen-nganh');
+        }else if($check_name){
+            Session::put('message','<div class="alert alert-danger">Tên chuyên ngành đã tồn tại!</div>');
             return Redirect::to('them-moi-chuyen-nganh');
         }else{
             $result = $specialized->save(); 
@@ -60,6 +104,32 @@ class SpecializedController extends Controller
 
     public function specialized_openupdate(Request $request, $specialized_id){
         $this->AuthLogin();
+        $user_ip_address = $request->ip();
+        $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+        $visitor_count = $visitor_current->count();
+        if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
+
+        $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+        $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+        $visitor_lastmonth_count = $visitor_lastmonth->count();
+        $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+        $visitor_thismonth_count = $visitor_thismonth->count();
+        $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+        $visitor_oneyear_count = $visitor_oneyear->count();
+        $visitors = Visitor::all();
+        $visitor_total_count = $visitors->count();
+
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $specializedId = Specialized::where('specialized_id',$specialized_id)->get();
         foreach ($specializedId as $key => $value){
             //SEO
@@ -71,20 +141,31 @@ class SpecializedController extends Controller
         $specialized_update = Specialized::find($specialized_id);
         $faculty = Faculty::whereNotIn('faculty_id', [$specialized_update->faculty_id])
         ->orderBy('faculty_code','ASC')->get();
-        return view('admin.pages.specialized.update')->with(compact('specialized_update', 'faculty', 'meta_desc','meta_title','url_canonical'));
+        return view('admin.pages.specialized.update')->with(compact('specialized_update', 'faculty', 'meta_desc','meta_title','url_canonical','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
     }
 
-    public function specialized_update(Request $request, $specialized_id)
-    {
+    public function specialized_update(Request $request, $specialized_id){
         $this->AuthLogin();
-        $data = $request->all();
+        $data = $request->validate([
+           'specialized_name'=>'bail|required|max:50|min:5',
+           'faculty_id'=>'bail|required',
+        ],[
+           'specialized_name.required'=>'Tên chuyên ngành không được để trống',
+           'specialized_name.min'=>'Tên chuyên ngành ít nhất có 5 ký tự',
+           'specialized_name.max'=>'Tên chuyên ngành không quá 50 ký tự',
+           'faculty_id.required'=>'Mã chuyên ngành không được để trống',
+        ]);
         $specialized = Specialized::find($specialized_id);
 
         $specialized->specialized_name = $data['specialized_name'];
         $specialized->faculty_id = $data['faculty_id'];
+        $check_name = Specialized::where('specialized_name','=',$specialized->specialized_name)->first();
 
         if ($data['specialized_name']=='' || $data['faculty_id']==0) {
             Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+            return Redirect::to('cap-nhat-chuyen-nganh/'.$specialized_id);
+        }else if($check_name){
+            Session::put('message','<div class="alert alert-danger">Tên chuyên ngành đã tồn tại!</div>');
             return Redirect::to('cap-nhat-chuyen-nganh/'.$specialized_id);
         }else{
             $result = $specialized->save();
@@ -118,8 +199,34 @@ class SpecializedController extends Controller
         $meta_title = "Danh sách chuyên ngành";
         $url_canonical = $request->url();
         //---------------
+        $user_ip_address = $request->ip();
+        $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+        $visitor_count = $visitor_current->count();
+        if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
+
+        $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+        $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+        $visitor_lastmonth_count = $visitor_lastmonth->count();
+        $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+        $visitor_thismonth_count = $visitor_thismonth->count();
+        $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+        $visitor_oneyear_count = $visitor_oneyear->count();
+        $visitors = Visitor::all();
+        $visitor_total_count = $visitors->count();
+
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $list = Specialized::orderBy('specialized_id', 'DESC')->paginate(5);
-        return view('admin.pages.specialized.list')->with(compact('list','meta_desc','meta_title','url_canonical'));
+        return view('admin.pages.specialized.list')->with(compact('list','meta_desc','meta_title','url_canonical','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
     }
 
     public function specialized_active($specialized_id){
@@ -149,9 +256,35 @@ class SpecializedController extends Controller
         $meta_title = "Tìm kiếm";
         $url_canonical = $request->url();
         //---------------
+        $user_ip_address = $request->ip();
+        $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+        $visitor_count = $visitor_current->count();
+        if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
+
+        $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+        $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+        $visitor_lastmonth_count = $visitor_lastmonth->count();
+        $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+        $visitor_thismonth_count = $visitor_thismonth->count();
+        $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+        $visitor_oneyear_count = $visitor_oneyear->count();
+        $visitors = Visitor::all();
+        $visitor_total_count = $visitors->count();
+        
+        $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $keywords = $request->keywords_submit;
         $search = Specialized::where('specialized_name','like','%'.$keywords.'%')
         ->orderBy('specialized_id','DESC')->get();
-        return view('admin.pages.specialized.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+        return view('admin.pages.specialized.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
     }
 }
