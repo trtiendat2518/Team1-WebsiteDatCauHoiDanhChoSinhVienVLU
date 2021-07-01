@@ -231,7 +231,7 @@ class StudentController extends Controller
 		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
 		->limit(1)->get();
 		$nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
-		$nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
+		$nofi2 = Nofication::with('postes')->where('nofication_status',0)->limit(1)->get();
 
 		//SEO
 		foreach($student2 as $key => $seo){
@@ -253,9 +253,11 @@ class StudentController extends Controller
 		$student_id = Session::get('student_id');
 		$student2 = Student::find($student_id)->limit(1)->get();
 		$nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
-		$nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
+		$nofi2 = Nofication::with('postes')->where('nofication_status',0)->limit(1)->get();
+		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
+		->limit(1)->get();
 
-		return view('student.page.student.changepass')->with(compact('meta_desc','meta_title','url_canonical','student2','nofi','nofi2'));
+		return view('student.page.student.changepass')->with(compact('meta_desc','meta_title','url_canonical','student2','nofi','nofi2','studentSS'));
 	}
 
 	public function changenewpass(Request $request,$student_id){

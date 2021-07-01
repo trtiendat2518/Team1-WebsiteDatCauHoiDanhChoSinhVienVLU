@@ -42,7 +42,7 @@ class HomeController extends Controller
 		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
 		->limit(1)->get();
 		$nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
-		$nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
+		$nofi2 = Nofication::with('postes')->where('nofication_status',0)->limit(1)->get();
 
 		return view('student.page.home')->with(compact('meta_desc','meta_title','url_canonical','category_post','post2','studentSS','nofi','nofi2','posthot','postpin','mypost_count','mylike_count','mycmt_count'));
 	}
@@ -70,7 +70,7 @@ class HomeController extends Controller
 		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
 		->limit(1)->get();
 		$nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
-		$nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
+		$nofi2 = Nofication::with('postes')->where('nofication_status',0)->limit(1)->get();
 		
 		return view('student.page.post.search')->with(compact('meta_desc','meta_title','url_canonical','category_post','search_product','studentSS','nofi','nofi2','posthot','mypost_count','mylike_count','mycmt_count'));
 	}

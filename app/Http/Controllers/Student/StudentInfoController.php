@@ -25,7 +25,8 @@ class StudentInfoController extends Controller
         $meta_title = "Thông tin tài khoản";
         $url_canonical =$request->url();
         //-----------------------
-        
+        $studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
+        ->limit(1)->get();
         $student2 = Student::with('info')->where('student_id',Session::get('student_id'))->limit(1)->get();
        
         foreach ($student2 as $key => $value) {
@@ -98,9 +99,9 @@ class StudentInfoController extends Controller
         }
        
         $nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
-        $nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
+        $nofi2 = Nofication::with('postes')->where('nofication_status',0)->limit(1)->get();
 
-        return view('student.page.student.profile')->with(compact('meta_desc','meta_title','url_canonical','student2','nofi','nofi2','faculty','specialized','course'));
+        return view('student.page.student.profile')->with(compact('meta_desc','meta_title','url_canonical','student2','nofi','nofi2','faculty','specialized','course','studentSS'));
     }
 
     public function studentinfo_create(Request $request, $student_id){

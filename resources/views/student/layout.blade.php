@@ -62,217 +62,6 @@
 	</div>
 	<!-- /PAGE LOADER -->
 
-	<!-- NAVIGATION WIDGET -->
-	<nav id="navigation-widget-small" class="navigation-widget navigation-widget-desktop closed sidebar left delayed">
-		<ul class="menu small">
-			<li class="menu-item active">
-				<a class="menu-item-link text-tooltip-tfr" href="{{url('/')}}" data-title="Trang câu hỏi">
-					<svg class="menu-item-link-icon icon-newsfeed">
-						<use xlink:href="#svg-newsfeed"></use>
-					</svg>
-				</a>
-			</li>
-			@if (Session::get('student_id'))
-			<li class="menu-item">
-				<a class="menu-item-link text-tooltip-tfr" href="{{url('/trang-sinh-vien/'.Session::get('student_id'))}}" data-title="Trang cá nhân">
-					<svg class="menu-item-link-icon icon-timeline">
-						<use xlink:href="#svg-timeline"></use>
-					</svg>
-				</a>
-			</li>
-			@endif
-			<li class="menu-item">
-				<a class="menu-item-link text-tooltip-tfr" href="members.html" data-title="FAQs">
-					<svg class="menu-item-link-icon icon-forum">
-						<use xlink:href="#svg-forum"></use>
-					</svg>
-				</a>
-			</li>
-			<li class="menu-item">
-				<a class="menu-item-link text-tooltip-tfr" href="members.html" data-title="About us">
-					<svg class="menu-item-link-icon icon-members">
-						<use xlink:href="#svg-profile"></use>
-					</svg>
-				</a>
-			</li>
-		</ul>
-	</nav>
-	<nav id="navigation-widget" class="navigation-widget navigation-widget-desktop sidebar left hidden" data-simplebar>
-		<ul class="menu">
-			<li class="menu-item active">
-				<a class="menu-item-link" href="{{url('/')}}">
-					<svg class="menu-item-link-icon icon-newsfeed">
-						<use xlink:href="#svg-newsfeed"></use>
-					</svg>
-					Trang câu hỏi
-				</a>
-			</li>
-			<li class="menu-item">
-				<a class="menu-item-link" href="{{url('/trang-sinh-vien/'.Session::get('student_id'))}}">
-					<svg class="menu-item-link-icon icon-members">
-						<use xlink:href="#svg-timeline"></use>
-					</svg>
-					Trang cá nhân
-				</a>
-			</li>
-			<li class="menu-item">
-				<a class="menu-item-link" href="members.html">
-					<svg class="menu-item-link-icon icon-members">
-						<use xlink:href="#svg-forum"></use>
-					</svg>
-					FAQs
-				</a>
-			</li>
-			<li class="menu-item">
-				<a class="menu-item-link" href="members.html">
-					<svg class="menu-item-link-icon icon-members">
-						<use xlink:href="#svg-profile"></use>
-					</svg>
-					About us
-				</a>
-			</li>
-			<!-- /MENU ITEM -->
-		</ul>
-		<!-- /MENU -->
-	</nav>
-	<!-- /NAVIGATION WIDGET -->
-
-	<!-- NAVIGATION WIDGET -->
-	<nav id="navigation-widget-mobile" class="navigation-widget navigation-widget-mobile sidebar left hidden" data-simplebar>
-		<!-- NAVIGATION WIDGET CLOSE BUTTON -->
-		<div class="navigation-widget-close-button">
-			<!-- NAVIGATION WIDGET CLOSE BUTTON ICON -->
-			<svg class="navigation-widget-close-button-icon icon-back-arrow">
-				<use xlink:href="#svg-back-arrow"></use>
-			</svg>
-			<!-- NAVIGATION WIDGET CLOSE BUTTON ICON -->
-		</div>
-		<!-- /NAVIGATION WIDGET CLOSE BUTTON -->
-
-		<!-- NAVIGATION WIDGET INFO WRAP -->
-		<div class="navigation-widget-info-wrap">
-			<!-- NAVIGATION WIDGET INFO -->
-			<div class="navigation-widget-info">
-				<!-- USER AVATAR -->
-				<a class="user-avatar small no-outline" href="profile-timeline.html">
-					<!-- USER AVATAR PROGRESS -->
-					<div class="user-avatar-progress">
-						<!-- HEXAGON -->
-						<div class="hexagon-progress-40-44"></div>
-						<!-- /HEXAGON -->
-					</div>
-					<!-- /USER AVATAR PROGRESS -->
-
-					<!-- USER AVATAR PROGRESS BORDER -->
-					<div class="user-avatar-progress-border">
-						<!-- HEXAGON -->
-						<div class="hexagon-border-40-44"></div>
-						<!-- /HEXAGON -->
-					</div>
-					<!-- /USER AVATAR PROGRESS BORDER -->
-				</a>
-				<!-- /USER AVATAR -->
-
-				<!-- NAVIGATION WIDGET INFO TITLE -->
-				<p class="navigation-widget-info-title"><a href="profile-timeline.html">@php
-				echo Session::get('student_name');
-			@endphp</a></p>
-			<!-- /NAVIGATION WIDGET INFO TITLE -->
-
-			<!-- NAVIGATION WIDGET INFO TEXT -->
-			<p class="navigation-widget-info-text">Chào mừng bạn trở lại!</p>
-			<!-- /NAVIGATION WIDGET INFO TEXT -->
-		</div>
-		<!-- /NAVIGATION WIDGET INFO -->
-
-		<!-- NAVIGATION WIDGET BUTTON -->
-		<p class="navigation-widget-info-button button small secondary">Đăng xuất</p>
-		<!-- /NAVIGATION WIDGET BUTTON -->
-	</div>
-	<!-- /NAVIGATION WIDGET INFO WRAP -->
-
-	<!-- NAVIGATION WIDGET SECTION TITLE -->
-	<p class="navigation-widget-section-title">Menu</p>
-	<!-- /NAVIGATION WIDGET SECTION TITLE -->
-
-	<!-- MENU -->
-	<ul class="menu">
-		<!-- MENU ITEM -->
-		<li class="menu-item active">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="newsfeed.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-newsfeed">
-					<use xlink:href="#svg-newsfeed"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Trang câu hỏi
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="{{url('/trang-sinh-vien/'.Session::get('student_id'))}}">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-overview">
-					<use xlink:href="#svg-overview"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Trang cá nhân
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="groups.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-group">
-					<use xlink:href="#svg-group"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				Liên hệ
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="members.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-members">
-					<use xlink:href="#svg-members"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				FAQs
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-
-		<!-- MENU ITEM -->
-		<li class="menu-item">
-			<!-- MENU ITEM LINK -->
-			<a class="menu-item-link" href="badges.html">
-				<!-- MENU ITEM LINK ICON -->
-				<svg class="menu-item-link-icon icon-badges">
-					<use xlink:href="#svg-badges"></use>
-				</svg>
-				<!-- /MENU ITEM LINK ICON -->
-				About us
-			</a>
-			<!-- /MENU ITEM LINK -->
-		</li>
-		<!-- /MENU ITEM -->
-	</ul>
-	<!-- /MENU -->
 	@if (Session::get('student_id'))
 	<!-- NAVIGATION WIDGET SECTION TITLE -->
 	<p class="navigation-widget-section-title">Cá nhân</p>
@@ -316,37 +105,16 @@
 
 	<!-- HEADER ACTIONS -->
 	<div class="header-actions">
-		<!-- SIDEMENU TRIGGER -->
-		<div class="sidemenu-trigger navigation-widget-trigger">
-			<!-- ICON GRID -->
-			<svg class="icon-grid">
-				<use xlink:href="#svg-grid"></use>
-			</svg>
-			<!-- /ICON GRID -->
-		</div>
-		<!-- /SIDEMENU TRIGGER -->
-
-		<!-- MOBILEMENU TRIGGER -->
-		<div class="mobilemenu-trigger navigation-widget-mobile-trigger">
-			<!-- BURGER ICON -->
-			<div class="burger-icon inverted">
-				<!-- BURGER ICON BAR -->
-				<div class="burger-icon-bar"></div>
-				<!-- /BURGER ICON BAR -->
-
-				<!-- BURGER ICON BAR -->
-				<div class="burger-icon-bar"></div>
-				<!-- /BURGER ICON BAR -->
-
-				<!-- BURGER ICON BAR -->
-				<div class="burger-icon-bar"></div>
-				<!-- /BURGER ICON BAR -->
-			</div>
-			<!-- /BURGER ICON -->
-		</div>
+		<nav class="navigation">
+			<ul class="menu-main">
+				<li class="menu-main-item">
+					<a class="menu-main-item-link" href="{{url('/')}}" style="font-size: 15px;">Trang chủ</a>
+				</li>
+			</ul>
+		</nav>
 	</div>
 
-	<div style="width: 70%;">
+	<div style="width: 60%;">
 		<form action="{{url('/tim-kiem')}}" method="post">
 			@csrf
 			<div class="interactive-input dark">
@@ -367,6 +135,28 @@
 
 	<!-- HEADER ACTIONS -->
 	<div class="header-actions headertop">
+		@foreach ($studentSS as $key => $ava)
+		@if (Session::get('student_id'))
+		<a class="user-status-avatar" style="margin-right: 40px; margin-left: 20px;" href="{{url('/trang-sinh-vien/'.Session::get('student_id'))}}">
+			<div class="user-avatar small no-outline">
+				<div class="user-avatar-content">
+					@if ($ava->student_info_id)
+					<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$ava->student_avatar)}}"></div>
+					@else
+					<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
+					@endif
+				</div>
+				<div class="user-avatar-progress">
+					<div class="hexagon-progress-40-44"></div>
+				</div>
+				<div class="user-avatar-progress-border">
+					<div class="hexagon-border-40-44"></div>
+				</div>
+			</div>
+		</a>
+		@endif	
+		@endforeach	
+
 		<!-- ACTION LIST -->
 		<div class="action-list dark">
 			<!-- ACTION LIST ITEM WRAP -->
@@ -590,134 +380,6 @@
 								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
 								<!-- /USER STATUS TIMESTAMP -->
 
-								<!-- USER STATUS ICON -->
-								<div class="user-status-icon">
-									<!-- ICON COMMENT -->
-									<svg class="icon-quests">
-										<use xlink:href="#svg-quests"></use>
-									</svg>
-									<!-- /ICON COMMENT -->
-								</div>
-								<!-- /USER STATUS ICON -->
-								@endif
-							</div>
-							<!-- /USER STATUS -->
-						</div>
-						<!-- /DROPDOWN BOX LIST ITEM -->
-						@elseif ($nofication->postes->student_id==Session::get('student_id') && $nofication->nofication_status==1)
-						<!-- DROPDOWN BOX LIST ITEM -->
-						<div class="dropdown-box-list-item">
-							<!-- USER STATUS -->
-							<div class="user-status notification">
-								<!-- USER STATUS AVATAR -->
-								<a class="user-status-avatar" href="profile-timeline.html">
-									<!-- USER AVATAR -->
-									<div class="user-avatar small no-outline">
-										<!-- USER AVATAR CONTENT -->
-										<div class="user-avatar-content">
-											<!-- HEXAGON -->
-											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/03.jpg')}}"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR CONTENT -->
-
-										<!-- USER AVATAR PROGRESS -->
-										<div class="user-avatar-progress">
-											<!-- HEXAGON -->
-											<div class="hexagon-progress-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS -->
-
-										<!-- USER AVATAR PROGRESS BORDER -->
-										<div class="user-avatar-progress-border">
-											<!-- HEXAGON -->
-											<div class="hexagon-border-40-44"></div>
-											<!-- /HEXAGON -->
-										</div>
-										<!-- /USER AVATAR PROGRESS BORDER -->
-
-										<!-- USER AVATAR BADGE -->
-										<div class="user-avatar-badge">
-											<!-- USER AVATAR BADGE BORDER -->
-											<div class="user-avatar-badge-border">
-												<!-- HEXAGON -->
-												<div class="hexagon-22-24"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE BORDER -->
-
-											<!-- USER AVATAR BADGE CONTENT -->
-											<div class="user-avatar-badge-content">
-												<!-- HEXAGON -->
-												<div class="hexagon-dark-16-18"></div>
-												<!-- /HEXAGON -->
-											</div>
-											<!-- /USER AVATAR BADGE CONTENT -->
-
-											<!-- USER AVATAR BADGE TEXT -->
-											<p class="user-avatar-badge-text">16</p>
-											<!-- /USER AVATAR BADGE TEXT -->
-										</div>
-										<!-- /USER AVATAR BADGE -->
-									</div>
-									<!-- /USER AVATAR -->
-								</a>
-								<!-- /USER STATUS AVATAR -->
-								@if ($nofication->nofication_kind=='Like')
-								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$nofication->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="profile-timeline.html">{{$nofication->postes->post_title}}</a> của bạn</p>
-								<!-- /USER STATUS TITLE -->
-
-								<!-- USER STATUS TIMESTAMP -->
-								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
-								<!-- /USER STATUS TIMESTAMP -->
-
-								<!-- USER STATUS ICON -->
-								<div class="user-status-icon">
-									<!-- ICON COMMENT -->
-									<svg class="icon-thumbs-up">
-										<use xlink:href="#svg-thumbs-up"></use>
-									</svg>
-									<!-- /ICON COMMENT -->
-								</div>
-								<!-- /USER STATUS ICON -->
-								@elseif($nofication->nofication_kind=='Comment')
-								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$nofication->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted" href="profile-timeline.html">{{$nofication->postes->post_title}}</a> của bạn</p>
-								<!-- /USER STATUS TITLE -->
-
-								<!-- USER STATUS TIMESTAMP -->
-								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
-								<!-- /USER STATUS TIMESTAMP -->
-
-								<!-- USER STATUS ICON -->
-								<div class="user-status-icon">
-									<!-- ICON COMMENT -->
-									<svg class="icon-comment">
-										<use xlink:href="#svg-comment"></use>
-									</svg>
-									<!-- /ICON COMMENT -->
-								</div>
-								<!-- /USER STATUS ICON -->
-								@else
-								<!-- USER STATUS TITLE -->
-								<p class="user-status-title">Khoa đã trả lời câu hỏi <a class="highlighted" href="profile-timeline.html">{{$nofication->postes->post_title}}</a> của bạn</p>
-								<!-- /USER STATUS TITLE -->
-
-								<!-- USER STATUS TIMESTAMP -->
-								<p class="user-status-timestamp">{{ \Carbon\Carbon::parse($nofication->nofication_created)->diffForHumans() }}</p>
-								<!-- /USER STATUS TIMESTAMP -->
-
-								<!-- USER STATUS ICON -->
-								<div class="user-status-icon">
-									<!-- ICON COMMENT -->
-									<svg class="icon-thumbs-up">
-										<use xlink:href="#svg-thumbs-up"></use>
-									</svg>
-									<!-- /ICON COMMENT -->
-								</div>
-								<!-- /USER STATUS ICON -->
 								<!-- USER STATUS ICON -->
 								<div class="user-status-icon">
 									<!-- ICON COMMENT -->

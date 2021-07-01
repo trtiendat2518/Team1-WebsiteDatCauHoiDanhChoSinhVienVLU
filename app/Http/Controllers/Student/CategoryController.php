@@ -36,7 +36,7 @@ class CategoryController extends Controller
 		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
 		->limit(1)->get();
 		$nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
-		$nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
+		$nofi2 = Nofication::with('postes')->where('nofication_status',0)->limit(1)->get();
 
     	//SEO
 		foreach ($category_by_name as $key => $value) {
