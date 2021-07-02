@@ -303,7 +303,7 @@
 							<!-- USER STATUS -->
 							<div class="user-status notification">
 								<!-- USER STATUS AVATAR -->
-								<a class="user-status-avatar" href="profile-timeline.html">
+								<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">
 									<!-- USER AVATAR -->
 									<div class="user-avatar small no-outline">
 										<!-- USER AVATAR CONTENT -->
@@ -337,7 +337,7 @@
 								<!-- /USER STATUS AVATAR -->
 								@if ($nofication->nofication_kind=='Like')
 								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$nofication->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
+								<p class="user-status-title"><a class="bold" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">{{$nofication->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
 								<!-- /USER STATUS TITLE -->
 
 								<!-- USER STATUS TIMESTAMP -->
@@ -355,7 +355,7 @@
 								<!-- /USER STATUS ICON -->
 								@elseif($nofication->nofication_kind=='Comment')
 								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$nofication->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
+								<p class="user-status-title"><a class="bold" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">{{$nofication->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
 								<!-- /USER STATUS TITLE -->
 
 								<!-- USER STATUS TIMESTAMP -->

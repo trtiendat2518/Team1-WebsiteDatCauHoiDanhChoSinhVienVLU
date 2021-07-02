@@ -29,7 +29,7 @@
 					@foreach ($category_post as $key => $val)
 					@if ($val->category_status==0)
 					<div class="user-status request-small">
-						<a class="user-status-avatar" href="profile-timeline.html">
+						<a class="user-status-avatar" href="{{url('/cau-hoi-theo-loai/'.$val->category_id)}}">
 							<div class="user-avatar small no-outline">
 								<div class="user-avatar-content">
 									<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/ques.png')}}"></div>
@@ -514,7 +514,7 @@
 					<!-- USER STATUS -->
 					<div class="user-status">
 						<!-- USER STATUS AVATAR -->
-						<a class="user-status-avatar" href="profile-timeline.html">
+						<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$hot->student_id)}}">
 							<!-- USER AVATAR -->
 							<div class="user-avatar small no-outline">
 								<!-- USER AVATAR CONTENT -->
@@ -548,7 +548,7 @@
 						<!-- /USER STATUS AVATAR -->
 
 						<!-- USER STATUS TITLE -->
-						<p class="user-status-title">Bài viết <a class="highlighted" href="profile-timeline.html">{{$hot->post_title}}</a> của <a class="bold" href="profile-timeline.html">{{$hot->student->student_name}}</a></p>
+						<p class="user-status-title">Bài viết <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$hot->post_id)}}">{{$hot->post_title}}</a> của <a class="bold" href="{{url('/trang-sinh-vien/'.$hot->student_id)}}">{{$hot->student->student_name}}</a></p>
 						<!-- /USER STATUS TITLE -->
 					</div>
 					<!-- /USER STATUS -->

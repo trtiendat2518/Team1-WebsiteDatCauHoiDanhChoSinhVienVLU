@@ -29,7 +29,7 @@
 					@foreach ($category_post as $key => $val)
 					@if ($val->category_status==0)
 					<div class="user-status request-small">
-						<a class="user-status-avatar" href="profile-timeline.html">
+						<a class="user-status-avatar" href="{{url('/cau-hoi-theo-loai/'.$val->category_id)}}">
 							<div class="user-avatar small no-outline">
 								<div class="user-avatar-content">
 									<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/ques.png')}}"></div>
@@ -234,14 +234,12 @@
 				}
 				@endphp
 				
-				@if (Session::get('student_id'))
 				<div class="post-option showCmt" data-toggle="tab" data-id_a="{{$pin->post_id}}" id="show_{{$pin->post_id}}">
 					<svg class="post-option-icon icon-comment">
 						<use xlink:href="#svg-comment"></use>
 					</svg>
 					<p class="post-option-text">Bình luận</p>
 				</div>
-				@endif
 				
 				@if ($pin->post_reply=='')
 				<div class="post-option">
@@ -320,9 +318,13 @@
 							</div>
 						</div>
 						@endif
-						<a class="user-avatar small no-outline" href="profile-timeline.html">
+						<a class="user-avatar small no-outline" href="{{url('/trang-sinh-vien/'.$pin->student_id)}}">
 							<div class="user-avatar-content">
-								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/05.jpg')}}"></div>
+								@if ($cmt->student->student_info_id)
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$cmt->student->student_avatar)}}"></div>
+								@else
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
+								@endif
 							</div>
 							<div class="user-avatar-progress">
 								<div class="hexagon-progress-40-44"></div>
@@ -331,7 +333,7 @@
 								<div class="hexagon-border-40-44"></div>
 							</div>
 						</a>
-						<p class="post-comment-text"><a class="post-comment-text-author" href="profile-timeline.html" style="color: #007bff;">{{$cmt->student->student_name}}</a>
+						<p class="post-comment-text"><a class="post-comment-text-author" href="{{url('/trang-sinh-vien/'.$cmt->student->student_id)}}" style="color: #007bff;">{{$cmt->student->student_name}}</a>
 							<span class="user-status-text small">
 								{{ \Carbon\Carbon::parse($cmt->created_at)->diffForHumans() }} 
 							</span>
@@ -459,14 +461,12 @@
 				}
 				@endphp
 				
-				@if (Session::get('student_id'))
 				<div class="post-option showCmt" data-toggle="tab" data-id_a="{{$post_info->post_id}}" id="show_{{$post_info->post_id}}">
 					<svg class="post-option-icon icon-comment">
 						<use xlink:href="#svg-comment"></use>
 					</svg>
 					<p class="post-option-text">Bình luận</p>
 				</div>
-				@endif
 				
 				@if ($post_info->post_reply=='')
 				<div class="post-option">
@@ -764,7 +764,7 @@
 					<!-- USER STATUS -->
 					<div class="user-status">
 						<!-- USER STATUS AVATAR -->
-						<a class="user-status-avatar" href="profile-timeline.html">
+						<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$hot->student_id)}}">
 							<!-- USER AVATAR -->
 							<div class="user-avatar small no-outline">
 								<!-- USER AVATAR CONTENT -->
@@ -798,7 +798,7 @@
 						<!-- /USER STATUS AVATAR -->
 
 						<!-- USER STATUS TITLE -->
-						<p class="user-status-title">Bài viết <a class="highlighted" href="profile-timeline.html">{{$hot->post_title}}</a> của <a class="bold" href="profile-timeline.html">{{$hot->student->student_name}}</a></p>
+						<p class="user-status-title">Bài viết <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$hot->post_id)}}">{{$hot->post_title}}</a> của <a class="bold" href="{{url('/trang-sinh-vien/'.$hot->student_id)}}">{{$hot->student->student_name}}</a></p>
 						<!-- /USER STATUS TITLE -->
 					</div>
 					<!-- /USER STATUS -->
