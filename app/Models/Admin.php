@@ -9,8 +9,12 @@ class Admin extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'admin_name', 'admin_email', 'admin_password', 'admin_role'
+        'admin_info_id', 'admin_avatar', 'admin_name', 'admin_email', 'admin_password', 'admin_role', 'admin_status'
     ];
     protected $primaryKey = 'admin_id';
     protected $table = 'tbl_admin';
+
+    public function info(){
+        return $this->belongsTo('App\Models\AdminInfo', 'admin_info_id');
+    }
 }

@@ -14,6 +14,9 @@
 					Session::put('message', null);
 				}
 				@endphp
+				@foreach ($errors->all() as $val)
+				<div class="alert alert-danger">{{$val}}</div>
+				@endforeach
 				<div class="position-center">
 					<form role="form" action="{{URL::to('/cap-nhat-nam-hoc-thanh-cong/'.$course_update->course_id)}}" method="POST" style="margin-bottom: 20px" >
 						{{csrf_field()}}

@@ -17,7 +17,12 @@ use App\Models\Reply;
 use App\Models\Student;
 use App\Imports\PostImport;
 use App\Exports\PostExport;
+use App\Models\Admin;
+use App\Models\Statistic;
+use App\Models\Visitor;
+use Carbon\Carbon;
 use Excel;
+use Validator;
 use Session;
 session_start();
 
@@ -39,8 +44,34 @@ class PostController extends Controller
 		$meta_title = "Danh sách câu hỏi";
 		$url_canonical = $request->url();
       	//---------------
-		$list = Post::orderBy('created_at', 'DESC')->paginate(5);
-		return view('admin.pages.post.list')->with(compact('meta_desc','meta_title','url_canonical','list'));
+      	$user_ip_address = $request->ip();
+        $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+        $visitor_count = $visitor_current->count();
+        if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
+
+        $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+        $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+        $visitor_lastmonth_count = $visitor_lastmonth->count();
+        $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+        $visitor_thismonth_count = $visitor_thismonth->count();
+        $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+        $visitor_oneyear_count = $visitor_oneyear->count();
+        $visitors = Visitor::all();
+        $visitor_total_count = $visitors->count();
+
+      	$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+		$list = Post::where('post_like','<',100)->orderBy('created_at', 'DESC')->paginate(5);
+		return view('admin.pages.post.list')->with(compact('meta_desc','meta_title','url_canonical','list','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
 	}
 
 	public function postadmin_search(Request $request){
@@ -50,11 +81,36 @@ class PostController extends Controller
 		$meta_title = "Tìm kiếm";
 		$url_canonical = $request->url();
       	//---------------
-      	
+      	$user_ip_address = $request->ip();
+        $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+        $visitor_count = $visitor_current->count();
+        if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
+
+        $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+        $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+        $visitor_lastmonth_count = $visitor_lastmonth->count();
+        $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+        $visitor_thismonth_count = $visitor_thismonth->count();
+        $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+        $visitor_oneyear_count = $visitor_oneyear->count();
+        $visitors = Visitor::all();
+        $visitor_total_count = $visitors->count();
+
+      	$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
       	$keywords = $request->keywords_submit;
 		$search = Post::where('post_title','like','%'.$keywords.'%')->with('category','student')
 		->orderBy('tbl_post.created_at','DESC')->get();
-		return view('admin.pages.post.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+		return view('admin.pages.post.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
 	}
 
 	public function postadmin_detail(Request $request, $post_id){
@@ -64,14 +120,52 @@ class PostController extends Controller
 		$meta_title = "Chi tiết câu hỏi";
 		$url_canonical = $request->url();
       	//---------------
-      	
+      	$user_ip_address = $request->ip();
+        $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+        $visitor_count = $visitor_current->count();
+        if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
+
+        $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+        $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+        $visitor_lastmonth_count = $visitor_lastmonth->count();
+        $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+        $visitor_thismonth_count = $visitor_thismonth->count();
+        $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+        $visitor_oneyear_count = $visitor_oneyear->count();
+        $visitors = Visitor::all();
+        $visitor_total_count = $visitors->count();
+
+      	$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
       	$post_detail = Post::find($post_id);
-		return view('admin.pages.post.reply')->with(compact('meta_desc','meta_title','url_canonical','post_detail'));
+		return view('admin.pages.post.reply')->with(compact('meta_desc','meta_title','url_canonical','post_detail','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
 	}
 
 	public function postadmin_delete(Request $request, $post_id){
 		$this->AuthLogin();
-      	
+		$postG = Post::where('post_id',$post_id)->get();
+		foreach($postG as $key => $val2){
+			$date = date('Y-m-d', strtotime($val2->created_at));
+			$sumlike = Post::where('created_at','like','%'.$date.'%')->sum('post_like');
+			$likepost = Post::where('post_id',$post_id)->sum('post_like');
+			$statistic = Statistic::where('statistic_date', $date)->get();
+			if($statistic){
+				foreach($statistic as $key => $val){
+					$del_sta = $val->statistic_post-=1;
+					$val->statistic_like = $sumlike-$likepost;
+					$val->save();
+				}
+			}
+		}
       	$pst = Post::find($post_id);
 		$like_del = Like::where('post_id',$post_id)->delete();
 		$cmt_del = Comment::where('post_id',$post_id)->delete();
@@ -123,11 +217,36 @@ class PostController extends Controller
 		$meta_title = "Danh sách câu hỏi HOT";
 		$url_canonical = $request->url();
       	//---------------
+		$user_ip_address = $request->ip();
+        $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+        $visitor_count = $visitor_current->count();
+        if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
 
+        $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+        $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+        $visitor_lastmonth_count = $visitor_lastmonth->count();
+        $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+        $visitor_thismonth_count = $visitor_thismonth->count();
+        $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+        $visitor_oneyear_count = $visitor_oneyear->count();
+        $visitors = Visitor::all();
+        $visitor_total_count = $visitors->count();
+
+		$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
 		$list = Post::with('category','student')->where('post_like','>',99)
 		->orderBy('created_at','DESC')->paginate(5);
 
-		return view('admin.pages.hotpost.list')->with(compact('meta_desc','meta_title','url_canonical','list'));
+		return view('admin.pages.hotpost.list')->with(compact('meta_desc','meta_title','url_canonical','list','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
 	}
 
 	public function postadmin_searchhot(Request $request){
@@ -137,11 +256,36 @@ class PostController extends Controller
 		$meta_title = "Tìm kiếm câu hỏi HOT";
 		$url_canonical = $request->url();
       	//---------------
-      	
+      	$user_ip_address = $request->ip();
+        $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+        $visitor_count = $visitor_current->count();
+        if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
+
+        $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+        $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+        $visitor_lastmonth_count = $visitor_lastmonth->count();
+        $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+        $visitor_thismonth_count = $visitor_thismonth->count();
+        $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+        $visitor_oneyear_count = $visitor_oneyear->count();
+        $visitors = Visitor::all();
+        $visitor_total_count = $visitors->count();
+
+      	$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
 		$keywords = $request->keywords_submit;
 		$search = Post::where('post_title','like','%'.$keywords.'%')->where('post_like','>',99)
 		->with('category','student')->orderBy('tbl_post.created_at','DESC')->get();
-		return view('admin.pages.hotpost.search')->with(compact('meta_desc','meta_title','url_canonical','search'));
+		return view('admin.pages.hotpost.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
 	}
 
 	public function postadmin_detailhot(Request $request, $post_id){
@@ -151,14 +295,52 @@ class PostController extends Controller
 		$meta_title = "Chi tiết câu hỏi";
 		$url_canonical = $request->url();
       	//---------------
+		$user_ip_address = $request->ip();
+        $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+        $visitor_count = $visitor_current->count();
+        if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
 
+        $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+        $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+        $visitor_lastmonth_count = $visitor_lastmonth->count();
+        $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+        $visitor_thismonth_count = $visitor_thismonth->count();
+        $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+        $visitor_oneyear_count = $visitor_oneyear->count();
+        $visitors = Visitor::all();
+        $visitor_total_count = $visitors->count();
+		
+		$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
 		$post_detail = Post::find($post_id);
-		return view('admin.pages.hotpost.reply')->with(compact('meta_desc','meta_title','url_canonical','post_detail'));
+		return view('admin.pages.hotpost.reply')->with(compact('meta_desc','meta_title','url_canonical','post_detail','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
 	}
 
 	public function postadmin_deletehot(Request $request, $post_id){
 		$this->AuthLogin();
-
+		$postG = Post::where('post_id',$post_id)->get();
+		foreach($postG as $key => $val2){
+			$date = date('Y-m-d', strtotime($val2->created_at));
+			$sumlike = Post::where('created_at','like','%'.$date.'%')->sum('post_like');
+			$likepost = Post::where('post_id',$post_id)->sum('post_like');
+			$statistic = Statistic::where('statistic_date', $date)->get();
+			if($statistic){
+				foreach($statistic as $key => $val){
+					$del_sta = $val->statistic_post-=1;
+					$val->statistic_like = $sumlike-$likepost;
+					$val->save();
+				}
+			}
+		}
 		$pst = Post::find($post_id);
 		$like_del = Like::where('post_id',$post_id)->delete();
 		$cmt_del = Comment::where('post_id',$post_id)->delete();

@@ -9,6 +9,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Reply;
 use App\Models\Post;
+use App\Models\Admin;
 use Validator;
 use Session;
 session_start();
