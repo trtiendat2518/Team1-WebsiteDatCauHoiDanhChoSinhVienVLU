@@ -158,5 +158,13 @@ Route::get('/xoa-user/{admin_id}', 'Admin\UserController@user_delete');
 //ADMIN INFO
 Route::get('/doi-mat-khau-moi', 'Admin\AdminController@admin_openchangepass');
 Route::post('/doi-mat-khau-moi-thanh-cong/{admin_id}', 'Admin\AdminController@admin_changepass');
+Route::get('/thong-tin-tai-khoan-admin/{admin_id}', 'Admin\AdminInfoController@admininfo_profile');
+Route::post('/them-thong-tin-admin/{admin_id}', 'Admin\AdminInfoController@admininfo_create');
+Route::post('/sua-thong-tin-admin/{admin_info_id}', 'Admin\AdminInfoController@admininfo_update');
+
+//ADMIN STATISTIC
+Route::post('/loc-ngay-thang', 'Admin\StatisticController@statistic_filter');
+Route::post('/loc-theo-ngay-thang-nam', 'Admin\StatisticController@statistic_select');
+Route::post('/hien-thi-thong-ke', 'Admin\StatisticController@statistic_show');
 
 

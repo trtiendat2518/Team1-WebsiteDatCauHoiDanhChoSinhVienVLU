@@ -37,8 +37,9 @@
   <link rel="stylesheet" href="{{asset('public/admin/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('public/admin/css/index-01.css')}}">
   <link rel="stylesheet" href="{{asset('public/admin/css/responsive.css')}}">
-
-
+  <link rel="stylesheet" href="{{asset('public/admin/css/jquery-ui.css')}}">
+  <link rel="stylesheet" href="{{asset('public/admin/css/morris.css')}}">
+  <link rel="stylesheet" href="{{asset('public/student/css/sweetalert.css')}}">
 </head>
 
 
@@ -59,13 +60,19 @@
       <div class="right-content float-right">
         <div class="dropdown user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg" class="rounded-circle float-left mr-2" alt="User Image">
+            @foreach ($info as $key => $val)
+            @if ($val->admin_info_id)
+            <img src="{{asset('public/admin/images/avatar/'.$val->admin_avatar)}}" class="rounded-circle float-left mr-2" alt="User Image">
+            @else
+            <img src="{{asset('public/student/img/avatar/noavatar.jpg')}}" class="rounded-circle float-left mr-2" alt="User Image">
+            @endif
+            @endforeach
             <h4 class="name">@php
             echo Session::get('admin_name')
           @endphp</h4>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="#"><i class="fa fa-user"></i> Thông tin cá nhân</a></li>
+          <li><a href="{{url('/thong-tin-tai-khoan-admin/'.Session::get('admin_id'))}}"><i class="fa fa-user"></i> Thông tin cá nhân</a></li>
           <li><a href="{{url('/doi-mat-khau-moi')}}"><i class="fa fa-unlock-alt"></i> Đổi mật khẩu</a></li>
           <li><a href="{{url('/logout-admin')}}"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
         </ul>
@@ -79,117 +86,126 @@
   <aside class="left-panel">
     <div class="user-card background-bg">
       <a href="#">
-       <div class="avatar mr-3 float-left"><img class="rounded-circle" src="https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg" alt="Avatar" style="height: 50px;"></div>
-        <div class="details">
-          <h4 class="name">@php
-          echo Session::get('admin_name')
-        @endphp</h4><!-- /.name -->
-        @if(Session::get('admin_role')==0)
-        <span class="designation">Quản trị viên</span>
-        @elseif(Session::get('admin_role')==1)
-        <span class="designation">BCN khoa</span>
+       <div class="avatar mr-3 float-left">
+        @foreach ($info as $key => $val)
+        @if ($val->admin_info_id)
+        <img class="rounded-circle" src="{{asset('public/admin/images/avatar/'.$val->admin_avatar)}}" alt="Avatar" style="height: 50px;">
         @else
-        <span class="designation">Trợ lý</span>
+        <img class="rounded-circle" src="{{asset('public/student/img/avatar/noavatar.jpg')}}" alt="Avatar" style="height: 50px;">
         @endif
-      </div><!-- /.details -->
-    </a>
-  </div>
-  <nav class="navbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="{{url('/admin-home')}}">
-          <i class="fa fa-dashboard"></i> <span class="menu-title">Trang chủ</span>
-        </a>
-      </li>
+        @endforeach
+      </div>
+      <div class="details">
+        <h4 class="name">@php
+        echo Session::get('admin_name')
+      @endphp</h4><!-- /.name -->
       @if(Session::get('admin_role')==0)
-      <li class="nav-item header"><span class="menu-title">Sinh viên</span></li>
+      <span class="designation">Quản trị viên</span>
+      @elseif(Session::get('admin_role')==1)
+      <span class="designation">BCN khoa</span>
+      @else
+      <span class="designation">Trợ lý</span>
       @endif
-      @if(Session::get('admin_role')==0)
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-university"></i> <span class="menu-title">Quản lý khoa</span>
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="{{url('/them-moi-khoa')}}">Thêm mới khoa</a>
-          <a class="dropdown-item" href="{{url('/danh-sach-khoa')}}">Danh sách khoa</a>
-        </div>
-      </li>
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-suitcase"></i> <span class="menu-title">Quản lý chuyên ngành</span>
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="{{url('/them-moi-chuyen-nganh')}}">Thêm mới chuyên ngành</a>
-          <a class="dropdown-item" href="{{url('/danh-sach-chuyen-nganh')}}">Danh sách chuyên ngành</a>
-        </div>
-      </li>
+    </div><!-- /.details -->
+  </a>
+</div>
+<nav class="navbar">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="{{url('/admin-home')}}">
+        <i class="fa fa-dashboard"></i> <span class="menu-title">Trang chủ</span>
+      </a>
+    </li>
+    @if(Session::get('admin_role')==0)
+    <li class="nav-item header"><span class="menu-title">Sinh viên</span></li>
+    @endif
+    @if(Session::get('admin_role')==0)
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-university"></i> <span class="menu-title">Quản lý khoa</span>
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="{{url('/them-moi-khoa')}}">Thêm mới khoa</a>
+        <a class="dropdown-item" href="{{url('/danh-sach-khoa')}}">Danh sách khoa</a>
+      </div>
+    </li>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-puzzle-piece"></i> <span class="menu-title">Quản lý khóa học</span>
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="{{url('/them-moi-nam-hoc')}}">Thêm mới khóa học</a>
-          <a class="dropdown-item" href="{{url('/danh-sach-nam-hoc')}}">Danh sách khóa học</a>
-        </div>
-      </li>
-      @endif
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-suitcase"></i> <span class="menu-title">Quản lý chuyên ngành</span>
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="{{url('/them-moi-chuyen-nganh')}}">Thêm mới chuyên ngành</a>
+        <a class="dropdown-item" href="{{url('/danh-sach-chuyen-nganh')}}">Danh sách chuyên ngành</a>
+      </div>
+    </li>
 
-      @if (Session::get('admin_role')==1 || Session::get('admin_role')==2)
-      <li class="nav-item header"><span class="menu-title">Câu hỏi sinh viên</span></li>
-      @endif
-      @if (Session::get('admin_role')==1 || Session::get('admin_role')==2)
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-list"></i> <span class="menu-title">Quản lý danh mục</span>
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="{{url('/them-moi-danh-muc')}}">Thêm mới danh mục</a>
-          <a class="dropdown-item" href="{{url('/danh-sach-danh-muc')}}">Danh sách danh mục</a>
-        </div>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="{{url('danh-sach-cau-hoi')}}">
-          <i class="fa fa-question-circle"></i> <span class="menu-title">Quản lý câu hỏi</span>
-        </a>
-      </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-puzzle-piece"></i> <span class="menu-title">Quản lý khóa học</span>
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="{{url('/them-moi-nam-hoc')}}">Thêm mới khóa học</a>
+        <a class="dropdown-item" href="{{url('/danh-sach-nam-hoc')}}">Danh sách khóa học</a>
+      </div>
+    </li>
+    @endif
 
-      <li class="nav-item">
-        <a class="nav-link" href="{{url('cau-hoi-dang-chu-y')}}">
-          <i class="fa fa-warning"></i> <span class="menu-title">Câu hỏi đáng chú ý</span>
-        </a>
-      </li>
-      @endif
+    @if (Session::get('admin_role')==1 || Session::get('admin_role')==2)
+    <li class="nav-item header"><span class="menu-title">Câu hỏi sinh viên</span></li>
+    @endif
+    @if (Session::get('admin_role')==1)
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-list"></i> <span class="menu-title">Quản lý danh mục</span>
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="{{url('/them-moi-danh-muc')}}">Thêm mới danh mục</a>
+        <a class="dropdown-item" href="{{url('/danh-sach-danh-muc')}}">Danh sách danh mục</a>
+      </div>
+    </li>
+    @endif
+    @if(Session::get('admin_role')==1 || Session::get('admin_role')==2)
+    <li class="nav-item">
+      <a class="nav-link" href="{{url('danh-sach-cau-hoi')}}">
+        <i class="fa fa-question-circle"></i> <span class="menu-title">Quản lý câu hỏi</span>
+      </a>
+    </li>
 
-      @if(Session::get('admin_role')==0 || Session::get('admin_role')==1)
-      <li class="nav-item header"><span class="menu-title">Tài khoản</span></li>
-      @endif
-      @if (Session::get('admin_role')==0)
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-users"></i> <span class="menu-title">Quản lý User</span>
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="{{url('/them-moi-user')}}">Thêm mới User</a>
-          <a class="dropdown-item" href="{{url('/danh-sach-user')}}">Danh sách các User</a>
-        </div>
-      </li>
-      @endif
-      @if (Session::get('admin_role')==0 || Session::get('admin_role')==1)
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-graduation-cap"></i> <span class="menu-title">Quản lý sinh viên</span>
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="{{url('/them-moi-sinh-vien')}}">Thêm mới sinh viên</a>
-          <a class="dropdown-item" href="{{url('/danh-sach-sinh-vien')}}">Danh sách sinh viên</a>
-        </div>
-      </li>
-      @endif
-    </ul>
-  </nav>
+    <li class="nav-item">
+      <a class="nav-link" href="{{url('cau-hoi-dang-chu-y')}}">
+        <i class="fa fa-warning"></i> <span class="menu-title">Câu hỏi đáng chú ý</span>
+      </a>
+    </li>
+    @endif
+
+    @if(Session::get('admin_role')==0 || Session::get('admin_role')==1)
+    <li class="nav-item header"><span class="menu-title">Tài khoản</span></li>
+    @endif
+    @if (Session::get('admin_role')==0)
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-users"></i> <span class="menu-title">Quản lý User</span>
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="{{url('/them-moi-user')}}">Thêm mới User</a>
+        <a class="dropdown-item" href="{{url('/danh-sach-user')}}">Danh sách các User</a>
+      </div>
+    </li>
+    @endif
+    @if (Session::get('admin_role')==0 || Session::get('admin_role')==1)
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-graduation-cap"></i> <span class="menu-title">Quản lý sinh viên</span>
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="{{url('/them-moi-sinh-vien')}}">Thêm mới sinh viên</a>
+        <a class="dropdown-item" href="{{url('/danh-sach-sinh-vien')}}">Danh sách sinh viên</a>
+      </div>
+    </li>
+    @endif
+  </ul>
+</nav>
 </aside><!-- /.left-panel -->
 
 <div class="dashboard-contents">
@@ -243,6 +259,10 @@
 
 <script src="{{asset('public/admin/js/index/index-01.js')}}"></script>
 <script src="{{asset('public/admin/js/main.js')}}"></script>
+<script src="{{asset('public/admin/js/jquery-ui.js')}}"></script>
+<script src="{{asset('public/admin/js/morris.min.js')}}"></script>
+<script src="{{asset('public/admin/js/raphael-min.js')}}"></script>
+<script src="{{asset('public/student/js/sweetalert.min.js')}}"></script>
 
 <script>
   $(function() {
@@ -250,6 +270,112 @@
 
     $('#calendar').fullCalendar();
 
+  });
+</script>
+
+<script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+      dateFormat: "yy-mm-dd",
+    });
+    $( "#datepicker2" ).datepicker({
+      dateFormat: "yy-mm-dd",
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    chartshow();
+
+    var chart = new Morris.Line({
+      element: 'chart_statistic_post',
+      lineColors: ['#7e57c2', '#e22424'],
+      pointStrokeColors:['black'],
+      fillOpacity: 0.3,
+      hideHover: 'auto',
+      parseTime: false,
+      xkey: 'period',
+      ykeys: ['post','like'],
+      labels: ['Câu hỏi','Lượt thích']
+    });
+
+    $('#btn-dashboard-filter').click(function(){
+      var _token = $('input[name="_token"]').val();
+      var from_date = $('#datepicker').val();
+      var to_date = $('#datepicker2').val();
+      if(from_date=='' || to_date==''){
+        swal("Vui lòng không để trống!", "", "warning");
+      }else if(from_date>to_date){
+        swal("Ngày không hợp lệ!", "", "error");
+      }else{
+        $.ajax({
+          url:"{{url('/loc-ngay-thang')}}",
+          method: "POST",
+          dataType: "JSON",
+          data: {from_date:from_date, to_date:to_date, _token:_token},
+          success:function(data){
+            chart.setData(data);
+          }
+        });
+      }
+    });
+
+    $('.dashboard-filter').change(function(){
+      var dashboard_value = $(this).val();
+      var _token = $('input[name="_token"]').val();
+      $.ajax({
+        url:"{{url('/loc-theo-ngay-thang-nam')}}",
+        method: "POST",
+        dataType: "JSON",
+        data: {dashboard_value:dashboard_value, _token:_token},
+        success:function(data){
+          chart.setData(data);
+        }
+      });
+    });
+
+    function chartshow(){
+      var _token = $('input[name="_token"]').val();
+      $.ajax({
+        url:"{{url('/hien-thi-thong-ke')}}",
+        method: "POST",
+        dataType: "JSON",
+        data: {_token:_token},
+        success:function(data){
+          chart.setData(data);
+        }
+      });
+    }
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var colorDanger = "#FF1744";
+    Morris.Donut({
+      element: 'donut',
+      resize: true,
+      colors: [
+      '#E0F7FA',
+      '#B2EBF2',
+      '#80DEEA',
+      '#4DD0E1',
+      '#26C6DA',
+      '#00BCD4',
+      '#00ACC1',
+      '#0097A7',
+      '#00838F',
+      '#006064'
+      ],
+      data: [
+      {label:"Đang Online", value:<?php echo $visitor_count ?>, color:colorDanger},
+      {label:"Tổng tháng trước", value:<?php echo $visitor_lastmonth_count ?>},
+      {label:"Tổng tháng này", value:<?php echo $visitor_thismonth_count ?>},
+      {label:"Tổng cả năm", value:<?php echo $visitor_oneyear_count ?>},
+      {label:"Tổng truy cập", value:<?php echo $visitor_total_count ?>}
+      ]
+    });
   });
 </script>
 
