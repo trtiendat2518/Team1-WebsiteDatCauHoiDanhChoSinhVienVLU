@@ -28,6 +28,7 @@ class CategoryController extends Controller
 	}
 	
 	public function category_list(Request $request){
+		$this->AuthLogin();
     	//SEO
 		$meta_desc = "Danh sách danh mục";
 		$meta_title = "Danh sách danh mục";
@@ -140,10 +141,11 @@ class CategoryController extends Controller
 
 	public function category_add(Request $request){
 		$data = $request->validate([
-			'category_name'=>'bail|required|max:50|min:5',
+			'category_name'=>'bail|required|max:50|min:5|notspecial_spaces',
 			'category_status'=>'bail|required',
 		],[
 			'category_name.required'=>'Tên danh mục không được để trống',
+			'category_name.notspecial_spaces'=>'Tên danh mục không được chứa ký tự đặc biệt',
 			'category_name.min'=>'Tên danh mục ít nhất có 5 ký tự',
 			'category_name.max'=>'Tên danh mục không quá 50 ký tự',
 		]);
@@ -216,9 +218,10 @@ class CategoryController extends Controller
 	public function category_update(Request $request, $category_id){
 		$this->AuthLogin();
 		$data = $request->validate([
-			'category_name'=>'bail|required|max:50|min:5',
+			'category_name'=>'bail|required|max:50|min:5|notspecial_spaces',
 		],[
 			'category_name.required'=>'Tên danh mục không được để trống',
+			'category_name.notspecial_spaces'=>'Tên danh mục không được chứa ký tự đặc biệt',
 			'category_name.min'=>'Tên danh mục ít nhất có 5 ký tự',
 			'category_name.max'=>'Tên danh mục không quá 50 ký tự',
 		]);

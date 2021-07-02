@@ -65,10 +65,11 @@ class CourseController extends Controller
 
    public function course_add(Request $request){
       $data = $request->validate([
-         'course_name'=>'bail|required|max:50|min:2',
+         'course_name'=>'bail|required|max:50|min:2|notspecial_spaces',
          'course_status'=>'bail|required',
       ],[
          'course_name.required'=>'Tên khóa học không được để trống',
+         'course_name.notspecial_spaces'=>'Tên khóa học không được chứa ký tự đặc biệt',
          'course_name.min'=>'Tên khóa học ít nhất có 5 ký tự',
          'course_name.max'=>'Tên khóa học không quá 50 ký tự',
       ]);
@@ -140,9 +141,10 @@ class CourseController extends Controller
    public function course_update(Request $request, $course_id){
       $this->AuthLogin();
       $data = $request->validate([
-         'course_name'=>'bail|required|max:50|min:2',
+         'course_name'=>'bail|required|max:50|min:2|notspecial_spaces',
       ],[
          'course_name.required'=>'Tên khóa học không được để trống',
+         'course_name.notspecial_spaces'=>'Tên khóa học không được chứa ký tự đặc biệt',
          'course_name.min'=>'Tên khóa học ít nhất có 5 ký tự',
          'course_name.max'=>'Tên khóa học không quá 50 ký tự',
       ]);
