@@ -74,7 +74,7 @@ class UserController extends Controller
             'admin_role'=>'required',
         ],[
             'admin_name.required'=>'Tên không được để trống',
-            'admin_name.alpha_spaces'=>'Tên không được chứa ký tự số',
+            'admin_name.alpha_spaces'=>'Tên không được chứa ký tự số hoặc ký tự đặc biệt',
             'admin_name.max'=>'Tên ít nhất có 2 ký tự',
             'admin_name.min'=>'Tên không quá 50 ký tự',
             'admin_email.required'=>'Mail không được để trống',
@@ -197,7 +197,7 @@ class UserController extends Controller
             'admin_role'=>'required',
         ],[
             'admin_name.required'=>'Tên không được để trống',
-            'admin_name.alpha_spaces'=>'Tên không được chứa ký tự số',
+            'admin_name.alpha_spaces'=>'Tên không được chứa ký tự số hoặc ký tự đặc biệt',
             'admin_name.max'=>'Tên ít nhất có 2 ký tự',
             'admin_name.min'=>'Tên không quá 50 ký tự',
             'admin_email.required'=>'Mail không được để trống',

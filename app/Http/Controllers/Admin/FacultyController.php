@@ -67,14 +67,16 @@ class FacultyController extends Controller
 
     public function faculty_add(Request $request){
         $data = $request->validate([
-           'faculty_name'=>'bail|required|max:50|min:5',
-           'faculty_code'=>'bail|required|max:10|min:2',
+           'faculty_name'=>'bail|required|max:50|min:5|notspecial_spaces',
+           'faculty_code'=>'bail|required|max:10|min:2|notspecial_spaces',
            'faculty_status'=>'bail|required',
         ],[
            'faculty_name.required'=>'Tên khoa không được để trống',
+           'faculty_name.notspecial_spaces'=>'Tên khoa không được chứa ký tự đặc biệt',
            'faculty_name.min'=>'Tên khoa ít nhất có 5 ký tự',
            'faculty_name.max'=>'Tên khoa không quá 50 ký tự',
            'faculty_code.required'=>'Mã khoa không được để trống',
+           'faculty_code.notspecial_spaces'=>'Mã khoa không được chứa ký tự đặc biệt',
            'faculty_code.min'=>'Mã khoa ít nhất có 5 ký tự',
            'faculty_code.max'=>'Mã khoa không quá 50 ký tự',
         ]);
@@ -148,13 +150,15 @@ class FacultyController extends Controller
     public function faculty_update(Request $request, $faculty_id){
         $this->AuthLogin();
         $data = $request->validate([
-           'faculty_name'=>'bail|required|max:50|min:5',
-           'faculty_code'=>'bail|required|max:10|min:2',
+           'faculty_name'=>'bail|required|max:50|min:5|notspecial_spaces',
+           'faculty_code'=>'bail|required|max:10|min:2|notspecial_spaces',
         ],[
            'faculty_name.required'=>'Tên khoa không được để trống',
+           'faculty_name.notspecial_spaces'=>'Tên khoa không được chứa ký tự đặc biệt',
            'faculty_name.min'=>'Tên khoa ít nhất có 5 ký tự',
            'faculty_name.max'=>'Tên khoa không quá 50 ký tự',
            'faculty_code.required'=>'Mã khoa không được để trống',
+           'faculty_code.notspecial_spaces'=>'Mã khoa không được chứa ký tự đặc biệt',
            'faculty_code.min'=>'Mã khoa ít nhất có 5 ký tự',
            'faculty_code.max'=>'Mã khoa không quá 50 ký tự',
         ]);
