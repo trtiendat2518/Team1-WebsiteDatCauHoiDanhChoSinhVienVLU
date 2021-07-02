@@ -162,4 +162,9 @@ Route::get('/thong-tin-tai-khoan-admin/{admin_id}', 'Admin\AdminInfoController@a
 Route::post('/them-thong-tin-admin/{admin_id}', 'Admin\AdminInfoController@admininfo_create');
 Route::post('/sua-thong-tin-admin/{admin_info_id}', 'Admin\AdminInfoController@admininfo_update');
 
+//ADMIN STATISTIC
+Route::post('/loc-ngay-thang', 'Admin\StatisticController@statistic_filter');
+Route::post('/loc-theo-ngay-thang-nam', 'Admin\StatisticController@statistic_select');
+Route::post('/hien-thi-thong-ke', 'Admin\StatisticController@statistic_show');
+
 

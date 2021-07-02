@@ -37,8 +37,9 @@
   <link rel="stylesheet" href="{{asset('public/admin/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('public/admin/css/index-01.css')}}">
   <link rel="stylesheet" href="{{asset('public/admin/css/responsive.css')}}">
-
-
+  <link rel="stylesheet" href="{{asset('public/admin/css/jquery-ui.css')}}">
+  <link rel="stylesheet" href="{{asset('public/admin/css/morris.css')}}">
+  <link rel="stylesheet" href="{{asset('public/student/css/sweetalert.css')}}">
 </head>
 
 
@@ -153,7 +154,7 @@
     @if (Session::get('admin_role')==1 || Session::get('admin_role')==2)
     <li class="nav-item header"><span class="menu-title">Câu hỏi sinh viên</span></li>
     @endif
-    @if (Session::get('admin_role')==1 || Session::get('admin_role')==2)
+    @if (Session::get('admin_role')==1)
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fa fa-list"></i> <span class="menu-title">Quản lý danh mục</span>
@@ -163,7 +164,8 @@
         <a class="dropdown-item" href="{{url('/danh-sach-danh-muc')}}">Danh sách danh mục</a>
       </div>
     </li>
-
+    @endif
+    @if(Session::get('admin_role')==1 || Session::get('admin_role')==2)
     <li class="nav-item">
       <a class="nav-link" href="{{url('danh-sach-cau-hoi')}}">
         <i class="fa fa-question-circle"></i> <span class="menu-title">Quản lý câu hỏi</span>
@@ -257,6 +259,10 @@
 
 <script src="{{asset('public/admin/js/index/index-01.js')}}"></script>
 <script src="{{asset('public/admin/js/main.js')}}"></script>
+<script src="{{asset('public/admin/js/jquery-ui.js')}}"></script>
+<script src="{{asset('public/admin/js/morris.min.js')}}"></script>
+<script src="{{asset('public/admin/js/raphael-min.js')}}"></script>
+<script src="{{asset('public/student/js/sweetalert.min.js')}}"></script>
 
 <script>
   $(function() {
@@ -264,6 +270,112 @@
 
     $('#calendar').fullCalendar();
 
+  });
+</script>
+
+<script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+      dateFormat: "yy-mm-dd",
+    });
+    $( "#datepicker2" ).datepicker({
+      dateFormat: "yy-mm-dd",
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    chartshow();
+
+    var chart = new Morris.Line({
+      element: 'chart_statistic_post',
+      lineColors: ['#7e57c2', '#e22424'],
+      pointStrokeColors:['black'],
+      fillOpacity: 0.3,
+      hideHover: 'auto',
+      parseTime: false,
+      xkey: 'period',
+      ykeys: ['post','like'],
+      labels: ['Câu hỏi','Lượt thích']
+    });
+
+    $('#btn-dashboard-filter').click(function(){
+      var _token = $('input[name="_token"]').val();
+      var from_date = $('#datepicker').val();
+      var to_date = $('#datepicker2').val();
+      if(from_date=='' || to_date==''){
+        swal("Vui lòng không để trống!", "", "warning");
+      }else if(from_date>to_date){
+        swal("Ngày không hợp lệ!", "", "error");
+      }else{
+        $.ajax({
+          url:"{{url('/loc-ngay-thang')}}",
+          method: "POST",
+          dataType: "JSON",
+          data: {from_date:from_date, to_date:to_date, _token:_token},
+          success:function(data){
+            chart.setData(data);
+          }
+        });
+      }
+    });
+
+    $('.dashboard-filter').change(function(){
+      var dashboard_value = $(this).val();
+      var _token = $('input[name="_token"]').val();
+      $.ajax({
+        url:"{{url('/loc-theo-ngay-thang-nam')}}",
+        method: "POST",
+        dataType: "JSON",
+        data: {dashboard_value:dashboard_value, _token:_token},
+        success:function(data){
+          chart.setData(data);
+        }
+      });
+    });
+
+    function chartshow(){
+      var _token = $('input[name="_token"]').val();
+      $.ajax({
+        url:"{{url('/hien-thi-thong-ke')}}",
+        method: "POST",
+        dataType: "JSON",
+        data: {_token:_token},
+        success:function(data){
+          chart.setData(data);
+        }
+      });
+    }
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var colorDanger = "#FF1744";
+    Morris.Donut({
+      element: 'donut',
+      resize: true,
+      colors: [
+      '#E0F7FA',
+      '#B2EBF2',
+      '#80DEEA',
+      '#4DD0E1',
+      '#26C6DA',
+      '#00BCD4',
+      '#00ACC1',
+      '#0097A7',
+      '#00838F',
+      '#006064'
+      ],
+      data: [
+      {label:"Đang Online", value:<?php echo $visitor_count ?>, color:colorDanger},
+      {label:"Tổng tháng trước", value:<?php echo $visitor_lastmonth_count ?>},
+      {label:"Tổng tháng này", value:<?php echo $visitor_thismonth_count ?>},
+      {label:"Tổng cả năm", value:<?php echo $visitor_oneyear_count ?>},
+      {label:"Tổng truy cập", value:<?php echo $visitor_total_count ?>}
+      ]
+    });
   });
 </script>
 

@@ -1,6 +1,6 @@
 @extends('admin.admin_layout')
 @section('admin_content')
-@foreach ($admin as $key => $infoma)
+@foreach ($info as $key => $infoma)
 <div class="row">
 	<div class="col-md-12">
 		@php
@@ -28,7 +28,7 @@
 									<div class="col-lg-12 col-md-12">
 										<div class="social-box">
 											<a href="javascript:void(0)">
-												<div class="avatar"><img class="rounded-circle" src="{{asset('public/admin/images/avatar/'.$infoma->admin_avatar)}}" alt="Avatar"></div>
+												<div class="avatar"><img class="rounded-circle" src="{{asset('public/admin/images/avatar/'.$infoma->info->admin_info_avatar)}}" alt="Avatar"></div>
 											</div><!-- /.details -->
 										</a>
 									</div><!-- /.social-box -->
@@ -79,7 +79,7 @@
 											@else
 											<option value="0">Nam</option>
 											<option value="1" selected>Nữ</option>
-											@endif\
+											@endif
 										</select>
 									</div>
 								</div>
@@ -95,7 +95,11 @@
 									<div class="form-group">
 										<label for="postal-code" class=" form-control-label">Khoa</label>
 										<select class="form-control select2" name="faculty_id">
+											@if ($infoma->info->faculty_id==0)
+											<option value="0">-</option>
+											@else
 											<option value="{{$infoma->info->faculty_id}}">{{$infoma->info->faculty->faculty_name}}</option>
+											@endif
 											@foreach ($faculty as $key => $fct)
 											<option value="{{$fct->faculty_id}}">{{$fct->faculty_name}}</option>
 											@endforeach
