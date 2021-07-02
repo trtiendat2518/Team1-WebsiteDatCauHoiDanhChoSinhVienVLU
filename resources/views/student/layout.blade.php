@@ -221,7 +221,7 @@
 						<div class="dropdown-box-list-item unread">
 							<!-- USER STATUS -->
 							<div class="user-status notification">
-								<!-- USER STATUS AVATAR -->
+								@if ($nofication->student_id!=0)
 								<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">
 									<!-- USER AVATAR -->
 									<div class="user-avatar small no-outline">
@@ -253,7 +253,36 @@
 									</div>
 									<!-- /USER AVATAR -->
 								</a>
-								<!-- /USER STATUS AVATAR -->
+								@else
+								<a class="user-status-avatar">
+									<!-- USER AVATAR -->
+									<div class="user-avatar small no-outline">
+										<!-- USER AVATAR CONTENT -->
+										<div class="user-avatar-content">
+											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/vlu.ico')}}"></div>
+										</div>
+										<!-- /USER AVATAR CONTENT -->
+
+										<!-- USER AVATAR PROGRESS -->
+										<div class="user-avatar-progress">
+											<!-- HEXAGON -->
+											<div class="hexagon-progress-40-44"></div>
+											<!-- /HEXAGON -->
+										</div>
+										<!-- /USER AVATAR PROGRESS -->
+
+										<!-- USER AVATAR PROGRESS BORDER -->
+										<div class="user-avatar-progress-border">
+											<!-- HEXAGON -->
+											<div class="hexagon-border-40-44"></div>
+											<!-- /HEXAGON -->
+										</div>
+										<!-- /USER AVATAR PROGRESS BORDER -->
+									</div>
+									<!-- /USER AVATAR -->
+								</a>
+								@endif
+								
 								@if ($nofication->nofication_kind=='Like')
 								<!-- USER STATUS TITLE -->
 								<p class="user-status-title"><a class="bold" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">{{$nofication->studentes->student_name}}</a> đã thích bài viết <a class="highlighted btnReadnofi" data-id_readnofi="{{$nofication->nofication_id}}" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
@@ -292,7 +321,7 @@
 								<!-- /USER STATUS ICON -->
 								@else
 								<!-- USER STATUS TITLE -->
-								<p class="user-status-title">Khoa đã trả lời câu hỏi <a class="highlighted btnReadnofi" data-id_readnofi="{{$nofication->nofication_id}}" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
+								<p class="user-status-title">BCN Khoa đã trả lời câu hỏi <a class="highlighted btnReadnofi" data-id_readnofi="{{$nofication->nofication_id}}" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
 								<!-- /USER STATUS TITLE -->
 
 								<!-- USER STATUS TIMESTAMP -->
@@ -318,7 +347,7 @@
 						<div class="dropdown-box-list-item">
 							<!-- USER STATUS -->
 							<div class="user-status notification">
-								<!-- USER STATUS AVATAR -->
+								@if ($nofication->student_id!=0)
 								<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">
 									<!-- USER AVATAR -->
 									<div class="user-avatar small no-outline">
@@ -350,7 +379,36 @@
 									</div>
 									<!-- /USER AVATAR -->
 								</a>
-								<!-- /USER STATUS AVATAR -->
+								@else
+								<a class="user-status-avatar">
+									<!-- USER AVATAR -->
+									<div class="user-avatar small no-outline">
+										<!-- USER AVATAR CONTENT -->
+										<div class="user-avatar-content">
+											<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/vlu.ico')}}"></div>
+										</div>
+										<!-- /USER AVATAR CONTENT -->
+
+										<!-- USER AVATAR PROGRESS -->
+										<div class="user-avatar-progress">
+											<!-- HEXAGON -->
+											<div class="hexagon-progress-40-44"></div>
+											<!-- /HEXAGON -->
+										</div>
+										<!-- /USER AVATAR PROGRESS -->
+
+										<!-- USER AVATAR PROGRESS BORDER -->
+										<div class="user-avatar-progress-border">
+											<!-- HEXAGON -->
+											<div class="hexagon-border-40-44"></div>
+											<!-- /HEXAGON -->
+										</div>
+										<!-- /USER AVATAR PROGRESS BORDER -->
+									</div>
+									<!-- /USER AVATAR -->
+								</a>
+								@endif
+
 								@if ($nofication->nofication_kind=='Like')
 								<!-- USER STATUS TITLE -->
 								<p class="user-status-title"><a class="bold" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">{{$nofication->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
@@ -389,7 +447,7 @@
 								<!-- /USER STATUS ICON -->
 								@else
 								<!-- USER STATUS TITLE -->
-								<p class="user-status-title">Khoa đã trả lời câu hỏi <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
+								<p class="user-status-title">BCN Khoa đã trả lời câu hỏi <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
 								<!-- /USER STATUS TITLE -->
 
 								<!-- USER STATUS TIMESTAMP -->
