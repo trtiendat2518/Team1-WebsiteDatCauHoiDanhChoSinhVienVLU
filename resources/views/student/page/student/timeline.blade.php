@@ -207,10 +207,10 @@
 						<!-- INFORMATION LINE TITLE -->
 						<p class="information-line-title">Chuyên ngành</p>
 						<!-- /INFORMATION LINE TITLE -->
-						@if ($Sinfo->info->student_info_gender == 1)
-						<p class="information-line-text">Nam</p>
-						@elseif ($Sinfo->info->student_info_gender == 2)
-						<p class="information-line-text">Nữ</p>
+						@if($Sinfo->info->specialized_id==0)
+						<p class="information-line-text">-</p>
+						@else
+						<p class="information-line-text">{{$Sinfo->info->specialized->specialized_name}}</p>
 						@endif
 					</div>
 					<!-- /INFORMATION LINE -->
@@ -259,11 +259,7 @@
 						<!-- /INFORMATION LINE TITLE -->
 
 						<!-- INFORMATION LINE TEXT -->
-						@if($Sinfo->info->specialized_id==0)
 						<p class="information-line-text">-</p>
-						@else
-						<p class="information-line-text">{{$Sinfo->info->specialized->specialized_name}}</p>
-						@endif
 						<!-- /INFORMATION LINE TEXT -->
 					</div>
 					<!-- /INFORMATION LINE -->
@@ -271,7 +267,16 @@
 					<!-- INFORMATION LINE -->
 					<div class="information-line">
 						<!-- INFORMATION LINE TITLE -->
-						<p class="information-line-title">Giới tính</p>
+						<p class="information-line-title">Khoa</p>
+						<!-- /INFORMATION LINE TITLE -->
+						<p class="information-line-text">-</p>
+					</div>
+					<!-- /INFORMATION LINE -->
+
+					<!-- INFORMATION LINE -->
+					<div class="information-line">
+						<!-- INFORMATION LINE TITLE -->
+						<p class="information-line-title">Chuyên ngành</p>
 						<!-- /INFORMATION LINE TITLE -->
 						<p class="information-line-text">-</p>
 					</div>

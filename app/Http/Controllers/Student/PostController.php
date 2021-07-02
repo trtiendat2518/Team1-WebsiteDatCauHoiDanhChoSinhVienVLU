@@ -82,13 +82,15 @@ class PostController extends Controller
 		$meta_title = "Chi tiết câu hỏi";
 		$url_canonical = $request->url();
 		//---------------
+		$nofi2 = Nofication::where('nofication_mine',md5(Session::get('student_id')))
+		->where('nofication_status',0)->get();
+		$nofi2_count = $nofi2->count();
 		
 		$post_detail = Post::where('post_id',$post_id)->with('category','student','likes','comments')->get();
 		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
 		->limit(1)->get();
 		$nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
-		$nofi2 = Nofication::with('postes')->where('nofication_status',0)->limit(1)->get();
 
-		return view('student.page.post.detail')->with(compact('meta_desc','meta_title','url_canonical','post_detail','nofi','studentSS','nofi2'));
+		return view('student.page.post.detail')->with(compact('meta_desc','meta_title','url_canonical','post_detail','nofi','studentSS','nofi2','nofi2_count'));
 	}
 }

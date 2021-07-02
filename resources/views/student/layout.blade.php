@@ -162,30 +162,46 @@
 			<!-- ACTION LIST ITEM WRAP -->
 			<div class="action-list-item-wrap">
 				<!-- ACTION LIST ITEM -->
-				@foreach ($nofi2 as $key => $val)
-				@if($val->postes->student_id==Session::get('student_id') && $val->nofication_status==0)
+				@php
+					if($nofi2_count>0){
+				@endphp
 				<div class="action-list-item iconnofi unread header-dropdown-trigger">
 					<svg class="action-list-item-icon icon-notification">
 						<use xlink:href="#svg-notification"></use>
 					</svg>
 				</div>
-				@else
+				@php
+					}else{
+				@endphp
 				<div class="action-list-item header-dropdown-trigger">
 					<svg class="action-list-item-icon icon-notification">
 						<use xlink:href="#svg-notification"></use>
 					</svg>
 				</div>
-				@endif
-				@endforeach
+				@php
+					}
+				@endphp
 				<!-- /ACTION LIST ITEM -->
 
 				<!-- DROPDOWN BOX -->
 				<div class="dropdown-box header-dropdown">
 					<!-- DROPDOWN BOX HEADER -->
 					<div class="dropdown-box-header">
+						@php
+							if($nofi2_count>0){
+						@endphp
+						<!-- DROPDOWN BOX HEADER TITLE -->
+						<p class="dropdown-box-header-title">Thông báo (<?php echo $nofi2_count ?>)</p>
+						<!-- /DROPDOWN BOX HEADER TITLE -->
+						@php
+							}else{
+						@endphp
 						<!-- DROPDOWN BOX HEADER TITLE -->
 						<p class="dropdown-box-header-title">Thông báo</p>
 						<!-- /DROPDOWN BOX HEADER TITLE -->
+						@php
+							}
+						@endphp
 
 						<!-- DROPDOWN BOX HEADER ACTIONS -->
 						<div class="dropdown-box-header-actions readallnofi">
@@ -303,7 +319,7 @@
 							<!-- USER STATUS -->
 							<div class="user-status notification">
 								<!-- USER STATUS AVATAR -->
-								<a class="user-status-avatar" href="profile-timeline.html">
+								<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">
 									<!-- USER AVATAR -->
 									<div class="user-avatar small no-outline">
 										<!-- USER AVATAR CONTENT -->
@@ -337,7 +353,7 @@
 								<!-- /USER STATUS AVATAR -->
 								@if ($nofication->nofication_kind=='Like')
 								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$nofication->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
+								<p class="user-status-title"><a class="bold" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">{{$nofication->studentes->student_name}}</a> đã thích bài viết <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
 								<!-- /USER STATUS TITLE -->
 
 								<!-- USER STATUS TIMESTAMP -->
@@ -355,7 +371,7 @@
 								<!-- /USER STATUS ICON -->
 								@elseif($nofication->nofication_kind=='Comment')
 								<!-- USER STATUS TITLE -->
-								<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$nofication->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
+								<p class="user-status-title"><a class="bold" href="{{url('/trang-sinh-vien/'.$nofication->studentes->student_id)}}">{{$nofication->studentes->student_name}}</a> đã bình luận vào bài viết <a class="highlighted" href="{{url('/chi-tiet-cau-hoi/'.$nofication->postes->post_id)}}">{{$nofication->postes->post_title}}</a> của bạn</p>
 								<!-- /USER STATUS TITLE -->
 
 								<!-- USER STATUS TIMESTAMP -->
