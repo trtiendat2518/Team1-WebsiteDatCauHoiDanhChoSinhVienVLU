@@ -67,11 +67,12 @@ class SpecializedController extends Controller
 
     public function specialized_add(Request $request){
         $data = $request->validate([
-           'specialized_name'=>'bail|required|max:50|min:5',
+           'specialized_name'=>'bail|required|max:50|min:5|notspecial_spaces',
            'faculty_id'=>'bail|required',
            'specialized_status'=>'bail|required',
         ],[
            'specialized_name.required'=>'Tên chuyên ngành không được để trống',
+           'specialized_name.notspecial_spaces'=>'Tên chuyên ngành không được chứa ký tự đặc biệt',
            'specialized_name.min'=>'Tên chuyên ngành ít nhất có 5 ký tự',
            'specialized_name.max'=>'Tên chuyên ngành không quá 50 ký tự',
            'faculty_id.required'=>'Mã chuyên ngành không được để trống',
@@ -147,10 +148,11 @@ class SpecializedController extends Controller
     public function specialized_update(Request $request, $specialized_id){
         $this->AuthLogin();
         $data = $request->validate([
-           'specialized_name'=>'bail|required|max:50|min:5',
+           'specialized_name'=>'bail|required|max:50|min:5|notspecial_spaces',
            'faculty_id'=>'bail|required',
         ],[
            'specialized_name.required'=>'Tên chuyên ngành không được để trống',
+           'specialized_name.notspecial_spaces'=>'Tên chuyên ngành không được chứa ký tự đặc biệt',
            'specialized_name.min'=>'Tên chuyên ngành ít nhất có 5 ký tự',
            'specialized_name.max'=>'Tên chuyên ngành không quá 50 ký tự',
            'faculty_id.required'=>'Mã chuyên ngành không được để trống',

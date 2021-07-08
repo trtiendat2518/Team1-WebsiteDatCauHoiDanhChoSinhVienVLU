@@ -22,15 +22,17 @@ class NoficationController extends Controller
         $meta_title = "Trang chủ";
         $url_canonical = $request->url();
         //---------------
+        $nofi2 = Nofication::where('nofication_mine',md5(Session::get('student_id')))
+        ->where('nofication_status',0)->get();
+        $nofi2_count = $nofi2->count();
         
         $nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
         $list = Nofication::with('postes','studentes')->orderBy('nofication_created','DESC')
         ->paginate(10);
         $studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
         ->limit(1)->get();
-        $nofi2 = Nofication::with('postes')->where('nofication_status',0)->limit(1)->get();
 
-        return view('student.page.nofication.list')->with(compact('meta_desc','meta_title','url_canonical','list','nofi','nofi2','studentSS'));
+        return view('student.page.nofication.list')->with(compact('meta_desc','meta_title','url_canonical','list','nofi','nofi2','studentSS','nofi2_count'));
     }
 
     public function nofication_readone($nofication_id){

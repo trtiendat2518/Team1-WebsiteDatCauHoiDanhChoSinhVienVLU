@@ -154,7 +154,7 @@ class StudentController extends Controller
 			'student_password'=>'bail|required|min:6|max:32',
 		],[
 			'student_name.required'=>'Tên không được để trống',
-			'student_name.alpha_spaces'=>'Tên không được chứa ký tự số',
+			'student_name.alpha_spaces'=>'Tên không được chứa ký tự số hoặc ký tự đặc biệt',
 			'student_email.required'=>'Mail không được để trống',
 			'student_email.email'=>'Mail nhập sai định dạng',
 			'student_password.required'=>'Mật khẩu không được để trống',
@@ -237,7 +237,7 @@ class StudentController extends Controller
 			'student_password'=>'bail|required|min:6|max:32',
 		],[
 			'student_name.required'=>'Tên không được để trống',
-			'student_name.alpha_spaces'=>'Tên không được chứa ký tự số',
+			'student_name.alpha_spaces'=>'Tên không được chứa ký tự số hoặc ký tự đặc biệt',
 			'student_email.required'=>'Mail không được để trống',
 			'student_email.email'=>'Mail nhập sai định dạng',
 			'student_password.required'=>'Mật khẩu không được để trống',

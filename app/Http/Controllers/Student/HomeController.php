@@ -32,6 +32,9 @@ class HomeController extends Controller
 		$mycmt_count = $mycmt->count();
 		$mypost = Post::where('student_id',Session::get('student_id'))->get();
 		$mypost_count = $mypost->count();
+		$nofi2 = Nofication::where('nofication_mine',md5(Session::get('student_id')))
+		->where('nofication_status',0)->get();
+		$nofi2_count = $nofi2->count();
 
 		$category_post = Category::orderBy('category_id', 'DESC')->get();
 		$postpin = Post::with('category','student','likes','comments')->where('post_pin',1)->limit(1)->get();
@@ -42,9 +45,8 @@ class HomeController extends Controller
 		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
 		->limit(1)->get();
 		$nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
-		$nofi2 = Nofication::with('postes')->where('nofication_status',0)->limit(1)->get();
 
-		return view('student.page.home')->with(compact('meta_desc','meta_title','url_canonical','category_post','post2','studentSS','nofi','nofi2','posthot','postpin','mypost_count','mylike_count','mycmt_count'));
+		return view('student.page.home')->with(compact('meta_desc','meta_title','url_canonical','category_post','post2','studentSS','nofi','nofi2','posthot','postpin','mypost_count','mylike_count','mycmt_count','nofi2_count'));
 	}
 
 	public function search(Request $request){
@@ -59,6 +61,9 @@ class HomeController extends Controller
 		$mycmt_count = $mycmt->count();
 		$mypost = Post::where('student_id',Session::get('student_id'))->get();
 		$mypost_count = $mypost->count();
+		$nofi2 = Nofication::where('nofication_mine',md5(Session::get('student_id')))
+		->where('nofication_status',0)->get();
+		$nofi2_count = $nofi2->count();
 		
 		$category_post = Category::orderBy('category_id', 'DESC')->get();
 		$keywords = $request->keywords_submit;
@@ -70,8 +75,7 @@ class HomeController extends Controller
 		$studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
 		->limit(1)->get();
 		$nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
-		$nofi2 = Nofication::with('postes')->where('nofication_status',0)->limit(1)->get();
 		
-		return view('student.page.post.search')->with(compact('meta_desc','meta_title','url_canonical','category_post','search_product','studentSS','nofi','nofi2','posthot','mypost_count','mylike_count','mycmt_count'));
+		return view('student.page.post.search')->with(compact('meta_desc','meta_title','url_canonical','category_post','search_product','studentSS','nofi','nofi2','posthot','mypost_count','mylike_count','mycmt_count','nofi2_count'));
 	}
 }
