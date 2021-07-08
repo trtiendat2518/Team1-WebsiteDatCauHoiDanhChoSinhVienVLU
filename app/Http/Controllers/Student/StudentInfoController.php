@@ -13,7 +13,6 @@ use App\Models\Nofication;
 use App\Models\Faculty;
 use App\Models\Specialized;
 use App\Models\Course;
-use DB;
 use Session;
 session_start();
 
