@@ -13,7 +13,6 @@ use App\Models\Nofication;
 use App\Models\Faculty;
 use App\Models\Specialized;
 use App\Models\Course;
-use DB;
 use Session;
 session_start();
 
@@ -25,7 +24,8 @@ class StudentInfoController extends Controller
         $meta_title = "Thông tin tài khoản";
         $url_canonical =$request->url();
         //-----------------------
-        
+        $studentSS = Student::with('info')->where('student_id',Session::get('student_id'))
+        ->limit(1)->get();
         $student2 = Student::with('info')->where('student_id',Session::get('student_id'))->limit(1)->get();
        
         foreach ($student2 as $key => $value) {
@@ -98,9 +98,11 @@ class StudentInfoController extends Controller
         }
        
         $nofi = Nofication::with('postes','studentes')->orderBy('nofication_id','DESC')->limit(5)->get();
-        $nofi2 = Nofication::with('postes')->orderBy('nofication_id','DESC')->limit(1)->get();
+        $nofi2 = Nofication::where('nofication_mine',md5(Session::get('student_id')))
+        ->where('nofication_status',0)->get();
+        $nofi2_count = $nofi2->count();
 
-        return view('student.page.student.profile')->with(compact('meta_desc','meta_title','url_canonical','student2','nofi','nofi2','faculty','specialized','course'));
+        return view('student.page.student.profile')->with(compact('meta_desc','meta_title','url_canonical','student2','nofi','nofi2','faculty','specialized','course','studentSS','nofi2_count'));
     }
 
     public function studentinfo_create(Request $request, $student_id){

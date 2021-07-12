@@ -89,7 +89,7 @@
 				<!-- USER STATUS -->
 				<div class="user-status notification">
 					<!-- USER STATUS AVATAR -->
-					<a class="user-status-avatar" href="profile-timeline.html">
+					<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$list_nofi->studentes->student_id)}}">
 						<!-- USER AVATAR -->
 						<div class="user-avatar small no-outline">
 							<!-- USER AVATAR CONTENT -->
@@ -125,7 +125,7 @@
 					<!-- /USER STATUS AVATAR -->
 					@if ($list_nofi->nofication_kind=='Like')
 					<!-- USER STATUS TITLE -->
-					<p class="user-status-title"><a class="bold" href="profile-timeline.html">{{$list_nofi->studentes->student_name}}</a> đã thích bài viết <a class="highlighted btnReadnofi" data-id_readnofi="{{$list_nofi->nofication_id}}" href="{{url('/chi-tiet-cau-hoi/'.$list_nofi->postes->post_id)}}">{{$list_nofi->postes->post_title}}</a> của bạn</p>
+					<p class="user-status-title"><a class="bold" href="{{url('/trang-sinh-vien/'.$list_nofi->studentes->student_id)}}">{{$list_nofi->studentes->student_name}}</a> đã thích bài viết <a class="highlighted btnReadnofi" data-id_readnofi="{{$list_nofi->nofication_id}}" href="{{url('/chi-tiet-cau-hoi/'.$list_nofi->postes->post_id)}}">{{$list_nofi->postes->post_title}}</a> của bạn</p>
 					<!-- /USER STATUS TITLE -->
 
 					<!-- USER STATUS TIMESTAMP -->

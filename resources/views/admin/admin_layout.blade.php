@@ -351,9 +351,7 @@
 </script>
 
 <script type="text/javascript">
-
   $(document).ready(function(){
-
     var colorDanger = "#FF1744";
     Morris.Donut({
       element: 'donut',
@@ -379,7 +377,6 @@
       ]
     });
   });
-
 </script>
 
 </body>

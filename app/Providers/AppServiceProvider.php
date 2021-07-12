@@ -28,5 +28,9 @@ class AppServiceProvider extends ServiceProvider
             return preg_match('/^[\pL\s]+$/u', $value); 
 
         });
+        Validator::extend('notspecial_spaces', function ($attribute, $value) {
+            return preg_match('/^[0-9a-zA-Z\pL\s]+$/u', $value); 
+
+        });
     }
 }

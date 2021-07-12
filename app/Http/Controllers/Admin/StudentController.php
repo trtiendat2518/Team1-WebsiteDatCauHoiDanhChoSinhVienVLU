@@ -16,6 +16,8 @@ use App\Models\Reply;
 use App\Imports\StudentImport;
 use App\Exports\StudentExport;
 use App\Models\Admin;
+use App\Models\Visitor;
+use Carbon\Carbon;
 use Excel;
 use Validator;
 use Session;
@@ -34,40 +36,127 @@ class StudentController extends Controller
 
 	public function student_list(Request $request){
 		$this->AuthLogin();
-      	//SEO
-		$meta_desc = "Danh sách sinh viên";
-		$meta_title = "Danh sách sinh viên";
-		$url_canonical = $request->url();
-     	//---------------
-     	$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-		$list = Student::orderBy('student_id', 'DESC')->paginate(5);
-		return view('admin.pages.alumnus.list')->with(compact('meta_desc','meta_title','url_canonical','list','info'));
+		if(Session::get('admin_role')==0 || Session::get('admin_role')==1){
+      		//SEO
+			$meta_desc = "Danh sách sinh viên";
+			$meta_title = "Danh sách sinh viên";
+			$url_canonical = $request->url();
+     		//---------------
+			$user_ip_address = $request->ip();
+			$visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+			$visitor_count = $visitor_current->count();
+			if($visitor_count<1){
+				$visitor = new Visitor();
+				$visitor->visitor_ipaddress = $user_ip_address;
+				$visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+				$visitor->save();
+			}
+
+			$headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+			$backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+			$headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+			$sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+			$now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+			$visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+			$visitor_lastmonth_count = $visitor_lastmonth->count();
+			$visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+			$visitor_thismonth_count = $visitor_thismonth->count();
+			$visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+			$visitor_oneyear_count = $visitor_oneyear->count();
+			$visitors = Visitor::all();
+			$visitor_total_count = $visitors->count();
+
+			$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+			$list = Student::orderBy('student_id', 'DESC')->paginate(5);
+			return view('admin.pages.alumnus.list')->with(compact('meta_desc','meta_title','url_canonical','list','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
+		}else{
+			return Redirect::to('admin-home');
+		}
 	}
 
 	public function student_search(Request $request){
 		$this->AuthLogin();
-      	//SEO
-		$meta_desc = "Tìm kiếm";
-		$meta_title = "Tìm kiếm";
-		$url_canonical = $request->url();
-      	//---------------
-		$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-		$keywords = $request->keywords_submit;
-		$search = Student::where('student_name','like','%'.$keywords.'%')
-		->orWhere('student_email','like','%'.$keywords.'%')
-		->orderBy('student_id','DESC')->get();
-		return view('admin.pages.alumnus.search')->with(compact('meta_desc','meta_title','url_canonical','search','info'));
+		if(Session::get('admin_role')==0 || Session::get('admin_role')==1){
+      		//SEO
+			$meta_desc = "Tìm kiếm";
+			$meta_title = "Tìm kiếm";
+			$url_canonical = $request->url();
+      		//---------------
+			$user_ip_address = $request->ip();
+			$visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+			$visitor_count = $visitor_current->count();
+			if($visitor_count<1){
+				$visitor = new Visitor();
+				$visitor->visitor_ipaddress = $user_ip_address;
+				$visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+				$visitor->save();
+			}
+
+			$headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+			$backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+			$headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+			$sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+			$now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+			$visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+			$visitor_lastmonth_count = $visitor_lastmonth->count();
+			$visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+			$visitor_thismonth_count = $visitor_thismonth->count();
+			$visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+			$visitor_oneyear_count = $visitor_oneyear->count();
+			$visitors = Visitor::all();
+			$visitor_total_count = $visitors->count();
+
+			$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+			$keywords = $request->keywords_submit;
+			$search = Student::where('student_name','like','%'.$keywords.'%')
+			->orWhere('student_email','like','%'.$keywords.'%')
+			->orderBy('student_id','DESC')->get();
+			return view('admin.pages.alumnus.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
+		}else{
+			return Redirect::to('admin-home');
+		}
 	}
 
 	public function student_open(Request $request){
 		$this->AuthLogin();
-      //SEO
-		$meta_desc = "Thêm mới sinh viên";
-		$meta_title = "Thêm mới sinh viên";
-		$url_canonical = $request->url();
-      //---------------
-      	$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-		return view('admin.pages.alumnus.add')->with(compact('meta_desc','meta_title','url_canonical','info'));
+		if(Session::get('admin_role')==0 || Session::get('admin_role')==1){
+      		//SEO
+			$meta_desc = "Thêm mới sinh viên";
+			$meta_title = "Thêm mới sinh viên";
+			$url_canonical = $request->url();
+      		//---------------
+			$user_ip_address = $request->ip();
+			$visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+			$visitor_count = $visitor_current->count();
+			if($visitor_count<1){
+				$visitor = new Visitor();
+				$visitor->visitor_ipaddress = $user_ip_address;
+				$visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+				$visitor->save();
+			}
+
+			$headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+			$backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+			$headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+			$sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+			$now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+			$visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+			$visitor_lastmonth_count = $visitor_lastmonth->count();
+			$visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+			$visitor_thismonth_count = $visitor_thismonth->count();
+			$visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+			$visitor_oneyear_count = $visitor_oneyear->count();
+			$visitors = Visitor::all();
+			$visitor_total_count = $visitors->count();
+
+			$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+			return view('admin.pages.alumnus.add')->with(compact('meta_desc','meta_title','url_canonical','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
+		}else{
+			return Redirect::to('admin-home');
+		}
 	}
 
 	public function student_add(Request $request){
@@ -77,7 +166,7 @@ class StudentController extends Controller
 			'student_password'=>'bail|required|min:6|max:32',
 		],[
 			'student_name.required'=>'Tên không được để trống',
-			'student_name.alpha_spaces'=>'Tên không được chứa ký tự số',
+			'student_name.alpha_spaces'=>'Tên không được chứa ký tự số hoặc ký tự đặc biệt',
 			'student_email.required'=>'Mail không được để trống',
 			'student_email.email'=>'Mail nhập sai định dạng',
 			'student_password.required'=>'Mật khẩu không được để trống',
@@ -98,9 +187,9 @@ class StudentController extends Controller
 			Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
 			return Redirect::to('them-moi-sinh-vien');
 		}else if($check_email){
-            Session::put('message','<div class="alert alert-danger">Email sinh viên đã tồn tại!</div>');
-            return Redirect::to('them-moi-sinh-vien');
-        }else{
+			Session::put('message','<div class="alert alert-danger">Email sinh viên đã tồn tại!</div>');
+			return Redirect::to('them-moi-sinh-vien');
+		}else{
 			$result = $student->save(); 
 			if($result){
 				Session::put('message','<div class="alert alert-success">Thêm mới sinh viên thành công!</div>');
@@ -114,17 +203,46 @@ class StudentController extends Controller
 
 	public function student_openupdate(Request $request,$student_id){
 		$this->AuthLogin();
-		$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-		$student_update = Student::find($student_id);
-		$studentId = Student::where('student_id',$student_id)->get();
-		foreach ($studentId as $key => $value){
-         //SEO
-			$meta_desc = "Cập nhật sinh viên ".$value->student_name;
-			$meta_title = "Cập nhật sinh viên ".$value->student_name;
-			$url_canonical = $request->url();
-         //---------------
+		if(Session::get('admin_role')==0 || Session::get('admin_role')==1){
+			$user_ip_address = $request->ip();
+			$visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+			$visitor_count = $visitor_current->count();
+			if($visitor_count<1){
+				$visitor = new Visitor();
+				$visitor->visitor_ipaddress = $user_ip_address;
+				$visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+				$visitor->save();
+			}
+
+			$headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+			$backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+			$headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+			$sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+			$now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+			$visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+			$visitor_lastmonth_count = $visitor_lastmonth->count();
+			$visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+			$visitor_thismonth_count = $visitor_thismonth->count();
+			$visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+			$visitor_oneyear_count = $visitor_oneyear->count();
+			$visitors = Visitor::all();
+			$visitor_total_count = $visitors->count();
+
+			$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+			$student_update = Student::find($student_id);
+			$studentId = Student::where('student_id',$student_id)->get();
+			foreach ($studentId as $key => $value){
+         	//SEO
+				$meta_desc = "Cập nhật sinh viên ".$value->student_name;
+				$meta_title = "Cập nhật sinh viên ".$value->student_name;
+				$url_canonical = $request->url();
+         	//---------------
+			}
+			return view('admin.pages.alumnus.update')->with(compact('student_update','meta_desc','meta_title','url_canonical','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
+		}else{
+			return Redirect::to('admin-home');
 		}
-		return view('admin.pages.alumnus.update')->with(compact('student_update','meta_desc','meta_title','url_canonical','info'));
 	}
 
 	public function student_update(Request $request, $student_id){
@@ -135,7 +253,7 @@ class StudentController extends Controller
 			'student_password'=>'bail|required|min:6|max:32',
 		],[
 			'student_name.required'=>'Tên không được để trống',
-			'student_name.alpha_spaces'=>'Tên không được chứa ký tự số',
+			'student_name.alpha_spaces'=>'Tên không được chứa ký tự số hoặc ký tự đặc biệt',
 			'student_email.required'=>'Mail không được để trống',
 			'student_email.email'=>'Mail nhập sai định dạng',
 			'student_password.required'=>'Mật khẩu không được để trống',
@@ -153,9 +271,9 @@ class StudentController extends Controller
 			Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
 			return Redirect::to('cap-nhat-sinh-vien/'.$student_id);
 		}else if($check_email){
-            Session::put('message','<div class="alert alert-danger">Email sinh viên đã tồn tại!</div>');
-            return Redirect::to('cap-nhat-sinh-vien/'.$student_id);
-        }else{
+			Session::put('message','<div class="alert alert-danger">Email sinh viên đã tồn tại!</div>');
+			return Redirect::to('cap-nhat-sinh-vien/'.$student_id);
+		}else{
 			$result = $student->save();
 			if($result){
 				Session::put('message','<div class="alert alert-success">Cập nhật sinh viên thành công!</div>');
@@ -177,10 +295,10 @@ class StudentController extends Controller
 		$del_nofi = Nofication::where('student_id',$student_id)->delete();
 		$post = Post::where('student_id',$student_id)->get();
 		foreach ($post as $key => $value) {
-		 	$like_del = Like::where('post_id',$value->post_id)->delete();
-		 	$cmt_del = Comment::where('post_id',$value->post_id)->delete();
-		 	$del_nofi = Nofication::where('post_id',$value->post_id)->delete();
-		 	$del_reply = Reply::where('post_id',$value->post_id)->delete();
+			$like_del = Like::where('post_id',$value->post_id)->delete();
+			$cmt_del = Comment::where('post_id',$value->post_id)->delete();
+			$del_nofi = Nofication::where('post_id',$value->post_id)->delete();
+			$del_reply = Reply::where('post_id',$value->post_id)->delete();
 		}
 		$post_del = Post::where('student_id',$student_id)->delete();
 		$student->delete();
@@ -190,8 +308,8 @@ class StudentController extends Controller
 
 	public function student_import(Request $request){
 		$path = $request->file('file')->getRealPath();
-        Excel::import(new StudentImport, $path);
-        return back();
+		Excel::import(new StudentImport, $path);
+		return back();
 	}
 
 	public function student_export(Request $request){

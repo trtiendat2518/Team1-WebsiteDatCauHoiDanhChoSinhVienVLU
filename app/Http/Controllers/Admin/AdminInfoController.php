@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Faculty;
 use App\Models\Admin;
 use App\Models\AdminInfo;
+use App\Models\Visitor;
+use Carbon\Carbon;
 use Validator;
 use Session;
 session_start();
@@ -22,6 +24,31 @@ class AdminInfoController extends Controller
         $meta_title = "Cập nhật hồ sơ";
         $url_canonical =$request->url();
         //--------------------------
+        $user_ip_address = $request->ip();
+        $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+        $visitor_count = $visitor_current->count();
+        if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
+
+        $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+        $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+        $visitor_lastmonth_count = $visitor_lastmonth->count();
+        $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+        $visitor_thismonth_count = $visitor_thismonth->count();
+        $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+        $visitor_oneyear_count = $visitor_oneyear->count();
+        $visitors = Visitor::all();
+        $visitor_total_count = $visitors->count();
+
         $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
         $admin = Admin::find($admin_id)->limit(1)->get();
         foreach ($info as $key => $value) {
@@ -38,7 +65,7 @@ class AdminInfoController extends Controller
             }
         }
 
-        return view('admin.pages.profile.add')->with(compact('meta_desc','meta_title','url_canonical','admin','faculty','info'));
+        return view('admin.pages.profile.add')->with(compact('meta_desc','meta_title','url_canonical','admin','faculty','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
     }
 
     public function admininfo_create(Request $request, $admin_id){
