@@ -299,7 +299,14 @@ class UserController extends Controller
             $visitor_total_count = $visitors->count();
 
             $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-            $keywords = $request->keywords_submit;
+            $data = $request->validate([
+                'keywords_submit'=>'bail|required|max:50|notspecial_spaces'
+            ],[
+                'keywords_submit.required'=>'Không được để trống',
+                'keywords_submit.notspecial_spaces'=>'Không thể tìm kiếm ký tự đặc biệt',
+                'keywords_submit.max'=>'Độ dài không quá 50 ký tự',
+            ]);
+            $keywords = $data['keywords_submit'];
             $search = Admin::where('admin_name','like','%'.$keywords.'%')
             ->orWhere('admin_email','like','%'.$keywords.'%')
             ->orderBy('admin_id','DESC')->get();

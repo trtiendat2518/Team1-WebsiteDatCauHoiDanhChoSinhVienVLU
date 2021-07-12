@@ -112,7 +112,14 @@ class PostController extends Controller
 			$visitor_total_count = $visitors->count();
 
 			$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-			$keywords = $request->keywords_submit;
+			$data = $request->validate([
+				'keywords_submit'=>'bail|required|max:50|notspecial_spaces'
+			],[
+				'keywords_submit.required'=>'Không được để trống',
+				'keywords_submit.notspecial_spaces'=>'Không thể tìm kiếm ký tự đặc biệt',
+				'keywords_submit.max'=>'Độ dài không quá 50 ký tự',
+			]);
+			$keywords = $data['keywords_submit'];
 			$search = Post::where('post_title','like','%'.$keywords.'%')->with('category','student')
 			->orderBy('tbl_post.created_at','DESC')->get();
 			return view('admin.pages.post.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
@@ -299,7 +306,14 @@ class PostController extends Controller
 			$visitor_total_count = $visitors->count();
 
 			$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-			$keywords = $request->keywords_submit;
+			$data = $request->validate([
+				'keywords_submit'=>'bail|required|max:50|notspecial_spaces'
+			],[
+				'keywords_submit.required'=>'Không được để trống',
+				'keywords_submit.notspecial_spaces'=>'Không thể tìm kiếm ký tự đặc biệt',
+				'keywords_submit.max'=>'Độ dài không quá 50 ký tự',
+			]);
+			$keywords = $data['keywords_submit'];
 			$search = Post::where('post_title','like','%'.$keywords.'%')->where('post_like','>',99)
 			->with('category','student')->orderBy('tbl_post.created_at','DESC')->get();
 			return view('admin.pages.hotpost.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));

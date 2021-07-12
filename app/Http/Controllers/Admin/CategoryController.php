@@ -102,7 +102,14 @@ class CategoryController extends Controller
 			$visitor_total_count = $visitors->count();
 
 			$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-			$keywords = $request->keywords_submit;
+			$data = $request->validate([
+				'keywords_submit'=>'bail|required|max:50|notspecial_spaces'
+			],[
+				'keywords_submit.required'=>'Không được để trống',
+				'keywords_submit.notspecial_spaces'=>'Không thể tìm kiếm ký tự đặc biệt',
+				'keywords_submit.max'=>'Độ dài không quá 50 ký tự',
+			]);
+			$keywords = $data['keywords_submit'];
 			$search = Category::where('category_name','like','%'.$keywords.'%')
 			->orderBy('category_id','DESC')->get();
 			return view('admin.pages.category.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
