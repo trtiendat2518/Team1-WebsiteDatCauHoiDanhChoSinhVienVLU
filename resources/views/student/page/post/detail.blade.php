@@ -197,7 +197,7 @@
 							</div>
 						</div>
 						@endif
-						<a class="user-avatar small no-outline" href="profile-timeline.html">
+						<a class="user-avatar small no-outline" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">
 							<div class="user-avatar-content">
 								@if ($cmt->student->student_info_id)
 								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$cmt->student->student_avatar)}}"></div>

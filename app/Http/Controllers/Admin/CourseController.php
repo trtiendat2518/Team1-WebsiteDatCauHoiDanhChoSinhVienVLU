@@ -29,38 +29,42 @@ class CourseController extends Controller
 
    public function course_open(Request $request){
       $this->AuthLogin();
-      //SEO
-      $meta_desc = "Thêm mới khóa học";
-      $meta_title = "Thêm mới khóa học";
-      $url_canonical = $request->url();
-      //---------------
-      $user_ip_address = $request->ip();
-      $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
-      $visitor_count = $visitor_current->count();
-      if($visitor_count<1){
-         $visitor = new Visitor();
-         $visitor->visitor_ipaddress = $user_ip_address;
-         $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-         $visitor->save();
+      if(Session::get('admin_role')==0){
+         //SEO
+         $meta_desc = "Thêm mới khóa học";
+         $meta_title = "Thêm mới khóa học";
+         $url_canonical = $request->url();
+         //---------------
+         $user_ip_address = $request->ip();
+         $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+         $visitor_count = $visitor_current->count();
+         if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+         }
+
+         $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+         $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+         $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+         $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+         $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+         $visitor_lastmonth_count = $visitor_lastmonth->count();
+         $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+         $visitor_thismonth_count = $visitor_thismonth->count();
+         $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+         $visitor_oneyear_count = $visitor_oneyear->count();
+         $visitors = Visitor::all();
+         $visitor_total_count = $visitors->count();
+
+         $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+         return view('admin.pages.course.add')->with(compact('meta_desc','meta_title','url_canonical','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
+      }else{
+         return Redirect::to('admin-home');
       }
-
-      $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
-      $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
-      $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
-      $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
-      $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-
-      $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
-      $visitor_lastmonth_count = $visitor_lastmonth->count();
-      $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
-      $visitor_thismonth_count = $visitor_thismonth->count();
-      $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
-      $visitor_oneyear_count = $visitor_oneyear->count();
-      $visitors = Visitor::all();
-      $visitor_total_count = $visitors->count();
-
-      $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-      return view('admin.pages.course.add')->with(compact('meta_desc','meta_title','url_canonical','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
    }
 
    public function course_add(Request $request){
@@ -100,42 +104,46 @@ class CourseController extends Controller
 
    public function course_openupdate(Request $request,$course_id){
       $this->AuthLogin();
-      $user_ip_address = $request->ip();
-      $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
-      $visitor_count = $visitor_current->count();
-      if($visitor_count<1){
-         $visitor = new Visitor();
-         $visitor->visitor_ipaddress = $user_ip_address;
-         $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-         $visitor->save();
-      }
+      if(Session::get('admin_role')==0){
+         $user_ip_address = $request->ip();
+         $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+         $visitor_count = $visitor_current->count();
+         if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+         }
 
-      $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
-      $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
-      $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
-      $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
-      $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+         $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+         $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+         $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+         $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
-      $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
-      $visitor_lastmonth_count = $visitor_lastmonth->count();
-      $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
-      $visitor_thismonth_count = $visitor_thismonth->count();
-      $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
-      $visitor_oneyear_count = $visitor_oneyear->count();
-      $visitors = Visitor::all();
-      $visitor_total_count = $visitors->count();
+         $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+         $visitor_lastmonth_count = $visitor_lastmonth->count();
+         $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+         $visitor_thismonth_count = $visitor_thismonth->count();
+         $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+         $visitor_oneyear_count = $visitor_oneyear->count();
+         $visitors = Visitor::all();
+         $visitor_total_count = $visitors->count();
 
-      $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-      $course_update = Course::find($course_id);
-      $courseId = Course::where('course_id',$course_id)->get();
-      foreach ($courseId as $key => $value){
+         $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+         $course_update = Course::find($course_id);
+         $courseId = Course::where('course_id',$course_id)->get();
+         foreach ($courseId as $key => $value){
          //SEO
-         $meta_desc = "Cập nhật khóa học ".$value->course_name;
-         $meta_title = "Cập nhật khóa học ".$value->course_name;
-         $url_canonical = $request->url();
+            $meta_desc = "Cập nhật khóa học ".$value->course_name;
+            $meta_title = "Cập nhật khóa học ".$value->course_name;
+            $url_canonical = $request->url();
          //---------------
+         }
+         return view('admin.pages.course.update')->with(compact('course_update','meta_desc','meta_title','url_canonical','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
+      }else{
+         return Redirect::to('admin-home');
       }
-      return view('admin.pages.course.update')->with(compact('course_update','meta_desc','meta_title','url_canonical','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
    }
 
    public function course_update(Request $request, $course_id){
@@ -186,39 +194,43 @@ class CourseController extends Controller
 
    public function course_list(Request $request){
       $this->AuthLogin();
-      //SEO
-      $meta_desc = "Danh sách khóa học";
-      $meta_title = "Danh sách khóa học";
-      $url_canonical = $request->url();
-      //---------------
-      $user_ip_address = $request->ip();
-      $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
-      $visitor_count = $visitor_current->count();
-      if($visitor_count<1){
-         $visitor = new Visitor();
-         $visitor->visitor_ipaddress = $user_ip_address;
-         $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-         $visitor->save();
+      if(Session::get('admin_role')==0){
+         //SEO
+         $meta_desc = "Danh sách khóa học";
+         $meta_title = "Danh sách khóa học";
+         $url_canonical = $request->url();
+         //---------------
+         $user_ip_address = $request->ip();
+         $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+         $visitor_count = $visitor_current->count();
+         if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+         }
+
+         $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+         $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+         $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+         $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+         $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+         $visitor_lastmonth_count = $visitor_lastmonth->count();
+         $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+         $visitor_thismonth_count = $visitor_thismonth->count();
+         $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+         $visitor_oneyear_count = $visitor_oneyear->count();
+         $visitors = Visitor::all();
+         $visitor_total_count = $visitors->count();
+
+         $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+         $list = Course::orderBy('course_id', 'DESC')->paginate(5);
+         return view('admin.pages.course.list')->with(compact('meta_desc','meta_title','url_canonical','list','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
+      }else{
+         return Redirect::to('admin-home');
       }
-
-      $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
-      $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
-      $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
-      $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
-      $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-
-      $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
-      $visitor_lastmonth_count = $visitor_lastmonth->count();
-      $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
-      $visitor_thismonth_count = $visitor_thismonth->count();
-      $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
-      $visitor_oneyear_count = $visitor_oneyear->count();
-      $visitors = Visitor::all();
-      $visitor_total_count = $visitors->count();
-
-      $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-      $list = Course::orderBy('course_id', 'DESC')->paginate(5);
-      return view('admin.pages.course.list')->with(compact('meta_desc','meta_title','url_canonical','list','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
    }
 
    public function course_active($course_id){
@@ -242,40 +254,44 @@ class CourseController extends Controller
 
    public function course_search(Request $request){
       $this->AuthLogin();
-      //SEO
-      $meta_desc = "Tìm kiếm";
-      $meta_title = "Tìm kiếm";
-      $url_canonical = $request->url();
-      //---------------
-      $user_ip_address = $request->ip();
-      $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
-      $visitor_count = $visitor_current->count();
-      if($visitor_count<1){
-         $visitor = new Visitor();
-         $visitor->visitor_ipaddress = $user_ip_address;
-         $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-         $visitor->save();
+      if(Session::get('admin_role')==0){
+         //SEO
+         $meta_desc = "Tìm kiếm";
+         $meta_title = "Tìm kiếm";
+         $url_canonical = $request->url();
+         //---------------
+         $user_ip_address = $request->ip();
+         $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+         $visitor_count = $visitor_current->count();
+         if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+         }
+
+         $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+         $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+         $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+         $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+         $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
+         $visitor_lastmonth_count = $visitor_lastmonth->count();
+         $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
+         $visitor_thismonth_count = $visitor_thismonth->count();
+         $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
+         $visitor_oneyear_count = $visitor_oneyear->count();
+         $visitors = Visitor::all();
+         $visitor_total_count = $visitors->count();
+
+         $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+         $keywords = $request->keywords_submit;
+         $search = Course::where('course_name','like','%'.$keywords.'%')
+         ->orderBy('course_id','DESC')->get();
+         return view('admin.pages.course.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
+      }else{
+         return Redirect::to('admin-home');
       }
-
-      $headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
-      $backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
-      $headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
-      $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
-      $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-
-      $visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
-      $visitor_lastmonth_count = $visitor_lastmonth->count();
-      $visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
-      $visitor_thismonth_count = $visitor_thismonth->count();
-      $visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
-      $visitor_oneyear_count = $visitor_oneyear->count();
-      $visitors = Visitor::all();
-      $visitor_total_count = $visitors->count();
-
-      $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-      $keywords = $request->keywords_submit;
-      $search = Course::where('course_name','like','%'.$keywords.'%')
-      ->orderBy('course_id','DESC')->get();
-      return view('admin.pages.course.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
    }
 }
