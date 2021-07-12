@@ -36,7 +36,7 @@ class AdminController extends Controller
         $meta_desc = "Admin VLU";
         $meta_title = "Dashboard";
         $url_canonical = $request->url();
-        //---------------
+        //-------------
         $user_ip_address = $request->ip();
         $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
         $visitor_count = $visitor_current->count();
