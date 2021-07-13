@@ -12,6 +12,9 @@
 			Session::put('message', null);
 		}     
 		@endphp
+		@foreach ($errors->all() as $val)
+		<div class="alert alert-danger">{{$val}}</div>
+		@endforeach
 		<div class="row w3-res-tb">
 			<div class="col-sm-5">
 				<form action="{{url('/tim-kiem-sinh-vien')}}" method="post">

@@ -102,10 +102,21 @@ class CategoryController extends Controller
 			$visitor_total_count = $visitors->count();
 
 			$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
+
 			$keywords = $request->keywords_submit;
-			$search = Category::where('category_name','like','%'.$keywords.'%')
-			->orderBy('category_id','DESC')->get();
-			return view('admin.pages.category.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
+			$reg = '"%\'*;<>?^`{|}~/\\#=&';
+			$quotes = preg_quote($reg, '/');
+			if($keywords==''){
+				Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+				return redirect()->back();
+			}else if(preg_match('/[' . $quotes . ']/', $keywords)){
+				Session::put('message','<div class="alert alert-danger">Không thể tìm kiếm ký tự đặc biệt!</div>');
+				return redirect()->back();
+			}else{
+				$search = Category::where('category_name','like','%'.$keywords.'%')
+				->orderBy('category_id','DESC')->get();
+				return view('admin.pages.category.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
+			}
 		}else{
 			return Redirect::to('admin-home');
 		}
