@@ -71,16 +71,16 @@ class SpecializedController extends Controller
 
     public function specialized_add(Request $request){
         $data = $request->validate([
-           'specialized_name'=>'bail|required|max:50|min:5|notspecial_spaces',
-           'faculty_id'=>'bail|required',
-           'specialized_status'=>'bail|required',
-       ],[
-           'specialized_name.required'=>'Tên chuyên ngành không được để trống',
-           'specialized_name.notspecial_spaces'=>'Tên chuyên ngành không được chứa ký tự đặc biệt',
-           'specialized_name.min'=>'Tên chuyên ngành ít nhất có 5 ký tự',
-           'specialized_name.max'=>'Tên chuyên ngành không quá 50 ký tự',
-           'faculty_id.required'=>'Mã chuyên ngành không được để trống',
-       ]);
+         'specialized_name'=>'bail|required|max:50|min:5|notspecial_spaces',
+         'faculty_id'=>'bail|required',
+         'specialized_status'=>'bail|required',
+     ],[
+         'specialized_name.required'=>'Tên chuyên ngành không được để trống',
+         'specialized_name.notspecial_spaces'=>'Tên chuyên ngành không được chứa ký tự đặc biệt',
+         'specialized_name.min'=>'Tên chuyên ngành ít nhất có 5 ký tự',
+         'specialized_name.max'=>'Tên chuyên ngành không quá 50 ký tự',
+         'faculty_id.required'=>'Mã chuyên ngành không được để trống',
+     ]);
         $specialized = new Specialized();
 
         $specialized->specialized_name = $data['specialized_name'];
@@ -156,15 +156,15 @@ class SpecializedController extends Controller
     public function specialized_update(Request $request, $specialized_id){
         $this->AuthLogin();
         $data = $request->validate([
-           'specialized_name'=>'bail|required|max:50|min:5|notspecial_spaces',
-           'faculty_id'=>'bail|required',
-       ],[
-           'specialized_name.required'=>'Tên chuyên ngành không được để trống',
-           'specialized_name.notspecial_spaces'=>'Tên chuyên ngành không được chứa ký tự đặc biệt',
-           'specialized_name.min'=>'Tên chuyên ngành ít nhất có 5 ký tự',
-           'specialized_name.max'=>'Tên chuyên ngành không quá 50 ký tự',
-           'faculty_id.required'=>'Mã chuyên ngành không được để trống',
-       ]);
+         'specialized_name'=>'bail|required|max:50|min:5|notspecial_spaces',
+         'faculty_id'=>'bail|required',
+     ],[
+         'specialized_name.required'=>'Tên chuyên ngành không được để trống',
+         'specialized_name.notspecial_spaces'=>'Tên chuyên ngành không được chứa ký tự đặc biệt',
+         'specialized_name.min'=>'Tên chuyên ngành ít nhất có 5 ký tự',
+         'specialized_name.max'=>'Tên chuyên ngành không quá 50 ký tự',
+         'faculty_id.required'=>'Mã chuyên ngành không được để trống',
+     ]);
         $specialized = Specialized::find($specialized_id);
 
         $specialized->specialized_name = $data['specialized_name'];
@@ -297,17 +297,22 @@ class SpecializedController extends Controller
             $visitor_total_count = $visitors->count();
 
             $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-            $data = $request->validate([
-                'keywords_submit'=>'bail|required|max:50|notspecial_spaces'
-            ],[
-                'keywords_submit.required'=>'Không được để trống',
-                'keywords_submit.notspecial_spaces'=>'Không thể tìm kiếm ký tự đặc biệt',
-                'keywords_submit.max'=>'Độ dài không quá 50 ký tự',
-            ]);
-            $keywords = $data['keywords_submit'];
-            $search = Specialized::where('specialized_name','like','%'.$keywords.'%')
-            ->orderBy('specialized_id','DESC')->get();
-            return view('admin.pages.specialized.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
+            
+            $keywords = $request->keywords_submit;
+            $reg = '"%\'*;<>?^`{|}~/\\#=&';
+            $quotes = preg_quote($reg, '/');
+            
+            if($keywords==''){
+                Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+                return redirect()->back();
+            }else if(preg_match('/[' . $quotes . ']/', $keywords)){
+                Session::put('message','<div class="alert alert-danger">Không thể tìm kiếm ký tự đặc biệt!</div>');
+                return redirect()->back();
+            }else{
+                $search = Specialized::where('specialized_name','like','%'.$keywords.'%')
+                ->orderBy('specialized_id','DESC')->get();
+                return view('admin.pages.specialized.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
+            }
         }else{
             return Redirect::to('admin-home');
         }

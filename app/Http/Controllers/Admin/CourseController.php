@@ -286,17 +286,22 @@ class CourseController extends Controller
          $visitor_total_count = $visitors->count();
 
          $info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-         $data = $request->validate([
-            'keywords_submit'=>'bail|required|max:50|notspecial_spaces'
-         ],[
-            'keywords_submit.required'=>'Không được để trống',
-            'keywords_submit.notspecial_spaces'=>'Không thể tìm kiếm ký tự đặc biệt',
-            'keywords_submit.max'=>'Độ dài không quá 50 ký tự',
-         ]);
-         $keywords = $data['keywords_submit'];
-         $search = Course::where('course_name','like','%'.$keywords.'%')
-         ->orderBy('course_id','DESC')->get();
-         return view('admin.pages.course.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
+         
+         $keywords = $request->keywords_submit;
+         $reg = '"%\'*;<>?^`{|}~/\\#=&';
+         $quotes = preg_quote($reg, '/');
+         
+         if($keywords==''){
+            Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
+            return redirect()->back();
+         }else if(preg_match('/[' . $quotes . ']/', $keywords)){
+            Session::put('message','<div class="alert alert-danger">Không thể tìm kiếm ký tự đặc biệt!</div>');
+            return redirect()->back();
+         }else{
+            $search = Course::where('course_name','like','%'.$keywords.'%')
+            ->orderBy('course_id','DESC')->get();
+            return view('admin.pages.course.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
+         }
       }else{
          return Redirect::to('admin-home');
       }
