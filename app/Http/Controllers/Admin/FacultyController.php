@@ -82,7 +82,7 @@ class FacultyController extends Controller
            'faculty_code.required'=>'Mã khoa không được để trống',
            'faculty_code.notspecial_spaces'=>'Mã khoa không được chứa ký tự đặc biệt',
            'faculty_code.min'=>'Mã khoa ít nhất có 5 ký tự',
-           'faculty_code.max'=>'Mã khoa không quá 50 ký tự',
+           'faculty_code.max'=>'Mã khoa không quá 10 ký tự',
        ]);
         $faculty = new Faculty();
 

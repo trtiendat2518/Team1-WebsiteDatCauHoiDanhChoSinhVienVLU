@@ -9,7 +9,7 @@ class Faculty extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'faculty_code','faculty_name'
+        'faculty_code','faculty_name', 'faculty_status'
     ];
     protected $primaryKey = 'faculty_id';
     protected $table = 'tbl_faculty';
