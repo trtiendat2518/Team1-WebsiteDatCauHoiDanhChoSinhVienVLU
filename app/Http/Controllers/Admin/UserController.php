@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Admin;
+use App\Models\AdminInfo;
 use App\Models\Reply;
 use App\Models\Post;
 use App\Imports\UserImport;
@@ -336,6 +337,7 @@ class UserController extends Controller
 
         $admin = Admin::find($admin_id);
         $reply_del = Reply::where('admin_id',$admin_id)->delete();
+        $info_del = AdminInfo::where('admin_info_id', $admin->admin_info_id)->delete();
         $admin->delete();
         Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
         return Redirect::to('danh-sach-user');

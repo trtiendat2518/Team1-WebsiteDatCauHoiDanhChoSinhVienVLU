@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Student;
+use App\Models\StudentInfo;
 use App\Models\Nofication;
 use App\Models\Comment;
 use App\Models\Like;
@@ -313,6 +314,7 @@ class StudentController extends Controller
 			$del_reply = Reply::where('post_id',$value->post_id)->delete();
 		}
 		$post_del = Post::where('student_id',$student_id)->delete();
+		$info_del = StudentInfo::where('student_info_id', $student->student_info_id)->delete();
 		$student->delete();
 		Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
 		return Redirect::to('danh-sach-sinh-vien');
