@@ -157,6 +157,7 @@
 		@endif	
 		@endforeach	
 
+		@if(Session::get('student_id'))
 		<!-- ACTION LIST -->
 		<div class="action-list dark">
 			<!-- ACTION LIST ITEM WRAP -->
@@ -482,7 +483,8 @@
 			<!-- /ACTION LIST ITEM WRAP -->
 		</div>
 		<!-- /ACTION LIST -->
-
+		@endif
+		
 		<!-- ACTION ITEM WRAP -->
 		<div class="action-item-wrap">
 			<!-- ACTION ITEM -->
@@ -1092,12 +1094,11 @@
 					method: 'POST',
 					data: {comment_content:comment_content, id:id, _token:_token},
 					success:function(data){
-						swal("", "", "success");
 					}
 				});
 				window.setTimeout(function(){
 					location.reload();
-				},3000);
+				},500);
 			}
 		});
 

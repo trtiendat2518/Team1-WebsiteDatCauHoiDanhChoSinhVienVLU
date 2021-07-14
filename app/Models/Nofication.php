@@ -9,7 +9,7 @@ class Nofication extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'post_id', 'student_id', 'nofication_mine', 'nofication_kind', 'nofication_code', 'nofication_status'
+        'post_id', 'student_id', 'nofication_mine', 'nofication_kind', 'nofication_code', 'nofication_status', 'nofication_created'
     ];
     protected $primaryKey = 'nofication_id';
     protected $table = 'tbl_nofication';  

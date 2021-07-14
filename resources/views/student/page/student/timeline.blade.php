@@ -576,6 +576,9 @@
 			<!-- /POST COMMENT LIST -->
 		</div>
 		@endforeach
+		@if ($countP==0)
+		<p style="text-align: center;"><b>Bạn chưa có bài viết nào</b></p>
+		@elseif($countP>5)
 		<!-- SECTION PAGER BAR -->
 		<div class="section-pager-bar" style="width: 360px;">
 			<!-- SECTION PAGER -->
@@ -592,6 +595,7 @@
 			</div>
 		</div>
 		<!-- /SECTION PAGER -->
+		@endif
 	</div>
 	<!-- /GRID COLUMN -->
 </div>

@@ -307,7 +307,7 @@
 			@endforeach
 		</div>
 		<!-- /NOTIFICATION BOX LIST -->
-
+		@if ($nofi2_count>9)
 		<!-- SECTION PAGER BAR -->
 		<div class="section-pager-bar" style="width: 360px;">
 			<!-- SECTION PAGER -->
@@ -325,6 +325,10 @@
 			</div>
 		</div>
 		<!-- /SECTION PAGER -->
+		@elseif($nofi2_count==0)
+		<p style="text-align: center;"><b>Chưa có thông báo nào</b></p>
+		@endif
+		
 	</div>
 	<!-- /GRID COLUMN -->
 </div>

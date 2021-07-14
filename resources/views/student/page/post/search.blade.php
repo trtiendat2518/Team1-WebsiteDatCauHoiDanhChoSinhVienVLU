@@ -225,14 +225,12 @@
 				}
 				@endphp
 				
-				@if (Session::get('student_id'))
 				<div class="post-option showCmt" data-toggle="tab" data-id_a="{{$post_info->post_id}}" id="show_{{$post_info->post_id}}">
 					<svg class="post-option-icon icon-comment">
 						<use xlink:href="#svg-comment"></use>
 					</svg>
 					<p class="post-option-text">Bình luận</p>
 				</div>
-				@endif
 				
 				@if ($post_info->post_reply=='')
 				<div class="post-option">

@@ -222,6 +222,9 @@ class StudentController extends Controller
 	}
 
 	public function show_student_post(Request $request, $student_id){
+		$count = Post::with('category','student','likes','comments')->where('tbl_post.student_id', $student_id)->get();
+		$countP = $count->count();
+
 		$category_post = Category::orderBy('category_id', 'DESC')->get();
 		$student_other_id = Post::with('category','student','likes','comments')
 		->where('tbl_post.student_id', $student_id)
@@ -243,7 +246,7 @@ class StudentController extends Controller
 		}
 		//-----------------------
 		
-		return view('student.page.student.timeline')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'student_other_id','student2','studentSS','nofi','nofi2','nofi2_count'));
+		return view('student.page.student.timeline')->with(compact('meta_desc','meta_title','url_canonical','category_post', 'student_other_id','student2','studentSS','nofi','nofi2','nofi2_count','countP'));
 	}
 
 	public function changepass(Request $request,$student_id){
