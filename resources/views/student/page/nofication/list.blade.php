@@ -89,16 +89,32 @@
 				<!-- USER STATUS -->
 				<div class="user-status notification">
 					<!-- USER STATUS AVATAR -->
+					@if ($list_nofi->student_id==0)
+					<a class="user-status-avatar">
+					@else
 					<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$list_nofi->studentes->student_id)}}">
+					@endif
 						<!-- USER AVATAR -->
 						<div class="user-avatar small no-outline">
 							<!-- USER AVATAR CONTENT -->
 							<div class="user-avatar-content">
-								@if ($list_nofi->studentes->student_info_id)
+								@php
+									if($list_nofi->student_id==0){
+								@endphp
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/vlu.ico')}}"></div>
+								@php
+									}else{
+										if($list_nofi->studentes->student_info_id){
+								@endphp
 								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$list_nofi->studentes->student_avatar)}}"></div>
-								@else
+								@php
+										}else{
+								@endphp
 								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
-								@endif
+								@php
+										}
+									}
+								@endphp
 							</div>
 							<!-- /USER AVATAR CONTENT -->
 
@@ -201,16 +217,32 @@
 				<!-- USER STATUS -->
 				<div class="user-status notification">
 					<!-- USER STATUS AVATAR -->
-					<a class="user-status-avatar" href="profile-timeline.html">
+					@if ($list_nofi->student_id==0)
+					<a class="user-status-avatar">
+					@else
+					<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$list_nofi->studentes->student_id)}}">
+					@endif
 						<!-- USER AVATAR -->
 						<div class="user-avatar small no-outline">
 							<!-- USER AVATAR CONTENT -->
 							<div class="user-avatar-content">
-								@if ($list_nofi->studentes->student_info_id)
+								@php
+									if($list_nofi->student_id==0){
+								@endphp
+								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/vlu.ico')}}"></div>
+								@php
+									}else{
+										if($list_nofi->studentes->student_info_id){
+								@endphp
 								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$list_nofi->studentes->student_avatar)}}"></div>
-								@else
+								@php
+										}else{
+								@endphp
 								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/noavatar.jpg')}}"></div>
-								@endif
+								@php
+										}
+									}
+								@endphp
 							</div>
 							<!-- /USER AVATAR CONTENT -->
 
@@ -307,7 +339,7 @@
 			@endforeach
 		</div>
 		<!-- /NOTIFICATION BOX LIST -->
-		@if ($nofi2_count>9)
+		@if ($nofi3_count>9)
 		<!-- SECTION PAGER BAR -->
 		<div class="section-pager-bar" style="width: 360px;">
 			<!-- SECTION PAGER -->
@@ -325,7 +357,7 @@
 			</div>
 		</div>
 		<!-- /SECTION PAGER -->
-		@elseif($nofi2_count==0)
+		@elseif($nofi3_count==0)
 		<p style="text-align: center;"><b>Chưa có thông báo nào</b></p>
 		@endif
 		

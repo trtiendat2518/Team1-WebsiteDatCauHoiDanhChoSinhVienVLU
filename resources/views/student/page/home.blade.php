@@ -577,7 +577,7 @@
 		</div>
 		@endforeach
 		<!-- SECTION PAGER BAR -->
-		<div class="section-pager-bar" style="width: 360px;">
+		<div class="section-pager-bar" style="width: 100%;">
 			<!-- SECTION PAGER -->
 			<div class="section-pager">
 				<!-- SECTION PAGER ITEM -->
