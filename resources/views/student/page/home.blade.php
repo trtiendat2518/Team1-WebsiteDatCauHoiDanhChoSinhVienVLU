@@ -167,9 +167,9 @@
 						<p class="user-status-title medium"><a class="bold" href="{{url('/trang-sinh-vien/'.$pin->student_id)}}">{{$pin->student->student_name}}</a></p>
 						<p class="user-status-text small">{{ \Carbon\Carbon::parse($pin->created_at)->diffForHumans() }}</p>
 					</div>
-					<p style="font-size: 20px;" class="widget-box-status-text">{{$pin->post_title}}</p>
+					<p style="font-size: 20px; word-wrap:break-word;" class="widget-box-status-text">{{$pin->post_title}}</p>
 					<br>
-					<p style="white-space: pre-line;" class="widget-box-status-text">{{$pin->post_content}}</p>
+					<p style="white-space: pre-line; word-wrap:break-word;" class="widget-box-status-text">{{$pin->post_content}}</p>
 
 					<div class="tag-list">
 						@if ($pin->category_id==0)
@@ -318,7 +318,7 @@
 							</div>
 						</div>
 						@endif
-						<a class="user-avatar small no-outline" href="{{url('/trang-sinh-vien/'.$pin->student_id)}}">
+						<a class="user-avatar small no-outline" href="{{url('/trang-sinh-vien/'.$cmt->student->student_id)}}">
 							<div class="user-avatar-content">
 								@if ($cmt->student->student_info_id)
 								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$cmt->student->student_avatar)}}"></div>
@@ -337,7 +337,7 @@
 							<span class="user-status-text small">
 								{{ \Carbon\Carbon::parse($cmt->created_at)->diffForHumans() }} 
 							</span>
-							<p>{{$cmt->comment_content}}</p>
+							<p style="white-space: pre-line; word-wrap:break-word;">{{$cmt->comment_content}}</p>
 						</p>
 					</div>
 					@endforeach
@@ -394,9 +394,9 @@
 						<p class="user-status-title medium"><a class="bold" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">{{$post_info->student->student_name}}</a></p>
 						<p class="user-status-text small">{{ \Carbon\Carbon::parse($post_info->created_at)->diffForHumans() }}</p>
 					</div>
-					<p style="font-size: 20px;" class="widget-box-status-text">{{$post_info->post_title}}</p>
+					<p style="font-size: 20px; word-wrap:break-word;" class="widget-box-status-text">{{$post_info->post_title}}</p>
 					<br>
-					<p style="white-space: pre-line;" class="widget-box-status-text">{{$post_info->post_content}}</p>
+					<p style="white-space: pre-line; word-wrap:break-word;" class="widget-box-status-text">{{$post_info->post_content}}</p>
 
 					<div class="tag-list">
 						@if ($post_info->category_id==0)
@@ -545,7 +545,7 @@
 							</div>
 						</div>
 						@endif
-						<a class="user-avatar small no-outline" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">
+						<a class="user-avatar small no-outline" href="{{url('/trang-sinh-vien/'.$cmt->student->student_id)}}">
 							<div class="user-avatar-content">
 								@if ($cmt->student->student_info_id)
 								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$cmt->student->student_avatar)}}"></div>
@@ -564,7 +564,7 @@
 							<span class="user-status-text small">
 								{{ \Carbon\Carbon::parse($cmt->created_at)->diffForHumans() }} 
 							</span>
-							<p>{{$cmt->comment_content}}</p>
+							<p style="white-space: pre-line; word-wrap:break-word;">{{$cmt->comment_content}}</p>
 						</p>
 					</div>
 					@endforeach

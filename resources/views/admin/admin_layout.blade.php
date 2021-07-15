@@ -357,11 +357,9 @@
       element: 'donut',
       resize: true,
       colors: [
-      '#E0F7FA',
       '#B2EBF2',
       '#80DEEA',
       '#4DD0E1',
-      '#26C6DA',
       '#00BCD4',
       '#00ACC1',
       '#0097A7',
@@ -369,9 +367,8 @@
       '#006064'
       ],
       data: [
-      {label:"Đang Online", value:<?php echo $visitor_count ?>, color:colorDanger},
       {label:"Tổng tháng trước", value:<?php echo $visitor_lastmonth_count ?>},
-      {label:"Tổng tháng này", value:<?php echo $visitor_thismonth_count ?>},
+      {label:"Tổng tháng này", value:<?php echo $visitor_thismonth_count ?>, color:colorDanger},
       {label:"Tổng cả năm", value:<?php echo $visitor_oneyear_count ?>},
       {label:"Tổng truy cập", value:<?php echo $visitor_total_count ?>}
       ]

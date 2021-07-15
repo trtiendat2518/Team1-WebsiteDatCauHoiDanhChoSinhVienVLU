@@ -36,6 +36,7 @@
 						<th style="text-align: center">Loại câu hỏi</th>
 						<th style="text-align: center">Trạng thái</th>
 						<th style="text-align: center">Ngày đăng</th>
+						<th style="text-align: center">Ghim đầu</th>
 						<th style="width:30px;"></th>
 					</tr>
 				</thead>
@@ -56,6 +57,25 @@
 							@endif
 						</td>
 						<td style="text-align: center; color: black">{{$listpost->created_at}}</td>
+						<td style="text-align: center">
+							<span  class="text-ellipsis">
+								@php
+								if ($listpost->post_pin==0){
+									@endphp
+									<a href="{{URL::to('/ghim-cau-hoi-dang-chu-y/'.$listpost->post_id)}}">
+										<span class="fa-eye-styling fa fa-circle-thin"></span>
+									</a>
+									@php
+								}else{
+									@endphp
+									<a href="{{URL::to('/huy-ghim-cau-hoi-dang-chu-y/'.$listpost->post_id)}}">
+										<span class="fa-eye-styling fa fa-thumb-tack"></span>
+									</a>
+									@php
+								}
+								@endphp
+							</span>
+						</td>
 						<td style="text-align: center">
 							@if (Session::get('admin_role')==1)
 							<a href="{{URL::to('/xem-cau-hoi-dang-chu-y/'.$listpost->post_id)}}" class="active styling-edit" ui-toggle-class="">

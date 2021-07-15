@@ -14,6 +14,7 @@ use App\Models\Nofication;
 use App\Models\Like;
 use App\Models\Comment;
 use Carbon\Carbon;
+use App\Models\Visitor;
 use Mail;
 use Session;
 session_start();
@@ -26,6 +27,16 @@ class HomeController extends Controller
 		$meta_title = "Trang chủ";
 		$url_canonical = $request->url();
 		//---------------
+		$user_ip_address = $request->ip();
+        $visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
+        $visitor_count = $visitor_current->count();
+        if($visitor_count<1){
+            $visitor = new Visitor();
+            $visitor->visitor_ipaddress = $user_ip_address;
+            $visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
+
 		$mylike = Like::where('student_id',Session::get('student_id'))->get();
 		$mylike_count = $mylike->count();
 		$mycmt = Comment::where('student_id',Session::get('student_id'))->get();

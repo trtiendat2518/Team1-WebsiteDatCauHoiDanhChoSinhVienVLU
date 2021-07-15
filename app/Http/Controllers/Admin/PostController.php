@@ -398,4 +398,28 @@ class PostController extends Controller
 		Session::put('message','<div class="alert alert-success">Xóa thành công!</div>');
 		return Redirect::to('cau-hoi-dang-chu-y');
 	}
+
+	public function postadmin_pinhot($post_id){
+		$this->AuthLogin();
+		$all = Post::where('post_pin',1)->get();
+		foreach ($all as $key => $value) {
+			$value->post_pin=0;
+			$value->save();
+		}
+		$post = Post::find($post_id);
+		$post->post_pin=1;
+		$post->save();
+		Session::put('message','<div class="alert alert-warning">Đã ghim câu hỏi!</div>');
+		return Redirect::to('cau-hoi-dang-chu-y');
+	}
+
+	public function postadmin_unpinhot($post_id){
+		$this->AuthLogin();
+		$post = Post::find($post_id);
+		$post->post_pin=0;
+		$post->save();
+
+		Session::put('message','<div class="alert alert-warning">Bỏ ghim câu hỏi!</div>');
+		return Redirect::to('cau-hoi-dang-chu-y'); 
+	}
 }

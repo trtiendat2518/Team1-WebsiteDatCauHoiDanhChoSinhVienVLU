@@ -1,0 +1,28 @@
+Step1: Open folder contain source code
+Step2: Ppen "git bash here" or "cmd" at source code
+Step3: Input command: composer update (if this command error then run: composer install --ignore-platform-reqs)
+Step4: Find env.txt file and change to .env file (if .env.txt file is error)
+Step5: Open xampp -> run Apache and MYSQL
+Step6: Open admin mysql
+Step7: Import sep01.sql to phpmyadmin (This file in source code)
+Step8: Open Chrome, Firefox, CocCoc or Edge to run website
+
+This is all account:
+-Admin: 
+hoa.dd@vlu.edu.vn
+123456
+
+-BCN Khoa:
+khoa@vlu.edu.vn
+123456
+
+-Troly:
+troly@vlu.edu.vn
+123456
+
+-Sinhvien:
+ten.mssv@vanlanguni.vn
+VLUmssv
+
+Ex: dat.187pm06566@vanlanguni.vn
+    VLU187pm06566

@@ -109,8 +109,6 @@ class ReplyController extends Controller
                     $nofi->nofication_created = now();
                     $nofi->save();
                     Session::put('message','<div class="alert alert-success">Trả lời thành công!</div>');
-                    return Redirect::to('danh-sach-cau-hoi');
-                    Session::put('message','<div class="alert alert-success">Trả lời thành công!</div>');
                     return Redirect::to('cau-hoi-dang-chu-y'); 
                 }
             }else{

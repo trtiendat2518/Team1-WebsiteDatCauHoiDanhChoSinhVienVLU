@@ -9,7 +9,7 @@ class Reply extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'post_id', 'admin_id', 'reply_content'
+        'post_id', 'admin_id', 'reply_content', 'reply_code'
     ];
     protected $primaryKey = 'reply_id';
     protected $table = 'tbl_reply';                

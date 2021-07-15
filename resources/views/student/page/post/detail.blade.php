@@ -28,7 +28,7 @@
 			<div class="widget-box-status">
 				<div class="widget-box-status-content">
 					<div class="user-status">
-						<a class="user-status-avatar">
+						<a class="user-status-avatar" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">
 							<div class="user-avatar small no-outline">
 								<div class="user-avatar-content">
 									@if ($post_info->student->student_info_id)
@@ -48,9 +48,9 @@
 						<p class="user-status-title medium"><a class="bold" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">{{$post_info->student->student_name}}</a></p>
 						<p class="user-status-text small">{{ \Carbon\Carbon::parse($post_info->created_at)->diffForHumans() }}</p>
 					</div>
-					<p style="font-size: 20px;" class="widget-box-status-text">{{$post_info->post_title}}</p>
+					<p style="font-size: 20px; word-wrap:break-word;" class="widget-box-status-text">{{$post_info->post_title}}</p>
 					<br>
-					<p style="white-space: pre-line;" class="widget-box-status-text">{{$post_info->post_content}}</p>
+					<p style="white-space: pre-line; word-wrap:break-word;" class="widget-box-status-text">{{$post_info->post_content}}</p>
 
 					<div class="tag-list">
 						<a class="tag-item secondary" style="font-size: 16px" href="{{url('/cau-hoi-theo-loai/'.$post_info->category_id)}}">{{$post_info->category->category_name}}</a>
@@ -197,7 +197,7 @@
 							</div>
 						</div>
 						@endif
-						<a class="user-avatar small no-outline" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">
+						<a class="user-avatar small no-outline" href="{{url('/trang-sinh-vien/'.$cmt->student->student_id)}}">
 							<div class="user-avatar-content">
 								@if ($cmt->student->student_info_id)
 								<div class="hexagon-image-30-32" data-src="{{asset('public/student/img/avatar/'.$cmt->student->student_avatar)}}"></div>
@@ -216,7 +216,7 @@
 							<span class="user-status-text small">
 								{{ \Carbon\Carbon::parse($cmt->created_at)->diffForHumans() }} 
 							</span>
-							<p>{{$cmt->comment_content}}</p>
+							<p style="white-space: pre-line; word-wrap:break-word;">{{$cmt->comment_content}}</p>
 						</p>
 					</div>
 					@endforeach

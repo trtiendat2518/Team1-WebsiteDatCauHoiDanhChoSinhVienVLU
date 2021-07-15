@@ -398,9 +398,9 @@
 						<p class="user-status-title medium"><a class="bold" href="{{url('/trang-sinh-vien/'.$post_info->student_id)}}">{{$post_info->student->student_name}}</a></p>
 						<p class="user-status-text small">{{ \Carbon\Carbon::parse($post_info->created_at)->diffForHumans() }}</p>
 					</div>
-					<p style="font-size: 20px;" class="widget-box-status-text">{{$post_info->post_title}}</p>
+					<p style="font-size: 20px; word-wrap:break-word;" class="widget-box-status-text">{{$post_info->post_title}}</p>
 					<br>
-					<p style="white-space: pre-line;" class="widget-box-status-text">{{$post_info->post_content}}</p>
+					<p style="white-space: pre-line; word-wrap:break-word;" class="widget-box-status-text">{{$post_info->post_content}}</p>
 
 					<div class="tag-list">
 						@if ($post_info->category_id==0)
@@ -564,7 +564,7 @@
 							<span class="user-status-text small">
 								{{ \Carbon\Carbon::parse($cmt->created_at)->diffForHumans() }} 
 							</span>
-							<p>{{$cmt->comment_content}}</p>
+							<p style="white-space: pre-line; word-wrap:break-word;">{{$cmt->comment_content}}</p>
 						</p>
 					</div>
 					@endforeach

@@ -9,7 +9,7 @@ class Post extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-    	'student_id', 'post_title', 'category_id', 'post_content','post_like', 'post_pin', 'created_at'
+    	'student_id', 'post_title', 'category_id', 'post_content','post_like', 'post_pin', 'post_reply', 'created_at'
     ];
     protected $primaryKey = 'post_id';
     protected $table = 'tbl_post';
