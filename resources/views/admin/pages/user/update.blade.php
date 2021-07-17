@@ -22,11 +22,11 @@
 						{{csrf_field()}}
 						<div class="form-group">
 							<label>Họ tên User</label>
-							<input type="text" name="admin_name" class="form-control" value="{{$admin_update->admin_name}}">
+							<input type="text" class="form-control" value="{{$admin_update->admin_name}}" disabled>
 						</div>
 						<div class="form-group">
 							<label>Email User</label>
-							<input type="email" name="admin_email" class="form-control" value="{{$admin_update->admin_email}}">
+							<input type="email" class="form-control" value="{{$admin_update->admin_email}}" disabled>
 						</div>
 						<div class="form-group">
 							<label>Mật khẩu của User</label>

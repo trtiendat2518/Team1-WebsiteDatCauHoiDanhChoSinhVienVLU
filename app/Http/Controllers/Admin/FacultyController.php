@@ -71,18 +71,20 @@ class FacultyController extends Controller
 
     public function faculty_add(Request $request){
         $data = $request->validate([
-           'faculty_name'=>'bail|required|max:50|min:5|notspecial_spaces',
-           'faculty_code'=>'bail|required|max:10|min:2|notspecial_spaces',
+           'faculty_name'=>'bail|required|max:50|min:5|notspecial_spaces|unique:tbl_faculty',
+           'faculty_code'=>'bail|required|max:10|min:2|notspecial_spaces|unique:tbl_faculty',
            'faculty_status'=>'bail|required',
        ],[
            'faculty_name.required'=>'Tên khoa không được để trống',
            'faculty_name.notspecial_spaces'=>'Tên khoa không được chứa ký tự đặc biệt',
            'faculty_name.min'=>'Tên khoa ít nhất có 5 ký tự',
            'faculty_name.max'=>'Tên khoa không quá 50 ký tự',
+           'faculty_name.unique'=>'Tên khoa đã tồn tại',
            'faculty_code.required'=>'Mã khoa không được để trống',
            'faculty_code.notspecial_spaces'=>'Mã khoa không được chứa ký tự đặc biệt',
            'faculty_code.min'=>'Mã khoa ít nhất có 5 ký tự',
            'faculty_code.max'=>'Mã khoa không quá 10 ký tự',
+           'faculty_code.unique'=>'Mã khoa đã tồn tại',
        ]);
         $faculty = new Faculty();
 
@@ -90,24 +92,13 @@ class FacultyController extends Controller
         $faculty->faculty_code = $data['faculty_code'];
         $faculty->faculty_status = $data['faculty_status'];
 
-        $check_name = Faculty::where('faculty_name','=',$faculty->faculty_name)->first();
-        $check_code = Faculty::where('faculty_code','=',$faculty->faculty_code)->first();
-
-        if ($data['faculty_name']=='' || $data['faculty_code']=='') {
-            Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
-            return Redirect::to('them-moi-khoa');
-        }else if($check_name || $check_code){
-            Session::put('message','<div class="alert alert-danger">Tên khoa hoặc mã khoa đã tồn tại!</div>');
-            return Redirect::to('them-moi-khoa');
+        $result = $faculty->save(); 
+        if($result){
+            Session::put('message','<div class="alert alert-success">Thêm mới khoa thành công!</div>');
+            return Redirect::to('danh-sach-khoa');
         }else{
-            $result = $faculty->save(); 
-            if($result){
-                Session::put('message','<div class="alert alert-success">Thêm mới khoa thành công!</div>');
-                return Redirect::to('danh-sach-khoa');
-            }else{
-                Session::put('message','<div class="alert alert-danger">Không thể thêm mới khoa!</div>');
-                return Redirect::to('them-moi-khoa');
-            }
+            Session::put('message','<div class="alert alert-danger">Không thể thêm mới khoa!</div>');
+            return Redirect::to('them-moi-khoa');
         }
     }
 
@@ -158,41 +149,33 @@ class FacultyController extends Controller
     public function faculty_update(Request $request, $faculty_id){
         $this->AuthLogin();
         $data = $request->validate([
-           'faculty_name'=>'bail|required|max:50|min:5|notspecial_spaces',
-           'faculty_code'=>'bail|required|max:10|min:2|notspecial_spaces',
+           'faculty_name'=>'bail|required|max:50|min:5|notspecial_spaces|unique:tbl_faculty',
+           'faculty_code'=>'bail|required|max:10|min:2|notspecial_spaces|unique:tbl_faculty',
        ],[
            'faculty_name.required'=>'Tên khoa không được để trống',
            'faculty_name.notspecial_spaces'=>'Tên khoa không được chứa ký tự đặc biệt',
            'faculty_name.min'=>'Tên khoa ít nhất có 5 ký tự',
            'faculty_name.max'=>'Tên khoa không quá 50 ký tự',
+           'faculty_name.unique'=>'Tên khoa đã tồn tại',
            'faculty_code.required'=>'Mã khoa không được để trống',
            'faculty_code.notspecial_spaces'=>'Mã khoa không được chứa ký tự đặc biệt',
            'faculty_code.min'=>'Mã khoa ít nhất có 5 ký tự',
            'faculty_code.max'=>'Mã khoa không quá 50 ký tự',
+           'faculty_code.unique'=>'Mã khoa đã tồn tại',
        ]);
         $faculty = Faculty::find($faculty_id);
 
         $faculty->faculty_name = $data['faculty_name'];
         $faculty->faculty_code = $data['faculty_code'];
-        $check_name = Faculty::where('faculty_name','=',$faculty->faculty_name)->first();
-        $check_code = Faculty::where('faculty_code','=',$faculty->faculty_code)->first();
 
-        if ($data['faculty_name']=='' || $data['faculty_code']=='') {
-            Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
-            return Redirect::to('cap-nhat-khoa/'.$faculty_id);
-        }else if($check_name || $check_code){
-            Session::put('message','<div class="alert alert-danger">Tên khoa hoặc mã khoa đã tồn tại!</div>');
-            return Redirect::to('cap-nhat-khoa/'.$faculty_id);
+        $result = $faculty->save();
+        if($result){
+            Session::put('message','<div class="alert alert-success">Cập nhật khoa thành công!</div>');
+            return Redirect::to('danh-sach-khoa');
         }else{
-            $result = $faculty->save();
-            if($result){
-                Session::put('message','<div class="alert alert-success">Cập nhật khoa thành công!</div>');
-                return Redirect::to('danh-sach-khoa');
-            }else{
-                Session::put('message','<div class="alert alert-danger">Không thể cập nhật khoa!</div>');
-                return Redirect::to('cap-nhat-khoa/'.$faculty_id);
-            } 
-        }
+            Session::put('message','<div class="alert alert-danger">Không thể cập nhật khoa!</div>');
+            return Redirect::to('cap-nhat-khoa/'.$faculty_id);
+        } 
     }
 
     public function faculty_delete($faculty_id){

@@ -69,11 +69,12 @@ class CourseController extends Controller
 
    public function course_add(Request $request){
       $data = $request->validate([
-         'course_name'=>'bail|required|max:50|min:2|notspecial_spaces',
+         'course_name'=>'bail|required|max:50|min:2|notspecial_spaces|unique:tbl_course',
          'course_status'=>'bail|required',
       ],[
          'course_name.required'=>'Tên khóa học không được để trống',
          'course_name.notspecial_spaces'=>'Tên khóa học không được chứa ký tự đặc biệt',
+         'course_name.unique'=>'Tên khóa học đã tồn tại',
          'course_name.min'=>'Tên khóa học ít nhất có 5 ký tự',
          'course_name.max'=>'Tên khóa học không quá 50 ký tự',
       ]);
@@ -82,23 +83,13 @@ class CourseController extends Controller
       $course->course_name = $data['course_name'];
       $course->course_status = $data['course_status'];
 
-      $check_name = Course::where('course_name','=',$course->course_name)->first();
-
-      if ($data['course_name']=='') {
-         Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
-         return Redirect::to('them-moi-nam-hoc');
-      }else if($check_name){
-         Session::put('message','<div class="alert alert-danger">Tên khóa học đã tồn tại!</div>');
-         return Redirect::to('them-moi-nam-hoc');
+      $result = $course->save(); 
+      if($result){
+         Session::put('message','<div class="alert alert-success">Thêm mới khóa học thành công!</div>');
+         return Redirect::to('danh-sach-nam-hoc');
       }else{
-         $result = $course->save(); 
-         if($result){
-            Session::put('message','<div class="alert alert-success">Thêm mới khóa học thành công!</div>');
-            return Redirect::to('danh-sach-nam-hoc');
-         }else{
-            Session::put('message','<div class="alert alert-danger">Không thể thêm mới khóa học!</div>');
-            return Redirect::to('them-moi-nam-hoc');
-         }
+         Session::put('message','<div class="alert alert-danger">Không thể thêm mới khóa học!</div>');
+         return Redirect::to('them-moi-nam-hoc');
       }
    }
 
@@ -149,34 +140,26 @@ class CourseController extends Controller
    public function course_update(Request $request, $course_id){
       $this->AuthLogin();
       $data = $request->validate([
-         'course_name'=>'bail|required|max:50|min:2|notspecial_spaces',
+         'course_name'=>'bail|required|max:50|min:2|notspecial_spaces|unique:tbl_course',
       ],[
          'course_name.required'=>'Tên khóa học không được để trống',
          'course_name.notspecial_spaces'=>'Tên khóa học không được chứa ký tự đặc biệt',
+         'course_name.unique'=>'Tên khóa học đã tồn tại',
          'course_name.min'=>'Tên khóa học ít nhất có 5 ký tự',
          'course_name.max'=>'Tên khóa học không quá 50 ký tự',
       ]);
       $course = Course::find($course_id);
 
       $course->course_name = $data['course_name'];
-      $check_name = Course::where('course_name','=',$course->course_name)->first();
 
-      if ($data['course_name']=='') {
-         Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
-         return Redirect::to('cap-nhat-nam-hoc/'.$course_id);
-      }else if($check_name){
-         Session::put('message','<div class="alert alert-danger">Tên khóa học đã tồn tại!</div>');
-         return Redirect::to('cap-nhat-nam-hoc/'.$course_id);
+      $result = $course->save();
+      if($result){
+         Session::put('message','<div class="alert alert-success">Cập nhật khóa thành công!</div>');
+         return Redirect::to('danh-sach-nam-hoc');
       }else{
-         $result = $course->save();
-         if($result){
-            Session::put('message','<div class="alert alert-success">Cập nhật khóa thành công!</div>');
-            return Redirect::to('danh-sach-nam-hoc');
-         }else{
-            Session::put('message','<div class="alert alert-danger">Không thể cập nhật khóa!</div>');
-            return Redirect::to('cap-nhat-nam-hoc/'.$course_id);
-         } 
-      }
+         Session::put('message','<div class="alert alert-danger">Không thể cập nhật khóa!</div>');
+         return Redirect::to('cap-nhat-nam-hoc/'.$course_id);
+      } 
    }
 
    public function course_delete($course_id){

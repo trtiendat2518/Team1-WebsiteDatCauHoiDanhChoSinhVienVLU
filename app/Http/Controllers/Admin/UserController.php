@@ -74,7 +74,7 @@ class UserController extends Controller
     public function user_add(Request $request){
         $data = $request->validate([
             'admin_name'=>'bail|required|alpha_spaces|max:50|min:2',
-            'admin_email'=>'bail|required|max:255',
+            'admin_email'=>'bail|required|max:255|unique:tbl_admin',
             'admin_password'=>'bail|required|min:6|max:32',
             'admin_role'=>'required',
         ],[
@@ -85,6 +85,7 @@ class UserController extends Controller
             'admin_email.required'=>'Mail không được để trống',
             'admin_email.email'=>'Mail nhập sai định dạng',
             'admin_email.max'=>'Email không quá 255 ký tự',
+            'admin_email.unique'=>'Email user đã tồn tại!',
             'admin_password.required'=>'Mật khẩu không được để trống',
             'admin_password.min'=>'Mật khẩu ít nhất có 6 ký tự',
             'admin_password.max'=>'Mật khẩu không quá 32 ký tự',
@@ -96,23 +97,14 @@ class UserController extends Controller
         $admin->admin_email = $data['admin_email'];
         $admin->admin_password = md5($data['admin_password']);
         $admin->admin_role = $data['admin_role'];
-        $check_email = Admin::where('admin_email','=',$admin->admin_email)->first();
 
-        if ($data['admin_name']=='' || $data['admin_email']=='' || $data['admin_password']=='') {
-            Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
-            return Redirect::to('them-moi-user');
-        }else if($check_email){
-            Session::put('message','<div class="alert alert-danger">Email user đã tồn tại!</div>');
-            return Redirect::to('them-moi-user');
+        $result = $admin->save(); 
+        if($result){
+            Session::put('message','<div class="alert alert-success">Thêm mới User thành công!</div>');
+            return Redirect::to('danh-sach-user');
         }else{
-            $result = $admin->save(); 
-            if($result){
-                Session::put('message','<div class="alert alert-success">Thêm mới sinh viên thành công!</div>');
-                return Redirect::to('danh-sach-user');
-            }else{
-                Session::put('message','<div class="alert alert-danger">Không thể thêm mới sinh viên!</div>');
-                return Redirect::to('them-moi-user');
-            }
+            Session::put('message','<div class="alert alert-danger">Không thể thêm mới User!</div>');
+            return Redirect::to('them-moi-user');
         }
     }
 
@@ -204,46 +196,26 @@ class UserController extends Controller
     public function user_update(Request $request, $admin_id){
         $this->AuthLogin();
         $data = $request->validate([
-            'admin_name'=>'bail|required|alpha_spaces|max:50|min:2',
-            'admin_email'=>'bail|required|max:255',
             'admin_password'=>'bail|required|min:6|max:32',
             'admin_role'=>'required',
         ],[
-            'admin_name.required'=>'Tên không được để trống',
-            'admin_name.alpha_spaces'=>'Tên không được chứa ký tự số hoặc ký tự đặc biệt',
-            'admin_name.max'=>'Tên ít nhất có 2 ký tự',
-            'admin_name.min'=>'Tên không quá 50 ký tự',
-            'admin_email.required'=>'Mail không được để trống',
-            'admin_email.email'=>'Mail nhập sai định dạng',
-            'admin_email.max'=>'Email không quá 255 ký tự',
             'admin_password.required'=>'Mật khẩu không được để trống',
             'admin_password.min'=>'Mật khẩu ít nhất có 6 ký tự',
             'admin_password.max'=>'Mật khẩu không quá 32 ký tự',
         ]);
         $admin = Admin::find($admin_id);
 
-        $admin->admin_name = $data['admin_name'];
-        $admin->admin_email = $data['admin_email'];
         $admin->admin_password = md5($data['admin_password']);
         $admin->admin_role = $data['admin_role'];
-        $check_email = Admin::where('admin_email','=',$admin->admin_email)->first();
 
-        if ($data['admin_name']=='' || $data['admin_email']=='' || $data['admin_password']=='') {
-            Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
-            return Redirect::to('cap-nhat-user/'.$admin_id);
-        }else if($check_email){
-            Session::put('message','<div class="alert alert-danger">Email user đã tồn tại!</div>');
-            return Redirect::to('cap-nhat-user/'.$admin_id);
+        $result = $admin->save();
+        if($result){
+            Session::put('message','<div class="alert alert-success">Cập nhật User thành công!</div>');
+            return Redirect::to('danh-sach-user');
         }else{
-            $result = $admin->save();
-            if($result){
-                Session::put('message','<div class="alert alert-success">Cập nhật sinh viên thành công!</div>');
-                return Redirect::to('danh-sach-user');
-            }else{
-                Session::put('message','<div class="alert alert-danger">Không thể cập nhật sinh viên!</div>');
-                return Redirect::to('cap-nhat-user/'.$admin_id);
-            } 
-        }
+            Session::put('message','<div class="alert alert-danger">Không thể cập nhật User!</div>');
+            return Redirect::to('cap-nhat-user/'.$admin_id);
+        } 
     }
 
     public function user_active($admin_id){

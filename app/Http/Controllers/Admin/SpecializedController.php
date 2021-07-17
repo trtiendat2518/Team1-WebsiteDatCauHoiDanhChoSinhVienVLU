@@ -71,7 +71,7 @@ class SpecializedController extends Controller
 
     public function specialized_add(Request $request){
         $data = $request->validate([
-         'specialized_name'=>'bail|required|max:50|min:5|notspecial_spaces',
+         'specialized_name'=>'bail|required|max:50|min:5|notspecial_spaces|unique:tbl_specialized',
          'faculty_id'=>'bail|required',
          'specialized_status'=>'bail|required',
      ],[
@@ -79,6 +79,7 @@ class SpecializedController extends Controller
          'specialized_name.notspecial_spaces'=>'Tên chuyên ngành không được chứa ký tự đặc biệt',
          'specialized_name.min'=>'Tên chuyên ngành ít nhất có 5 ký tự',
          'specialized_name.max'=>'Tên chuyên ngành không quá 50 ký tự',
+         'specialized_name.unique'=>'Tên chuyên ngành đã tồn tại',
          'faculty_id.required'=>'Mã chuyên ngành không được để trống',
      ]);
         $specialized = new Specialized();
@@ -87,23 +88,13 @@ class SpecializedController extends Controller
         $specialized->faculty_id = $data['faculty_id'];
         $specialized->specialized_status = $data['specialized_status'];
 
-        $check_name = Specialized::where('specialized_name','=',$specialized->specialized_name)->first();
-
-        if ($data['specialized_name']=='' || $data['faculty_id']==0) {
-            Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
-            return Redirect::to('them-moi-chuyen-nganh');
-        }else if($check_name){
-            Session::put('message','<div class="alert alert-danger">Tên chuyên ngành đã tồn tại!</div>');
-            return Redirect::to('them-moi-chuyen-nganh');
+        $result = $specialized->save(); 
+        if($result){
+            Session::put('message','<div class="alert alert-success">Thêm mới chuyên ngành thành công!</div>');
+            return Redirect::to('danh-sach-chuyen-nganh');
         }else{
-            $result = $specialized->save(); 
-            if($result){
-                Session::put('message','<div class="alert alert-success">Thêm mới chuyên ngành thành công!</div>');
-                return Redirect::to('danh-sach-chuyen-nganh');
-            }else{
-                Session::put('message','<div class="alert alert-danger">Không thể thêm mới chuyên ngành!</div>');
-                return Redirect::to('them-moi-chuyen-nganh');
-            }
+            Session::put('message','<div class="alert alert-danger">Không thể thêm mới chuyên ngành!</div>');
+            return Redirect::to('them-moi-chuyen-nganh');
         }
     }
 
@@ -156,37 +147,29 @@ class SpecializedController extends Controller
     public function specialized_update(Request $request, $specialized_id){
         $this->AuthLogin();
         $data = $request->validate([
-            'specialized_name'=>'bail|required|max:50|min:5|notspecial_spaces',
+            'specialized_name'=>'bail|required|max:50|min:5|notspecial_spaces|unique:tbl_specialized',
             'faculty_id'=>'bail|required',
         ],[
             'specialized_name.required'=>'Tên chuyên ngành không được để trống',
             'specialized_name.notspecial_spaces'=>'Tên chuyên ngành không được chứa ký tự đặc biệt',
             'specialized_name.min'=>'Tên chuyên ngành ít nhất có 5 ký tự',
             'specialized_name.max'=>'Tên chuyên ngành không quá 50 ký tự',
+            'specialized_name.unique'=>'Tên chuyên ngành đã tồn tại',
             'faculty_id.required'=>'Mã chuyên ngành không được để trống',
         ]);
         $specialized = Specialized::find($specialized_id);
 
         $specialized->specialized_name = $data['specialized_name'];
         $specialized->faculty_id = $data['faculty_id'];
-        $check_name = Specialized::where('specialized_name','=',$specialized->specialized_name)->first();
 
-        if ($data['specialized_name']=='' || $data['faculty_id']==0) {
-            Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
-            return Redirect::to('cap-nhat-chuyen-nganh/'.$specialized_id);
-        }else if($check_name){
-            Session::put('message','<div class="alert alert-danger">Tên chuyên ngành đã tồn tại!</div>');
-            return Redirect::to('cap-nhat-chuyen-nganh/'.$specialized_id);
+        $result = $specialized->save();
+        if($result){
+            Session::put('message','<div class="alert alert-success">Cập nhật chuyên ngành thành công!</div>');
+            return Redirect::to('danh-sach-chuyen-nganh');
         }else{
-            $result = $specialized->save();
-            if($result){
-                Session::put('message','<div class="alert alert-success">Cập nhật chuyên ngành thành công!</div>');
-                return Redirect::to('danh-sach-chuyen-nganh');
-            }else{
-                Session::put('message','<div class="alert alert-danger">Không thể cập nhật chuyên ngành!</div>');
-                return Redirect::to('cap-nhat-chuyen-nganh/'.$specialized_id);
-            } 
-        }
+            Session::put('message','<div class="alert alert-danger">Không thể cập nhật chuyên ngành!</div>');
+            return Redirect::to('cap-nhat-chuyen-nganh/'.$specialized_id);
+        } 
     }
 
     public function specialized_delete($specialized_id){

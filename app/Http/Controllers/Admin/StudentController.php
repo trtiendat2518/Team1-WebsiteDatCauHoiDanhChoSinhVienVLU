@@ -175,13 +175,14 @@ class StudentController extends Controller
 	public function student_add(Request $request){
 		$data = $request->validate([
 			'student_name'=>'bail|required|alpha_spaces|max:100',
-			'student_email'=>'bail|required',
+			'student_email'=>'bail|required|unique:tbl_student',
 			'student_password'=>'bail|required|min:6|max:32',
 		],[
 			'student_name.required'=>'Tên không được để trống',
 			'student_name.alpha_spaces'=>'Tên không được chứa ký tự số hoặc ký tự đặc biệt',
 			'student_email.required'=>'Mail không được để trống',
 			'student_email.email'=>'Mail nhập sai định dạng',
+			'student_email.unique'=>'Mail sinh viên đã tồn tại',
 			'student_password.required'=>'Mật khẩu không được để trống',
 			'student_password.min'=>'Mật khẩu ít nhất có 6 ký tự',
 			'student_password.max'=>'Mật khẩu không quá 32 ký tự',
@@ -194,23 +195,13 @@ class StudentController extends Controller
 		$student->student_password = md5($data['student_password']);
 		$student->student_status = 'Verified';
 
-		$check_email = Student::where('student_email','=',$student->student_email)->first();
-
-		if ($data['student_name']=='' || $data['student_email']=='' || $data['student_password']=='') {
-			Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
-			return Redirect::to('them-moi-sinh-vien');
-		}else if($check_email){
-			Session::put('message','<div class="alert alert-danger">Email sinh viên đã tồn tại!</div>');
-			return Redirect::to('them-moi-sinh-vien');
+		$result = $student->save(); 
+		if($result){
+			Session::put('message','<div class="alert alert-success">Thêm mới sinh viên thành công!</div>');
+			return Redirect::to('danh-sach-sinh-vien');
 		}else{
-			$result = $student->save(); 
-			if($result){
-				Session::put('message','<div class="alert alert-success">Thêm mới sinh viên thành công!</div>');
-				return Redirect::to('danh-sach-sinh-vien');
-			}else{
-				Session::put('message','<div class="alert alert-danger">Không thể thêm mới sinh viên!</div>');
-				return Redirect::to('them-moi-sinh-vien');
-			}
+			Session::put('message','<div class="alert alert-danger">Không thể thêm mới sinh viên!</div>');
+			return Redirect::to('them-moi-sinh-vien');
 		}
 	}
 
@@ -262,13 +253,14 @@ class StudentController extends Controller
 		$this->AuthLogin();
 		$data = $request->validate([
 			'student_name'=>'bail|required|alpha_spaces|max:100',
-			'student_email'=>'bail|required',
+			'student_email'=>'bail|required|unique:tbl_student',
 			'student_password'=>'bail|required|min:6|max:32',
 		],[
 			'student_name.required'=>'Tên không được để trống',
 			'student_name.alpha_spaces'=>'Tên không được chứa ký tự số hoặc ký tự đặc biệt',
 			'student_email.required'=>'Mail không được để trống',
 			'student_email.email'=>'Mail nhập sai định dạng',
+			'student_email.unique'=>'Mail sinh viên đã tồn tại',
 			'student_password.required'=>'Mật khẩu không được để trống',
 			'student_password.min'=>'Mật khẩu ít nhất có 6 ký tự',
 			'student_password.max'=>'Mật khẩu không quá 32 ký tự',
@@ -278,23 +270,14 @@ class StudentController extends Controller
 		$student->student_name = $data['student_name'];
 		$student->student_email = $data['student_email'];
 		$student->student_password = md5($data['student_password']);
-		$check_email = Student::where('student_email','=',$student->student_email)->first();
 
-		if ($data['student_name']=='' || $data['student_email']=='' || $data['student_password']=='') {
-			Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
-			return Redirect::to('cap-nhat-sinh-vien/'.$student_id);
-		}else if($check_email){
-			Session::put('message','<div class="alert alert-danger">Email sinh viên đã tồn tại!</div>');
-			return Redirect::to('cap-nhat-sinh-vien/'.$student_id);
+		$result = $student->save();
+		if($result){
+			Session::put('message','<div class="alert alert-success">Cập nhật sinh viên thành công!</div>');
+			return Redirect::to('danh-sach-sinh-vien');
 		}else{
-			$result = $student->save();
-			if($result){
-				Session::put('message','<div class="alert alert-success">Cập nhật sinh viên thành công!</div>');
-				return Redirect::to('danh-sach-sinh-vien');
-			}else{
-				Session::put('message','<div class="alert alert-danger">Không thể cập nhật sinh viên!</div>');
-				return Redirect::to('cap-nhat-sinh-vien/'.$student_id);
-			} 
+			Session::put('message','<div class="alert alert-danger">Không thể cập nhật sinh viên!</div>');
+			return Redirect::to('cap-nhat-sinh-vien/'.$student_id);
 		}
 	}
 

@@ -19,13 +19,13 @@
 								<div class="col-4">
 									<div class="form-group">
 										<label for="fromdate" class="form-control-label">Từ ngày:</label>
-										<input type="text" id="datepicker" class="form-control" name="from_date">
+										<input type="date" id="datepicker" class="form-control" name="from_date" readonly>
 									</div>
 								</div>
 								<div class="col-4">
 									<div class="form-group">
 										<label for="todate" class="form-control-label">Đến ngày:</label>
-										<input type="text" id="datepicker2" class="form-control" name="to_date">
+										<input type="date" id="datepicker2" class="form-control" name="to_date" readonly>
 									</div>
 								</div>
 								<div class="col-4">

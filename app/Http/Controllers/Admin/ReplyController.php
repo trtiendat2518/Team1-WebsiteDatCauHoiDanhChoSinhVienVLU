@@ -64,9 +64,32 @@ class ReplyController extends Controller
                     $value2->save();
                     $value->post_reply = $value2->reply_content;
                     $value->save();
-                    Session::put('message','<div class="alert alert-success">Cập nhật câu trrả lời thành công!</div>');
-                    return Redirect::to('danh-sach-cau-hoi');
+
+                    $nofiat = Nofication::where('post_id', $post_id)->where('nofication_kind',"=",'Reply')->get();
+                    $nofiat_count = $nofiat->count();
+
+                    if($nofiat_count==0){
+                        $nofi3 = new Nofication();
+                        $nofi3->post_id = $post_id;
+                        $nofi3->student_id = 0;
+                        $nofi3->nofication_mine = md5($value->student_id);
+                        $nofi3->nofication_kind = "Reply";
+                        $nofi3->nofication_code = "REPLY".md5(time().rand(1000,9999).$post_id);;
+                        $nofi3->nofication_status = 0;
+                        date_default_timezone_set('Asia/Ho_Chi_Minh');
+                        $nofi3->nofication_created = now();
+                        $nofi3->save();
+                    }else{
+                        foreach ($nofiat as $key => $value3) {
+                            $value3->nofication_status = 0;
+                            date_default_timezone_set('Asia/Ho_Chi_Minh');
+                            $value3->nofication_created = now();
+                            $value3->save();
+                        }
+                    }
                 }
+                Session::put('message','<div class="alert alert-success">Cập nhật câu trả lời thành công!</div>');
+                return Redirect::to('danh-sach-cau-hoi');
             }
         } 
     }
@@ -118,9 +141,32 @@ class ReplyController extends Controller
                     $value2->save();
                     $value->post_reply = $value2->reply_content;
                     $value->save();
-                    Session::put('message','<div class="alert alert-success">Cập nhật câu trrả lời thành công!</div>');
-                    return Redirect::to('cau-hoi-dang-chu-y');
+
+                    $nofiat = Nofication::where('post_id', $post_id)->where('nofication_kind',"=",'Reply')->get();
+                    $nofiat_count = $nofiat->count();
+
+                    if($nofiat_count==0){
+                        $nofi3 = new Nofication();
+                        $nofi3->post_id = $post_id;
+                        $nofi3->student_id = 0;
+                        $nofi3->nofication_mine = md5($value->student_id);
+                        $nofi3->nofication_kind = "Reply";
+                        $nofi3->nofication_code = "REPLY".md5(time().rand(1000,9999).$post_id);;
+                        $nofi3->nofication_status = 0;
+                        date_default_timezone_set('Asia/Ho_Chi_Minh');
+                        $nofi3->nofication_created = now();
+                        $nofi3->save();
+                    }else{
+                        foreach ($nofiat as $key => $value3) {
+                            $value3->nofication_status = 0;
+                            date_default_timezone_set('Asia/Ho_Chi_Minh');
+                            $value3->nofication_created = now();
+                            $value3->save();
+                        }
+                    }
                 }
+                Session::put('message','<div class="alert alert-success">Cập nhật câu trả lời thành công!</div>');
+                return Redirect::to('cau-hoi-dang-chu-y');
             }
         } 
     }

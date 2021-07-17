@@ -164,11 +164,12 @@ class CategoryController extends Controller
 
 	public function category_add(Request $request){
 		$data = $request->validate([
-			'category_name'=>'bail|required|max:50|min:5|notspecial_spaces',
+			'category_name'=>'bail|required|max:50|min:5|notspecial_spaces|unique:tbl_category',
 			'category_status'=>'bail|required',
 		],[
 			'category_name.required'=>'Tên danh mục không được để trống',
 			'category_name.notspecial_spaces'=>'Tên danh mục không được chứa ký tự đặc biệt',
+			'category_name.unique'=>'Tên danh mục đã tồn tại',
 			'category_name.min'=>'Tên danh mục ít nhất có 5 ký tự',
 			'category_name.max'=>'Tên danh mục không quá 50 ký tự',
 		]);
@@ -177,24 +178,13 @@ class CategoryController extends Controller
 		$category->category_name = $data['category_name'];
 		$category->category_status = $data['category_status'];
 
-		$check_name = Category::where('category_name','=',$category->category_name)->first();
-
-
-		if ($data['category_name']=='') {
-			Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
-			return Redirect::to('them-moi-danh-muc');
-		}else if($check_name){
-			Session::put('message','<div class="alert alert-danger">Tên danh mục đã tồn tại!</div>');
-			return Redirect::to('them-moi-danh-muc');
+		$result = $category->save(); 
+		if($result){
+			Session::put('message','<div class="alert alert-success">Thêm mới danh mục thành công!</div>');
+			return Redirect::to('danh-sach-danh-muc');
 		}else{
-			$result = $category->save(); 
-			if($result){
-				Session::put('message','<div class="alert alert-success">Thêm mới danh mục thành công!</div>');
-				return Redirect::to('danh-sach-danh-muc');
-			}else{
-				Session::put('message','<div class="alert alert-danger">Không thể thêm mới danh mục học!</div>');
-				return Redirect::to('them-moi-danh-muc');
-			}
+			Session::put('message','<div class="alert alert-danger">Không thể thêm mới danh mục học!</div>');
+			return Redirect::to('them-moi-danh-muc');
 		}
 	}
 
@@ -245,10 +235,11 @@ class CategoryController extends Controller
 	public function category_update(Request $request, $category_id){
 		$this->AuthLogin();
 		$data = $request->validate([
-			'category_name'=>'bail|required|max:50|min:5|notspecial_spaces',
+			'category_name'=>'bail|required|max:50|min:5|notspecial_spaces|unique:tbl_category',
 		],[
 			'category_name.required'=>'Tên danh mục không được để trống',
 			'category_name.notspecial_spaces'=>'Tên danh mục không được chứa ký tự đặc biệt',
+			'category_name.unique'=>'Tên danh mục đã tồn tại',
 			'category_name.min'=>'Tên danh mục ít nhất có 5 ký tự',
 			'category_name.max'=>'Tên danh mục không quá 50 ký tự',
 		]);
@@ -256,24 +247,14 @@ class CategoryController extends Controller
 
 		$category->category_name = $data['category_name'];
 
-		$check_name = Category::where('category_name','=',$category->category_name)->first();
-
-		if ($data['category_name']=='') {
-			Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
-			return Redirect::to('cap-nhat-danh-muc/'.$category_id);
-		}else if($check_name){
-			Session::put('message','<div class="alert alert-danger">Tên danh mục đã tồn tại!</div>');
-			return Redirect::to('cap-nhat-danh-muc/'.$category_id);
+		$result = $category->save();
+		if($result){
+			Session::put('message','<div class="alert alert-success">Cập nhật danh mục thành công!</div>');
+			return Redirect::to('danh-sach-danh-muc');
 		}else{
-			$result = $category->save();
-			if($result){
-				Session::put('message','<div class="alert alert-success">Cập nhật danh mục thành công!</div>');
-				return Redirect::to('danh-sach-danh-muc');
-			}else{
-				Session::put('message','<div class="alert alert-danger">Không thể cập nhật danh mục!</div>');
-				return Redirect::to('cap-nhat-danh-muc/'.$category_id);
-			} 
-		}
+			Session::put('message','<div class="alert alert-danger">Không thể cập nhật danh mục!</div>');
+			return Redirect::to('cap-nhat-danh-muc/'.$category_id);
+		} 
 	}
 
 	public function category_active($category_id){
