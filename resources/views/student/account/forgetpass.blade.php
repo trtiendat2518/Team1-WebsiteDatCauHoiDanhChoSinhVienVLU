@@ -64,6 +64,9 @@
 						Session::put('message', null);
 					}
 					@endphp
+					@foreach ($errors->all() as $val)
+					<div class="alert alert-danger">{{$val}}</div>
+					@endforeach
 					<div class="form-row">
 						<!-- FORM ITEM -->
 						<div class="form-item">

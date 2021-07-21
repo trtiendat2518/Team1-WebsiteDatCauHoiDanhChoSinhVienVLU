@@ -59,17 +59,17 @@
 				<!-- /FORM BOX DECORATION -->
 				<h2 style="color: white;" class="form-box-title">Tạo tài khoản!</h2>
 				<!-- /FORM BOX TITLE -->
-				@php
-				$message=Session::get('message');
-				if($message){
-					echo $message;
-					Session::put('message', null);
-				}
-				@endphp
 				<!-- FORM -->
 				<form action="{{url('/dang-ky')}}" method="post" class="form">
 					<!-- FORM ROW -->
 					{{csrf_field()}}
+					@php
+					$message=Session::get('message');
+					if($message){
+						echo $message;
+						Session::put('message', null);
+					}
+					@endphp
 					@foreach ($errors->all() as $val)
 					<div class="alert alert-danger">{{$val}}</div>
 					@endforeach

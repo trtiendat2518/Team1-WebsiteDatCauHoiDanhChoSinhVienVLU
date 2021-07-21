@@ -4,8 +4,10 @@ namespace App\Imports;
 
 use App\Models\Post;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class PostImport implements ToModel
+class PostImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -15,14 +17,11 @@ class PostImport implements ToModel
     public function model(array $row)
     {
         return new Post([
-            'student_id'=>$row[0],
-            'post_title'=>$row[1],
-            'category_id'=>$row[2],
-            'post_content'=>$row[3],
-            'post_like'=>$row[4],
-            'post_reply'=>$row[5],
-            'post_pin'=>$row[6],
-            'created_at'=>$row[7],
+            'student_id'=>$row['student_id'],
+            'post_title'=>$row['title'],
+            'category_id'=>$row['category_id'],
+            'post_content'=>$row['content'],
+            'created_at'=>$row['date'],
         ]);
     }
 }

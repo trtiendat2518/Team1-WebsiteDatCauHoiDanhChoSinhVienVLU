@@ -150,23 +150,16 @@ class FacultyController extends Controller
         $this->AuthLogin();
         $data = $request->validate([
            'faculty_name'=>'bail|required|max:50|min:5|notspecial_spaces|unique:tbl_faculty',
-           'faculty_code'=>'bail|required|max:10|min:2|notspecial_spaces|unique:tbl_faculty',
        ],[
            'faculty_name.required'=>'Tên khoa không được để trống',
            'faculty_name.notspecial_spaces'=>'Tên khoa không được chứa ký tự đặc biệt',
            'faculty_name.min'=>'Tên khoa ít nhất có 5 ký tự',
            'faculty_name.max'=>'Tên khoa không quá 50 ký tự',
            'faculty_name.unique'=>'Tên khoa đã tồn tại',
-           'faculty_code.required'=>'Mã khoa không được để trống',
-           'faculty_code.notspecial_spaces'=>'Mã khoa không được chứa ký tự đặc biệt',
-           'faculty_code.min'=>'Mã khoa ít nhất có 5 ký tự',
-           'faculty_code.max'=>'Mã khoa không quá 50 ký tự',
-           'faculty_code.unique'=>'Mã khoa đã tồn tại',
        ]);
         $faculty = Faculty::find($faculty_id);
 
         $faculty->faculty_name = $data['faculty_name'];
-        $faculty->faculty_code = $data['faculty_code'];
 
         $result = $faculty->save();
         if($result){

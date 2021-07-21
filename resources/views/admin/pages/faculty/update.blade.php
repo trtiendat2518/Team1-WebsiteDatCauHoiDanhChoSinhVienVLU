@@ -26,7 +26,7 @@
 						</div>
 						<div class="form-group">
 							<label>Mã khoa</label>
-							<input type="text" name="faculty_code" class="form-control" value="{{$faculty_update->faculty_code}}">
+							<input type="text" class="form-control" value="{{$faculty_update->faculty_code}}" disabled>
 						</div>
 						<button type="submit" name="updating_faculty" class="btn btn-primary btn-block">Cập nhật</button>
 					</form>

@@ -98,6 +98,7 @@
 								<div class="form-input small">
 									<label for="account-current-password">Nhập mật khẩu hiện tại</label>
 									<input type="password" id="account-current-password" name="student_password">
+									<span class="text-danger">@error('student_password') {{ $message }} @enderror</span>
 								</div>
 								<!-- /FORM INPUT -->
 							</div>
@@ -113,6 +114,7 @@
 								<div class="form-input small">
 									<label for="account-new-password">Mật khẩu mới</label>
 									<input type="password" id="account-new-password" name="student_newpassword">
+									<span class="text-danger">@error('student_newpassword') {{ $message }} @enderror</span>
 								</div>
 								<!-- /FORM INPUT -->
 							</div>
@@ -124,6 +126,7 @@
 								<div class="form-input small">
 									<label for="account-new-password-confirm">Nhập lại mật khẩu mới</label>
 									<input type="password" id="account-new-password-confirm" name="student_newpassword_confirm">
+									<span class="text-danger">@error('student_newpassword_confirm') {{ $message }} @enderror</span>
 								</div>
 								<!-- /FORM INPUT -->
 							</div>

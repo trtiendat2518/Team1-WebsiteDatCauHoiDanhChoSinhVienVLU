@@ -46,7 +46,7 @@
 <body class="index-01">
   <header class="top-header media" style="background-color: #343542;">
     <div class="top-left mr-3">
-      <a class="navbar-brand" href="./index.html"><img src="{{asset('public/admin/images/vlulogo2.png')}}" alt="VLU"></a>
+      <a class="navbar-brand" href="{{ url('admin-home') }}"><img src="{{asset('public/admin/images/vlulogo2.png')}}" alt="VLU"></a>
     </div>
 
     <div class="top-right media-body">
@@ -59,7 +59,7 @@
 
       <div class="right-content float-right">
         <div class="dropdown user-menu">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <a href="{{url('/thong-tin-tai-khoan-admin/'.Session::get('admin_id'))}}" class="dropdown-toggle" data-toggle="dropdown">
             @foreach ($info as $key => $val)
             @if ($val->admin_info_id)
             <img src="{{asset('public/admin/images/avatar/'.$val->admin_avatar)}}" class="rounded-circle float-left mr-2" alt="User Image">
@@ -85,7 +85,7 @@
 <div class="content-wrapper container-fluid">
   <aside class="left-panel">
     <div class="user-card background-bg">
-      <a href="#">
+      <a href="{{url('/thong-tin-tai-khoan-admin/'.Session::get('admin_id'))}}">
        <div class="avatar mr-3 float-left">
         @foreach ($info as $key => $val)
         @if ($val->admin_info_id)
@@ -273,7 +273,7 @@
   });
 </script>
 
-<script>
+<script type="text/javascript">
   $(function() {
     $( "#datepicker" ).datepicker({
       dateFormat: "yy-mm-dd",

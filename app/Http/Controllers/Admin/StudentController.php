@@ -252,23 +252,14 @@ class StudentController extends Controller
 	public function student_update(Request $request, $student_id){
 		$this->AuthLogin();
 		$data = $request->validate([
-			'student_name'=>'bail|required|alpha_spaces|max:100',
-			'student_email'=>'bail|required|unique:tbl_student',
 			'student_password'=>'bail|required|min:6|max:32',
 		],[
-			'student_name.required'=>'Tên không được để trống',
-			'student_name.alpha_spaces'=>'Tên không được chứa ký tự số hoặc ký tự đặc biệt',
-			'student_email.required'=>'Mail không được để trống',
-			'student_email.email'=>'Mail nhập sai định dạng',
-			'student_email.unique'=>'Mail sinh viên đã tồn tại',
 			'student_password.required'=>'Mật khẩu không được để trống',
 			'student_password.min'=>'Mật khẩu ít nhất có 6 ký tự',
 			'student_password.max'=>'Mật khẩu không quá 32 ký tự',
 		]);
 		$student = Student::find($student_id);
 
-		$student->student_name = $data['student_name'];
-		$student->student_email = $data['student_email'];
 		$student->student_password = md5($data['student_password']);
 
 		$result = $student->save();

@@ -104,14 +104,15 @@ class StudentController extends Controller
 	public function register(Request $request){
 		$data = $request->validate([
 			'student_name'=>'bail|required|alpha_spaces|max:100',
-			'student_email'=>'bail|required',
+			'student_email'=>'bail|required|unique:tbl_student',
 			'student_password'=>'bail|required|min:6|max:32',
 			'g-recaptcha-response'=>new Captcha(),
 		],[
 			'student_name.required'=>'Tên không được để trống',
 			'student_name.alpha_spaces'=>'Tên không được chứa ký tự số hoặc ký tự đặc biệt',
 			'student_email.required'=>'Mail không được để trống',
-			'student_email.email'=>'Mail nhập sai định dạng',
+			'student_email.email'=>'Email nhập sai định dạng',
+			'student_email.unique'=>'Email này đã tồn tại',
 			'student_password.required'=>'Mật khẩu không được để trống',
 			'student_password.min'=>'Mật khẩu ít nhất có 6 ký tự',
 			'student_password.max'=>'Mật khẩu không quá 32 ký tự',
@@ -124,15 +125,6 @@ class StudentController extends Controller
 		$student_new->student_password = $data['student_password'];
 		$student_password_confirm = $request->student_password_confirm;
 
-		$check_student_email = Student::where('student_email','=',$data['student_email'])->first();
-
-		if($student_new->student_name=='' || $student_new->student_email=='' || $student_new->student_password=='' || $student_password_confirm==''){
-			Session::put('message', '<div class="alert alert-danger">Không được để trống!</div>');
-			return Redirect::to('register');
-		}else if($check_student_email){
-			Session::put('message', '<div class="alert alert-danger">Email đã tồn tại!</div>');
-			return Redirect::to('/register');
-		} 
 		if(preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@vanlanguni*.vn^",$student_new->student_email)){
 			if($student_new->student_password != $student_password_confirm){
 				Session::put('message', '<div class="alert alert-danger">Mật khẩu không khớp!</div>');
@@ -172,41 +164,45 @@ class StudentController extends Controller
 	}
 	
 	public function confirm_mail(Request $request){
-		$data = $request->all();
-		$student_email = $data['student_email'];
-		$check_exist = Student::where('student_email', $student_email)->first();
-		if(empty($student_email)){
-			Session::put('message','<div class="alert alert-danger">Vui lòng nhập mail!</div>');
-			return Redirect::to('forgetpass');
-		}
-		if($check_exist){
-			$to_name = "BCN Khoa CNTT";
-			$to_email = $check_exist->student_email;
-			$data = array("name"=>"Vui lòng xác nhận tài khoản để tiếp tục!", "body"=>"Nhấn xác nhận để tiếp tục");
-			Mail::send('mail.send_mail_change_pass', $data, function($message) use ($to_name, $to_email){
-				$message->to($to_email)->subject('Quên mật khẩu');
-				$message->from($to_email, $to_name);
-			});
+		$data = $request->validate([
+			'student_email'=>'bail|required|exists:tbl_student',
+		],[
+			'student_email.required'=>'Email không được để trống',
+			'student_email.email'=>'Email nhập sai định dạng',
+			'student_email.exists'=>'Email này không tồn tại',
+		]);
 
-			Session::put('student_email', $student_email);
-			Session::put('message','<div class="alert alert-warning">Xác nhận Mail để tiếp tục đổi mật khẩu mới!</div>');
-			return Redirect::to('forgetpass');
-		}else{
-			Session::put('message','<div class="alert alert-danger">Mail không tồn tại!</div>');
-			return Redirect::to('forgetpass');
-		}
+		$student_email = $data['student_email'];
+
+		$to_name = "BCN Khoa CNTT";
+		$to_email = $student_email;
+		$data = array("name"=>"Vui lòng xác nhận tài khoản để tiếp tục!", "body"=>"Nhấn xác nhận để tiếp tục");
+		Mail::send('mail.send_mail_change_pass', $data, function($message) use ($to_name, $to_email){
+			$message->to($to_email)->subject('Quên mật khẩu');
+			$message->from($to_email, $to_name);
+		});
+
+		Session::put('student_email', $student_email);
+		Session::put('message','<div class="alert alert-warning">Xác nhận Mail để tiếp tục đổi mật khẩu mới!</div>');
+		return Redirect::to('forgetpass');
 	}
 
 	public function newpassword(Request $request){
-		$data = $request->all();
+		$data = $request->validate([
+			'student_password'=>'bail|required|min:6|max:32',
+			'student_password_confirm'=>'required',
+		],[
+			'student_password.required'=>'Mật khẩu không được để trống',
+			'student_password.min'=>'Mật khẩu ít nhất có 6 ký tự',
+			'student_password.max'=>'Mật khẩu không quá 32 ký tự',
+			'student_password_confirm.required'=>'Vui lòng nhập xác nhận mật khẩu',
+		]);
+
 		$student_email = Session::get('student_email');
 		$student_password = $data['student_password'];
 		$student_password_confirm = $request->student_password_confirm;
 
-		if(empty($student_password) || empty($student_password_confirm)){
-			Session::put('message','<div class="alert alert-danger">Vui lòng điền đầy đủ thông tin!</div>');
-			return Redirect::to('newpass');
-		}else if($student_password != $student_password_confirm){
+		if($student_password != $student_password_confirm){
 			Session::put('message','<div class="alert alert-danger">Mật khẩu không khớp với nhau!</div>');
 			return Redirect::to('newpass');
 		}else{
@@ -269,15 +265,22 @@ class StudentController extends Controller
 	}
 
 	public function changenewpass(Request $request,$student_id){
-		$data = $request->all();
+		$data = $request->validate([
+			'student_password'=>'bail|required',
+			'student_newpassword'=>'bail|required|min:6|max:32',
+			'student_newpassword_confirm'=>'required',
+		],[
+			'student_password.required'=>'Mật khẩu cũ không được để trống',
+			'student_newpassword.required'=>'Mật khẩu mới không được để trống',
+			'student_newpassword.min'=>'Mật khẩu mới ít nhất có 6 ký tự',
+			'student_newpassword.max'=>'Mật khẩu mới không quá 32 ký tự',
+			'student_newpassword_confirm.required'=>'Vui lòng nhập xác nhận mật khẩu mới',
+		]);
+
 		$student = Student::find($student_id);
 		$student_password = $data['student_password'];
 		$student_newpassword = $data['student_newpassword'];
 		$student_newpassword_confirm = $request->student_newpassword_confirm;
-		if($student_password=='' || $student_newpassword=='' || $student_newpassword_confirm==''){
-			Session::put('message','<div class="alert alert-danger">Vui lòng không để trống!</div>');
-			return Redirect::to('thay-doi-mat-khau/'.Session::get('student_id'));
-		}
 
 		if(md5($student_password)==$student->student_password){
 			if($student_newpassword==$student_newpassword_confirm){
