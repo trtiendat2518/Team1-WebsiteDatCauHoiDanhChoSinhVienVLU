@@ -76,7 +76,6 @@ Route::post('/cap-nhat-khoa-thanh-cong/{faculty_id}', 'Admin\FacultyController@f
 Route::get('/xoa-khoa/{faculty_id}', 'Admin\FacultyController@faculty_delete');
 Route::get('/an-khoa/{faculty_id}', 'Admin\FacultyController@faculty_unactive');
 Route::get('/hien-thi-khoa/{faculty_id}', 'Admin\FacultyController@faculty_active');
-Route::post('tim-kiem-khoa','Admin\FacultyController@faculty_search');
 
 //ADMIN SPECIALIZED
 Route::get('/them-moi-chuyen-nganh', 'Admin\SpecializedController@specialized_open');
@@ -87,7 +86,6 @@ Route::post('/cap-nhat-chuyen-nganh-thanh-cong/{specialized_id}', 'Admin\Special
 Route::get('/xoa-chuyen-nganh/{specialized_id}', 'Admin\SpecializedController@specialized_delete');
 Route::get('/an-chuyen-nganh/{specialized_id}', 'Admin\SpecializedController@specialized_unactive');
 Route::get('/hien-thi-chuyen-nganh/{specialized_id}', 'Admin\SpecializedController@specialized_active');
-Route::post('/tim-kiem-chuyen-nganh','Admin\SpecializedController@specialized_search');
 
 //ADMIN COURSE
 Route::get('/them-moi-nam-hoc', 'Admin\CourseController@course_open');
@@ -98,11 +96,9 @@ Route::post('/cap-nhat-nam-hoc-thanh-cong/{course_id}', 'Admin\CourseController@
 Route::get('/xoa-nam-hoc/{course_id}', 'Admin\CourseController@course_delete');
 Route::get('/an-nam-hoc/{course_id}', 'Admin\CourseController@course_unactive');
 Route::get('/hien-thi-nam-hoc/{course_id}', 'Admin\CourseController@course_active');
-Route::post('/tim-kiem-nam-hoc','Admin\CourseController@course_search');
 
 //ADMIN POST
 Route::get('/danh-sach-cau-hoi', 'Admin\PostController@postadmin_list');
-Route::post('/tim-kiem-cau-hoi','Admin\PostController@postadmin_search');
 Route::get('/xem-cau-hoi/{post_id}', 'Admin\PostController@postadmin_detail');
 Route::get('/xoa-cau-hoi/{post_id}', 'Admin\PostController@postadmin_delete');
 Route::post('/import-cau-hoi', 'Admin\PostController@postadmin_import');
@@ -112,7 +108,6 @@ Route::get('/huy-ghim-cau-hoi/{post_id}', 'Admin\PostController@postadmin_unpin'
 
 //ADMIN HOT POST
 Route::get('/cau-hoi-dang-chu-y', 'Admin\PostController@postadmin_listhot');
-Route::post('/tim-kiem-cau-hoi-dang-chu-y','Admin\PostController@postadmin_searchhot');
 Route::get('/xem-cau-hoi-dang-chu-y/{post_id}', 'Admin\PostController@postadmin_detailhot');
 Route::get('/xoa-cau-hoi-dang-chu-y/{post_id}', 'Admin\PostController@postadmin_deletehot');
 Route::get('/ghim-cau-hoi-dang-chu-y/{post_id}', 'Admin\PostController@postadmin_pinhot');
@@ -124,7 +119,6 @@ Route::post('/tra-loi-cau-hoi-dang-chu-y/{post_id}', 'Admin\ReplyController@repl
 
 //ADMIN CATEGORY
 Route::get('/danh-sach-danh-muc', 'Admin\CategoryController@category_list');
-Route::post('/tim-kiem-danh-muc','Admin\CategoryController@category_search');
 Route::get('/them-moi-danh-muc', 'Admin\CategoryController@category_open');
 Route::post('/them-moi-danh-muc-thanh-cong', 'Admin\CategoryController@category_add');
 Route::get('/cap-nhat-danh-muc/{category_id}', 'Admin\CategoryController@category_openupdate');
@@ -135,7 +129,6 @@ Route::get('/xoa-danh-muc/{category_id}', 'Admin\CategoryController@category_del
 
 //ADMIN ALUMNUS
 Route::get('/danh-sach-sinh-vien', 'Admin\StudentController@student_list');
-Route::post('/tim-kiem-sinh-vien','Admin\StudentController@student_search');
 Route::get('/them-moi-sinh-vien', 'Admin\StudentController@student_open');
 Route::post('/them-moi-sinh-vien-thanh-cong', 'Admin\StudentController@student_add');
 Route::get('/cap-nhat-sinh-vien/{student_id}', 'Admin\StudentController@student_openupdate');
@@ -152,7 +145,6 @@ Route::get('/cap-nhat-user/{admin_id}', 'Admin\UserController@user_openupdate');
 Route::post('/cap-nhat-user-thanh-cong/{admin_id}', 'Admin\UserController@user_update');
 Route::get('/an-user/{admin_id}', 'Admin\UserController@user_unactive');
 Route::get('/hien-thi-user/{admin_id}', 'Admin\UserController@user_active');
-Route::post('/tim-kiem-user','Admin\UserController@user_search');
 Route::post('/import-user', 'Admin\UserController@user_import');
 Route::post('/export-user', 'Admin\UserController@user_export');
 Route::get('/xoa-user/{admin_id}', 'Admin\UserController@user_delete');

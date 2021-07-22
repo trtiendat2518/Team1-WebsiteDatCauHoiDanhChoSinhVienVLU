@@ -71,63 +71,8 @@ class PostController extends Controller
 			$visitor_total_count = $visitors->count();
 
 			$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-			$list = Post::where('post_like','<',100)->orderBy('created_at', 'DESC')->paginate(5);
+			$list = Post::where('post_like','<',100)->orderBy('created_at', 'DESC')->get();
 			return view('admin.pages.post.list')->with(compact('meta_desc','meta_title','url_canonical','list','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
-		}else{
-			return Redirect::to('admin-home');
-		}
-	}
-
-	public function postadmin_search(Request $request){
-		$this->AuthLogin();
-		if(Session::get('admin_role')==1 || Session::get('admin_role')==2){
-      		//SEO
-			$meta_desc = "Tìm kiếm";
-			$meta_title = "Tìm kiếm";
-			$url_canonical = $request->url();
-      		//---------------
-			$user_ip_address = $request->ip();
-			$visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
-			$visitor_count = $visitor_current->count();
-			if($visitor_count<1){
-				$visitor = new Visitor();
-				$visitor->visitor_ipaddress = $user_ip_address;
-				$visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-				$visitor->save();
-			}
-
-			$headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
-			$backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
-			$headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
-			$sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
-			$now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-
-			$visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
-			$visitor_lastmonth_count = $visitor_lastmonth->count();
-			$visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
-			$visitor_thismonth_count = $visitor_thismonth->count();
-			$visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
-			$visitor_oneyear_count = $visitor_oneyear->count();
-			$visitors = Visitor::all();
-			$visitor_total_count = $visitors->count();
-
-			$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-			
-			$keywords = $request->keywords_submit;
-			$reg = '"%\'*;<>?^`{|}~/\\#=&';
-			$quotes = preg_quote($reg, '/');
-			
-			if($keywords==''){
-				Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
-				return redirect()->back();
-			}else if(preg_match('/[' . $quotes . ']/', $keywords)){
-				Session::put('message','<div class="alert alert-danger">Không thể tìm kiếm ký tự đặc biệt!</div>');
-				return redirect()->back();
-			}else{
-				$search = Post::where('post_title','like','%'.$keywords.'%')->with('category','student')
-				->orderBy('tbl_post.created_at','DESC')->get();
-				return view('admin.pages.post.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
-			}
 		}else{
 			return Redirect::to('admin-home');
 		}
@@ -272,61 +217,6 @@ class PostController extends Controller
 			->orderBy('created_at','DESC')->paginate(5);
 
 			return view('admin.pages.hotpost.list')->with(compact('meta_desc','meta_title','url_canonical','list','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
-		}else{
-			return Redirect::to('admin-home');
-		}
-	}
-
-	public function postadmin_searchhot(Request $request){
-		$this->AuthLogin();
-		if(Session::get('admin_role')==1 || Session::get('admin_role')==2){
-      		//SEO
-			$meta_desc = "Tìm kiếm câu hỏi HOT";
-			$meta_title = "Tìm kiếm câu hỏi HOT";
-			$url_canonical = $request->url();
-      		//---------------
-			$user_ip_address = $request->ip();
-			$visitor_current = Visitor::where('visitor_ipaddress',$user_ip_address)->get();
-			$visitor_count = $visitor_current->count();
-			if($visitor_count<1){
-				$visitor = new Visitor();
-				$visitor->visitor_ipaddress = $user_ip_address;
-				$visitor->visitor_date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-				$visitor->save();
-			}
-
-			$headmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
-			$backmonthlast = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
-			$headmonthnow = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
-			$sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
-			$now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-
-			$visitor_lastmonth = Visitor::whereBetween('visitor_date',[$headmonthlast,$backmonthlast])->get();
-			$visitor_lastmonth_count = $visitor_lastmonth->count();
-			$visitor_thismonth = Visitor::whereBetween('visitor_date',[$headmonthnow,$now])->get();
-			$visitor_thismonth_count = $visitor_thismonth->count();
-			$visitor_oneyear = Visitor::whereBetween('visitor_date',[$sub365days,$now])->get();
-			$visitor_oneyear_count = $visitor_oneyear->count();
-			$visitors = Visitor::all();
-			$visitor_total_count = $visitors->count();
-
-			$info = Admin::where('admin_id',Session::get('admin_id'))->limit(1)->get();
-			
-			$keywords = $request->keywords_submit;
-			$reg = '"%\'*;<>?^`{|}~/\\#=&';
-			$quotes = preg_quote($reg, '/');
-			
-			if($keywords==''){
-				Session::put('message','<div class="alert alert-danger">Không được để trống!</div>');
-				return redirect()->back();
-			}else if(preg_match('/[' . $quotes . ']/', $keywords)){
-				Session::put('message','<div class="alert alert-danger">Không thể tìm kiếm ký tự đặc biệt!</div>');
-				return redirect()->back();
-			}else{
-				$search = Post::where('post_title','like','%'.$keywords.'%')->where('post_like','>',99)
-				->with('category','student')->orderBy('tbl_post.created_at','DESC')->get();
-				return view('admin.pages.hotpost.search')->with(compact('meta_desc','meta_title','url_canonical','search','info','visitor_count','visitor_lastmonth_count','visitor_thismonth_count','visitor_oneyear_count','visitor_total_count'));
-			}
 		}else{
 			return Redirect::to('admin-home');
 		}

@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="{{asset('public/admin/css/responsive.css')}}">
   <link rel="stylesheet" href="{{asset('public/admin/css/jquery-ui.css')}}">
   <link rel="stylesheet" href="{{asset('public/admin/css/morris.css')}}">
+  <link rel="stylesheet" href="{{asset('public/admin/css/jquery.dataTables.min.css')}}">
   <link rel="stylesheet" href="{{asset('public/student/css/sweetalert.css')}}">
 </head>
 
@@ -263,13 +264,18 @@
 <script src="{{asset('public/admin/js/morris.min.js')}}"></script>
 <script src="{{asset('public/admin/js/raphael-min.js')}}"></script>
 <script src="{{asset('public/student/js/sweetalert.min.js')}}"></script>
+<script src="{{asset('public/admin/js/jquery.dataTables.min.js')}}"></script>
+
+<script type="text/javascript">
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+  });
+</script>
 
 <script>
   $(function() {
     "use strict";
-
     $('#calendar').fullCalendar();
-
   });
 </script>
 
